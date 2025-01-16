@@ -41,6 +41,3 @@ O **Tchilla App** é uma plataforma onde os clientes podem solicitar serviços a
     flutter run
     ```
 
-## Contribuição
-
-Se você deseja contribuir para o projeto, fique à vontade para abrir uma *issue* ou fazer um *pull request*. Toda contribuição é bem-vinda!
