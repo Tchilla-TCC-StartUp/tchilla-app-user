@@ -1,6 +1,6 @@
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-getAdaptativeWidth(double max, double medium, double min) {
+double getAdaptativeWidth(double max, double medium, double min) {
   final double width = Device.width;
 
   if (width >= 480) {
@@ -14,7 +14,6 @@ getAdaptativeWidth(double max, double medium, double min) {
 
 double getAdaptativeHeight(double max, double medium, double min) {
   final double height = Device.height;
-
   if (height >= 800) {
     return max;
   } else if (height >= 600) {
