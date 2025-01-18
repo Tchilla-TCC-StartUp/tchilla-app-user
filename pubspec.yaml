@@ -38,6 +38,8 @@ dependencies:
   flutter_modular: ^6.3.4
   flutter_svg: ^2.0.17
   responsive_sizer: ^3.3.1
+  provider: ^6.1.2
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:

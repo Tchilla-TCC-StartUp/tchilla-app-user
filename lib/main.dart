@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/app_module.dart';
+import 'package:tchilla/app_provider.dart';
 import 'package:tchilla/style/colors.dart';
 
 void main() {
-  runApp(ResponsiveSizer(
-    builder: (context, orientation, screenType) {
-      return ModularApp(
-        module: AppModule(),
-        child: const MyApp(),
-      );
-    },
+  runApp(MultiProvider(
+    providers: appProviders,
+    child: ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return ModularApp(
+          module: AppModule(),
+          child: const MyApp(),
+        );
+      },
+    ),
   ));
 }
 
