@@ -36,13 +36,13 @@ class _SplashPageState extends State<SplashPage>
         backgroundColor: Colors.white,
         body: Center(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.sp),
             child: AnimatedOpacity(
               opacity: _opacity,
               duration: const Duration(seconds: 2),
               curve: Curves.easeInOut,
               child: Image.asset(
-                logotipo_png,
+                logotipoPng,
                 width: getAdaptativeWidth(70.w, 50.w, 30.w),
                 height: getAdaptativeHeight(35.h, 25.h, 15.h),
               ),
