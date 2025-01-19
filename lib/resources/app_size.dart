@@ -23,6 +23,17 @@ double getAdaptativeHeight(double max, double medium, double min) {
   }
 }
 
+double getAdaptativeHeightContainer(double max, double medium, double min) {
+  final double height = Device.safeHeight;
+
+  if (height >= 1000) {
+    return max;
+  } else if (height >= 800) {
+    return medium;
+  } else {
+    return min;
+  }
+}
 
 double getAdaptativeFontSize(double large, double medium, double small) {
   final double width = Device.width;

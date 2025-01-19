@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/style/colors.dart';
 
 enum TextStyleEnum {
@@ -26,56 +27,60 @@ TextStyle getTextStyle(TextStyleEnum style, {Color color = primary950}) {
     case TextStyleEnum.p_normal:
       return GoogleFonts.inter(
         fontWeight: FontWeight.normal,
+        fontSize: 15.sp,
         color: color,
       );
     case TextStyleEnum.p_light:
       return GoogleFonts.inter(
         fontWeight: FontWeight.w300,
+        fontSize: 15.sp,
         color: color,
       );
     case TextStyleEnum.p_medium:
       return GoogleFonts.inter(
         fontWeight: FontWeight.w500,
+        fontSize: 15.sp,
         color: color,
       );
     case TextStyleEnum.p_bold:
       return GoogleFonts.inter(
         fontWeight: FontWeight.bold,
+        fontSize: 15.sp,
         color: color,
       );
     case TextStyleEnum.h1_bold:
       return GoogleFonts.inter(
-        fontSize: 32,
+        fontSize: 30.sp,
         fontWeight: FontWeight.bold,
         color: color,
       );
     case TextStyleEnum.h1_medium:
       return GoogleFonts.inter(
-        fontSize: 32,
+        fontSize: 30.sp,
         fontWeight: FontWeight.w500,
         color: color,
       );
     case TextStyleEnum.h2_bold:
       return GoogleFonts.inter(
-        fontSize: 24,
+        fontSize: 20.sp,
         fontWeight: FontWeight.bold,
         color: color,
       );
     case TextStyleEnum.h2_medium:
       return GoogleFonts.inter(
-        fontSize: 24,
+        fontSize: 20.sp,
         fontWeight: FontWeight.w500,
         color: color,
       );
     case TextStyleEnum.h3_bold:
       return GoogleFonts.inter(
-        fontSize: 18,
+        fontSize: 16.sp,
         fontWeight: FontWeight.bold,
         color: color,
       );
     case TextStyleEnum.h3_medium:
       return GoogleFonts.inter(
-        fontSize: 18,
+        fontSize: 16.sp,
         fontWeight: FontWeight.w500,
         color: color,
       );
@@ -91,24 +96,24 @@ TextStyle getTextStyle(TextStyleEnum style, {Color color = primary950}) {
       );
     case TextStyleEnum.caption:
       return GoogleFonts.inter(
-        fontSize: 12,
+        fontSize: 12.sp,
         color: color,
       );
     case TextStyleEnum.button_text:
       return GoogleFonts.inter(
         fontWeight: FontWeight.bold,
-        fontSize: 14,
+        fontSize: 14.sp,
         color: color,
       );
     case TextStyleEnum.subtitle:
       return GoogleFonts.inter(
-        fontSize: 16,
+        fontSize: 16.sp,
         fontWeight: FontWeight.w400,
         color: color,
       );
     case TextStyleEnum.overline:
       return GoogleFonts.inter(
-        fontSize: 10,
+        fontSize: 10.sp,
         color: color,
       );
     default:

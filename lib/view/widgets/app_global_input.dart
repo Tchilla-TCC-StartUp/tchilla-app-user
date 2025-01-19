@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
+import 'package:tchilla/view/widgets/app_global_spacing.dart';
+import 'package:tchilla/view/widgets/app_global_text.dart';
 
 class AppGlobalInput extends StatelessWidget {
   final TextEditingController? controller;
@@ -13,10 +17,11 @@ class AppGlobalInput extends StatelessWidget {
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final VoidCallback? onSuffixIconPressed;
-
-  // Construtor do widget
+  final String? helpText;
+final FocusNode? focusNode;
+  
   const AppGlobalInput({
-    Key? key,
+    super.key,
     this.controller,
     this.label,
     this.hintText,
@@ -27,58 +32,77 @@ class AppGlobalInput extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.onSuffixIconPressed,
-  }) : super(key: key);
+    this.helpText, this.focusNode,
+
+  });
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      keyboardType: keyboardType,
-      obscureText: obscureText,
-      textInputAction: textInputAction,
-      validator: validator,
-      style: GoogleFonts.inter(
-        fontWeight: FontWeight.normal,
-        fontSize: 14,
-        color: primary950,
-      ),
-      decoration: InputDecoration(
-        labelText: label,
-        hintText: hintText,
-        hintStyle: GoogleFonts.inter(
-          fontWeight: FontWeight.w500,
-          fontSize: 14,
-          color: const Color(0xffAFBACA),
-        ),
-        prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
-        suffixIcon: suffixIcon != null
-            ? IconButton(
-                icon: Icon(suffixIcon, color: primary400,),
-                onPressed: onSuffixIconPressed,
-              )
-            : null,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-             color: Color(0xffAFBACA),
-            width: 2,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(
-               color: Color(0xffAFBACA),
-              width: 2,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (helpText != null)
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 4.spa),
+            child: AppGlobalText(
+              text: helpText!,
+              style: TextStyleEnum.h3_bold,
+              color: primary950,
             ),
           ),
-          disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-             color: Color(0xffAFBACA),
-            width: 2,
+        TextFormField(
+          focusNode: focusNode,
+          controller: controller,
+          keyboardType: keyboardType,
+          obscureText: obscureText,
+          textInputAction: textInputAction,
+          validator: validator,
+          style: GoogleFonts.inter(
+            fontWeight: FontWeight.w500,
+            fontSize: 15.sp,
+            color: primary950,
           ),
-        )
-      ),
+          decoration: InputDecoration(
+              labelText: label,
+              hintText: hintText,
+              hintStyle: GoogleFonts.inter(
+                fontWeight: FontWeight.w600,
+                fontSize: 15.sp,
+                color: const Color(0xffAFBACA),
+              ),
+              prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
+              suffixIcon: suffixIcon != null
+                  ? IconButton(
+                      icon: Icon(
+                        suffixIcon,
+                        color: primary400,
+                      ),
+                      onPressed: onSuffixIconPressed,
+                    )
+                  : null,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: const BorderSide(
+                  color: Color(0xffAFBACA),
+                  width: 1,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: const BorderSide(
+                  color: Color(0xffAFBACA),
+                  width: 1,
+                ),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: const BorderSide(
+                  color: Color(0xffAFBACA),
+                  width: 1,
+                ),
+              )),
+        ),
+      ],
     );
   }
 }
