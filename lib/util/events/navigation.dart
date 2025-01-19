@@ -6,7 +6,25 @@ class Navigation extends INavigation {
   final modular = Modular;
   @override
   Future<void> navigateToHome() {
-    return modular.to
-        .pushNamedAndRemoveUntil(Router.homePage, (route) => false);
+    return modular.to.pushNamedAndRemoveUntil(
+      Router.homePage,
+      (route) => false,
+    );
+  }
+
+  @override
+  Future<void> navigateToLoginPage() {
+    return modular.to.pushNamedAndRemoveUntil(
+      Router.loginPage,
+      (route) => false,
+    );
+  }
+
+  @override
+  Future<void> navigateToRegisterPage() {
+    return modular.to.pushNamedAndRemoveUntil(
+      Router.registerPage,
+      (route) => false,
+    );
   }
 }

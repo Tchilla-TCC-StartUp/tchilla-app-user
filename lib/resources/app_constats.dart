@@ -6,3 +6,5 @@ const String logoSvg = '${vectoresPash}logo.svg';
 const String logotipoSvg = '${vectoresPash}logotipo.svg';
 const String logoPng = '${vectoresPash}logo3x.png';
 const String logotipoPng = '${vectoresPash}logotipo3x.png';
+
+const String googlelogoSvg = '${vectoresPash}Google__G__logo.svg';

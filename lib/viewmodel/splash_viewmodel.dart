@@ -7,7 +7,6 @@ class SplashViewmodel extends ChangeNotifier {
 
   Future<void> navigateToHomePage() async {
     await Future.delayed(const Duration(seconds: 5));
-    await _navigation.navigateToHome();
+    await _navigation.navigateToLoginPage();
   }
-
 }

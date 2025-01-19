@@ -13,7 +13,7 @@ import 'package:tchilla/view/widgets/app_global_show_and_hide_animation.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
-import 'package:tchilla/viewmodel/app_circular_liner.dart';
+import 'package:tchilla/view/widgets/app_circular_liner.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                 focusNode: _locationFocusNode,
               ),
               AppGlobalShowAndHideAnimation(
-                focusNode: _locationFocusNode,
+                focusNode: [_locationFocusNode],
                 children: [
                   AppGlobalVericalSpacing(
                     value: 2.h,
@@ -157,16 +157,13 @@ class _HomePageState extends State<HomePage> {
                       print("Tags Selecionadas: $selectedTags");
                     },
                   ),
-                  AppGlobalVericalSpacing(
-                    value: 2.h,
-                  ),
                 ],
               ),
               AppGlobalTextButton(
                 minWidth: 80.w,
                 textButton: "Pesquisar",
                 onPressed: () {},
-              )
+              ),
             ],
           )),
         ),

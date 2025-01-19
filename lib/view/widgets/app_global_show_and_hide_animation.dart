@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 
 class AppGlobalShowAndHideAnimation extends StatefulWidget {
-  final FocusNode focusNode; // FocusNode para monitorar o foco
-  final List<Widget> children; // Widgets que serão exibidos/ocultados
-  final Duration duration; // Duração da animação
-  final Curve curve; // Curva da animação
+  final List<FocusNode> focusNode; 
+  final List<Widget> children; 
+  final Duration duration;
+  final Curve curve; 
 
   const AppGlobalShowAndHideAnimation({
     Key? key,
@@ -29,12 +29,15 @@ class _AppGlobalShowAndHideAnimationState
   void initState() {
     super.initState();
 
-    // Listener para monitorar o estado do FocusNode
-    widget.focusNode.addListener(() {
-      setState(() {
-        _isVisible = !widget.focusNode.hasFocus;
-      });
-    });
+    widget.focusNode.forEach(
+      (e) {
+        e.addListener(() {
+          setState(() {
+            _isVisible = !e.hasFocus;
+          });
+        });
+      },
+    );
   }
 
   @override

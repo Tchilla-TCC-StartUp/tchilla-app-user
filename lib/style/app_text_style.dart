@@ -22,7 +22,7 @@ enum TextStyleEnum {
   overline,
 }
 
-TextStyle getTextStyle(TextStyleEnum style, {Color color = primary950}) {
+TextStyle getTextStyle(TextStyleEnum style, {Color color = primary950,}) {
   switch (style) {
     case TextStyleEnum.p_normal:
       return GoogleFonts.inter(

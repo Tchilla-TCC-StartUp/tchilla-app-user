@@ -5,3 +5,5 @@ final String initialRoute = Modular.initialRoute;
 final String mainRouter = "${initialRoute}main";
 
 final String homePage = "$mainRouter/home";
+final String loginPage = "$mainRouter/login";
+final String registerPage = "$mainRouter/register";
