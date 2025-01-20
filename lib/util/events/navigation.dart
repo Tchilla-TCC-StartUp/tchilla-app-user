@@ -27,4 +27,19 @@ class Navigation extends INavigation {
       (route) => false,
     );
   }
+
+  @override
+  navigateToBack() {
+    modular.to.pop();
+  }
+
+  @override
+  Future<void> navigateToForengePassewordEmailPage() {
+    return modular.to.pushNamed(Router.forengePassswordEmail);
+  }
+
+  @override
+  Future<void> navigateToConfirmationPage() {
+    return modular.to.pushNamed(Router.forengePassswordConfirmationPin);
+  }
 }

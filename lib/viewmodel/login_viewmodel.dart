@@ -11,4 +11,8 @@ class LoginViewmodel {
   Future<void> navigateToHomePagePage() {
     return _navigation.navigateToHome();
   }
+
+  Future<void> navigateToForengePasswordPage() {
+    return _navigation.navigateToForengePassewordEmailPage();
+  }
 }

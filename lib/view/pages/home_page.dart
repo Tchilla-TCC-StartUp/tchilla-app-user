@@ -23,19 +23,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late FocusNode _locationFocusNode;
-
-  @override
-  void initState() {
-    super.initState();
-    _locationFocusNode = FocusNode();
-  }
-
-  @override
-  void dispose() {
-    _locationFocusNode.dispose();
-    super.dispose();
-  }
+  final FocusNode _locationFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -237,7 +225,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Ola",
+              "Olá👋",
               style: GoogleFonts.inter(
                 color: Colors.white,
                 fontSize: 13.spa,
@@ -245,7 +233,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Text(
-              "Sr Visitante",
+              "Sr(a) Visitante",
               style: GoogleFonts.inter(
                 color: Colors.white,
                 fontSize: 15.spa,
