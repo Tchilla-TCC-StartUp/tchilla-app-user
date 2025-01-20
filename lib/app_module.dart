@@ -5,6 +5,7 @@ import 'package:tchilla/view/pages/forenge_passsword_auth_email_page.dart';
 import 'package:tchilla/view/pages/forenge_password_confitmation_pin_page.dart';
 import 'package:tchilla/view/pages/home_page.dart';
 import 'package:tchilla/view/pages/login_page.dart';
+import 'package:tchilla/view/pages/redefine_password_page.dart';
 import 'package:tchilla/view/pages/register_page.dart';
 import 'package:tchilla/view/pages/splash_page.dart';
 import 'package:tchilla/viewmodel/forenge_password_viewmodel.dart';
@@ -42,10 +43,17 @@ class AppModule extends Module {
     );
     r.child(
       Router.forengePassswordConfirmationPin,
-      child: (context) => const ForengePasswordConfitmationPinPage(),
+      child: (context) => const ForengePasswordConfirmationPinPage(),
+      transition: TransitionType.rightToLeft,
+    );
+
+    r.child(
+      Router.redefinePasswordPage,
+      child: (context) => const RedefinePasswordPage(),
       transition: TransitionType.rightToLeft,
     );
   }
+
   @override
   void binds(Injector i) {
     // Navigation

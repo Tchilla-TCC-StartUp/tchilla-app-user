@@ -4,7 +4,15 @@ import 'package:tchilla/util/events/navigation.dart';
 class ForengePasswordViewmodel {
   final _navigation = Modular.get<Navigation>();
 
-  Future<void> navigateToToConfirmationPage() {
+  Future<void> navigateToConfirmationPage() {
     return _navigation.navigateToConfirmationPage();
+  }
+
+   Future<void> navigateToRedefinePasswordPage() {
+    return _navigation.navigateToRefefinePasswordPage();
+  }
+
+   Future<void> navigateToLoginPage() {
+    return _navigation.navigateToLoginPage();
   }
 }

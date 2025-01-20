@@ -5,5 +5,6 @@ abstract class INavigation {
   navigateToBack();
 
   Future<void> navigateToForengePassewordEmailPage();
-    Future<void> navigateToConfirmationPage();
+  Future<void> navigateToConfirmationPage();
+  Future<void> navigateToRefefinePasswordPage();
 }

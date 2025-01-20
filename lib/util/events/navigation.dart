@@ -42,4 +42,9 @@ class Navigation extends INavigation {
   Future<void> navigateToConfirmationPage() {
     return modular.to.pushNamed(Router.forengePassswordConfirmationPin);
   }
+
+  @override
+  Future<void> navigateToRefefinePasswordPage() {
+    return modular.to.pushNamed(Router.redefinePasswordPage);
+  }
 }

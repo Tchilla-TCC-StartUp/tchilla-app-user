@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/view/widgets/app_global_back_button.dart';
 import 'package:tchilla/view/widgets/app_global_input.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
@@ -12,17 +10,14 @@ import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/headerpage.dart';
 import 'package:tchilla/viewmodel/forenge_password_viewmodel.dart';
 
-class ForengePassswordAuthEmailPage extends StatefulWidget {
-  const ForengePassswordAuthEmailPage({super.key});
+class RedefinePasswordPage extends StatefulWidget {
+  const RedefinePasswordPage({super.key});
 
   @override
-  State<ForengePassswordAuthEmailPage> createState() =>
-      _ForengePassswordAuthEmailPageState();
+  State<RedefinePasswordPage> createState() => _RedefinePasswordPageState();
 }
 
-class _ForengePassswordAuthEmailPageState
-    extends State<ForengePassswordAuthEmailPage> {
-  final FocusNode emailFocus = FocusNode();
+class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
   final viewmodel = Modular.get<ForengePasswordViewmodel>();
   @override
   Widget build(BuildContext context) {
@@ -35,22 +30,32 @@ class _ForengePassswordAuthEmailPageState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Headerpage(
-            title: "Esqueceu sua senha?",
-            description: "Digite seu email para recuperar a senha",
+            title: "Redefinir senha",
+            description:
+                "Redefina sua senha com uma mais segura\n e facil de lembrar",
           ),
-          AppGlobalInput(
-            helpText: "Endereço de email",
-            hintText: "celson.paixao@gmail.com",
-            focusNode: emailFocus,
-            keyboardType: TextInputType.emailAddress,
+          const AppGlobalInput(
+            helpText: "Senha",
+            hintText: "***********",
+            keyboardType: TextInputType.visiblePassword,
           ),
           AppGlobalVericalSpacing(
-            value: 3.h,
+            value: 2.h,
+          ),
+          const AppGlobalInput(
+            helpText: "Confirmar senha ",
+            hintText: "***********",
+            keyboardType: TextInputType.visiblePassword,
+          ),
+          AppGlobalVericalSpacing(
+            value: 4.h,
           ),
           AppGlobalTextButton(
             minWidth: 100.w,
-            onPressed: viewmodel.navigateToConfirmationPage,
-            textButton: "Confirmar",
+            onPressed: () {
+              viewmodel.navigateToLoginPage();
+            },
+            textButton: "Redefinir",
           )
         ],
       )),

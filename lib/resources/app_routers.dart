@@ -11,3 +11,6 @@ final String forengePassswordEmail =
     "$mainRouter/forange_passsword/auth_email_page";
 final String forengePassswordConfirmationPin =
     "$forengePassswordEmail/forange_passsword/confirmation_pin";
+
+final String redefinePasswordPage =
+    "$forengePassswordConfirmationPin/redefinePasswordPage";
