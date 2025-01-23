@@ -14,7 +14,7 @@ class AppAnimationLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppGlobalShowAndHideAnimation(
-      focusNode: focusNode,
+      focusNodes: focusNode,
       children: [
         AppGlobalVericalSpacing(
           value: 2.h,

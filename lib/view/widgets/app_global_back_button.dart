@@ -12,25 +12,28 @@ class AppGlobalBackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final navigation = Get.find<Navigation>();
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: MaterialButton(
         minWidth: 2.w,
-        padding: EdgeInsets.all(0),
-        onPressed: navigation.navigateToBack,
+        padding: const EdgeInsets.all(0),
+        onPressed: Get.find<Navigation>().navigateToBack,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(100.px),
-            side: BorderSide(color: primary200)),
+          borderRadius: BorderRadius.circular(10.px),
+          side: const BorderSide(color: primaryBorder),
+        ),
         child: Stack(
-           alignment: Alignment.center,
+          alignment: Alignment.center,
           children: [
             Positioned(
               top: 9,
               bottom: 3,
               child: SvgPicture.asset(
                 arrowBackSvg,
-                color: primary950,
+                colorFilter: const ColorFilter.mode(
+                  primaryBorder,
+                  BlendMode.srcIn,
+                ),
                 width: 40.px,
                 height: 40.px,
                 fit: BoxFit.cover,

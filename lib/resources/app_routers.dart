@@ -14,3 +14,5 @@ final String forengePassswordConfirmationPin =
 
 final String redefinePasswordPage =
     "$forengePassswordConfirmationPin/redefinePasswordPage";
+
+final String resultSearchPage = "$homePage/result_search";

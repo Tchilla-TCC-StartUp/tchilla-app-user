@@ -10,8 +10,8 @@ class OnboardingViewModel extends GetxController {
   void nextPage() {
     if (currentPage.value < 2) {
       pageController.nextPage(
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeInOut,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOutCubic,
       );
     } else {
       _navigator.navigateToHome();
@@ -19,7 +19,7 @@ class OnboardingViewModel extends GetxController {
   }
 
   void clickSkip() {
-    _navigator.navigateToHome();
+    _navigator.navigateToLoginPage();
   }
 
   @override

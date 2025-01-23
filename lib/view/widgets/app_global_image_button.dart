@@ -25,7 +25,9 @@ class AppGlobalImageButton extends StatelessWidget {
       color: color,
       splashColor: color,
       elevation: 0,
+      hoverColor: Colors.transparent,
       minWidth: minWidth,
+      hoverElevation: 0,
       height: 55.px,
       onPressed: onPressed,
       shape: RoundedRectangleBorder(

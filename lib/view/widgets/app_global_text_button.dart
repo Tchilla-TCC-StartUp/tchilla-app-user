@@ -32,7 +32,7 @@ class AppGlobalTextButton extends StatelessWidget {
       child: AppGlobalText(
         text: textButton,
         style: TextStyleEnum.h3_medium,
-        color: Colors.white,
+        color: primary50,
       ),
     );
   }

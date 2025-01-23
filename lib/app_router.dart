@@ -8,6 +8,7 @@ import 'package:tchilla/view/pages/login_page.dart';
 import 'package:tchilla/view/pages/onboarding_page.dart';
 import 'package:tchilla/view/pages/redefine_password_page.dart';
 import 'package:tchilla/view/pages/register_page.dart';
+import 'package:tchilla/view/pages/result_search_page.dart';
 import 'package:tchilla/view/pages/splash_page.dart';
 
 class AppRouter {
@@ -57,6 +58,11 @@ class AppRouter {
               path: Router.onboardingPage,
               page: const OnboardingPage(),
             ),
+            _buildRoute(
+              name: Router.resultSearchPage,
+              path: Router.resultSearchPage,
+              page: const ResultSearchPage(),
+            ),
           ],
         );
 
@@ -68,16 +74,20 @@ class AppRouter {
     return GoRoute(
       name: name,
       path: path,
+      builder: (context, state) {
+        return page;
+      },
       pageBuilder: (context, state) {
         return CustomTransitionPage(
           key: state.pageKey,
           child: page,
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(-1.0, 0.0);
+            const begin = Offset(1.0, 0.0);
             const end = Offset.zero;
-            const curve = Curves.easeInOut;
+            const curve = Curves.easeInOutCubic;
 
-            final tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            final tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
             final offsetAnimation = animation.drive(tween);
 
             return SlideTransition(
@@ -85,6 +95,7 @@ class AppRouter {
               child: child,
             );
           },
+          transitionDuration: const Duration(milliseconds: 500),
         );
       },
     );

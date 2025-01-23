@@ -93,13 +93,13 @@ class OnboardingPage extends StatelessWidget {
                   children: [
                     AppGlobalText(
                       text: "Prosseguir",
-                      color: Colors.white,
+                      color: primary50,
                       style: TextStyleEnum.h3_bold,
                     ),
                     const AppGlobalHorizontalSpacing(),
                     const Icon(
                       Icons.arrow_forward,
-                      color: Colors.white,
+                      color: primary50,
                     )
                   ],
                 )),

@@ -1,4 +1,3 @@
-
 import 'package:go_router/go_router.dart';
 import 'package:tchilla/util/interface/inavigation.dart';
 import 'package:tchilla/resources/app_routers.dart' as Router;
@@ -51,5 +50,10 @@ class Navigation extends INavigation {
   @override
   Future<void> navigateToOnboarding() {
     return _router.pushReplacementNamed(Router.onboardingPage);
+  }
+
+  @override
+  Future<void> navigateToResultSearchPage() {
+    return _router.pushNamed(Router.resultSearchPage);
   }
 }

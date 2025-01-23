@@ -13,3 +13,7 @@ const String arrowBackSvg = '${vectoresPash}noun-back-arrow-3565454.svg';
 const onbordingImage1 = '${imagesPash}House searching-cuate.svg';
 const onbordingImage2 = '${imagesPash}Wedding planner-cuate.svg';
 const onbordingImage3 = '${imagesPash}Wedding-cuate.svg';
+
+const String locationIconoSvg = '${vectoresPash}noun-location-7460684.svg';
+
+const userImageDefult = '${imagesPash}default-avatar-photo-placeholder-profile-icon-vector';

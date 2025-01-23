@@ -1,35 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:get/get.dart'; // Import necessário para o GetX
-import 'app_gets.dart'; // Importe a classe AppGets
-import 'app_router.dart'; // Importe a classe AppRouter
-import 'style/colors.dart'; // Importe as cores
+import 'app_gets.dart'; 
+import 'app_router.dart'; 
+import 'style/colors.dart'; 
 
 void main() {
   final appRouter = AppRouter();
-  AppGets.init(appRouter.router);
+  AppGets.init();
 
   runApp(
     ResponsiveSizer(
       builder: (context, orientation, screenType) {
-        return MyApp(router: appRouter.router);
+        return const MyApp();
       },
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  final GoRouter router;
+ 
+  const MyApp({super.key});
 
-  const MyApp({super.key, required this.router});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Tchilla',
-      routerConfig: router,
+      routerConfig: Get.find<AppRouter>().router,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: primary500),
         useMaterial3: true,

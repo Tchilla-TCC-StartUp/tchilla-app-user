@@ -19,25 +19,24 @@ O **Tchilla App** é uma plataforma onde os clientes podem solicitar serviços a
 
 - **Flutter**: Framework utilizado para o desenvolvimento do aplicativo
 - **Dart**: Linguagem de programação para lógica de negócios
-- **Provider**: Para gerenciamento de estado e navegação reativa
-- **Flutter Modular**: Para gerenciamento de rotas e dependências
+- **GetX**: Para gerenciamento de estado e dependências
+- **goRuter**: Para gerenciamento de rotas 
 
 ## Como Rodar o Projeto
 
 1. Clone o repositório:
-    ```bash
-    git clone https://github.com/Tchilla-TCC-StartUp/tchilla-app-user.git
-    ```
+   ```bash
+   git clone https://github.com/Tchilla-TCC-StartUp/tchilla-app-user.git
+   ```
 2. Navegue até a pasta do projeto:
-    ```bash
-    cd tchilla-app
-    ```
+   ```bash
+   cd tchilla-app
+   ```
 3. Instale as dependências:
-    ```bash
-    flutter pub get
-    ```
+   ```bash
+   flutter pub get
+   ```
 4. Execute o aplicativo:
-    ```bash
-    flutter run
-    ```
-
+   ```bash
+   flutter run
+   ```

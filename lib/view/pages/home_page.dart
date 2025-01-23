@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/resources/app_size.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
@@ -14,6 +16,7 @@ import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_circular_liner.dart';
+import 'package:tchilla/viewmodel/home_viewmodel.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,6 +27,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final FocusNode _locationFocusNode = FocusNode();
+  final viewmodel = Get.find<HomeViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +65,7 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: primary50,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
@@ -88,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                 focusNode: _locationFocusNode,
               ),
               AppGlobalShowAndHideAnimation(
-                focusNode: [_locationFocusNode],
+                focusNodes: [_locationFocusNode],
                 children: [
                   AppGlobalVericalSpacing(
                     value: 2.h,
@@ -156,7 +160,7 @@ class _HomePageState extends State<HomePage> {
               AppGlobalTextButton(
                 minWidth: 80.w,
                 textButton: "Pesquisar",
-                onPressed: () {},
+                onPressed: viewmodel.navigateToResultSearchPage,
               ),
             ],
           )),
@@ -202,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                   child: AppGlobalText(
                     text: "Organize seu evento\nem questão de minutos ",
                     style: TextStyleEnum.h2_bold,
-                    color: Colors.white,
+                    color: primary50,
                   ),
                 ),
               ],
@@ -213,7 +217,7 @@ class _HomePageState extends State<HomePage> {
           flex: 6, // Flexível, ocupa 60% da tela
           child: Container(
             width: double.infinity,
-            color: Colors.white,
+            color: primary50,
           ),
         ),
       ],
@@ -224,7 +228,8 @@ class _HomePageState extends State<HomePage> {
     return Row(
       children: [
         const CircleAvatar(
-          child: Icon(Icons.person),
+         backgroundImage: AssetImage(userImageDefult),
+         backgroundColor: primary50,
         ),
         const AppGlobalHorizontalSpacing(),
         Column(
@@ -233,7 +238,7 @@ class _HomePageState extends State<HomePage> {
             Text(
               "Olá👋",
               style: GoogleFonts.inter(
-                color: Colors.white,
+                color: primary50,
                 fontSize: 13.spa,
                 fontWeight: FontWeight.w200,
               ),
@@ -241,7 +246,7 @@ class _HomePageState extends State<HomePage> {
             Text(
               "Sr(a) Visitante",
               style: GoogleFonts.inter(
-                color: Colors.white,
+                color: primary50,
                 fontSize: 15.spa,
                 fontWeight: FontWeight.w500,
               ),

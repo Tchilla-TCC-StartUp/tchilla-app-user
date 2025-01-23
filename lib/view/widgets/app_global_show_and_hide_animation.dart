@@ -1,61 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 
-class AppGlobalShowAndHideAnimation extends StatefulWidget {
-  final List<FocusNode> focusNode; 
-  final List<Widget> children; 
-  final Duration duration;
-  final Curve curve; 
+class AppGlobalShowAndHideAnimationController extends GetxController {
+  final RxBool isVisible = true.obs;
 
-  const AppGlobalShowAndHideAnimation({
+  void toggleVisibility(bool hasFocus) {
+    isVisible.value = !hasFocus;
+  }
+}
+
+class AppGlobalShowAndHideAnimation extends StatelessWidget {
+  final List<FocusNode> focusNodes;
+  final List<Widget> children;
+  final Duration duration;
+  final Curve curve;
+
+  AppGlobalShowAndHideAnimation({
     Key? key,
-    required this.focusNode,
+    required this.focusNodes,
     required this.children,
-    this.duration = const Duration(milliseconds: 300),
+    this.duration = const Duration(milliseconds: 600),
     this.curve = Curves.easeInOut,
   }) : super(key: key);
 
-  @override
-  _AppGlobalShowAndHideAnimationState createState() =>
-      _AppGlobalShowAndHideAnimationState();
-}
-
-class _AppGlobalShowAndHideAnimationState
-    extends State<AppGlobalShowAndHideAnimation>
-    with SingleTickerProviderStateMixin {
-  bool _isVisible = true;
-
-  @override
-  void initState() {
-    super.initState();
-
-    widget.focusNode.forEach(
-      (e) {
-        e.addListener(() {
-          setState(() {
-            _isVisible = !e.hasFocus;
-          });
-        });
-      },
-    );
-  }
+  final AppGlobalShowAndHideAnimationController controller =
+      Get.put(AppGlobalShowAndHideAnimationController());
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedSize(
-      duration: widget.duration,
-      curve: widget.curve,
-      clipBehavior: Clip.hardEdge, // Garante que o conteúdo fique contido
-      child: AnimatedOpacity(
-        opacity: _isVisible ? 1 : 0,
-        duration: widget.duration,
-        curve: widget.curve,
-        child: _isVisible
-            ? Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: widget.children,
+  
+    for (var focusNode in focusNodes) {
+      focusNode.addListener(() {
+        controller.toggleVisibility(focusNode.hasFocus);
+      });
+    }
+
+    return Obx(
+      () => AnimatedSize(
+        duration: duration,
+        curve: curve,
+        clipBehavior: Clip.hardEdge,
+        child: controller.isVisible.value
+            ? AnimatedOpacity(
+                opacity: controller.isVisible.value ? 1 : 0,
+                duration: duration,
+                curve: curve,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: children,
+                ),
               )
-            : const AppGlobalVericalSpacing(), // Se invisível, remove o tamanho
+            : AppGlobalVericalSpacing(
+                    value: 2.h,
+                  ),
       ),
     );
   }

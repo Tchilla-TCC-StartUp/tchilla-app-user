@@ -8,4 +8,6 @@ abstract class INavigation {
   Future<void> navigateToForengePassewordEmailPage();
   Future<void> navigateToConfirmationPage();
   Future<void> navigateToRefefinePasswordPage();
+
+   Future<void> navigateToResultSearchPage();
 }
