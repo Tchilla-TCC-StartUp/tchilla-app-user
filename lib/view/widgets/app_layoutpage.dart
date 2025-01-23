@@ -9,11 +9,17 @@ class AppLayoutpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: getAdaptativeWidth(7.w, 5.w, 3.w),
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        behavior: HitTestBehavior.opaque,
+        child: Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: getAdaptativeWidth(7.w, 5.w, 3.w),
+          ),
+          child: body,
         ),
-        child: body,
       ),
     );
   }
