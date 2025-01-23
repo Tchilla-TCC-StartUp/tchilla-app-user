@@ -20,6 +20,7 @@ enum TextStyleEnum {
   button_text,
   subtitle,
   overline,
+  onboarding_title,
 }
 
 TextStyle getTextStyle(TextStyleEnum style, {Color color = primary950,}) {
@@ -114,6 +115,12 @@ TextStyle getTextStyle(TextStyleEnum style, {Color color = primary950,}) {
     case TextStyleEnum.overline:
       return GoogleFonts.inter(
         fontSize: 10.sp,
+        color: color,
+      );
+    case TextStyleEnum.onboarding_title:
+      return GoogleFonts.inter(
+        fontSize: 22.sp,
+        fontWeight: FontWeight.w900,
         color: color,
       );
     default:

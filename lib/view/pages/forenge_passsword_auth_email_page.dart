@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/view/widgets/app_global_back_button.dart';
@@ -23,7 +23,7 @@ class ForengePassswordAuthEmailPage extends StatefulWidget {
 class _ForengePassswordAuthEmailPageState
     extends State<ForengePassswordAuthEmailPage> {
   final FocusNode emailFocus = FocusNode();
-  final viewmodel = Modular.get<ForengePasswordViewmodel>();
+  final viewmodel = Get.find<ForengePasswordViewmodel>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

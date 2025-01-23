@@ -1,50 +1,55 @@
-import 'package:flutter_modular/flutter_modular.dart';
+
+import 'package:go_router/go_router.dart';
 import 'package:tchilla/util/interface/inavigation.dart';
 import 'package:tchilla/resources/app_routers.dart' as Router;
 
 class Navigation extends INavigation {
-  final modular = Modular;
+  final GoRouter _router;
+
+  Navigation(this._router);
   @override
   Future<void> navigateToHome() {
-    return modular.to.pushNamedAndRemoveUntil(
+    return _router.pushReplacementNamed(
       Router.homePage,
-      (route) => false,
     );
   }
 
   @override
   Future<void> navigateToLoginPage() {
-    return modular.to.pushNamedAndRemoveUntil(
+    return _router.pushReplacementNamed(
       Router.loginPage,
-      (route) => false,
     );
   }
 
   @override
   Future<void> navigateToRegisterPage() {
-    return modular.to.pushNamedAndRemoveUntil(
+    return _router.pushReplacementNamed(
       Router.registerPage,
-      (route) => false,
     );
   }
 
   @override
   navigateToBack() {
-    modular.to.pop();
+    _router.pop();
   }
 
   @override
   Future<void> navigateToForengePassewordEmailPage() {
-    return modular.to.pushNamed(Router.forengePassswordEmail);
+    return _router.pushNamed(Router.forengePassswordEmail);
   }
 
   @override
   Future<void> navigateToConfirmationPage() {
-    return modular.to.pushNamed(Router.forengePassswordConfirmationPin);
+    return _router.pushNamed(Router.forengePassswordConfirmationPin);
   }
 
   @override
   Future<void> navigateToRefefinePasswordPage() {
-    return modular.to.pushNamed(Router.redefinePasswordPage);
+    return _router.pushNamed(Router.redefinePasswordPage);
+  }
+
+  @override
+  Future<void> navigateToOnboarding() {
+    return _router.pushReplacementNamed(Router.onboardingPage);
   }
 }

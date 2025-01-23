@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/resources/app_size.dart';
@@ -28,7 +29,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final FocusNode emailFocusNode = FocusNode();
   final FocusNode passwordFocusNode = FocusNode();
-  final viewmodel = Modular.get<LoginViewmodel>();
+  final viewmodel = Get.find<LoginViewmodel>();
 
   @override
   Widget build(BuildContext context) {

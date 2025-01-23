@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/view/widgets/app_global_back_button.dart';
 import 'package:tchilla/view/widgets/app_global_input.dart';
@@ -18,7 +18,7 @@ class RedefinePasswordPage extends StatefulWidget {
 }
 
 class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
-  final viewmodel = Modular.get<ForengePasswordViewmodel>();
+  final viewmodel = Get.find<ForengePasswordViewmodel>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

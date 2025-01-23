@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/app_text_style.dart';
@@ -27,7 +27,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final FocusNode nameFocusNode = FocusNode();
   final FocusNode emailFocusNode = FocusNode();
   final FocusNode passwordFocusNode = FocusNode();
-  final viewmodel = Modular.get<RegisterViewmodel>();
+  final viewmodel = Get.find<RegisterViewmodel>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

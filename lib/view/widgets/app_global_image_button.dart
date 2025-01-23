@@ -23,7 +23,7 @@ class AppGlobalImageButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       color: color,
-      splashColor: primary50,
+      splashColor: color,
       elevation: 0,
       minWidth: minWidth,
       height: 55.px,

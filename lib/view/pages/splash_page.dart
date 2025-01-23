@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/resources/app_size.dart';
@@ -20,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    viewmodel = Modular.get<SplashViewmodel>();
+    viewmodel = Get.find<SplashViewmodel>();
     viewmodel.navigateToHomePage();
   }
 

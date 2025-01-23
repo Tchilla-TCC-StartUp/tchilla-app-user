@@ -1,8 +1,8 @@
-import 'package:flutter_modular/flutter_modular.dart';
-
-final String initialRoute = Modular.initialRoute;
+final String initialRoute = "/";
 
 final String mainRouter = "${initialRoute}main";
+
+final String onboardingPage = "$mainRouter/onboarding";
 
 final String homePage = "$mainRouter/home";
 final String loginPage = "$mainRouter/login";

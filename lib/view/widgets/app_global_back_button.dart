@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/colors.dart';
@@ -12,7 +12,7 @@ class AppGlobalBackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final navigation = Modular.get<Navigation>();
+    final navigation = Get.find<Navigation>();
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: MaterialButton(

@@ -1,5 +1,6 @@
 abstract class INavigation {
   Future<void> navigateToHome();
+  Future<void> navigateToOnboarding();
   Future<void> navigateToLoginPage();
   Future<void> navigateToRegisterPage();
   navigateToBack();
