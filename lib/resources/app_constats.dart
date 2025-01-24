@@ -15,5 +15,8 @@ const onbordingImage2 = '${imagesPash}Wedding planner-cuate.svg';
 const onbordingImage3 = '${imagesPash}Wedding-cuate.svg';
 
 const String locationIconoSvg = '${vectoresPash}noun-location-7460684.svg';
+const String personsIconoSvg = '${vectoresPash}noun-reviews-6307615.svg';
+const String moneyIconoSvg = '${vectoresPash}noun-money-7460748.svg';
 
-const userImageDefult = '${imagesPash}default-avatar-photo-placeholder-profile-icon-vector';
+const userImageDefult =
+    '${imagesPash}default-avatar-photo-placeholder-profile-icon-vector.jpg';

@@ -9,6 +9,7 @@ import 'package:tchilla/view/widgets/app_global_back_button.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
+import 'package:tchilla/view/widgets/proposed_card.dart';
 import 'package:tchilla/viewmodel/result_search_viewmodel.dart';
 
 class ResultSearchPage extends StatefulWidget {
@@ -22,11 +23,14 @@ class _ResultSearchPageState extends State<ResultSearchPage>
     with SingleTickerProviderStateMixin {
   final ResultSearchViewModel viewmodel = Get.find<ResultSearchViewModel>();
   late TabController _tabController;
-  final tabs = [
-    const Tab(text: 'Todas Ofertas'),
-    const Tab(text: 'Mais perto de si'),
-    const Tab(text: 'Mais solicitados'),
-    const Tab(text: 'Melhores custos e beneficio'),
+
+  final int tabCount = 5; // Atualizado para refletir o número de títulos
+  final List<String> tabTitles = [
+    'Todas Ofertas',
+    'Melhores Promoções',
+    'Mais perto de si',
+    'Mais solicitados',
+    'Melhores custos e benefício',
   ];
 
   @override
@@ -34,7 +38,7 @@ class _ResultSearchPageState extends State<ResultSearchPage>
     super.initState();
     _tabController = TabController(
       initialIndex: viewmodel.selectedIndex.value,
-      length: tabs.length,
+      length: tabCount,
       vsync: this,
     );
     _tabController.addListener(() {
@@ -45,36 +49,15 @@ class _ResultSearchPageState extends State<ResultSearchPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: _buildAppbar(),
       body: AppLayoutpage(
         body: Column(
           children: [
-            AppGlobalVericalSpacing(
-              value: 4.h,
-            ),
-            _builTabs(
-              tabController: _tabController,
-              viewmodel: viewmodel,
-              tabs: tabs,
-            ),
+            AppGlobalVericalSpacing(value: 1.h),
+            _buildTabs(),
             _buildTabViews(),
           ],
         ),
-      ),
-    );
-  }
-
-  Expanded _buildTabViews() {
-    return Expanded(
-      child: TabBarView(
-        controller: _tabController,
-        children: const [
-          Center(child: Text('Conteúdo da Tab 1')),
-          Center(child: Text('Conteúdo da Tab 2')),
-          Center(child: Text('Conteúdo da Tab 3')),
-          Center(child: Text('Conteúdo da Tab 4')),
-        ],
       ),
     );
   }
@@ -85,7 +68,64 @@ class _ResultSearchPageState extends State<ResultSearchPage>
     super.dispose();
   }
 
-  // Construção do AppBar
+  Widget _buildTabs() {
+    return TabBar(
+      controller: _tabController,
+      onTap: viewmodel.selectTab,
+      isScrollable: true,
+      unselectedLabelColor: primaryBorder,
+      tabAlignment: TabAlignment.start,
+      labelColor: primary950,
+      indicatorColor: primary950,
+      tabs: List.generate(
+        tabCount,
+        (index) => Tab(text: tabTitles[index]),
+      ),
+    );
+  }
+
+  Expanded _buildTabViews() {
+    return Expanded(
+      child: TabBarView(
+        controller: _tabController,
+        physics: const NeverScrollableScrollPhysics(), // Desativa o scroll
+        children: List.generate(
+          tabCount,
+          (index) {
+            if (index == 0) {
+              return _builAllProposedSection();
+            }
+            return _builFilterProposedSection(index + 1);
+          },
+        ),
+      ),
+    );
+  }
+
+  _builAllProposedSection() {
+    return ListView.builder(
+      itemCount: 10,
+      itemBuilder: (context, itemIndex) => Padding(
+        padding: EdgeInsets.symmetric(vertical: 1.h),
+        child: ProposedCard(
+          services: ["Dj", "Decoração"],
+        ),
+      ),
+    );
+  }
+
+  _builFilterProposedSection(final int count) {
+    return ListView.builder(
+      itemCount: count,
+      itemBuilder: (context, itemIndex) => Padding(
+        padding: EdgeInsets.symmetric(vertical: 1.h),
+        child: ProposedCard(
+          services: ["Dj", "Decoração"],
+        ),
+      ),
+    );
+  }
+
   AppBar _buildAppbar() {
     return AppBar(
       leading: const AppGlobalBackButton(),
@@ -117,33 +157,6 @@ class _ResultSearchPageState extends State<ResultSearchPage>
           align: TextAlign.justify,
         ),
       ),
-    );
-  }
-}
-
-class _builTabs extends StatelessWidget {
-  const _builTabs({
-    super.key,
-    required TabController tabController,
-    required this.viewmodel,
-    required this.tabs,
-  }) : _tabController = tabController;
-
-  final TabController _tabController;
-  final ResultSearchViewModel viewmodel;
-  final List<Tab> tabs;
-
-  @override
-  Widget build(BuildContext context) {
-    return TabBar(
-      controller: _tabController,
-      onTap: viewmodel.selectTab,
-      isScrollable: true,
-      tabAlignment: TabAlignment.start,
-      unselectedLabelColor: primaryBorder,
-      labelColor: primary950,
-      indicatorColor: primary950,
-      tabs: tabs,
     );
   }
 }

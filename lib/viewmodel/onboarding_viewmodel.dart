@@ -11,7 +11,7 @@ class OnboardingViewModel extends GetxController {
     if (currentPage.value < 2) {
       pageController.nextPage(
         duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOutCubic,
+        curve: Curves.easeInOut,
       );
     } else {
       _navigator.navigateToHome();

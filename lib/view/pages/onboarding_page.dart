@@ -63,6 +63,8 @@ class OnboardingPage extends StatelessWidget {
             Expanded(
               child: PageView.builder(
                 controller: viewModel.pageController,
+                physics:
+                    const NeverScrollableScrollPhysics(), // Desativa o scroll
                 onPageChanged: (index) {
                   viewModel.currentPage.value = index;
                 },
@@ -86,7 +88,7 @@ class OnboardingPage extends StatelessWidget {
               value: 10.h,
             ),
             AppGlobalImageButton(
-                onPressed: viewModel.nextPage,
+                onPressed: viewModel.nextPage, // Botão para navegar
                 color: primary950,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
