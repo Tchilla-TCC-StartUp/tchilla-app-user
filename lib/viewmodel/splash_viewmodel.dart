@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tchilla/util/events/navigation.dart';
 
-class SplashViewmodel extends ChangeNotifier {
+class SplashViewmodel {
   final Navigation _navigation = Get.find<Navigation>();
 
   Future<void> navigateToHomePage() async {

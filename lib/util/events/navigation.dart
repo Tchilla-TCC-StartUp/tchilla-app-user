@@ -7,22 +7,22 @@ class Navigation extends INavigation {
 
   Navigation(this._router);
   @override
-  Future<void> navigateToHome() {
-    return _router.pushReplacementNamed(
+  navigateToHome() {
+    _router.goNamed(
       Router.homePage,
     );
   }
 
   @override
-  Future<void> navigateToLoginPage() {
-    return _router.pushReplacementNamed(
+  navigateToLoginPage() {
+    _router.pushReplacementNamed(
       Router.loginPage,
     );
   }
 
   @override
-  Future<void> navigateToRegisterPage() {
-    return _router.pushReplacementNamed(
+  navigateToRegisterPage() {
+    _router.pushReplacementNamed(
       Router.registerPage,
     );
   }
@@ -33,27 +33,32 @@ class Navigation extends INavigation {
   }
 
   @override
-  Future<void> navigateToForengePassewordEmailPage() {
-    return _router.pushNamed(Router.forengePassswordEmail);
+  navigateToForengePassewordEmailPage() {
+    _router.pushNamed(Router.forengePassswordEmail);
   }
 
   @override
-  Future<void> navigateToConfirmationPage() {
-    return _router.pushNamed(Router.forengePassswordConfirmationPin);
+  navigateToConfirmationPage() {
+    _router.pushNamed(Router.forengePassswordConfirmationPin);
   }
 
   @override
-  Future<void> navigateToRefefinePasswordPage() {
-    return _router.pushNamed(Router.redefinePasswordPage);
+  navigateToRefefinePasswordPage() {
+    _router.pushNamed(Router.redefinePasswordPage);
   }
 
   @override
-  Future<void> navigateToOnboarding() {
-    return _router.pushReplacementNamed(Router.onboardingPage);
+  navigateToOnboarding() {
+    _router.pushReplacementNamed(Router.onboardingPage);
   }
 
   @override
-  Future<void> navigateToResultSearchPage() {
-    return _router.pushNamed(Router.resultSearchPage);
+  navigateToResultSearchPage() {
+    _router.pushNamed(Router.resultSearchPage);
+  }
+
+  @override
+  navigateToWelcomePage() {
+    _router.goNamed(Router.welconePage);
   }
 }

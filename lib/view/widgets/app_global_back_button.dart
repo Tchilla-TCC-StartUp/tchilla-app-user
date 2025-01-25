@@ -25,20 +25,16 @@ class AppGlobalBackButton extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Positioned(
-              top: 9,
-              bottom: 3,
-              child: SvgPicture.asset(
-                arrowBackSvg,
-                colorFilter: const ColorFilter.mode(
-                  primaryBorder,
-                  BlendMode.srcIn,
-                ),
-                width: 40.px,
-                height: 40.px,
-                fit: BoxFit.cover,
-                alignment: Alignment.center,
+            SvgPicture.asset(
+              arrowBackSvg,
+              colorFilter: const ColorFilter.mode(
+                primaryBorder,
+                BlendMode.srcIn,
               ),
+              width: 20.px,
+              height: 20.px,
+              fit: BoxFit.cover,
+              alignment: Alignment.center,
             ),
           ],
         ),

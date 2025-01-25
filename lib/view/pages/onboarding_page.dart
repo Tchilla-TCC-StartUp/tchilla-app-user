@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -88,7 +89,7 @@ class OnboardingPage extends StatelessWidget {
               value: 10.h,
             ),
             AppGlobalImageButton(
-                onPressed: viewModel.nextPage, // Botão para navegar
+                onPressed: viewModel.nextPage, 
                 color: primary950,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -99,10 +100,7 @@ class OnboardingPage extends StatelessWidget {
                       style: TextStyleEnum.h3_bold,
                     ),
                     const AppGlobalHorizontalSpacing(),
-                    const Icon(
-                      Icons.arrow_forward,
-                      color: primary50,
-                    )
+                  SvgPicture.asset(arrowRightSvg)
                   ],
                 )),
             AppGlobalVericalSpacing(

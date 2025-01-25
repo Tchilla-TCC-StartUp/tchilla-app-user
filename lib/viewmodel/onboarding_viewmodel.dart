@@ -14,12 +14,12 @@ class OnboardingViewModel extends GetxController {
         curve: Curves.easeInOut,
       );
     } else {
-      _navigator.navigateToHome();
+      _navigator.navigateToWelcomePage();
     }
   }
 
   void clickSkip() {
-    _navigator.navigateToLoginPage();
+    _navigator.navigateToWelcomePage();
   }
 
   @override

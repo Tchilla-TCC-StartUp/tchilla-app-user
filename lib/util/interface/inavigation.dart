@@ -1,13 +1,14 @@
 abstract class INavigation {
-  Future<void> navigateToHome();
-  Future<void> navigateToOnboarding();
-  Future<void> navigateToLoginPage();
-  Future<void> navigateToRegisterPage();
+  navigateToHome();
+  navigateToOnboarding();
+  navigateToLoginPage();
+  navigateToRegisterPage();
   navigateToBack();
 
-  Future<void> navigateToForengePassewordEmailPage();
-  Future<void> navigateToConfirmationPage();
-  Future<void> navigateToRefefinePasswordPage();
+  navigateToForengePassewordEmailPage();
+  navigateToConfirmationPage();
+  navigateToRefefinePasswordPage();
 
-   Future<void> navigateToResultSearchPage();
+   navigateToResultSearchPage();
+    navigateToWelcomePage();
 }

@@ -31,7 +31,6 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: AppLayoutpage(
           body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -10,6 +10,7 @@ import 'package:tchilla/view/pages/redefine_password_page.dart';
 import 'package:tchilla/view/pages/register_page.dart';
 import 'package:tchilla/view/pages/result_search_page.dart';
 import 'package:tchilla/view/pages/splash_page.dart';
+import 'package:tchilla/view/pages/welcome_page.dart';
 
 class AppRouter {
   final GoRouter router;
@@ -62,6 +63,11 @@ class AppRouter {
               name: Router.resultSearchPage,
               path: Router.resultSearchPage,
               page: const ResultSearchPage(),
+            ),
+              _buildRoute(
+              name: Router.welconePage,
+              path: Router.welconePage,
+              page: const  WelcomePage(),
             ),
           ],
         );
