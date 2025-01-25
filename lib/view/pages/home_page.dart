@@ -42,14 +42,16 @@ class _HomePageState extends State<HomePage> {
             FocusScope.of(context).unfocus();
           },
           behavior: HitTestBehavior.opaque,
-          child: SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-            child: Stack(
-              children: <Widget>[
-                _buildBackground(),
-                _buildContainerMan(),
-              ],
+          child: SingleChildScrollView(
+            child: SizedBox(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height,
+              child: Stack(
+                children: <Widget>[
+                  _buildBackground(),
+                  _buildContainerMan(),
+                ],
+              ),
             ),
           ),
         ),
@@ -57,123 +59,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _buildContainerMan() {
-    return Positioned(
-      top: 25.h,
-      left: getAdaptativeWidth(7.w, 5.w, 3.w),
-      right: getAdaptativeWidth(7.w, 5.w, 3.w),
-      child: Container(
-        clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(
-          color: primary50,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              spreadRadius: 1,
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Container(
-          clipBehavior: Clip.none,
-          margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
-          child: Form(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              AppGlobalInput(
-                helpText: "Local Evento",
-                hintText: "EX: provincia/municipio/bairro",
-                keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.done,
-                focusNode: _locationFocusNode,
-              ),
-              AppGlobalShowAndHideAnimation(
-                focusNodes: [_locationFocusNode],
-                children: [
-                  AppGlobalVericalSpacing(
-                    value: 2.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      AppGlobalDatePicker(
-                        helpText: "Data do Evento",
-                        hintText: "25 NOV 2025",
-                        width: 37.w,
-                        firstDate: DateTime(2020),
-                        lastDate: DateTime(2030),
-                        onDateSelected: (DateTime date) {
-                          print("Data selecionada: $date");
-                        },
-                      ),
-                      AppGlobalDropdownMenu(
-                        helpText: "Tipo Evento",
-                        hintText: "Casamento",
-                        width: 37.w,
-                        dropdownMenuEntries: const [
-                          DropdownMenuEntry(value: "OP1", label: "Casamento"),
-                          DropdownMenuEntry(value: "OP1", label: "Pedido"),
-                          DropdownMenuEntry(value: "OP1", label: "Aniversário"),
-                          DropdownMenuEntry(value: "OP1", label: "Noivado"),
-                        ],
-                      ),
-                    ],
-                  ),
-                  AppGlobalVericalSpacing(
-                    value: 2.h,
-                  ),
-                  AppGlobalDropdownMenu(
-                    helpText: "N de Convidados",
-                    hintText: "150 Convidados",
-                    width: 80.w,
-                    dropdownMenuEntries: const [
-                      DropdownMenuEntry(value: "OP1", label: "150 Convidados"),
-                      DropdownMenuEntry(value: "OP1", label: "300 Convidadoso"),
-                      DropdownMenuEntry(value: "OP1", label: "600 Convidados"),
-                      DropdownMenuEntry(value: "OP1", label: "1200 Convidados"),
-                    ],
-                  ),
-                  AppGlobalVericalSpacing(
-                    value: 2.h,
-                  ),
-                  AppGlobalServiceTagsManager(
-                    helpText: "Adicionar Serviço",
-                    hintText: "Selecione um serviço",
-                    dropdownMenuEntries: const [
-                      DropdownMenuEntry(value: "Decoracao", label: "Decoração"),
-                      DropdownMenuEntry(value: "DJ", label: "DJ"),
-                      DropdownMenuEntry(
-                          value: "Confeiteiro", label: "Confeiteiro"),
-                      DropdownMenuEntry(value: "Bartender", label: "Bartender"),
-                    ],
-                    // Exemplo de valor inicial
-                    onChanged: (selectedTags) {
-                      print("Tags Selecionadas: $selectedTags");
-                    },
-                  ),
-                ],
-              ),
-              AppGlobalTextButton(
-                minWidth: 80.w,
-                textButton: "Pesquisar",
-                onPressed: viewmodel.navigateToResultSearchPage,
-              ),
-            ],
-          )),
-        ),
-      ),
-    );
-  }
-
-  _buildBackground() {
+  Widget _buildBackground() {
     return Column(
       children: [
-        Expanded(
-          flex: 4,
+        SizedBox(
+          height: 40.h,
           child: Container(
             width: double.infinity,
             color: primary950,
@@ -200,11 +90,11 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Positioned(
-                  top: 15.h,
+                  top: 13.h,
                   left: getAdaptativeWidth(8.w, 6.w, 4.w),
                   right: getAdaptativeWidth(8.w, 6.w, 4.w),
                   child: AppGlobalText(
-                    text: "Organize seu evento\nem questão de minutos ",
+                    text: "Organize seu evento\nem questão de minutos",
                     style: TextStyleEnum.h2_bold,
                     color: primary50,
                   ),
@@ -213,8 +103,8 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-        Expanded(
-          flex: 6, // Flexível, ocupa 60% da tela
+        SizedBox(
+          height: 60.h, // 60% da tela
           child: Container(
             width: double.infinity,
             color: primary50,
@@ -224,12 +114,126 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _buildHelloUser() {
+  Widget _buildContainerMan() {
+    return Positioned(
+      top: 23.h,
+      left: getAdaptativeWidth(7.w, 5.w, 3.w),
+      right: getAdaptativeWidth(7.w, 5.w, 3.w),
+      child: Container(
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          color: primary50,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Container(
+          clipBehavior: Clip.none,
+          margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+          child: Form(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                AppGlobalInput(
+                  helpText: "Local Evento",
+                  hintText: "EX: provincia/municipio/bairro",
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.done,
+                  focusNode: _locationFocusNode,
+                ),
+                AppGlobalVericalSpacing(
+                  value: 2.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AppGlobalDatePicker(
+                      helpText: "Data do Evento",
+                      hintText: "25 NOV 2025",
+                      width: 37.w,
+                      firstDate: DateTime(2020),
+                      lastDate: DateTime(2030),
+                      onDateSelected: (DateTime date) {
+                        print("Data selecionada: $date");
+                      },
+                    ),
+                    AppGlobalDropdownMenu(
+                      helpText: "Tipo Evento",
+                      hintText: "Casamento",
+                      width: 37.w,
+                      dropdownMenuEntries: const [
+                        DropdownMenuEntry(value: "OP1", label: "Casamento"),
+                        DropdownMenuEntry(value: "OP1", label: "Pedido"),
+                        DropdownMenuEntry(
+                            value: "OP1", label: "Aniversário"),
+                        DropdownMenuEntry(value: "OP1", label: "Noivado"),
+                      ],
+                    ),
+                  ],
+                ),
+                AppGlobalVericalSpacing(
+                  value: 2.h,
+                ),
+                AppGlobalDropdownMenu(
+                  helpText: "N de Convidados",
+                  hintText: "150 Convidados",
+                  width: 80.w,
+                  dropdownMenuEntries: const [
+                    DropdownMenuEntry(
+                        value: "OP1", label: "150 Convidados"),
+                    DropdownMenuEntry(
+                        value: "OP1", label: "300 Convidadoso"),
+                    DropdownMenuEntry(
+                        value: "OP1", label: "600 Convidados"),
+                    DropdownMenuEntry(
+                        value: "OP1", label: "1200 Convidados"),
+                  ],
+                ),
+                AppGlobalVericalSpacing(
+                  value: 2.h,
+                ),
+                AppGlobalServiceTagsManager(
+                  helpText: "Adicionar Serviço",
+                  hintText: "Selecione um serviço",
+                  dropdownMenuEntries: const [
+                    DropdownMenuEntry(
+                        value: "Decoracao", label: "Decoração"),
+                    DropdownMenuEntry(value: "DJ", label: "DJ"),
+                    DropdownMenuEntry(
+                        value: "Confeiteiro", label: "Confeiteiro"),
+                    DropdownMenuEntry(
+                        value: "Bartender", label: "Bartender"),
+                  ],
+                  onChanged: (selectedTags) {
+                    print("Tags Selecionadas: $selectedTags");
+                  },
+                ),
+                AppGlobalTextButton(
+                  minWidth: 80.w,
+                  textButton: "Pesquisar",
+                  onPressed: viewmodel.navigateToResultSearchPage,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHelloUser() {
     return Row(
       children: [
         const CircleAvatar(
-         backgroundImage: AssetImage(userImageDefult),
-         backgroundColor: primary50,
+          backgroundImage: AssetImage(userImageDefult),
+          backgroundColor: primary50,
         ),
         const AppGlobalHorizontalSpacing(),
         Column(
@@ -239,7 +243,7 @@ class _HomePageState extends State<HomePage> {
               "Olá👋",
               style: GoogleFonts.inter(
                 color: primary50,
-                fontSize: 13.spa,
+                fontSize: 12.spa,
                 fontWeight: FontWeight.w200,
               ),
             ),
@@ -247,7 +251,7 @@ class _HomePageState extends State<HomePage> {
               "Sr(a) Visitante",
               style: GoogleFonts.inter(
                 color: primary50,
-                fontSize: 15.spa,
+                fontSize: 14.spa,
                 fontWeight: FontWeight.w500,
               ),
             )

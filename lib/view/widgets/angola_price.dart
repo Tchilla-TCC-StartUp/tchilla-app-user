@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:tchilla/style/colors.dart';
 
 class AngolaPrice extends StatelessWidget {
   final double price;
@@ -25,10 +26,10 @@ class AngolaPrice extends StatelessWidget {
     return Text(
       _formatPrice(price),
       style: style ??
-          TextStyle(
-            color: Colors.amber.shade700,
+          const TextStyle(
+            color: primary800,
             fontSize: 13.5,
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w800,
           ),
     );
   }

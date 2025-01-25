@@ -10,7 +10,7 @@ class OnboardingViewModel extends GetxController {
   void nextPage() {
     if (currentPage.value < 2) {
       pageController.nextPage(
-        duration: const Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     } else {

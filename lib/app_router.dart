@@ -101,7 +101,7 @@ class AppRouter {
               child: child,
             );
           },
-          transitionDuration: const Duration(milliseconds: 500),
+          transitionDuration: const Duration(milliseconds: 300),
         );
       },
     );
