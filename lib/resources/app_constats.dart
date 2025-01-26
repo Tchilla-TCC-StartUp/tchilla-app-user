@@ -10,6 +10,7 @@ const String logotipoPng = '${vectoresPash}logotipo3x.png';
 const String googlelogoSvg = '${vectoresPash}Google__G__logo.svg';
 const String arrowBackSvg = '${vectoresPash}arrow-left.svg';
 const String arrowRightSvg = '${vectoresPash}arrow-rigth.svg';
+const String arrowDowntSvg = '${vectoresPash}noun-down-6988259.svg';
 
 const onbordingImage1 = '${imagesPash}House searching-cuate.svg';
 const onbordingImage2 = '${imagesPash}Wedding planner-cuate.svg';
