@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tchilla/resources/app_routers.dart' as Router;
+import 'package:tchilla/view/pages/detalhe_proposed_page.dart';
 import 'package:tchilla/view/pages/forenge_passsword_auth_email_page.dart';
 import 'package:tchilla/view/pages/forenge_password_confitmation_pin_page.dart';
 import 'package:tchilla/view/pages/home_page.dart';
@@ -19,60 +20,65 @@ class AppRouter {
       : router = GoRouter(
           initialLocation: Router.initialRoute,
           routes: [
-            _buildRoute(
+            _buildStaticRoute(
               name: Router.initialRoute,
               path: Router.initialRoute,
               page: const SplashPage(),
             ),
-            _buildRoute(
+            _buildStaticRoute(
               name: Router.homePage,
               path: Router.homePage,
               page: const HomePage(),
             ),
-            _buildRoute(
+            _buildStaticRoute(
               name: Router.loginPage,
               path: Router.loginPage,
               page: const LoginPage(),
             ),
-            _buildRoute(
+            _buildStaticRoute(
               name: Router.registerPage,
               path: Router.registerPage,
               page: const RegisterPage(),
             ),
-            _buildRoute(
+            _buildStaticRoute(
               name: Router.forengePassswordEmail,
               path: Router.forengePassswordEmail,
               page: const ForengePassswordAuthEmailPage(),
             ),
-            _buildRoute(
+            _buildStaticRoute(
               name: Router.forengePassswordConfirmationPin,
               path: Router.forengePassswordConfirmationPin,
               page: const ForengePasswordConfirmationPinPage(),
             ),
-            _buildRoute(
+            _buildStaticRoute(
               name: Router.redefinePasswordPage,
               path: Router.redefinePasswordPage,
               page: const RedefinePasswordPage(),
             ),
-            _buildRoute(
+            _buildStaticRoute(
               name: Router.onboardingPage,
               path: Router.onboardingPage,
               page: const OnboardingPage(),
             ),
-            _buildRoute(
+            _buildStaticRoute(
               name: Router.resultSearchPage,
               path: Router.resultSearchPage,
               page: const ResultSearchPage(),
             ),
-              _buildRoute(
+            _buildStaticRoute(
               name: Router.welconePage,
               path: Router.welconePage,
-              page: const  WelcomePage(),
+              page: const WelcomePage(),
+            ),
+            _buildDynamicRoute<String>(
+              name: Router.detalheshPage,
+              path: Router.detalheshPage,
+              pageBuilder: (context, id) => DetalheProposedPage(id: id),
             ),
           ],
         );
 
-  static GoRoute _buildRoute({
+  static GoRoute _buildStaticRoute({
     required String name,
     required String path,
     required Widget page,
@@ -80,30 +86,50 @@ class AppRouter {
     return GoRoute(
       name: name,
       path: path,
+      builder: (context, state) => page,
+      pageBuilder: (context, state) => _buildPageTransition(state, child: page),
+    );
+  }
+
+  static GoRoute _buildDynamicRoute<T>({
+    required String name,
+    required String path,
+    required Widget Function(BuildContext context, T extra) pageBuilder,
+  }) {
+    return GoRoute(
+      name: name,
+      path: path,
       builder: (context, state) {
-        return page;
+        final extra = state.extra as T;
+        return pageBuilder(context, extra);
       },
       pageBuilder: (context, state) {
-        return CustomTransitionPage(
-          key: state.pageKey,
-          child: page,
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(1.0, 0.0);
-            const end = Offset.zero;
-            const curve = Curves.easeInOut;
+        final extra = state.extra as T;
+        return _buildPageTransition(state, child: pageBuilder(context, extra));
+      },
+    );
+  }
 
-            final tween =
-                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-            final offsetAnimation = animation.drive(tween);
+  static Page<void> _buildPageTransition(GoRouterState state,
+      {required Widget child}) {
+    return CustomTransitionPage(
+      key: state.pageKey,
+      child: child,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(1.0, 0.0);
+        const end = Offset.zero;
+        const curve = Curves.easeInOut;
 
-            return SlideTransition(
-              position: offsetAnimation,
-              child: child,
-            );
-          },
-          transitionDuration: const Duration(milliseconds: 500),
+        final tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        final offsetAnimation = animation.drive(tween);
+
+        return SlideTransition(
+          position: offsetAnimation,
+          child: child,
         );
       },
+      transitionDuration: const Duration(milliseconds: 500),
     );
   }
 }

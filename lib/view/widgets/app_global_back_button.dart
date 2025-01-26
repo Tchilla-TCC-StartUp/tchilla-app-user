@@ -8,14 +8,15 @@ import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/util/events/navigation.dart';
 
 class AppGlobalBackButton extends StatelessWidget {
-  const AppGlobalBackButton({super.key});
+  final double? minWidth;
+  const AppGlobalBackButton({super.key, this.minWidth});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: MaterialButton(
-        minWidth: 2.w,
+        minWidth: minWidth ?? 2.w,
         padding: const EdgeInsets.all(0),
         onPressed: Get.find<Navigation>().navigateToBack,
         shape: RoundedRectangleBorder(

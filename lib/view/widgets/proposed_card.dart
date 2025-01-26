@@ -19,6 +19,7 @@ class ProposedCard extends StatelessWidget {
   final int? suportpersonNumer;
   final String? fortypeEvent;
   final double? price;
+  final void Function() onClick;
   final List<String>? services;
   const ProposedCard({
     super.key,
@@ -30,11 +31,13 @@ class ProposedCard extends StatelessWidget {
     this.fortypeEvent,
     this.price,
     this.services,
+    required this.onClick,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onClick,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -136,11 +139,9 @@ class ProposedCard extends StatelessWidget {
           ),
           Row(
             children: [
-             
               AngolaPrice(
                 price: price ?? 150000,
               ),
-              
             ],
           )
         ],
@@ -154,9 +155,11 @@ class ProposedCard extends StatelessWidget {
       child: CachedNetworkImage(
         width: 35.w,
         height: 12.h,
-        imageUrl:
-            "https://upload.wikimedia.org/wikipedia/commons/3/3b/Copacabana_Palace_-_Sal%C3%A3o_de_festas_%281%29.jpg",
-        placeholder: (context, url) => const ShimmerLoading(),
+        imageUrl: defultProposedImage,
+        placeholder: (context, url) => ShimmerLoading(
+          width: 35.w,
+          height: 12.h,
+        ),
         errorWidget: (context, url, error) =>
             const Icon(Icons.error, color: Colors.red),
         fit: BoxFit.cover,

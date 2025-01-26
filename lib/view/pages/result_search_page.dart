@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_constats.dart';
-import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
+import 'package:tchilla/view/widgets/app_custom_list_card.dart';
 import 'package:tchilla/view/widgets/app_global_back_button.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
-import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/proposed_card.dart';
 import 'package:tchilla/viewmodel/result_search_viewmodel.dart';
@@ -24,7 +22,6 @@ class _ResultSearchPageState extends State<ResultSearchPage>
   final ResultSearchViewModel viewmodel = Get.find<ResultSearchViewModel>();
   late TabController _tabController;
 
-  final int tabCount = 5; // Atualizado para refletir o número de títulos
   final List<String> tabTitles = [
     'Todas Ofertas',
     'Melhores Promoções',
@@ -38,7 +35,7 @@ class _ResultSearchPageState extends State<ResultSearchPage>
     super.initState();
     _tabController = TabController(
       initialIndex: viewmodel.selectedIndex.value,
-      length: tabCount,
+      length: tabTitles.length,
       vsync: this,
     );
     _tabController.addListener(() {
@@ -78,7 +75,7 @@ class _ResultSearchPageState extends State<ResultSearchPage>
       labelColor: primary950,
       indicatorColor: primary950,
       tabs: List.generate(
-        tabCount,
+        tabTitles.length,
         (index) => Tab(text: tabTitles[index]),
       ),
     );
@@ -88,9 +85,9 @@ class _ResultSearchPageState extends State<ResultSearchPage>
     return Expanded(
       child: TabBarView(
         controller: _tabController,
-        physics: const NeverScrollableScrollPhysics(), // Desativa o scroll
+        physics: const NeverScrollableScrollPhysics(),
         children: List.generate(
-          tabCount,
+          tabTitles.length,
           (index) {
             if (index == 0) {
               return _builAllProposedSection();
@@ -108,6 +105,7 @@ class _ResultSearchPageState extends State<ResultSearchPage>
       itemBuilder: (context, itemIndex) => Padding(
         padding: EdgeInsets.symmetric(vertical: 1.h),
         child: ProposedCard(
+          onClick: () => viewmodel.selectProposed("id"),
           services: ["Dj", "Decoração"],
         ),
       ),
@@ -120,6 +118,7 @@ class _ResultSearchPageState extends State<ResultSearchPage>
       itemBuilder: (context, itemIndex) => Padding(
         padding: EdgeInsets.symmetric(vertical: 1.h),
         child: ProposedCard(
+          onClick: () => viewmodel.selectProposed("id"),
           services: ["Dj", "Decoração"],
         ),
       ),
@@ -128,34 +127,13 @@ class _ResultSearchPageState extends State<ResultSearchPage>
 
   AppBar _buildAppbar() {
     return AppBar(
-      leading: const AppGlobalBackButton(),
+      leading: const SizedBox.shrink(),
       centerTitle: true,
-      title: ListTile(
-        leading: SvgPicture.asset(
-          locationIconoSvg,
-          colorFilter: const ColorFilter.mode(
-            primaryBorder,
-            BlendMode.srcIn,
-          ),
-          width: 30.px,
-          height: 40.px,
-        ),
-        title: Row(
-          children: [
-            AppGlobalText(
-              text: "Benfica, Zona Verde II",
-              style: TextStyleEnum.h3_bold,
-              color: primaryBorder,
-              align: TextAlign.justify,
-            ),
-          ],
-        ),
-        subtitle: AppGlobalText(
-          text: "25 Nov 2025",
-          style: TextStyleEnum.p_medium,
-          color: primaryBorder,
-          align: TextAlign.justify,
-        ),
+      leadingWidth: 0,
+      title: AppCustomListCard(
+        iconPath: locationIconoSvg,
+        title: "Benfica, Zona Verde II",
+        subtitle: "25 Nov 2025",
       ),
     );
   }

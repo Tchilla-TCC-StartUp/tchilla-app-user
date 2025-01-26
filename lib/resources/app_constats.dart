@@ -22,3 +22,6 @@ const String moneyIconoSvg = '${vectoresPash}noun-money-7460748.svg';
 
 const userImageDefult =
     '${imagesPash}default-avatar-photo-placeholder-profile-icon-vector.jpg';
+
+const defultProposedImage =
+    "https://upload.wikimedia.org/wikipedia/commons/3/3b/Copacabana_Palace_-_Sal%C3%A3o_de_festas_%281%29.jpg";

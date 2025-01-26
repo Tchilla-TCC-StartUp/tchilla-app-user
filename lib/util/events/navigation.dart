@@ -61,4 +61,9 @@ class Navigation extends INavigation {
   navigateToWelcomePage() {
     _router.goNamed(Router.welconePage);
   }
+
+  @override
+  navigateToDetalhesPage(String id) {
+    _router.pushNamed(Router.detalheshPage, extra: id);
+  }
 }

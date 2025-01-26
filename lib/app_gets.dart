@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tchilla/app_router.dart';
 import 'package:tchilla/util/events/navigation.dart';
+import 'package:tchilla/viewmodel/detalhesproposedviewmodel.dart';
 import 'package:tchilla/viewmodel/forenge_password_viewmodel.dart';
 import 'package:tchilla/viewmodel/home_viewmodel.dart';
 import 'package:tchilla/viewmodel/login_viewmodel.dart';
@@ -35,5 +36,6 @@ class AppGets {
     Get.lazyPut<ForengePasswordViewmodel>(() => ForengePasswordViewmodel());
     Get.lazyPut<HomeViewModel>(() => HomeViewModel());
     Get.lazyPut<WelcomeViewmodel>(() => WelcomeViewmodel());
+    Get.lazyPut<DetalheProposedViewModel>(() => DetalheProposedViewModel());
   }
 }

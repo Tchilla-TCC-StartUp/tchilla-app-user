@@ -9,6 +9,8 @@ abstract class INavigation {
   navigateToConfirmationPage();
   navigateToRefefinePasswordPage();
 
-   navigateToResultSearchPage();
-    navigateToWelcomePage();
+  navigateToResultSearchPage();
+  navigateToWelcomePage();
+
+  navigateToDetalhesPage(String id);
 }
