@@ -86,10 +86,19 @@ class CardMoreRequested extends StatelessWidget {
                   text: name ?? "Salão de Festa Mela",
                   style: TextStyleEnum.h3_bold,
                 ),
-                AppGlobalText(
-                  text: state ?? "Livre",
-                  style: TextStyleEnum.h3_bold,
-                  color: Colors.green,
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.green.withOpacity(.2),
+                    borderRadius: BorderRadius.circular(20.px)
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: AppGlobalText(
+                      text: state ?? "Livre",
+                      style: TextStyleEnum.button_text,
+                      color: Colors.green,
+                    ),
+                  ),
                 ),
               ],
             ),
