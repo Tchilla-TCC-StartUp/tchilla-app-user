@@ -4,9 +4,9 @@ import 'package:tchilla/util/events/navigation.dart';
 class SplashViewmodel {
   final Navigation _navigation = Get.find<Navigation>();
 
-  Future<void> navigateToHomePage() async {
-    await Future.delayed(const Duration(seconds: 5));
-    // await _navigation.navigateToOnboarding();
-    await _navigation.navigateToHome();
+  navigateToHomePage() async {
+    await Future.delayed(const Duration(seconds: 3));
+    await _navigation.navigateToOnboarding();
+    // await _navigation.navigateToHome();
   }
 }

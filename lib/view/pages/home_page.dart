@@ -15,8 +15,7 @@ import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_circular_liner.dart';
-import 'package:tchilla/view/widgets/home_indicator_banner.dart';
-import 'package:tchilla/view/widgets/proposed_card.dart';
+import 'package:tchilla/view/widgets/card_more_requested.dart';
 import 'package:tchilla/viewmodel/home_viewmodel.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,7 +32,7 @@ class _HomePageState extends State<HomePage>
 
   late TabController _tabController;
 
-  final List<String> tabTitles = ["Local", "Local+\nServiços", "Serviços"];
+  final List<String> tabTitles = ["Local", "Serviços", "Local+\nServiços"];
 
   @override
   void initState() {
@@ -61,25 +60,46 @@ class _HomePageState extends State<HomePage>
             FocusScope.of(context).unfocus();
           },
           behavior: HitTestBehavior.opaque,
-          child: SingleChildScrollView(
-            child: SizedBox(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height,
-              child: Stack(
-                children: <Widget>[
-                  _buildBackground(),
-                  _buildContainerMan(),
-                 
-                ],
-              ),
-            ),
+          child: CustomScrollView(
+            slivers: [
+              _buildSliverAppBar(),
+              _buildSliverContainerMan(),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget _buildBackground() {
+  Widget _buildSliverAppBar() {
+    return Obx(
+      () => SliverAppBar(
+        expandedHeight: viewmodel.adptiveSilverExpade.value,
+        pinned: true,
+        floating: false,
+        backgroundColor: primary50,
+        flexibleSpace: FlexibleSpaceBar(
+          background: Stack(
+            children: [
+              _buildBackground(),
+              _buildContainerMan(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSliverContainerMan() {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 5.w),
+        child: _buildMoreRequested(),
+      ),
+    );
+  }
+
+  _buildBackground() {
     return Column(
       children: [
         SizedBox(
@@ -123,13 +143,6 @@ class _HomePageState extends State<HomePage>
             ),
           ),
         ),
-        SizedBox(
-          height: 60.h, // 60% da tela
-          child: Container(
-            width: double.infinity,
-            color: primary50,
-          ),
-        ),
       ],
     );
   }
@@ -143,42 +156,7 @@ class _HomePageState extends State<HomePage>
         children: [
           _buildTabBar(),
           _buildForms(),
-          
         ],
-      ),
-    );
-  }
-
-  _buildForms() {
-    return Container(
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        color: primary50,
-        borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Container(
-        clipBehavior: Clip.none,
-        margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
-        child: SizedBox(
-          height: 60.h,
-          child: TabBarView(
-            controller: _tabController,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              _buildFormLocal(),
-              _buildFormLocalEndService(),
-              _buildFormService()
-            ],
-          ),
-        ),
       ),
     );
   }
@@ -233,6 +211,72 @@ class _HomePageState extends State<HomePage>
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildForms() {
+    return Container(
+      height: viewmodel.adptiveHeight.value,
+      decoration: BoxDecoration(
+        color: primary50,
+        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(20)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+        child: IndexedStack(
+          index: _tabController.index,
+          children: [
+            _buildFormLocal(),
+            _buildFormService(),
+            _buildFormLocalEndService(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _buildMoreRequested() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AppGlobalVericalSpacing(value: 2.h),
+        AppGlobalText(
+          text: "Mais solicitados",
+          style: TextStyleEnum.h3_bold,
+        ),
+        AppGlobalVericalSpacing(value: 2.h),
+        SizedBox(
+          height: 34.h,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CardMoreRequested(
+                onClick: () => viewmodel.selectProposed("id"),
+                services: [
+                  "Dj",
+                  "Decoração",
+                  "Decoração",
+                  "Decoração",
+                ],
+              ),
+            ),
+            separatorBuilder: (context, index) => AppGlobalHorizontalSpacing(
+              value: 20.px,
+            ),
+            itemCount: 5,
+          ),
+        ),
+        AppGlobalVericalSpacing(value: 2.h),
+      ],
     );
   }
 
@@ -300,10 +344,8 @@ class _HomePageState extends State<HomePage>
             textButton: "Pesquisar",
             onPressed: viewmodel.navigateToResultSearchPage,
           ),
-          AppGlobalVericalSpacing(
-            value: 4.h,
-          ),
-          HomeIndicatorBanner()
+
+          // HomeIndicatorBanner()
         ],
       ),
     );

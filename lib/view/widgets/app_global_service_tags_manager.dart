@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
+import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 
 class AppGlobalServiceTagsManager extends StatefulWidget {
@@ -65,7 +66,7 @@ class _AppGlobalServiceTagsManagerState
       children: [
         if (widget.helpText != null)
           Padding(
-            padding: EdgeInsets.only(bottom: 10.spa),
+            padding: EdgeInsets.only(bottom: 5.spa),
             child: AppGlobalText(
               text: widget.helpText!,
               style: TextStyleEnum.h3_bold,
@@ -134,7 +135,7 @@ class _AppGlobalServiceTagsManagerState
             }
           },
         ),
-        const SizedBox(height: 16),
+        if (_selectedTags.isEmpty) AppGlobalVericalSpacing(value: 1.h),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal, // Define rolagem horizontal
           child: Row(
@@ -148,8 +149,8 @@ class _AppGlobalServiceTagsManagerState
                       side: const BorderSide(width: 0, color: primary400)),
                   label: Text(
                     tag,
-                    style: GoogleFonts.inter(
-                        fontSize: 10.spa, color: Colors.white),
+                    style:
+                        GoogleFonts.inter(fontSize: 9.spa, color: Colors.white),
                   ),
                   onDeleted: () => _removeTag(tag),
                   deleteIcon: const Icon(

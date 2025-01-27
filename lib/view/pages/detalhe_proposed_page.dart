@@ -28,7 +28,10 @@ class _DetalheProposedPageState extends State<DetalheProposedPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        children: [_buildPageView(), _buildBody()],
+        children: [
+          _buildPageView(),
+          _buildBody(),
+        ],
       ),
     );
   }
@@ -43,10 +46,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage> {
         decoration: BoxDecoration(
           color: primary50,
           boxShadow: [
-            BoxShadow(
-              color: gray900.withOpacity(.4),
-              blurRadius: 10
-            )
+            BoxShadow(color: gray900.withOpacity(.4), blurRadius: 10)
           ],
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(25.px),
@@ -114,7 +114,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage> {
             width: 40.px,
             height: 40.px,
             decoration: BoxDecoration(
-              color: primary50,
+              color: primary50.withOpacity(.9),
               borderRadius: BorderRadius.circular(50.px),
             ),
             child: Center(
