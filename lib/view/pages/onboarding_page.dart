@@ -42,71 +42,72 @@ class OnboardingPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      body: AppLayoutpage(
-        body: Column(
-          children: [
-            AppGlobalVericalSpacing(
-              value: 2.h,
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: GestureDetector(
-                onTap: viewModel.clickSkip,
-                child: AppGlobalText(
-                  text: "Pular",
-                  style: TextStyleEnum.h3_medium,
+      body: SafeArea(
+        child: AppLayoutpage(
+          body: Column(
+            children: [
+              AppGlobalVericalSpacing(
+                value: 2.h,
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: GestureDetector(
+                  onTap: viewModel.clickSkip,
+                  child: AppGlobalText(
+                    text: "Pular",
+                    style: TextStyleEnum.h3_medium,
+                  ),
                 ),
               ),
-            ),
-            AppGlobalVericalSpacing(
-              value: 4.h,
-            ),
-            Expanded(
-              child: PageView.builder(
+              AppGlobalVericalSpacing(
+                value: 4.h,
+              ),
+              Expanded(
+                child: PageView.builder(
+                  controller: viewModel.pageController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  onPageChanged: (index) {
+                    viewModel.currentPage.value = index;
+                  },
+                  itemCount: onboardingList.length,
+                  itemBuilder: (context, index) {
+                    return onboardingList[index];
+                  },
+                ),
+              ),
+              SmoothPageIndicator(
                 controller: viewModel.pageController,
-                physics:
-                    const NeverScrollableScrollPhysics(), // Desativa o scroll
-                onPageChanged: (index) {
-                  viewModel.currentPage.value = index;
-                },
-                itemCount: onboardingList.length,
-                itemBuilder: (context, index) {
-                  return onboardingList[index];
-                },
+                count: onboardingList.length,
+                effect: ExpandingDotsEffect(
+                  dotColor: gray400,
+                  activeDotColor: primary950,
+                  dotWidth: 2.w,
+                  dotHeight: 1.h,
+                ),
               ),
-            ),
-            SmoothPageIndicator(
-              controller: viewModel.pageController,
-              count: onboardingList.length,
-              effect: ExpandingDotsEffect(
-                dotColor: gray400,
-                activeDotColor: primary950,
-                dotWidth: 2.w,
-                dotHeight: 1.h,
+              AppGlobalVericalSpacing(
+                value: 10.h,
               ),
-            ),
-            AppGlobalVericalSpacing(
-              value: 10.h,
-            ),
-            AppGlobalImageButton(
-                onPressed: viewModel.nextPage, 
-                color: primary950,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    AppGlobalText(
-                      text: "Prosseguir",
-                      color: primary50,
-                      style: TextStyleEnum.h3_bold,
-                    ),
-                    const AppGlobalHorizontalSpacing(),
-                  SvgPicture.asset(arrowRightSvg)
-                  ],
-                )),
-            AppGlobalVericalSpacing(
-              value: 6.h,
-            )
-          ],
+              AppGlobalImageButton(
+                  onPressed: viewModel.nextPage,
+                  color: primary950,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AppGlobalText(
+                        text: "Prosseguir",
+                        color: primary50,
+                        style: TextStyleEnum.h3_bold,
+                      ),
+                      const AppGlobalHorizontalSpacing(),
+                      SvgPicture.asset(arrowRightSvg)
+                    ],
+                  )),
+              AppGlobalVericalSpacing(
+                value: 6.h,
+              )
+            ],
+          ),
         ),
       ),
     );

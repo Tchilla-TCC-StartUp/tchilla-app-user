@@ -25,40 +25,42 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
       appBar: AppBar(
         leading: const AppGlobalBackButton(),
       ),
-      body: AppLayoutpage(
-          body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Headerpage(
-            title: "Redefinir senha",
-            description:
-                "Redefina sua senha com uma mais segura\n e facil de lembrar",
-          ),
-          const AppGlobalInput(
-            helpText: "Senha",
-            hintText: "***********",
-            keyboardType: TextInputType.visiblePassword,
-          ),
-          AppGlobalVericalSpacing(
-            value: 2.h,
-          ),
-          const AppGlobalInput(
-            helpText: "Confirmar senha ",
-            hintText: "***********",
-            keyboardType: TextInputType.visiblePassword,
-          ),
-          AppGlobalVericalSpacing(
-            value: 4.h,
-          ),
-          AppGlobalTextButton(
-            minWidth: 100.w,
-            onPressed: () {
-              viewmodel.navigateToLoginPage();
-            },
-            textButton: "Redefinir",
-          )
-        ],
-      )),
+      body: SafeArea(
+        child: AppLayoutpage(
+            body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Headerpage(
+              title: "Redefinir senha",
+              description:
+                  "Redefina sua senha com uma mais segura\n e facil de lembrar",
+            ),
+            const AppGlobalInput(
+              helpText: "Senha",
+              hintText: "***********",
+              keyboardType: TextInputType.visiblePassword,
+            ),
+            AppGlobalVericalSpacing(
+              value: 2.h,
+            ),
+            const AppGlobalInput(
+              helpText: "Confirmar senha ",
+              hintText: "***********",
+              keyboardType: TextInputType.visiblePassword,
+            ),
+            AppGlobalVericalSpacing(
+              value: 4.h,
+            ),
+            AppGlobalTextButton(
+              minWidth: 100.w,
+              onPressed: () {
+                viewmodel.navigateToLoginPage();
+              },
+              textButton: "Redefinir",
+            )
+          ],
+        )),
+      ),
     );
   }
 }

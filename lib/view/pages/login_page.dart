@@ -33,107 +33,109 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: AppLayoutpage(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AppAnimationLogo(
-            focusNode: [
-              emailFocusNode,
-              passwordFocusNode,
-            ],
-          ),
-          AppGlobalText(
-            text: "Fazer Login",
-            style: TextStyleEnum.h2_bold,
-          ),
-          AppGlobalVericalSpacing(
-            value: 2.h,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              AppGlobalInput(
-                focusNode: emailFocusNode,
-                helpText: "Endereco de email",
-                hintText: "celson.paixao@gmail.com",
-                keyboardType: TextInputType.emailAddress,
-                textInputAction: TextInputAction.next,
-              ),
-              const AppGlobalVericalSpacing(),
-              GestureDetector(
-                onTap: viewmodel.navigateToForengePasswordPage,
-                child: AppGlobalText(
-                  text: "Esqueceu sua senha?",
-                  style: TextStyleEnum.p_normal,
-                  color: primary500,
-                ),
-              )
-            ],
-          ),
-          const AppGlobalVericalSpacing(),
-          AppGlobalInput(
-            focusNode: passwordFocusNode,
-            helpText: "Senha",
-            hintText: "*******",
-            keyboardType: TextInputType.visiblePassword,
-            textInputAction: TextInputAction.done,
-            obscureText: true,
-          ),
-          AppGlobalVericalSpacing(
-            value: 6.h,
-          ),
-          AppGlobalTextButton(
-            minWidth: 100.w,
-            onPressed: viewmodel.navigateToHomePagePage,
-            textButton: "Entrar",
-          ),
-          AppGlobalVericalSpacing(
-            value: 3.h,
-          ),
-          const AppAuthDivider(text: "Ou tembém\npode"),
-          AppGlobalVericalSpacing(
-            value: 3.h,
-          ),
-          AppGlobalImageButton(
-            minWidth: 100.w,
-            color: primary300.withOpacity(.5),
-            onPressed: () {},
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+    return SafeArea(
+      child: Scaffold(
+          body: AppLayoutpage(
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AppAnimationLogo(
+              focusNode: [
+                emailFocusNode,
+                passwordFocusNode,
+              ],
+            ),
+            AppGlobalText(
+              text: "Fazer Login",
+              style: TextStyleEnum.h2_bold,
+            ),
+            AppGlobalVericalSpacing(
+              value: 2.h,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                SvgPicture.asset(
-                  googlelogoSvg,
-                  width: 30.px,
-                  height: 30.px,
+                AppGlobalInput(
+                  focusNode: emailFocusNode,
+                  helpText: "Endereco de email",
+                  hintText: "celson.paixao@gmail.com",
+                  keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
                 ),
-                const AppGlobalHorizontalSpacing(),
-                AppGlobalText(
-                  text: "Logar com o Google",
-                  style: TextStyleEnum.p_normal,
-                  color: gray600,
+                const AppGlobalVericalSpacing(),
+                GestureDetector(
+                  onTap: viewmodel.navigateToForengePasswordPage,
+                  child: AppGlobalText(
+                    text: "Esqueceu sua senha?",
+                    style: TextStyleEnum.p_normal,
+                    color: primary500,
+                  ),
                 )
               ],
             ),
-          ),
-          AppGlobalVericalSpacing(
-            value: 3.h,
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: GestureDetector(
-              onTap: viewmodel.navigateToRegisterPage,
-              child: AppGlobalText(
-                text: "Crie uma conta",
-                style: TextStyleEnum.h3_bold,
-                color: primary500,
-                align: TextAlign.center,
+            const AppGlobalVericalSpacing(),
+            AppGlobalInput(
+              focusNode: passwordFocusNode,
+              helpText: "Senha",
+              hintText: "*******",
+              keyboardType: TextInputType.visiblePassword,
+              textInputAction: TextInputAction.done,
+              obscureText: true,
+            ),
+            AppGlobalVericalSpacing(
+              value: 6.h,
+            ),
+            AppGlobalTextButton(
+              minWidth: 100.w,
+              onPressed: viewmodel.navigateToHomePagePage,
+              textButton: "Entrar",
+            ),
+            AppGlobalVericalSpacing(
+              value: 3.h,
+            ),
+            const AppAuthDivider(text: "Ou tembém\npode"),
+            AppGlobalVericalSpacing(
+              value: 3.h,
+            ),
+            AppGlobalImageButton(
+              minWidth: 100.w,
+              color: primary300.withOpacity(.5),
+              onPressed: () {},
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    googlelogoSvg,
+                    width: 30.px,
+                    height: 30.px,
+                  ),
+                  const AppGlobalHorizontalSpacing(),
+                  AppGlobalText(
+                    text: "Logar com o Google",
+                    style: TextStyleEnum.p_normal,
+                    color: gray600,
+                  )
+                ],
               ),
             ),
-          )
-        ],
-      ),
-    ));
+            AppGlobalVericalSpacing(
+              value: 3.h,
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: GestureDetector(
+                onTap: viewmodel.navigateToRegisterPage,
+                child: AppGlobalText(
+                  text: "Crie uma conta",
+                  style: TextStyleEnum.h3_bold,
+                  color: primary500,
+                  align: TextAlign.center,
+                ),
+              ),
+            )
+          ],
+        ),
+      )),
+    );
   }
 }

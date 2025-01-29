@@ -30,114 +30,116 @@ class _RegisterPageState extends State<RegisterPage> {
   final viewmodel = Get.find<RegisterViewmodel>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AppLayoutpage(
-          body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AppAnimationLogo(
-            focusNode: [
-              nameFocusNode,
-              emailFocusNode,
-              passwordFocusNode,
-            ],
-          ),
-          AppGlobalText(
-            text: "Fazer Cadastro",
-            style: TextStyleEnum.h2_bold,
-          ),
-          AppGlobalVericalSpacing(
-            value: 2.h,
-          ),
-          AppGlobalInput(
-            focusNode: nameFocusNode,
-            helpText: "Nome",
-            hintText: "Celson Paixão",
-            keyboardType: TextInputType.name,
-            textInputAction: TextInputAction.next,
-          ),
-          AppGlobalVericalSpacing(
-            value: 2.h,
-          ),
-          AppGlobalInput(
-            focusNode: emailFocusNode,
-            helpText: "Endereco de email",
-            hintText: "celson.paixao@gmail.com",
-            keyboardType: TextInputType.emailAddress,
-            textInputAction: TextInputAction.next,
-          ),
-          AppGlobalVericalSpacing(
-            value: 2.h,
-          ),
-          AppGlobalInput(
-            focusNode: passwordFocusNode,
-            helpText: "Senha",
-            hintText: "*******",
-            keyboardType: TextInputType.visiblePassword,
-            textInputAction: TextInputAction.done,
-            obscureText: true,
-          ),
-          AppGlobalVericalSpacing(
-            value: 6.h,
-          ),
-          AppGlobalTextButton(
-            minWidth: 100.w,
-            onPressed: viewmodel.navigateToLoginPage,
-            textButton: "Criar Conta",
-          ),
-          AppGlobalVericalSpacing(
-            value: 3.h,
-          ),
-          const AppAuthDivider(text: "Ou tembém\npode"),
-          AppGlobalVericalSpacing(
-            value: 3.h,
-          ),
-          AppGlobalImageButton(
-            minWidth: 100.w,
-            color: primary300.withOpacity(.5),
-            onPressed: () {},
-            child: Row(
+    return SafeArea(
+      child: Scaffold(
+        body: AppLayoutpage(
+            body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AppAnimationLogo(
+              focusNode: [
+                nameFocusNode,
+                emailFocusNode,
+                passwordFocusNode,
+              ],
+            ),
+            AppGlobalText(
+              text: "Fazer Cadastro",
+              style: TextStyleEnum.h2_bold,
+            ),
+            AppGlobalVericalSpacing(
+              value: 2.h,
+            ),
+            AppGlobalInput(
+              focusNode: nameFocusNode,
+              helpText: "Nome",
+              hintText: "Celson Paixão",
+              keyboardType: TextInputType.name,
+              textInputAction: TextInputAction.next,
+            ),
+            AppGlobalVericalSpacing(
+              value: 2.h,
+            ),
+            AppGlobalInput(
+              focusNode: emailFocusNode,
+              helpText: "Endereco de email",
+              hintText: "celson.paixao@gmail.com",
+              keyboardType: TextInputType.emailAddress,
+              textInputAction: TextInputAction.next,
+            ),
+            AppGlobalVericalSpacing(
+              value: 2.h,
+            ),
+            AppGlobalInput(
+              focusNode: passwordFocusNode,
+              helpText: "Senha",
+              hintText: "*******",
+              keyboardType: TextInputType.visiblePassword,
+              textInputAction: TextInputAction.done,
+              obscureText: true,
+            ),
+            AppGlobalVericalSpacing(
+              value: 6.h,
+            ),
+            AppGlobalTextButton(
+              minWidth: 100.w,
+              onPressed: viewmodel.navigateToLoginPage,
+              textButton: "Criar Conta",
+            ),
+            AppGlobalVericalSpacing(
+              value: 3.h,
+            ),
+            const AppAuthDivider(text: "Ou tembém\npode"),
+            AppGlobalVericalSpacing(
+              value: 3.h,
+            ),
+            AppGlobalImageButton(
+              minWidth: 100.w,
+              color: primary300.withOpacity(.5),
+              onPressed: () {},
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    googlelogoSvg,
+                    width: 30.px,
+                    height: 30.px,
+                  ),
+                  const AppGlobalHorizontalSpacing(),
+                  AppGlobalText(
+                    text: "Cadastrar com o Google",
+                    style: TextStyleEnum.p_normal,
+                    color: gray600,
+                  ),
+                ],
+              ),
+            ),
+            AppGlobalVericalSpacing(
+              value: 2.h,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SvgPicture.asset(
-                  googlelogoSvg,
-                  width: 30.px,
-                  height: 30.px,
+                AppGlobalText(
+                  text: "Ja tem uma conta?",
+                  style: TextStyleEnum.p_medium,
+                  color: gray600,
                 ),
                 const AppGlobalHorizontalSpacing(),
-                AppGlobalText(
-                  text: "Cadastrar com o Google",
-                  style: TextStyleEnum.p_normal,
-                  color: gray600,
+                GestureDetector(
+                  onTap: viewmodel.navigateToLoginPage,
+                  child: AppGlobalText(
+                    text: "Faca login aqui",
+                    style: TextStyleEnum.p_medium,
+                    color: primary500,
+                  ),
                 ),
               ],
             ),
-          ),
-          AppGlobalVericalSpacing(
-            value: 2.h,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AppGlobalText(
-                text: "Ja tem uma conta?",
-                style: TextStyleEnum.p_medium,
-                color: gray600,
-              ),
-              const AppGlobalHorizontalSpacing(),
-              GestureDetector(
-                onTap: viewmodel.navigateToLoginPage,
-                child: AppGlobalText(
-                  text: "Faca login aqui",
-                  style: TextStyleEnum.p_medium,
-                  color: primary500,
-                ),
-              ),
-            ],
-          ),
-        ],
-      )),
+          ],
+        )),
+      ),
     );
   }
 }

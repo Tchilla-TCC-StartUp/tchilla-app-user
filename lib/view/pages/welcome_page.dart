@@ -18,46 +18,48 @@ class WelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewmodel = Get.find<WelcomeViewmodel>();
     return Scaffold(
-      body: AppLayoutpage(
-          body: Column(
-        children: [
-          AppGlobalVericalSpacing(
-            value: 2.h,
-          ),
-          const OnboardingBody(
-            image: welconeImage,
-            title: "Seja bem vindo ao Tchilla",
-            description:
-                "Estamos grato por ter baixado o nosso aplicativo, crie conta, faz login, ou explore a App.",
-          ),
-          AppGlobalVericalSpacing(
-            value: 4.h,
-          ),
-          AppGlobalTextButton(
-            minWidth: 100.w,
-            onPressed: viewmodel.navigateToRegister,
-            textButton: "Crie uma conta",
-          ),
-          AppGlobalVericalSpacing(
-            value: 3.h,
-          ),
-          AppGlobalBorderButton(
-            minWidth: 100.w,
-            textButton: "Login",
-            onPressed: viewmodel.navigateToLogin,
-          ),
-          AppGlobalVericalSpacing(
-            value: 3.h,
-          ),
-          GestureDetector(
-            child: AppGlobalText(
-              text: "Entrar como Visitante",
-              style: TextStyleEnum.h3_bold,
+      body: SafeArea(
+        child: AppLayoutpage(
+            body: Column(
+          children: [
+            AppGlobalVericalSpacing(
+              value: 2.h,
             ),
-            onTap: viewmodel.enteraVisitor,
-          )
-        ],
-      )),
+            const OnboardingBody(
+              image: welconeImage,
+              title: "Seja bem vindo ao Tchilla",
+              description:
+                  "Estamos grato por ter baixado o nosso aplicativo, crie conta, faz login, ou explore a App.",
+            ),
+            AppGlobalVericalSpacing(
+              value: 4.h,
+            ),
+            AppGlobalTextButton(
+              minWidth: 100.w,
+              onPressed: viewmodel.navigateToRegister,
+              textButton: "Crie uma conta",
+            ),
+            AppGlobalVericalSpacing(
+              value: 3.h,
+            ),
+            AppGlobalBorderButton(
+              minWidth: 100.w,
+              textButton: "Login",
+              onPressed: viewmodel.navigateToLogin,
+            ),
+            AppGlobalVericalSpacing(
+              value: 3.h,
+            ),
+            GestureDetector(
+              child: AppGlobalText(
+                text: "Entrar como Visitante",
+                style: TextStyleEnum.h3_bold,
+              ),
+              onTap: viewmodel.enteraVisitor,
+            )
+          ],
+        )),
+      ),
     );
   }
 }

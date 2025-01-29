@@ -5,8 +5,11 @@ import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tchilla/resources/app_constats.dart';
+import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_global_back_button.dart';
+import 'package:tchilla/view/widgets/app_global_text.dart';
+import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/shimmer_loading.dart';
 import 'package:tchilla/viewmodel/detalhesproposedviewmodel.dart';
 
@@ -27,11 +30,16 @@ class _DetalheProposedPageState extends State<DetalheProposedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          _buildPageView(),
-          _buildBody(),
-        ],
+      backgroundColor: primary50,
+      body: SizedBox(
+        width: double.maxFinite,
+        height: double.maxFinite,
+        child: Stack(
+          children: [
+            _buildPageView(),
+            _buildBody(),
+          ],
+        ),
       ),
     );
   }
@@ -41,7 +49,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage> {
       top: 33.h,
       child: Container(
         width: 100.w,
-        height: 65.h,
+        height: 70.h,
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           color: primary50,
@@ -52,6 +60,15 @@ class _DetalheProposedPageState extends State<DetalheProposedPage> {
             top: Radius.circular(25.px),
           ),
         ),
+        child: AppLayoutpage(
+            body: Column(
+          children: [
+            ListTile(
+              title: AppGlobalText(
+                  text: "Lindeza Club", style: TextStyleEnum.h2_bold),
+            )
+          ],
+        )),
       ),
     );
   }
@@ -59,7 +76,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage> {
   Widget _buildPageView() {
     return SizedBox(
       width: 100.w,
-      height: 35.h,
+      height: 36.h,
       child: Stack(
         children: [
           PageView.builder(
@@ -85,7 +102,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: EdgeInsets.only(bottom: 3.h),
+              padding: EdgeInsets.only(bottom: 4.h),
               child: SmoothPageIndicator(
                 controller: viewModel.pageController,
                 count: viewModel.listImages.length,

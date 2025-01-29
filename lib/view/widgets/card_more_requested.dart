@@ -88,9 +88,8 @@ class CardMoreRequested extends StatelessWidget {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.green.withOpacity(.2),
-                    borderRadius: BorderRadius.circular(20.px)
-                  ),
+                      color: Colors.green.withOpacity(.2),
+                      borderRadius: BorderRadius.circular(20.px)),
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: AppGlobalText(
@@ -102,13 +101,27 @@ class CardMoreRequested extends StatelessWidget {
                 ),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SvgPicture.asset(
+                  locationIconoSvg,
+                  width: 20.px,
+                  colorFilter:
+                      const ColorFilter.mode(primary500, BlendMode.srcIn),
+                ),
+                AppGlobalHorizontalSpacing(
+                  value: 2.px,
+                ),
+                AppGlobalText(
+                  text: location ?? "Benfica",
+                  style: TextStyleEnum.p_medium,
+                  color: primary500,
+                ),
+              ],
+            ),
             AppGlobalVericalSpacing(
               value: 2.px,
-            ),
-            AppGlobalText(
-              text: fortypeEvent ?? "Casemento",
-              style: TextStyleEnum.p_medium,
-              color: primary800,
             ),
             AppGlobalVericalSpacing(
               value: 3.px,
@@ -141,7 +154,7 @@ class CardMoreRequested extends StatelessWidget {
               ),
             ),
             AppGlobalVericalSpacing(
-              value: 3.px,
+              value: 4.px,
             ),
             _buildBottomInfo()
           ],
@@ -152,6 +165,7 @@ class CardMoreRequested extends StatelessWidget {
     return SingleChildScrollView(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Row(
             children: [
@@ -162,7 +176,7 @@ class CardMoreRequested extends StatelessWidget {
                   BlendMode.srcIn,
                 ),
                 width: 20.px,
-                height: 25.px,
+                height: 20.px,
               ),
               AppGlobalHorizontalSpacing(
                 value: 3.px,
@@ -195,7 +209,7 @@ class CardMoreRequested extends StatelessWidget {
       height: 15.h,
       imageUrl: defultProposedImage,
       placeholder: (context, url) => ShimmerLoading(
-        width: 50.w,
+        width: 60.w,
         height: 12.h,
       ),
       errorWidget: (context, url, error) =>
