@@ -26,3 +26,10 @@ const userImageDefult =
 
 const defultProposedImage =
     "https://upload.wikimedia.org/wikipedia/commons/3/3b/Copacabana_Palace_-_Sal%C3%A3o_de_festas_%281%29.jpg";
+
+const bufeImage = '${imagesPash}buffet_1683726.svg';
+const djImage = '${imagesPash}dj_7615043.svg';
+const doceImage = '${imagesPash}wedding-cake_4474320.svg';
+const garcomImage = '${imagesPash}waiter_2356994.svg';
+const decoracoaImage = '${imagesPash}table_12060024.svg';
+const fotografoImage = '${imagesPash}photographer_8540857.svg';

@@ -7,6 +7,7 @@ import 'package:tchilla/util/events/navigation.dart';
 
 class DetalheProposedViewModel extends GetxController {
   final _navigator = Get.find<Navigation>();
+  RxInt selectedIndex = 0.obs;
   final listImages = [
     defultProposedImage,
     "https://www.quintoandar.com.br/guias/wp-content/uploads/2024/07/salao-de-festas-condominio.webp",
@@ -22,5 +23,13 @@ class DetalheProposedViewModel extends GetxController {
 
   goBack() {
     _navigator.navigateToBack();
+  }
+
+  void selectTab(int index) {
+    selectedIndex.value = index;
+  }
+
+  selectProposed(String id) {
+    _navigator.navigateToDetalhesPage(id);
   }
 }

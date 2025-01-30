@@ -6,6 +6,7 @@ import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_custom_list_card.dart';
 import 'package:tchilla/view/widgets/app_global_back_button.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
+import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/proposed_card.dart';
 import 'package:tchilla/viewmodel/result_search_viewmodel.dart';
@@ -66,18 +67,14 @@ class _ResultSearchPageState extends State<ResultSearchPage>
   }
 
   Widget _buildTabs() {
-    return TabBar(
-      controller: _tabController,
+    return AppGlobalTabBar(
+      tabController: _tabController,
+      tabs: tabTitles,
       onTap: viewmodel.selectTab,
-      isScrollable: true,
       unselectedLabelColor: primaryBorder,
-      tabAlignment: TabAlignment.start,
       labelColor: primary950,
       indicatorColor: primary950,
-      tabs: List.generate(
-        tabTitles.length,
-        (index) => Tab(text: tabTitles[index]),
-      ),
+      tabAlignment: TabAlignment.start,
     );
   }
 

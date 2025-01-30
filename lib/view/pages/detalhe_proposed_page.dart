@@ -7,8 +7,11 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
-import 'package:tchilla/view/widgets/app_global_back_button.dart';
+import 'package:tchilla/view/widgets/angola_price.dart';
+import 'package:tchilla/view/widgets/app_global_spacing.dart';
+import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
+import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/shimmer_loading.dart';
 import 'package:tchilla/viewmodel/detalhesproposedviewmodel.dart';
@@ -24,8 +27,41 @@ class DetalheProposedPage extends StatefulWidget {
   State<DetalheProposedPage> createState() => _DetalheProposedPageState();
 }
 
-class _DetalheProposedPageState extends State<DetalheProposedPage> {
-  final viewModel = Get.find<DetalheProposedViewModel>();
+class _DetalheProposedPageState extends State<DetalheProposedPage>
+    with SingleTickerProviderStateMixin {
+  final viewmodel = Get.find<DetalheProposedViewModel>();
+
+  late TabController _tabController;
+
+  final List<String> tabTitles = [
+    'Sobre',
+    ' Serviços',
+    'Galeria',
+    'Avaliações',
+    'Localização',
+  ];
+
+  final listServices = [
+    {"name": "Bufê", "image": bufeImage},
+    {"name": "Garçom", "image": garcomImage},
+    {"name": "DJ", "image": djImage},
+    {"name": "Decoração", "image": decoracoaImage},
+    {"name": "Doces e Salgados", "image": doceImage},
+    {"name": "Fotógrafo", "image": fotografoImage},
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      initialIndex: viewmodel.selectedIndex.value,
+      length: tabTitles.length,
+      vsync: this,
+    );
+    _tabController.addListener(() {
+      viewmodel.selectTab(_tabController.index);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +72,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage> {
         height: double.maxFinite,
         child: Stack(
           children: [
-            _buildPageView(),
+            _buildImageSlide(),
             _buildBody(),
           ],
         ),
@@ -62,32 +98,93 @@ class _DetalheProposedPageState extends State<DetalheProposedPage> {
         ),
         child: AppLayoutpage(
             body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ListTile(
-              title: AppGlobalText(
-                  text: "Lindeza Club", style: TextStyleEnum.h2_bold),
-            )
+            const AppGlobalVericalSpacing(),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AppGlobalText(
+                  text: "Lindeza Club",
+                  style: TextStyleEnum.h2_bold,
+                ),
+                const AngolaPrice(
+                  price: 150000,
+                  style: TextStyleEnum.h3_bold,
+                )
+              ],
+            ),
+            const AppGlobalVericalSpacing(),
+            AppGlobalText(
+              text: "Luanda bairro do Hoje ya Henda",
+              style: TextStyleEnum.p_medium,
+              color: gray500,
+            ),
+            AppGlobalVericalSpacing(
+              value: 1.h,
+            ),
+            _buildTabs(),
+            _buildTabViews(),
+            AppGlobalTextButton(
+              onPressed: () {},
+              textButton: "Agendar",
+              minWidth: 100.w,
+            ),
+            AppGlobalVericalSpacing(
+              value: 2.h,
+            ),
           ],
         )),
       ),
     );
   }
 
-  Widget _buildPageView() {
+  Widget _buildTabs() {
+    return AppGlobalTabBar(
+      tabController: _tabController,
+      tabs: tabTitles,
+      onTap: viewmodel.selectTab,
+      unselectedLabelColor: primaryBorder,
+      labelColor: primary950,
+      indicatorColor: primary950,
+      tabAlignment: TabAlignment.start,
+    );
+  }
+
+  _buildTabViews() {
+    return Container(
+      // color: primary400,
+      height: 42.h,
+      child: TabBarView(
+        controller: _tabController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: [
+          _buildAboutView(),
+          _buildServiceView(),
+          _buildGalleryView(),
+          _buildReviewsView(),
+          _buildLocationView(),
+        ],
+      ),
+    );
+  }
+
+  _buildImageSlide() {
     return SizedBox(
       width: 100.w,
       height: 36.h,
       child: Stack(
         children: [
           PageView.builder(
-            controller: viewModel.pageController,
-            onPageChanged: (index) => viewModel.updateCurrentIndex(index),
-            itemCount: viewModel.listImages.length,
+            controller: viewmodel.pageController,
+            onPageChanged: (index) => viewmodel.updateCurrentIndex(index),
+            itemCount: viewmodel.listImages.length,
             itemBuilder: (context, index) {
               return CachedNetworkImage(
                 width: 100.w,
                 height: 35.h,
-                imageUrl: viewModel.listImages[index],
+                imageUrl: viewmodel.listImages[index],
                 placeholder: (context, url) => ShimmerLoading(
                   width: 100.w,
                   height: 35.h,
@@ -104,8 +201,8 @@ class _DetalheProposedPageState extends State<DetalheProposedPage> {
             child: Padding(
               padding: EdgeInsets.only(bottom: 4.h),
               child: SmoothPageIndicator(
-                controller: viewModel.pageController,
-                count: viewModel.listImages.length,
+                controller: viewmodel.pageController,
+                count: viewmodel.listImages.length,
                 effect: ExpandingDotsEffect(
                   dotColor: gray400,
                   activeDotColor: gray50,
@@ -126,7 +223,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage> {
       child: Padding(
         padding: EdgeInsets.all(20.sp),
         child: GestureDetector(
-          onTap: viewModel.goBack,
+          onTap: viewmodel.goBack,
           child: Container(
             width: 40.px,
             height: 40.px,
@@ -144,6 +241,177 @@ class _DetalheProposedPageState extends State<DetalheProposedPage> {
           ),
         ),
       ),
+    );
+  }
+
+  _buildAboutView() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AppGlobalVericalSpacing(
+          value: 2.h,
+        ),
+        AppGlobalText(
+          text: "Descrição",
+          style: TextStyleEnum.h3_bold,
+        ),
+        const AppGlobalVericalSpacing(),
+        AppGlobalText(
+          text:
+              "Com apenas alguns cliques, encontre o local ideal para qualquer evento social com as melhores opcoes do mercado eliminando as dores de cabeca na procura",
+          style: TextStyleEnum.p_normal,
+          maxLines: 50,
+          align: TextAlign.start,
+          color: gray700,
+        ),
+        AppGlobalVericalSpacing(
+          value: 30.px,
+        ),
+        AppGlobalText(
+          text: "Responsavel",
+          style: TextStyleEnum.h3_bold,
+        ),
+        const AppGlobalVericalSpacing(),
+        _buildResponsibleCard(),
+      ],
+    );
+  }
+
+  _buildResponsibleCard() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            ClipOval(
+              child: CachedNetworkImage(
+                width: 45.px,
+                height: 45.px,
+                fit: BoxFit.cover,
+                imageUrl:
+                    "https://img.freepik.com/free-photo/clueless-unbothered-black-man-shrugging-with-indifferent-look_1258-26279.jpg?t=st=1738253477~exp=1738257077~hmac=2cb8d21e3aab0749da2b048d33b6b5ffe409e5356ab249b7ee43ab009a4da117&w=1060",
+              ),
+            ),
+            const AppGlobalHorizontalSpacing(),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppGlobalText(
+                  text: "Genilda Neto",
+                  style: TextStyleEnum.p_bold,
+                ),
+                AppGlobalText(
+                  text: "Prestadora de Serviço",
+                  style: TextStyleEnum.p_normal,
+                )
+              ],
+            ),
+          ],
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Row(
+              children: [
+                const Icon(
+                  Icons.star_rounded,
+                  color: Colors.amber,
+                ),
+                AppGlobalText(
+                  text: "4.5",
+                  style: TextStyleEnum.p_bold,
+                ),
+              ],
+            ),
+            AppGlobalText(
+              text: "(450 Avaliações)",
+              style: TextStyleEnum.p_normal,
+              color: gray700,
+            )
+          ],
+        ),
+      ],
+    );
+  }
+
+  _buildServiceView() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(
+          child: GridView.builder(
+            padding: EdgeInsets.all(8.sp),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 1.w,
+              mainAxisSpacing: 1.h,
+              childAspectRatio: 2,
+            ),
+            itemCount: listServices.length,
+            itemBuilder: (context, index) {
+              final service = listServices[index];
+              return _buildCardService(service);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  _buildCardService(Map<String, String> service) {
+    return Card(
+      elevation: 1,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.sp),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            service["image"]!,
+          ),
+          AppGlobalText(
+            text: service["name"]!,
+            style: TextStyleEnum.p_medium,
+          ),
+        ],
+      ),
+    );
+  }
+
+  _buildGalleryView() {
+    return Column(
+      children: [
+        Center(
+            child: Text(
+          "Galeria",
+        )),
+        // Adicione mais conteúdo ou widgets conforme necessário
+      ],
+    );
+  }
+
+  _buildReviewsView() {
+    return Column(
+      children: [
+        Center(
+            child: Text(
+          "Avaliações",
+        )),
+        // Adicione mais conteúdo ou widgets conforme necessário
+      ],
+    );
+  }
+
+  _buildLocationView() {
+    return Column(
+      children: [
+        Center(
+            child: Text(
+          "Localização",
+        )),
+        // Adicione mais conteúdo ou widgets conforme necessário
+      ],
     );
   }
 }
