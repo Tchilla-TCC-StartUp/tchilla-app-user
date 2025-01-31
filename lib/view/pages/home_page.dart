@@ -12,6 +12,7 @@ import 'package:tchilla/view/widgets/app_global_dropdown_menu.dart';
 import 'package:tchilla/view/widgets/app_global_input.dart';
 import 'package:tchilla/view/widgets/app_global_service_tags_manager.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
+import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_circular_liner.dart';
@@ -32,14 +33,22 @@ class _HomePageState extends State<HomePage>
 
   late TabController _tabController;
 
-  final List<String> tabTitles = ["Local", "Serviços", "Local+\nServiços"];
+  final List<String> tabTitlesForm = ["Local", "Serviços", "Local+Serviços"];
+  final List<String> tabTitlesSegestions = [
+    "Casamento",
+    "Pedido",
+    "Noivado",
+    "Aniversario",
+    "Corporativos",
+    "Religos",
+  ];
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(
       initialIndex: viewmodel.selectedIndex.value,
-      length: tabTitles.length,
+      length: tabTitlesForm.length,
       vsync: this,
     );
     _tabController.addListener(() {
@@ -163,55 +172,34 @@ class _HomePageState extends State<HomePage>
 
   _buildTabBar() {
     return Container(
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        color: primary100,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(20),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: TabBar(
-        controller: _tabController,
-        onTap: viewmodel.selectTab,
-        unselectedLabelColor: primaryBorder,
-        tabAlignment: TabAlignment.fill,
-        labelColor: primary50,
-        indicatorSize: TabBarIndicatorSize.tab,
-        indicator: BoxDecoration(
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
           color: primary50,
-          // borderRadius: BorderRadius.only(
-          //   bottomRight: Radius.circular(20),
-          //   topLeft: Radius.circular(20)
-          // ),
+          borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(20),
+          ),
           boxShadow: [
             BoxShadow(
-              color: primary950.withOpacity(.2),
+              color: Colors.black.withOpacity(0.1),
               spreadRadius: 1,
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
           ],
         ),
-        tabs: List.generate(
-          tabTitles.length,
-          (index) => Tab(
-            child: AppGlobalText(
-              text: tabTitles[index],
-              style: TextStyleEnum.p_bold,
-              align: TextAlign.center,
-            ),
+        child: AppGlobalTabBar(
+          tabController: _tabController,
+          tabs: tabTitlesForm,
+          onTap: viewmodel.selectTab,
+          unselectedLabelColor: primaryBorder,
+          labelColor: primary950,
+          indicatorColor: primary950,
+          tabAlignment: TabAlignment.center,
+          isScrollable: true,
+          labelPadding: EdgeInsets.symmetric(
+            horizontal: getAdaptativeWidth(9.w, 7.w, 5.w),
           ),
-        ),
-      ),
-    );
+        ));
   }
 
   Widget _buildForms() {
@@ -274,6 +262,11 @@ class _HomePageState extends State<HomePage>
             ),
             itemCount: 5,
           ),
+        ),
+        AppGlobalVericalSpacing(value: 2.h),
+        AppGlobalText(
+          text: "Sugestões da Casa",
+          style: TextStyleEnum.h3_bold,
         ),
         AppGlobalVericalSpacing(value: 2.h),
       ],

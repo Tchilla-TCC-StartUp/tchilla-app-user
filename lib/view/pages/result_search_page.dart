@@ -66,7 +66,7 @@ class _ResultSearchPageState extends State<ResultSearchPage>
     super.dispose();
   }
 
-  Widget _buildTabs() {
+   _buildTabs() {
     return AppGlobalTabBar(
       tabController: _tabController,
       tabs: tabTitles,
