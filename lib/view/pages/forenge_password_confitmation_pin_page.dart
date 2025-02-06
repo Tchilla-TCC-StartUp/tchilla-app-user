@@ -8,7 +8,6 @@ import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/headerpage.dart';
-
 import '../../viewmodel/forenge_password_viewmodel.dart';
 
 class ForengePasswordConfirmationPinPage extends StatefulWidget {
@@ -21,10 +20,13 @@ class ForengePasswordConfirmationPinPage extends StatefulWidget {
 
 class _ForengePasswordConfirmationPinPageState
     extends State<ForengePasswordConfirmationPinPage> {
-  final List<TextEditingController> _controllers =
-      List.generate(6, (_) => TextEditingController());
+  final List<TextEditingController> _controllers = List.generate(
+    6,
+    (_) => TextEditingController(),
+  );
 
   final viewmodel = Get.find<ForengePasswordViewmodel>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,81 +47,77 @@ class _ForengePasswordConfirmationPinPageState
                 style: TextStyleEnum.h3_bold,
               ),
               const AppGlobalVericalSpacing(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: List.generate(
-                  6,
-                  (index) => SizedBox(
-                    width: 12.w,
-                    height: 12.w,
-                    child: TextFormField(
-                      controller: _controllers[index],
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6),
-                          borderSide: const BorderSide(
-                            color: Color(0xffAFBACA),
-                            width: 1,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6),
-                          borderSide: const BorderSide(
-                            color: Color(0xffAFBACA),
-                            width: 1,
-                          ),
-                        ),
-                        disabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6),
-                          borderSide: const BorderSide(
-                            color: Color(0xffAFBACA),
-                            width: 1,
-                          ),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 10,
-                        ),
-                      ),
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.number,
-                      maxLength: 1,
-                      buildCounter: (_,
-                              {required int currentLength,
-                              required bool isFocused,
-                              int? maxLength}) =>
-                          null,
-                      onChanged: (value) {
-                        if (value.isNotEmpty && index < 5) {
-                          FocusScope.of(context).nextFocus();
-                        } else if (value.isEmpty && index > 0) {
-                          FocusScope.of(context).previousFocus();
-                        }
-                      },
-                    ),
-                  ),
-                ),
-              ),
+              _buildInputs(context),
               AppGlobalVericalSpacing(
                 value: 3.h,
               ),
               AppGlobalTextButton(
                 onPressed: () {
                   final pin = _controllers.map((c) => c.text).join();
-                  if (pin.length == 6) {
-                    viewmodel.navigateToRedefinePasswordPage();
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content:
-                              Text("Por favor, preencha todos os campos.")),
-                    );
-                  }
+                  viewmodel.confirmPin(pin, context);
                 },
                 textButton: "Confirmar",
                 minWidth: 100.w,
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Row _buildInputs(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: List.generate(
+        6,
+        (index) => SizedBox(
+          width: 12.w,
+          height: 12.w,
+          child: TextFormField(
+            controller: _controllers[index],
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: const BorderSide(
+                  color: Color(0xffAFBACA),
+                  width: 1,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: const BorderSide(
+                  color: Color(0xffAFBACA),
+                  width: 1,
+                ),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: const BorderSide(
+                  color: Color(0xffAFBACA),
+                  width: 1,
+                ),
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 10,
+              ),
+            ),
+            textAlign: TextAlign.center,
+            keyboardType: TextInputType.number,
+            maxLength: 1,
+            buildCounter: (_,
+                    {required int currentLength,
+                    required bool isFocused,
+                    int? maxLength}) =>
+                null,
+            onChanged: (value) {
+              if (value.isNotEmpty && index < 5) {
+                FocusScope.of(context).nextFocus();
+              } else if (value.isEmpty && index > 0) {
+                FocusScope.of(context).previousFocus();
+              }
+            },
           ),
         ),
       ),

@@ -23,6 +23,7 @@ class ForengePassswordAuthEmailPage extends StatefulWidget {
 class _ForengePassswordAuthEmailPageState
     extends State<ForengePassswordAuthEmailPage> {
   final FocusNode emailFocus = FocusNode();
+  final _emailController = TextEditingController();
   final viewmodel = Get.find<ForengePasswordViewmodel>();
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,7 @@ class _ForengePassswordAuthEmailPageState
             helpText: "Endereço de email",
             hintText: "celson.paixao@gmail.com",
             focusNode: emailFocus,
+            controller: _emailController,
             keyboardType: TextInputType.emailAddress,
           ),
           AppGlobalVericalSpacing(
@@ -49,7 +51,10 @@ class _ForengePassswordAuthEmailPageState
           ),
           AppGlobalTextButton(
             minWidth: 100.w,
-            onPressed: viewmodel.navigateToConfirmationPage,
+            onPressed: () => viewmodel.submitEmail(
+              _emailController.text,
+              context,
+            ),
             textButton: "Confirmar",
           )
         ],

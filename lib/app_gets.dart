@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tchilla/app_router.dart';
 import 'package:tchilla/util/events/navigation.dart';
+import 'package:tchilla/util/events/notificator.dart';
+import 'package:tchilla/util/events/validator.dart';
 import 'package:tchilla/viewmodel/detalhesproposedviewmodel.dart';
 import 'package:tchilla/viewmodel/forenge_password_viewmodel.dart';
 import 'package:tchilla/viewmodel/home_viewmodel.dart';
@@ -24,6 +26,8 @@ class AppGets {
 
   static void registerEvents(GoRouter router) {
     Get.lazyPut(() => Navigation(router));
+    Get.lazyPut(() => Notificator());
+    Get.lazyPut(() => Validator());
   }
 
   static void registerGets() {

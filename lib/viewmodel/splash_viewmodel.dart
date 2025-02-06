@@ -6,7 +6,7 @@ class SplashViewmodel {
 
   navigateToHomePage() async {
     await Future.delayed(const Duration(seconds: 3));
-    // await _navigation.navigateToOnboarding();
-    await _navigation.navigateToHome();
+    await _navigation.navigateToOnboarding();
+    // await _navigation.navigateToHome();
   }
 }
