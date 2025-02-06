@@ -7,6 +7,7 @@ import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/resources/app_size.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
+import 'package:tchilla/view/pages/view_more_page.dart';
 import 'package:tchilla/view/widgets/app_global_data_picker.dart';
 import 'package:tchilla/view/widgets/app_global_dropdown_menu.dart';
 import 'package:tchilla/view/widgets/app_global_input.dart';
@@ -16,7 +17,6 @@ import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_circular_liner.dart';
-import 'package:tchilla/view/widgets/card_more_requested.dart';
 import 'package:tchilla/viewmodel/home_viewmodel.dart';
 
 class HomePage extends StatefulWidget {
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage>
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
         body: GestureDetector(
@@ -84,9 +84,11 @@ class _HomePageState extends State<HomePage>
     return Obx(
       () => SliverAppBar(
         expandedHeight: viewmodel.adptiveSilverExpade.value,
-        pinned: true,
+        // pinned: true,
         floating: false,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         backgroundColor: primary50,
+        // title: _buildHelloUser(),
         flexibleSpace: FlexibleSpaceBar(
           background: Stack(
             children: [
@@ -103,7 +105,7 @@ class _HomePageState extends State<HomePage>
     return SliverToBoxAdapter(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 5.w),
-        child: _buildMoreRequested(),
+        child: const ViewMorePage(),
       ),
     );
   }
@@ -228,48 +230,6 @@ class _HomePageState extends State<HomePage>
           ],
         ),
       ),
-    );
-  }
-
-  _buildMoreRequested() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AppGlobalVericalSpacing(value: 2.h),
-        AppGlobalText(
-          text: "Mais solicitados",
-          style: TextStyleEnum.h3_bold,
-        ),
-        AppGlobalVericalSpacing(value: 2.h),
-        SizedBox(
-          height: 34.h,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CardMoreRequested(
-                onClick: () => viewmodel.selectProposed("id"),
-                services: [
-                  "Dj",
-                  "Decoração",
-                  "Decoração",
-                  "Decoração",
-                ],
-              ),
-            ),
-            separatorBuilder: (context, index) => AppGlobalHorizontalSpacing(
-              value: 20.px,
-            ),
-            itemCount: 5,
-          ),
-        ),
-        AppGlobalVericalSpacing(value: 2.h),
-        AppGlobalText(
-          text: "Sugestões da Casa",
-          style: TextStyleEnum.h3_bold,
-        ),
-        AppGlobalVericalSpacing(value: 2.h),
-      ],
     );
   }
 

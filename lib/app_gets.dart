@@ -10,6 +10,7 @@ import 'package:tchilla/viewmodel/onboarding_viewmodel.dart';
 import 'package:tchilla/viewmodel/register_viewmodel.dart';
 import 'package:tchilla/viewmodel/result_search_viewmodel.dart';
 import 'package:tchilla/viewmodel/splash_viewmodel.dart';
+import 'package:tchilla/viewmodel/view_more_viewmodel.dart';
 import 'package:tchilla/viewmodel/welcome_viewmodel.dart';
 
 class AppGets {
@@ -37,5 +38,6 @@ class AppGets {
     Get.lazyPut<HomeViewModel>(() => HomeViewModel());
     Get.lazyPut<WelcomeViewmodel>(() => WelcomeViewmodel());
     Get.lazyPut<DetalheProposedViewModel>(() => DetalheProposedViewModel());
+    Get.lazyPut<ViewMoreViewmodel>(() => ViewMoreViewmodel());
   }
 }
