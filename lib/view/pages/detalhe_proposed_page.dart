@@ -41,15 +41,6 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
     'Localização',
   ];
 
-  final listServices = [
-    {"name": "Bufê", "image": bufeImage},
-    {"name": "Garçom", "image": garcomImage},
-    {"name": "DJ", "image": djImage},
-    {"name": "Decoração", "image": decoracoaImage},
-    {"name": "Doces e Salgados", "image": doceImage},
-    {"name": "Fotógrafo", "image": fotografoImage},
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -335,9 +326,20 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
   }
 
   _buildServiceView() {
+    final listServices = [
+      {"name": "Bufê", "image": bufeImage, "selected": true},
+      {"name": "Garçom", "image": garcomImage, "selected": true},
+      {"name": "DJ", "image": djImage, "selected": true},
+      {"name": "Decoração", "image": decoracoaImage, "selected": false},
+      {"name": "Doces e Salgados", "image": doceImage, "selected": true},
+      {"name": "Fotógrafo", "image": fotografoImage, "selected": false},
+    ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        AppGlobalVericalSpacing(
+          value: 2.h,
+        ),
         Expanded(
           child: GridView.builder(
             padding: EdgeInsets.all(8.sp),
@@ -358,21 +360,27 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
     );
   }
 
-  _buildCardService(Map<String, String> service) {
+  Widget _buildCardService(Map<String, dynamic> service) {
+    final bool isSelected = service["selected"] as bool;
     return Card(
-      elevation: 1,
+      elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.sp),
       ),
+      color: isSelected ? primary950 : primary50,
+      shadowColor: isSelected ? primary950 : primary500,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          SizedBox(width: 2.w),
           SvgPicture.asset(
             service["image"]!,
+            placeholderBuilder: (context) =>
+                const Icon(Icons.image_not_supported),
           ),
           AppGlobalText(
             text: service["name"]!,
-            style: TextStyleEnum.p_medium,
+            style: TextStyleEnum.p_bold,
+             color: isSelected ? primary50 : primary950,
           ),
         ],
       ),

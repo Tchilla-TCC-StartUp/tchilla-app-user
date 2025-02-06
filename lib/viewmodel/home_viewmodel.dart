@@ -18,7 +18,7 @@ class HomeViewModel extends GetxController {
     _navigator.navigateToDetalhesPage(id);
   }
 
-  Future<void> navigateToResultSearchPage() {
+  navigateToResultSearchPage() {
     return _navigator.navigateToResultSearchPage();
   }
 
@@ -30,11 +30,11 @@ class HomeViewModel extends GetxController {
         break;
       case 1:
         adptiveHeight.value = 500.px;
-        adptiveSilverExpade.value = 720.px;
+        adptiveSilverExpade.value = 730.px;
         break;
       case 2:
         adptiveHeight.value = 530.px;
-        adptiveSilverExpade.value = 750.px;
+        adptiveSilverExpade.value = 760.px;
         break;
       default:
         adptiveHeight.value = 420.px;
