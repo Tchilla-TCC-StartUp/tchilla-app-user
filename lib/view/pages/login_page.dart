@@ -1,18 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_constats.dart';
-import 'package:tchilla/resources/app_size.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_animation_logo.dart';
 import 'package:tchilla/view/widgets/app_auth_divider.dart';
 import 'package:tchilla/view/widgets/app_global_image_button.dart';
 import 'package:tchilla/view/widgets/app_global_input.dart';
-import 'package:tchilla/view/widgets/app_global_show_and_hide_animation.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
@@ -28,14 +24,16 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final FocusNode emailFocusNode = FocusNode();
+  final emailController = TextEditingController();
   final FocusNode passwordFocusNode = FocusNode();
+  final passwordController = TextEditingController();
   final viewmodel = Get.find<LoginViewmodel>();
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          body: AppLayoutpage(
+    return Scaffold(
+        body: SafeArea(
+      child: AppLayoutpage(
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -60,6 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                   helpText: "Endereco de email",
                   hintText: "celson.paixao@gmail.com",
                   keyboardType: TextInputType.emailAddress,
+                  controller: emailController,
                   textInputAction: TextInputAction.next,
                 ),
                 const AppGlobalVericalSpacing(),
@@ -77,6 +76,7 @@ class _LoginPageState extends State<LoginPage> {
             AppGlobalInput(
               focusNode: passwordFocusNode,
               helpText: "Senha",
+              controller: passwordController,
               hintText: "*******",
               keyboardType: TextInputType.visiblePassword,
               textInputAction: TextInputAction.done,
@@ -87,7 +87,11 @@ class _LoginPageState extends State<LoginPage> {
             ),
             AppGlobalTextButton(
               minWidth: 100.w,
-              onPressed: viewmodel.navigateToHomePagePage,
+              onPressed: () => viewmodel.login(
+                emailController.text,
+                passwordController.text,
+                context,
+              ),
               textButton: "Entrar",
             ),
             AppGlobalVericalSpacing(
@@ -135,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
             )
           ],
         ),
-      )),
-    );
+      ),
+    ));
   }
 }

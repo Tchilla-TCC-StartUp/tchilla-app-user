@@ -48,7 +48,7 @@ SnackBar getAlertStyle({
     backgroundColor: backgroundColor,
     behavior: SnackBarBehavior.floating,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.px)),
-    duration: const Duration(seconds: 5),
+    duration: const Duration(seconds: 3),
     content: Row(
       children: [
         icon,

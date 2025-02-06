@@ -10,7 +10,7 @@ class ForengePasswordViewmodel extends GetxController {
   final _notificator = Get.find<Notificator>();
   final _validator = Get.find<Validator>();
 
-  void confirmPin(String pin, BuildContext context) {
+  confirmPin(String pin, BuildContext context) {
     if (pin.length != 6) {
       _notificator.showLocalAlert(
         AlertStyleEnum.pedding,
@@ -19,35 +19,74 @@ class ForengePasswordViewmodel extends GetxController {
         context,
       );
     } else {
-      navigateToRedefinePasswordPage();
+      return _navigation.navigateToRefefinePasswordPage();
     }
   }
 
-  Future<void> navigateToRedefinePasswordPage() {
-    return _navigation.navigateToRefefinePasswordPage();
+  Future<void> resetPassord(
+    String passord,
+    String confirmPassord,
+    BuildContext context,
+  ) async {
+    if (passord.isEmpty || confirmPassord.isEmpty) {
+      _notificator.showLocalAlert(
+        AlertStyleEnum.pedding,
+        "Atenção",
+        "Os campos de senha são obrigatórios.",
+        context,
+      );
+      return;
+    }
+    if (passord != confirmPassord) {
+      _notificator.showLocalAlert(
+        AlertStyleEnum.pedding,
+        "Atenção",
+        "As senhas não coincidem.",
+        context,
+      );
+      return;
+    }
+    if (passord.length < 6) {
+      _notificator.showLocalAlert(
+        AlertStyleEnum.pedding,
+        "Atenção",
+        "A senha deve ter pelo menos 6 caracteres.",
+        context,
+      );
+      return;
+    }
+
+    _notificator.showLocalAlert(
+      AlertStyleEnum.sucess,
+      "Sucesso",
+      "A senha Redefimnida com sucesso",
+      context,
+    );
+    await Future.delayed(const Duration(seconds: 3));
+    await _navigation.navigateToLoginPage();
   }
 
-  submitEmail(String email, BuildContext context) {
+  Future<void> submitEmail(String email, BuildContext context) async {
     if (email.isEmpty) {
       _notificator.showLocalAlert(
         AlertStyleEnum.pedding,
-        "Atensão",
-        "O campo de email é obrigatório",
+        "Atenção",
+        "O campo de email é obrigatório.",
         context,
       );
-    } else if (_validator.validatEmail(email)) {
+      return;
+    }
+
+    if (!_validator.validatEmail(email)) {
       _notificator.showLocalAlert(
         AlertStyleEnum.pedding,
-        "Atensão",
-        "Email inválido.",
+        "Atenção",
+        "Este email é inválido.",
         context,
       );
-    } else {
-      _navigation.navigateToConfirmationPage();
+      return;
     }
-  }
 
-  Future<void> navigateToLoginPage() {
-    return _navigation.navigateToLoginPage();
+    await _navigation.navigateToConfirmationPage();
   }
 }

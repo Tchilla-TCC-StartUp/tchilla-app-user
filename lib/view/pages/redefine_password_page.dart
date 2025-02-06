@@ -19,6 +19,8 @@ class RedefinePasswordPage extends StatefulWidget {
 
 class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
   final viewmodel = Get.find<ForengePasswordViewmodel>();
+  final passordController = TextEditingController();
+  final confirmPassordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,18 +37,20 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
               description:
                   "Redefina sua senha com uma mais segura\n e facil de lembrar",
             ),
-            const AppGlobalInput(
+            AppGlobalInput(
               helpText: "Senha",
               hintText: "***********",
               keyboardType: TextInputType.visiblePassword,
+              controller: passordController,
             ),
             AppGlobalVericalSpacing(
               value: 2.h,
             ),
-            const AppGlobalInput(
+            AppGlobalInput(
               helpText: "Confirmar senha ",
               hintText: "***********",
               keyboardType: TextInputType.visiblePassword,
+              controller: confirmPassordController,
             ),
             AppGlobalVericalSpacing(
               value: 4.h,
@@ -54,7 +58,11 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
             AppGlobalTextButton(
               minWidth: 100.w,
               onPressed: () {
-                viewmodel.navigateToLoginPage();
+                viewmodel.resetPassord(
+                  passordController.text,
+                  confirmPassordController.text,
+                  context,
+                );
               },
               textButton: "Redefinir",
             )
