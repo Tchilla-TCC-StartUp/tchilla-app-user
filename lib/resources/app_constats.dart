@@ -9,8 +9,17 @@ const String logotipoPng = '${vectoresPash}logotipo3x.png';
 
 const String googlelogoSvg = '${vectoresPash}Google__G__logo.svg';
 const String arrowBackSvg = '${vectoresPash}arrow-left.svg';
+const String arrowBackSvg2 = '${vectoresPash}arrow-left-2.svg';
 const String arrowRightSvg = '${vectoresPash}arrow-rigth.svg';
+const String arrowRightSvg2 = '${vectoresPash}arrow-rigth-2.svg';
 const String arrowDowntSvg = '${vectoresPash}noun-down-6988259.svg';
+const String listIconSvg = '${vectoresPash}list-icon.svg';
+const String notificationIconSvg = '${vectoresPash}notification-icon.svg';
+const String securiteIconSvg = '${vectoresPash}securite-icon.svg';
+const String monIconSvg = '${vectoresPash}mon-icon.svg';
+const String notepadIconSvg = '${vectoresPash}notepad-icon.svg';
+const String questionIconSvg = '${vectoresPash}question-icon.svg';
+const String logoutIconSvg = '${vectoresPash}logout-icon.svg';
 
 const onbordingImage1 = '${imagesPash}House searching-cuate.svg';
 const onbordingImage2 = '${imagesPash}Wedding planner-cuate.svg';

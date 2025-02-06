@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
+        statusBarColor: primary50,
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
@@ -86,9 +86,12 @@ class _HomePageState extends State<HomePage>
         expandedHeight: viewmodel.adptiveSilverExpade.value,
         // pinned: true,
         floating: false,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.light,
+        ),
         backgroundColor: primary50,
-        // title: _buildHelloUser(),
+
         flexibleSpace: FlexibleSpaceBar(
           background: Stack(
             children: [
@@ -472,9 +475,12 @@ class _HomePageState extends State<HomePage>
   Widget _buildHelloUser() {
     return Row(
       children: [
-        const CircleAvatar(
-          backgroundImage: AssetImage(userImageDefult),
-          backgroundColor: primary50,
+        GestureDetector(
+          onTap: () => viewmodel.navigateToProfilePage("id"),
+          child: const CircleAvatar(
+            backgroundImage: AssetImage(userImageDefult),
+            backgroundColor: primary50,
+          ),
         ),
         const AppGlobalHorizontalSpacing(),
         Column(

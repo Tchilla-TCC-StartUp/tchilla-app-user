@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -56,16 +57,22 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: primary50,
-      body: SizedBox(
-        width: double.maxFinite,
-        height: double.maxFinite,
-        child: Stack(
-          children: [
-            _buildImageSlide(),
-            _buildBody(),
-          ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+      ),
+      child: Scaffold(
+        backgroundColor: primary50,
+        body: SizedBox(
+          width: double.maxFinite,
+          height: double.maxFinite,
+          child: Stack(
+            children: [
+              _buildImageSlide(),
+              _buildBody(),
+            ],
+          ),
         ),
       ),
     );
@@ -380,7 +387,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
           AppGlobalText(
             text: service["name"]!,
             style: TextStyleEnum.p_bold,
-             color: isSelected ? primary50 : primary950,
+            color: isSelected ? primary50 : primary950,
           ),
         ],
       ),

@@ -7,6 +7,8 @@ final String onboardingPage = "$mainRouter/onboarding";
 
 //Home Pages
 final String homePage = "$mainRouter/home";
+final String profilPage = "$mainRouter/profile";
+
 final String resultSearchPage = "$homePage/result_search";
 final String detalheshPage = "$resultSearchPage/detalhes";
 

@@ -7,6 +7,7 @@ import 'package:tchilla/viewmodel/forenge_password_viewmodel.dart';
 import 'package:tchilla/viewmodel/home_viewmodel.dart';
 import 'package:tchilla/viewmodel/login_viewmodel.dart';
 import 'package:tchilla/viewmodel/onboarding_viewmodel.dart';
+import 'package:tchilla/viewmodel/profile_viewmodel.dart';
 import 'package:tchilla/viewmodel/register_viewmodel.dart';
 import 'package:tchilla/viewmodel/result_search_viewmodel.dart';
 import 'package:tchilla/viewmodel/splash_viewmodel.dart';
@@ -39,5 +40,6 @@ class AppGets {
     Get.lazyPut<WelcomeViewmodel>(() => WelcomeViewmodel());
     Get.lazyPut<DetalheProposedViewModel>(() => DetalheProposedViewModel());
     Get.lazyPut<ViewMoreViewmodel>(() => ViewMoreViewmodel());
+    Get.lazyPut<ProfileViewmodel>(() => ProfileViewmodel());
   }
 }

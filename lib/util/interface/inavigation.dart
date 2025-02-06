@@ -13,4 +13,5 @@ abstract class INavigation {
   navigateToWelcomePage();
 
   navigateToDetalhesPage(String id);
+  navigateToProfilePage(String id);
 }

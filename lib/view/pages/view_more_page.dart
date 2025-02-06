@@ -63,7 +63,7 @@ class _ViewMorePageState extends State<ViewMorePage>
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(right: 3, top: 8, bottom: 8, left: 5),
               child: CardMoreRequested(
                 onClick: () => viewmodel.selectProposed("id"),
                 services: [
@@ -96,12 +96,10 @@ class _ViewMorePageState extends State<ViewMorePage>
           tabAlignment: TabAlignment.start,
           isScrollable: true,
         ),
-        // AppGlobalVericalSpacing(value: 2.h),
         SizedBox(
           height: 56.h,
           child: _buildTabViews(),
         )
-        // _buildTabViews()
       ],
     );
   }
@@ -120,16 +118,14 @@ class _ViewMorePageState extends State<ViewMorePage>
   }
 
   _buildTabViews() {
-    return Expanded(
-      child: TabBarView(
-        controller: _tabController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: List.generate(
-          tabTitlesSegestions.length,
-          (index) {
-            return _builFilterProposedSection(index + 1);
-          },
-        ),
+    return TabBarView(
+      controller: _tabController,
+      physics: const NeverScrollableScrollPhysics(),
+      children: List.generate(
+        tabTitlesSegestions.length,
+        (index) {
+          return _builFilterProposedSection(index + 1);
+        },
       ),
     );
   }

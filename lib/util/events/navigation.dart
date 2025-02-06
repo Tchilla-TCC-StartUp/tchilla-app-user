@@ -66,4 +66,9 @@ class Navigation extends INavigation {
   navigateToDetalhesPage(String id) {
     _router.pushNamed(Router.detalheshPage, extra: id);
   }
+
+  @override
+  navigateToProfilePage(String id) {
+    _router.pushNamed(Router.profilPage, extra: id);
+  }
 }

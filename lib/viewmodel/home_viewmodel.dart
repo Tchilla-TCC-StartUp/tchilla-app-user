@@ -14,8 +14,8 @@ class HomeViewModel extends GetxController {
     updateAdaptiveHeight();
   }
 
-  void selectProposed(String id) {
-    _navigator.navigateToDetalhesPage(id);
+  void navigateToProfilePage(String id) {
+    _navigator.navigateToProfilePage(id);
   }
 
   navigateToResultSearchPage() {

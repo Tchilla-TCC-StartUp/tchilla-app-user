@@ -7,6 +7,7 @@ import 'package:tchilla/view/pages/forenge_password_confitmation_pin_page.dart';
 import 'package:tchilla/view/pages/home_page.dart';
 import 'package:tchilla/view/pages/login_page.dart';
 import 'package:tchilla/view/pages/onboarding_page.dart';
+import 'package:tchilla/view/pages/profile_page.dart';
 import 'package:tchilla/view/pages/redefine_password_page.dart';
 import 'package:tchilla/view/pages/register_page.dart';
 import 'package:tchilla/view/pages/result_search_page.dart';
@@ -74,6 +75,11 @@ class AppRouter {
               name: Router.detalheshPage,
               path: Router.detalheshPage,
               pageBuilder: (context, id) => DetalheProposedPage(id: id),
+            ),
+            _buildDynamicRoute<String>(
+              name: Router.profilPage,
+              path: Router.profilPage,
+              pageBuilder: (context, id) => ProfilePage(id: id),
             ),
           ],
         );
