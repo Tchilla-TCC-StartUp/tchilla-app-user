@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tchilla/style/colors.dart';
 
 class AppGlobalTabBar extends StatelessWidget {
   final TabController tabController;
@@ -9,6 +10,8 @@ class AppGlobalTabBar extends StatelessWidget {
   final Color? indicatorColor;
   final bool isScrollable;
   final TabAlignment tabAlignment;
+  final TextStyle? labelStyle;
+  final EdgeInsetsGeometry? labelPadding;
 
   const AppGlobalTabBar({
     Key? key,
@@ -20,6 +23,7 @@ class AppGlobalTabBar extends StatelessWidget {
     this.indicatorColor,
     this.isScrollable = true,
     this.tabAlignment = TabAlignment.start,
+    this.labelStyle, this.labelPadding,
   }) : super(key: key);
 
   @override
@@ -32,6 +36,12 @@ class AppGlobalTabBar extends StatelessWidget {
       labelColor: labelColor,
       indicatorColor: indicatorColor,
       tabAlignment: tabAlignment,
+      dividerColor: primary50,
+      labelStyle: labelStyle,
+      labelPadding: labelPadding,
+      unselectedLabelStyle: TextStyle(
+        fontWeight: FontWeight.normal
+      ),
       tabs: tabs.map((title) => Tab(text: title)).toList(),
     );
   }
