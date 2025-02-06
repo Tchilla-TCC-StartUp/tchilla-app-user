@@ -28,22 +28,77 @@ class AppGets {
     Get.lazyPut(() => Navigation(router));
     Get.lazyPut(() => Notificator());
     Get.lazyPut(() => Validator());
+    Get.lazyPut(() {});
   }
 
   static void registerGets() {
-    Get.lazyPut<OnboardingViewModel>(() => OnboardingViewModel());
-    Get.lazyPut<ResultSearchViewModel>(() => ResultSearchViewModel());
+    Get.lazyPut<OnboardingViewModel>(
+      () => OnboardingViewModel(
+        navigator: Get.find(),
+      ),
+    );
+    Get.lazyPut<ResultSearchViewModel>(
+      () => ResultSearchViewModel(
+        navigator: Get.find(),
+        notificator: Get.find(),
+      ),
+    );
   }
 
   static void registerViewmodels() {
-    Get.lazyPut<SplashViewmodel>(() => SplashViewmodel());
-    Get.lazyPut<LoginViewmodel>(() => LoginViewmodel());
-    Get.lazyPut<RegisterViewmodel>(() => RegisterViewmodel());
-    Get.lazyPut<ForengePasswordViewmodel>(() => ForengePasswordViewmodel());
-    Get.lazyPut<HomeViewModel>(() => HomeViewModel());
-    Get.lazyPut<WelcomeViewmodel>(() => WelcomeViewmodel());
-    Get.lazyPut<DetalheProposedViewModel>(() => DetalheProposedViewModel());
-    Get.lazyPut<ViewMoreViewmodel>(() => ViewMoreViewmodel());
-    Get.lazyPut<ProfileViewmodel>(() => ProfileViewmodel());
+    Get.lazyPut<SplashViewmodel>(
+      () => SplashViewmodel(
+        navigator: Get.find(),
+        notificator: Get.find(),
+      ),
+    );
+    Get.lazyPut<LoginViewmodel>(
+      () => LoginViewmodel(
+        navigator: Get.find(),
+        notificator: Get.find(),
+        validator: Get.find(),
+      ),
+    );
+    Get.lazyPut<RegisterViewmodel>(
+      () => RegisterViewmodel(
+        navigator: Get.find(),
+        notificator: Get.find(),
+        validator: Get.find(),
+      ),
+    );
+    Get.lazyPut<ForengePasswordViewmodel>(
+      () => ForengePasswordViewmodel(
+        navigator: Get.find(),
+        notificator: Get.find(),
+        validator: Get.find(),
+      ),
+    );
+    Get.lazyPut<HomeViewModel>(
+      () => HomeViewModel(
+        navigator: Get.find(),
+      ),
+    );
+    Get.lazyPut<WelcomeViewmodel>(
+      () => WelcomeViewmodel(
+        navigator: Get.find(),
+      ),
+    );
+    Get.lazyPut<DetalheProposedViewModel>(
+      () => DetalheProposedViewModel(
+        navigator: Get.find(),
+      ),
+    );
+    Get.lazyPut<ViewMoreViewmodel>(
+      () => ViewMoreViewmodel(
+        navigator: Get.find(),
+        notificator: Get.find(),
+      ),
+    );
+    Get.lazyPut<ProfileViewmodel>(
+      () => ProfileViewmodel(
+        navigator: Get.find(),
+        notificator: Get.find(),
+      ),
+    );
   }
 }

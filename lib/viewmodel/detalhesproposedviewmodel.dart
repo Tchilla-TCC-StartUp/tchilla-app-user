@@ -1,12 +1,14 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/util/events/navigation.dart';
 
 class DetalheProposedViewModel extends GetxController {
-  final _navigator = Get.find<Navigation>();
+  final Navigation navigator;
   RxInt selectedIndex = 0.obs;
   final listImages = [
     defultProposedImage,
@@ -15,6 +17,9 @@ class DetalheProposedViewModel extends GetxController {
   ];
 
   var currentIndex = 0.obs;
+  DetalheProposedViewModel({
+    required this.navigator,
+  });
   final pageController = PageController();
 
   void updateCurrentIndex(int index) {
@@ -22,7 +27,7 @@ class DetalheProposedViewModel extends GetxController {
   }
 
   goBack() {
-    _navigator.navigateToBack();
+    navigator.navigateToBack();
   }
 
   void selectTab(int index) {
@@ -30,6 +35,6 @@ class DetalheProposedViewModel extends GetxController {
   }
 
   selectProposed(String id) {
-    _navigator.navigateToDetalhesPage(id);
+    navigator.navigateToDetalhesPage(id);
   }
 }

@@ -1,35 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:tchilla/style/app_alert_style.dart';
 import 'package:tchilla/util/events/navigation.dart';
 import 'package:tchilla/util/events/notificator.dart';
 import 'package:tchilla/util/events/validator.dart';
 
 class LoginViewmodel {
-  final _navigation = Get.find<Navigation>();
-  final _notificator = Get.find<Notificator>();
-  final _validator = Get.find<Validator>();
+  final Navigation navigator;
+  final Notificator notificator;
+  final Validator validator;
+
+  LoginViewmodel({
+    required this.navigator,
+    required this.notificator,
+    required this.validator,
+  });
 
   Future<void> navigateToRegisterPage() {
-    return _navigation.navigateToRegisterPage();
+    return navigator.navigateToRegisterPage();
   }
 
-Future<void> login(
+  Future<void> login(
       String email, String password, BuildContext context) async {
-    // Verifica se o email está vazio
-    if (email.isEmpty) {
-      _notificator.showLocalAlert(
+    if (email.isEmpty || password.isEmpty) {
+      notificator.showLocalAlert(
         AlertStyleEnum.pedding,
         "Atenção",
-        "O campo de email é obrigatório.",
+        "Todos os campos são obrigatório para o login.",
         context,
       );
       return;
     }
 
-   
-    if (!_validator.validatEmail(email)) {
-      _notificator.showLocalAlert(
+    if (!validator.validatEmail(email)) {
+      notificator.showLocalAlert(
         AlertStyleEnum.pedding,
         "Atenção",
         "Este email é inválido.",
@@ -38,19 +41,8 @@ Future<void> login(
       return;
     }
 
-  
-    if (password.isEmpty) {
-      _notificator.showLocalAlert(
-        AlertStyleEnum.pedding,
-        "Atenção",
-        "O campo de senha é obrigatório.",
-        context,
-      );
-      return;
-    }
-
     if (password.length < 6) {
-      _notificator.showLocalAlert(
+      notificator.showLocalAlert(
         AlertStyleEnum.pedding,
         "Atenção",
         "A senha deve ter pelo menos 6 caracteres.",
@@ -59,12 +51,10 @@ Future<void> login(
       return;
     }
 
-  
-    await _navigation.navigateToHome();
+    await navigator.navigateToHome();
   }
 
-
-  Future<void> navigateToForengePasswordPage() {
-    return _navigation.navigateToForengePassewordEmailPage();
+  navigateToForengePasswordPage() {
+    navigator.navigateToForengePassewordEmailPage();
   }
 }

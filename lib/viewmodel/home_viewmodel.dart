@@ -1,13 +1,18 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
 import 'package:tchilla/util/events/navigation.dart';
 
 class HomeViewModel extends GetxController {
-  final _navigator = Get.find<Navigation>();
-
+  final Navigation navigator;
   RxInt selectedIndex = 0.obs;
   RxDouble adptiveHeight = 420.px.obs;
   RxDouble adptiveSilverExpade = 650.px.obs;
+
+  HomeViewModel({
+    required this.navigator,
+  });
 
   void selectTab(int index) {
     selectedIndex.value = index;
@@ -15,11 +20,16 @@ class HomeViewModel extends GetxController {
   }
 
   void navigateToProfilePage(String id) {
-    _navigator.navigateToProfilePage(id);
+    navigator.navigateToProfilePage(id);
   }
 
   navigateToResultSearchPage() {
-    return _navigator.navigateToResultSearchPage();
+    return navigator.navigateToResultSearchPage();
+  }
+
+  Future<void> searchLocal(
+      String local, DateTime data, int envitNumber, BuildContext context) {
+    return navigator.navigateToResultSearchPage();
   }
 
   void updateAdaptiveHeight() {

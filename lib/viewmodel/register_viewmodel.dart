@@ -1,10 +1,20 @@
 import 'package:get/get.dart';
 import 'package:tchilla/util/events/navigation.dart';
+import 'package:tchilla/util/events/notificator.dart';
+import 'package:tchilla/util/events/validator.dart';
 
 class RegisterViewmodel {
-  final _navigation = Get.find<Navigation>();
+  final Navigation navigator;
+  final Notificator notificator;
+  final Validator validator;
 
-  Future<void> navigateToLoginPage() {
-    return _navigation.navigateToLoginPage();
+  RegisterViewmodel({
+    required this.navigator,
+    required this.notificator,
+    required this.validator,
+  });
+
+  navigateToLoginPage() {
+    return navigator.navigateToLoginPage();
   }
 }

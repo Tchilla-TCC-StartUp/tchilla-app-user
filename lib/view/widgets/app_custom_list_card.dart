@@ -29,6 +29,8 @@ class AppCustomListCard extends StatelessWidget {
           minWidth: 35.px,
         ),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset(
               iconPath,
@@ -64,8 +66,8 @@ class AppCustomListCard extends StatelessWidget {
             ),
           ],
         ),
-        AppGlobalHorizontalSpacing(
-          value: 35.px,
+        Container(
+          width: 35.px,
         )
       ],
     );

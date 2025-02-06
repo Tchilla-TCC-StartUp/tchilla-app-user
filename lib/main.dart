@@ -7,9 +7,7 @@ import 'app_router.dart';
 import 'style/colors.dart';
 
 void main() {
-  final appRouter = AppRouter();
   AppGets.init();
-
   runApp(
     ResponsiveSizer(
       builder: (context, orientation, screenType) {

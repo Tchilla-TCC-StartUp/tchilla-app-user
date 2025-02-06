@@ -1,9 +1,15 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+
 import 'package:tchilla/util/events/navigation.dart';
 
 class OnboardingViewModel extends GetxController {
-  final _navigator = Get.find<Navigation>();
+  final Navigation navigator;
+  OnboardingViewModel({
+    required this.navigator,
+  });
+
   final pageController = PageController();
   final RxInt currentPage = 0.obs;
 
@@ -14,12 +20,12 @@ class OnboardingViewModel extends GetxController {
         curve: Curves.easeInOut,
       );
     } else {
-      _navigator.navigateToWelcomePage();
+      navigator.navigateToWelcomePage();
     }
   }
 
   void clickSkip() {
-    _navigator.navigateToWelcomePage();
+    navigator.navigateToWelcomePage();
   }
 
   @override

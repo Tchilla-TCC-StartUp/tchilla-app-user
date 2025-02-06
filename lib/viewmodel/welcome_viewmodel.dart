@@ -2,17 +2,19 @@ import 'package:get/get.dart';
 import 'package:tchilla/util/events/navigation.dart';
 
 class WelcomeViewmodel {
-  final _navigation = Get.find<Navigation>();
+  final Navigation navigator;
+
+  WelcomeViewmodel({required this.navigator});
 
   navigateToLogin() {
-    _navigation.navigateToLoginPage();
+    navigator.navigateToLoginPage();
   }
 
   navigateToRegister() {
-    _navigation.navigateToRegisterPage();
+    navigator.navigateToRegisterPage();
   }
 
   enteraVisitor() {
-    _navigation.navigateToHome();
+    navigator.navigateToHome();
   }
 }
