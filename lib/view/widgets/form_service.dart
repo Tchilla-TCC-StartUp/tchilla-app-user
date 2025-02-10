@@ -3,6 +3,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/view/widgets/app_global_data_picker.dart';
 import 'package:tchilla/view/widgets/app_global_dropdown_menu.dart';
 import 'package:tchilla/view/widgets/app_global_input.dart';
+import 'package:tchilla/view/widgets/app_global_service_tags_manager.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_global_time_picker.dart';
@@ -32,9 +33,7 @@ class FormService extends StatelessWidget {
             textInputAction: TextInputAction.done,
             focusNode: _locationFocusNode,
           ),
-          AppGlobalVericalSpacing(
-            value: 1.h,
-          ),
+          const AppGlobalVericalSpacing(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -61,9 +60,7 @@ class FormService extends StatelessWidget {
               ),
             ],
           ),
-          AppGlobalVericalSpacing(
-            value: 1.h,
-          ),
+          const AppGlobalVericalSpacing(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -81,9 +78,7 @@ class FormService extends StatelessWidget {
               ),
             ],
           ),
-          AppGlobalVericalSpacing(
-            value: 1.h,
-          ),
+          const AppGlobalVericalSpacing(),
           AppGlobalDropdownMenu(
             helpText: "N de Convidados",
             hintText: "150 Convidados",
@@ -95,22 +90,19 @@ class FormService extends StatelessWidget {
               DropdownMenuEntry(value: "OP1", label: "1200 Convidados"),
             ],
           ),
-          AppGlobalVericalSpacing(
-            value: 1.h,
-          ),
-          AppGlobalDropdownMenu(
-            helpText: "Adicionar Serviço",
-            hintText: "Selecione um serviço",
-            width: 80.w,
+          const AppGlobalVericalSpacing(),
+          AppGlobalServiceTagsManager(
+            helpText: "Adicionar Serviços",
+            hintText: "Selecione um serviços",
             dropdownMenuEntries: const [
               DropdownMenuEntry(value: "Decoracao", label: "Decoração"),
               DropdownMenuEntry(value: "DJ", label: "DJ"),
               DropdownMenuEntry(value: "Confeiteiro", label: "Confeiteiro"),
               DropdownMenuEntry(value: "Bartender", label: "Bartender"),
             ],
-          ),
-          AppGlobalVericalSpacing(
-            value: 1.h,
+            onChanged: (selectedTags) {
+              print("Tags Selecionadas: $selectedTags");
+            },
           ),
           AppGlobalTextButton(
             minWidth: 80.w,

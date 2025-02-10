@@ -6,6 +6,15 @@ class ViewMoreViewmodel extends GetxController {
   final Navigation navigator;
   final Notificator notificator;
 
+  RxList<String> tabTitlesSegestions = [
+    "Casamento",
+    "Pedido",
+    "Noivado",
+    "Aniversario",
+    "Corporativos",
+    "Religos",
+  ].obs;
+
   RxInt selectedIndex = 0.obs;
 
   ViewMoreViewmodel({required this.navigator, required this.notificator});

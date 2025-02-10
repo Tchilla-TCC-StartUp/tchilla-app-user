@@ -23,63 +23,62 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: const SystemUiOverlayStyle(
-        statusBarIconBrightness: Brightness.dark,
-      ),
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          systemOverlayStyle: SystemUiOverlayStyle.dark,
-          leadingWidth: 0,
-          leading: const SizedBox.shrink(),
-          centerTitle: true,
-          title: _buildAppbar(),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarIconBrightness: Brightness.dark,
+          statusBarColor: primary50,
+          systemNavigationBarColor: primary50,
         ),
-        body: AppLayoutpage(
-            body: Column(
-          children: [
-            const ProfileSectionCard(
-              leading: CircleAvatar(
-                backgroundImage: AssetImage(
-                  userImageDefult,
-                ),
-                backgroundColor: primary50,
-              ),
-              title: "Celson Paixão",
-            ),
-            ProfileSectionCard(
-              leading: SvgPicture.asset(
-                listIconSvg,
-                colorFilter: const ColorFilter.mode(
-                  primary900,
-                  BlendMode.srcIn,
-                ),
-              ),
-              title: "Meus Agendamentos",
-            ),
-            ProfileSectionCard(
-              leading: SvgPicture.asset(
-                notificationIconSvg,
-                colorFilter: const ColorFilter.mode(
-                  primary900,
-                  BlendMode.srcIn,
-                ),
-              ),
-              title: "Notificacoes",
-            ),
-            const Divider(
-              color: primary200,
-            ),
-            _builPreferences(),
-            const Divider(
-              color: primary200,
-            ),
-            _buildSuporte(),
-            _buidLogoutButton()
-          ],
-        )),
+        leadingWidth: 0,
+        leading: const SizedBox.shrink(),
+        centerTitle: true,
+        title: _buildAppbar(),
       ),
+      body: AppLayoutpage(
+          body: Column(
+        children: [
+          const ProfileSectionCard(
+            leading: CircleAvatar(
+              backgroundImage: AssetImage(
+                userImageDefult,
+              ),
+              backgroundColor: primary50,
+            ),
+            title: "Celson Paixão",
+          ),
+          ProfileSectionCard(
+            leading: SvgPicture.asset(
+              listIconSvg,
+              colorFilter: const ColorFilter.mode(
+                primary900,
+                BlendMode.srcIn,
+              ),
+            ),
+            title: "Meus Agendamentos",
+          ),
+          ProfileSectionCard(
+            leading: SvgPicture.asset(
+              notificationIconSvg,
+              colorFilter: const ColorFilter.mode(
+                primary900,
+                BlendMode.srcIn,
+              ),
+            ),
+            title: "Notificacoes",
+          ),
+          const Divider(
+            color: primary200,
+          ),
+          _builPreferences(),
+          const Divider(
+            color: primary200,
+          ),
+          _buildSuporte(),
+          _buidLogoutButton()
+        ],
+      )),
     );
   }
 

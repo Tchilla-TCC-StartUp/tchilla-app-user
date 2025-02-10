@@ -32,9 +32,7 @@ class FormLocal extends StatelessWidget {
             textInputAction: TextInputAction.done,
             focusNode: _locationFocusNode,
           ),
-          AppGlobalVericalSpacing(
-            value: 1.h,
-          ),
+          const AppGlobalVericalSpacing(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -61,9 +59,7 @@ class FormLocal extends StatelessWidget {
               ),
             ],
           ),
-          AppGlobalVericalSpacing(
-            value: 1.h,
-          ),
+          const AppGlobalVericalSpacing(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -82,9 +78,7 @@ class FormLocal extends StatelessWidget {
             ],
           ),
 
-          AppGlobalVericalSpacing(
-            value: 1.h,
-          ),
+          const AppGlobalVericalSpacing(),
           AppGlobalDropdownMenu(
             helpText: "N de Convidados",
             hintText: "150 Convidados",
@@ -96,9 +90,7 @@ class FormLocal extends StatelessWidget {
               DropdownMenuEntry(value: "OP1", label: "1200 Convidados"),
             ],
           ),
-          AppGlobalVericalSpacing(
-            value: 1.h,
-          ),
+          const AppGlobalVericalSpacing(),
           AppGlobalTextButton(
             minWidth: 80.w,
             textButton: "Pesquisar",

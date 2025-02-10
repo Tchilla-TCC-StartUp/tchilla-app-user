@@ -4,7 +4,6 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_custom_list_card.dart';
-import 'package:tchilla/view/widgets/app_global_back_button.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
@@ -23,20 +22,12 @@ class _ResultSearchPageState extends State<ResultSearchPage>
   final ResultSearchViewModel viewmodel = Get.find<ResultSearchViewModel>();
   late TabController _tabController;
 
-  final List<String> tabTitles = [
-    'Todas Ofertas',
-    'Melhores Promoções',
-    'Mais perto de si',
-    'Mais solicitados',
-    'Melhores custos e benefício',
-  ];
-
   @override
   void initState() {
     super.initState();
     _tabController = TabController(
       initialIndex: viewmodel.selectedIndex.value,
-      length: tabTitles.length,
+      length: viewmodel.tabTitles.length,
       vsync: this,
     );
     _tabController.addListener(() {
@@ -66,10 +57,10 @@ class _ResultSearchPageState extends State<ResultSearchPage>
     super.dispose();
   }
 
-   _buildTabs() {
+  _buildTabs() {
     return AppGlobalTabBar(
       tabController: _tabController,
-      tabs: tabTitles,
+      tabs: viewmodel.tabTitles.value,
       onTap: viewmodel.selectTab,
       unselectedLabelColor: primaryBorder,
       labelColor: primary950,
@@ -84,7 +75,7 @@ class _ResultSearchPageState extends State<ResultSearchPage>
         controller: _tabController,
         physics: const NeverScrollableScrollPhysics(),
         children: List.generate(
-          tabTitles.length,
+          viewmodel.tabTitles.length,
           (index) {
             if (index == 0) {
               return _builAllProposedSection();
@@ -103,7 +94,7 @@ class _ResultSearchPageState extends State<ResultSearchPage>
         padding: EdgeInsets.symmetric(vertical: 1.h),
         child: ProposedCard(
           onClick: () => viewmodel.selectProposed("id"),
-          services: ["Dj", "Decoração"],
+          services: const ["Dj", "Decoração"],
         ),
       ),
     );
@@ -116,7 +107,7 @@ class _ResultSearchPageState extends State<ResultSearchPage>
         padding: EdgeInsets.symmetric(vertical: 1.h),
         child: ProposedCard(
           onClick: () => viewmodel.selectProposed("id"),
-          services: ["Dj", "Decoração"],
+          services: const ["Dj", "Decoração"],
         ),
       ),
     );
@@ -127,7 +118,7 @@ class _ResultSearchPageState extends State<ResultSearchPage>
       leading: const SizedBox.shrink(),
       centerTitle: true,
       leadingWidth: 0,
-      title: AppCustomListCard(
+      title: const AppCustomListCard(
         iconPath: locationIconoSvg,
         title: "Benfica, Zona Verde II",
         subtitle: "25 Nov 2025",

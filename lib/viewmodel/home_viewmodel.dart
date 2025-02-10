@@ -10,6 +10,8 @@ class HomeViewModel extends GetxController {
   RxDouble adptiveHeight = 520.px.obs;
   RxDouble adptiveSilverExpade = 760.px.obs;
 
+  RxList<String> tabTitlesForm = ["Local", "Serviços", "Local+Serviços"].obs;
+
   HomeViewModel({
     required this.navigator,
   });
@@ -43,8 +45,8 @@ class HomeViewModel extends GetxController {
         adptiveSilverExpade.value = 860.px;
         break;
       case 2:
-        adptiveHeight.value = 635.px;
-        adptiveSilverExpade.value = 875.px;
+        adptiveHeight.value = 625.px;
+        adptiveSilverExpade.value = 860.px;
         break;
       default:
         adptiveHeight.value = 520.px;

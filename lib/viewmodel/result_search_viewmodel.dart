@@ -7,7 +7,13 @@ class ResultSearchViewModel extends GetxController {
   final Notificator notificator;
 
   RxInt selectedIndex = 0.obs;
-
+  RxList<String> tabTitles = [
+    'Todas Ofertas',
+    'Melhores Promoções',
+    'Mais perto de si',
+    'Mais solicitados',
+    'Melhores custos e benefício',
+  ].obs;
   ResultSearchViewModel({
     required this.navigator,
     required this.notificator,

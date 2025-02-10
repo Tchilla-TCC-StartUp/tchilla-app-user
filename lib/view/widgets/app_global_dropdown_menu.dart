@@ -25,7 +25,7 @@ class AppGlobalDropdownMenu extends StatelessWidget {
       children: [
         if (helpText != null)
           Padding(
-            padding: EdgeInsets.only(bottom: 10.spa),
+            padding: EdgeInsets.only(bottom: 8.px),
             child: AppGlobalText(
               text: helpText!,
               style: TextStyleEnum.h3_bold,

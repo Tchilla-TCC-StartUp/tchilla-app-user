@@ -32,22 +32,12 @@ class _HomePageState extends State<HomePage>
 
   late TabController _tabController;
 
-  final List<String> tabTitlesForm = ["Local", "Serviços", "Local+Serviços"];
-  final List<String> tabTitlesSegestions = [
-    "Casamento",
-    "Pedido",
-    "Noivado",
-    "Aniversario",
-    "Corporativos",
-    "Religos",
-  ];
-
   @override
   void initState() {
     super.initState();
     _tabController = TabController(
       initialIndex: viewmodel.selectedIndex.value,
-      length: tabTitlesForm.length,
+      length: viewmodel.tabTitlesForm.length,
       vsync: this,
     );
     _tabController.addListener(() {
@@ -82,7 +72,6 @@ class _HomePageState extends State<HomePage>
                     ),
                   ),
                 ),
-               
                 const AppLayoutpage(
                   body: ViewMorePage(),
                 )
@@ -126,8 +115,8 @@ class _HomePageState extends State<HomePage>
                 ),
                 Positioned(
                   top: 13.h,
-                  left: getAdaptativeWidth(8.w, 6.w, 4.w),
-                  right: getAdaptativeWidth(8.w, 6.w, 4.w),
+                  left: getAdaptativeWidth(6.w, 4.w, 2.w),
+                  right: getAdaptativeWidth(6.w, 4.w, 2.w),
                   child: AppGlobalText(
                     text: "Organize seu evento\nem questão de minutos",
                     style: TextStyleEnum.h2_bold,
@@ -145,13 +134,12 @@ class _HomePageState extends State<HomePage>
   Widget _buildContainerMan() {
     return Positioned(
       top: 23.h,
-      left: getAdaptativeWidth(7.w, 5.w, 3.w),
-      right: getAdaptativeWidth(7.w, 5.w, 3.w),
+      left: getAdaptativeWidth(6.w, 4.w, 2.w),
+      right: getAdaptativeWidth(6.w, 4.w, 2.w),
       child: Column(
         children: [
           _buildTabBar(),
           _buildForms(),
-          
         ],
       ),
     );
@@ -159,24 +147,25 @@ class _HomePageState extends State<HomePage>
 
   _buildTabBar() {
     return Container(
-        clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(
-          color: primary50,
-          borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(20),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              spreadRadius: 1,
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            ),
-          ],
+      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(
+        color: primary50,
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(20),
         ),
-        child: AppGlobalTabBar(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Obx(
+        () => AppGlobalTabBar(
           tabController: _tabController,
-          tabs: tabTitlesForm,
+          tabs: viewmodel.tabTitlesForm.value,
           onTap: viewmodel.selectTab,
           unselectedLabelColor: primaryBorder,
           labelColor: primary950,
@@ -186,7 +175,9 @@ class _HomePageState extends State<HomePage>
           labelPadding: EdgeInsets.symmetric(
             horizontal: getAdaptativeWidth(9.w, 7.w, 5.w),
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   Widget _buildForms() {
@@ -219,7 +210,7 @@ class _HomePageState extends State<HomePage>
               locationFocusNode: _locationFocusNode,
               viewmodel: viewmodel,
             ),
-             FormLocalEndService(
+            FormLocalEndService(
               locationFocusNode: _locationFocusNode,
               viewmodel: viewmodel,
             ),

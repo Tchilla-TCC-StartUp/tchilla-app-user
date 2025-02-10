@@ -66,7 +66,7 @@ class _AppGlobalServiceTagsManagerState
       children: [
         if (widget.helpText != null)
           Padding(
-            padding: EdgeInsets.only(bottom: 5.spa),
+            padding: EdgeInsets.only(bottom: 8.px),
             child: AppGlobalText(
               text: widget.helpText!,
               style: TextStyleEnum.h3_bold,

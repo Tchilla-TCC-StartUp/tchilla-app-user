@@ -33,9 +33,7 @@ class FormLocalEndService extends StatelessWidget {
             textInputAction: TextInputAction.done,
             focusNode: _locationFocusNode,
           ),
-          AppGlobalVericalSpacing(
-            value: 1.h,
-          ),
+          const AppGlobalVericalSpacing(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -62,9 +60,7 @@ class FormLocalEndService extends StatelessWidget {
               ),
             ],
           ),
-          AppGlobalVericalSpacing(
-            value: 1.h,
-          ),
+          const AppGlobalVericalSpacing(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -82,9 +78,7 @@ class FormLocalEndService extends StatelessWidget {
               ),
             ],
           ),
-          AppGlobalVericalSpacing(
-            value: 1.h,
-          ),
+          const AppGlobalVericalSpacing(),
           AppGlobalDropdownMenu(
             helpText: "N de Convidados",
             hintText: "150 Convidados",
@@ -96,12 +90,10 @@ class FormLocalEndService extends StatelessWidget {
               DropdownMenuEntry(value: "OP1", label: "1200 Convidados"),
             ],
           ),
-          AppGlobalVericalSpacing(
-            value: 1.h,
-          ),
+          const AppGlobalVericalSpacing(),
           AppGlobalServiceTagsManager(
-            helpText: "Adicionar Serviço",
-            hintText: "Selecione um serviço",
+            helpText: "Adicionar Serviços",
+            hintText: "Selecione um serviços",
             dropdownMenuEntries: const [
               DropdownMenuEntry(value: "Decoracao", label: "Decoração"),
               DropdownMenuEntry(value: "DJ", label: "DJ"),

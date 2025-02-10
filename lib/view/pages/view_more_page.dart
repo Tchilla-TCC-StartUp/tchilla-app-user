@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:tchilla/resources/app_size.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
-import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/card_more_requested.dart';
 import 'package:tchilla/view/widgets/proposed_card.dart';
 import 'package:tchilla/viewmodel/view_more_viewmodel.dart';
@@ -25,21 +23,12 @@ class _ViewMorePageState extends State<ViewMorePage>
 
   late TabController _tabController;
 
-  final List<String> tabTitlesSegestions = [
-    "Casamento",
-    "Pedido",
-    "Noivado",
-    "Aniversario",
-    "Corporativos",
-    "Religos",
-  ];
-
   @override
   void initState() {
     super.initState();
     _tabController = TabController(
       initialIndex: viewmodel.selectedIndex.value,
-      length: tabTitlesSegestions.length,
+      length: viewmodel.tabTitlesSegestions.length,
       vsync: this,
     );
     _tabController.addListener(() {
@@ -63,10 +52,11 @@ class _ViewMorePageState extends State<ViewMorePage>
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.only(right: 3, top: 8, bottom: 8, left: 5),
+              padding:
+                  const EdgeInsets.only(right: 3, top: 8, bottom: 8, left: 5),
               child: CardMoreRequested(
                 onClick: () => viewmodel.selectProposed("id"),
-                services: [
+                services: const [
                   "Dj",
                   "Decoração",
                   "Decoração",
@@ -86,15 +76,17 @@ class _ViewMorePageState extends State<ViewMorePage>
           style: TextStyleEnum.h3_bold,
         ),
         AppGlobalVericalSpacing(value: 1.h),
-        AppGlobalTabBar(
-          tabController: _tabController,
-          tabs: tabTitlesSegestions,
-          onTap: viewmodel.selectTab,
-          unselectedLabelColor: primaryBorder,
-          labelColor: primary950,
-          indicatorColor: primary950,
-          tabAlignment: TabAlignment.start,
-          isScrollable: true,
+        Obx(
+          () => AppGlobalTabBar(
+            tabController: _tabController,
+            tabs: viewmodel.tabTitlesSegestions.value,
+            onTap: viewmodel.selectTab,
+            unselectedLabelColor: primaryBorder,
+            labelColor: primary950,
+            indicatorColor: primary950,
+            tabAlignment: TabAlignment.start,
+            isScrollable: true,
+          ),
         ),
         SizedBox(
           height: 90.h,
@@ -122,9 +114,9 @@ class _ViewMorePageState extends State<ViewMorePage>
       controller: _tabController,
       physics: const NeverScrollableScrollPhysics(),
       children: List.generate(
-        tabTitlesSegestions.length,
+        viewmodel.tabTitlesSegestions.length,
         (index) {
-          return _builFilterProposedSection(index + 1);
+          return _builFilterProposedSection(index + 2);
         },
       ),
     );

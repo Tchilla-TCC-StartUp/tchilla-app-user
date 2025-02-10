@@ -34,20 +34,12 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
 
   late TabController _tabController;
 
-  final List<String> tabTitles = [
-    'Sobre',
-    ' Serviços',
-    'Galeria',
-    'Avaliações',
-    'Localização',
-  ];
-
   @override
   void initState() {
     super.initState();
     _tabController = TabController(
       initialIndex: viewmodel.selectedIndex.value,
-      length: tabTitles.length,
+      length: viewmodel.tabTitles.length,
       vsync: this,
     );
     _tabController.addListener(() {
@@ -141,7 +133,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
   Widget _buildTabs() {
     return AppGlobalTabBar(
       tabController: _tabController,
-      tabs: tabTitles,
+      tabs: viewmodel.tabTitles.value,
       onTap: viewmodel.selectTab,
       unselectedLabelColor: primaryBorder,
       labelColor: primary950,
@@ -153,7 +145,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
   _buildTabViews() {
     return Container(
       // color: primary400,
-      height: 42.h,
+      height: 44.h,
       child: TabBarView(
         controller: _tabController,
         physics: const NeverScrollableScrollPhysics(),
@@ -395,15 +387,31 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
   }
 
   _buildGalleryView() {
-    return Column(
-      children: [
-        Center(
-            child: Text(
-          "Galeria",
-        )),
-        // Adicione mais conteúdo ou widgets conforme necessário
-      ],
-    );
+    return GridView.builder(
+        padding: const EdgeInsets.all(0),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 1.w,
+          mainAxisSpacing: 1.h,
+          childAspectRatio: 1.4,
+        ),
+        itemCount: viewmodel.galeryImages.length,
+        itemBuilder: (context, index) {
+          var item = viewmodel.galeryImages[index];
+          return Card(
+            elevation: 4,
+            clipBehavior: Clip.hardEdge,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.sp),
+            ),
+            color: primary50,
+            shadowColor: primary500,
+            child: CachedNetworkImage(
+              imageUrl: item,
+              fit: BoxFit.cover,
+            ),
+          );
+        });
   }
 
   _buildReviewsView() {

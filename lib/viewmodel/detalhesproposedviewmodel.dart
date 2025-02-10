@@ -10,10 +10,26 @@ import 'package:tchilla/util/events/navigation.dart';
 class DetalheProposedViewModel extends GetxController {
   final Navigation navigator;
   RxInt selectedIndex = 0.obs;
+  RxList<String> tabTitles = [
+    'Sobre',
+    ' Serviços',
+    'Galeria',
+    'Avaliações',
+    'Localização',
+  ].obs;
   final listImages = [
     defultProposedImage,
     "https://www.quintoandar.com.br/guias/wp-content/uploads/2024/07/salao-de-festas-condominio.webp",
     "https://espacohipica.com.br/wp-content/uploads/2019/02/festa-de-casamento-em-curitiba_locacao-de-espaco-para-eventos-em-curitiba-52.webp"
+  ];
+
+  final galeryImages = [
+    defultProposedImage,
+    "https://www.quintoandar.com.br/guias/wp-content/uploads/2024/07/salao-de-festas-condominio.webp",
+    "https://espacohipica.com.br/wp-content/uploads/2019/02/festa-de-casamento-em-curitiba_locacao-de-espaco-para-eventos-em-curitiba-52.webp",
+    defultProposedImage,
+    "https://www.quintoandar.com.br/guias/wp-content/uploads/2024/07/salao-de-festas-condominio.webp",
+    "https://espacohipica.com.br/wp-content/uploads/2019/02/festa-de-casamento-em-curitiba_locacao-de-espaco-para-eventos-em-curitiba-52.webp",
   ];
 
   var currentIndex = 0.obs;
