@@ -23,7 +23,7 @@ class FormLocal extends StatelessWidget {
     return Form(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           AppGlobalInput(
             helpText: "Local Evento",
@@ -33,7 +33,7 @@ class FormLocal extends StatelessWidget {
             focusNode: _locationFocusNode,
           ),
           AppGlobalVericalSpacing(
-            value: 2.h,
+            value: 1.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -62,7 +62,7 @@ class FormLocal extends StatelessWidget {
             ],
           ),
           AppGlobalVericalSpacing(
-            value: 2.h,
+            value: 1.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -83,7 +83,7 @@ class FormLocal extends StatelessWidget {
           ),
 
           AppGlobalVericalSpacing(
-            value: 2.h,
+            value: 1.h,
           ),
           AppGlobalDropdownMenu(
             helpText: "N de Convidados",
@@ -97,7 +97,7 @@ class FormLocal extends StatelessWidget {
             ],
           ),
           AppGlobalVericalSpacing(
-            value: 4.h,
+            value: 1.h,
           ),
           AppGlobalTextButton(
             minWidth: 80.w,

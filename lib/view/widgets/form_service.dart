@@ -23,7 +23,7 @@ class FormService extends StatelessWidget {
     return Form(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           AppGlobalInput(
             helpText: "Local Evento",
@@ -33,7 +33,7 @@ class FormService extends StatelessWidget {
             focusNode: _locationFocusNode,
           ),
           AppGlobalVericalSpacing(
-            value: 2.h,
+            value: 1.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -62,7 +62,27 @@ class FormService extends StatelessWidget {
             ],
           ),
           AppGlobalVericalSpacing(
-            value: 2.h,
+            value: 1.h,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              AppGlobalTimePicker(
+                helpText: 'Horade Início',
+                hintText: "00:00",
+                width: 37.w,
+                onDateSelected: (value) {},
+              ),
+              AppGlobalTimePicker(
+                helpText: 'Hora de Fim',
+                hintText: "00:00",
+                width: 37.w,
+                onDateSelected: (value) {},
+              ),
+            ],
+          ),
+          AppGlobalVericalSpacing(
+            value: 1.h,
           ),
           AppGlobalDropdownMenu(
             helpText: "N de Convidados",
@@ -76,7 +96,7 @@ class FormService extends StatelessWidget {
             ],
           ),
           AppGlobalVericalSpacing(
-            value: 2.h,
+            value: 1.h,
           ),
           AppGlobalDropdownMenu(
             helpText: "Adicionar Serviço",
@@ -90,7 +110,7 @@ class FormService extends StatelessWidget {
             ],
           ),
           AppGlobalVericalSpacing(
-            value: 2.h,
+            value: 1.h,
           ),
           AppGlobalTextButton(
             minWidth: 80.w,

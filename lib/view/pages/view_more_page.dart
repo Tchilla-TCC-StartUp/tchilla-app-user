@@ -97,7 +97,7 @@ class _ViewMorePageState extends State<ViewMorePage>
           isScrollable: true,
         ),
         SizedBox(
-          height: 56.h,
+          height: 90.h,
           child: _buildTabViews(),
         )
       ],
