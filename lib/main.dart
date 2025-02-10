@@ -26,9 +26,10 @@ class MyApp extends StatelessWidget {
       title: 'Tchilla',
       routerConfig: Get.find<AppRouter>().router,
       theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: primary500),
-          useMaterial3: true,
-          scaffoldBackgroundColor: primary50),
+        colorScheme: ColorScheme.fromSeed(seedColor: primary500),
+        useMaterial3: true,
+        scaffoldBackgroundColor: primary50,
+      ),
     );
   }
 }

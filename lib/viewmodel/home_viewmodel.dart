@@ -7,7 +7,7 @@ import 'package:tchilla/util/events/navigation.dart';
 class HomeViewModel extends GetxController {
   final Navigation navigator;
   RxInt selectedIndex = 0.obs;
-  RxDouble adptiveHeight = 420.px.obs;
+  RxDouble adptiveHeight = 520.px.obs;
   RxDouble adptiveSilverExpade = 650.px.obs;
 
   HomeViewModel({
@@ -35,20 +35,20 @@ class HomeViewModel extends GetxController {
   void updateAdaptiveHeight() {
     switch (selectedIndex.value) {
       case 0:
-        adptiveHeight.value = 420.px;
-        adptiveSilverExpade.value = 650.px;
+        adptiveHeight.value = 520.px;
+        adptiveSilverExpade.value = 750.px;
         break;
       case 1:
-        adptiveHeight.value = 500.px;
-        adptiveSilverExpade.value = 730.px;
+        adptiveHeight.value = 600.px;
+        adptiveSilverExpade.value = 830.px;
         break;
       case 2:
-        adptiveHeight.value = 530.px;
-        adptiveSilverExpade.value = 760.px;
+        adptiveHeight.value = 630.px;
+        adptiveSilverExpade.value = 860.px;
         break;
       default:
-        adptiveHeight.value = 420.px;
-        adptiveSilverExpade.value = 650.px;
+        adptiveHeight.value = 520.px;
+        adptiveSilverExpade.value = 750.px;
         break;
     }
   }

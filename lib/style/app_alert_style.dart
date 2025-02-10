@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
+import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 
 enum AlertStyleEnum {
@@ -52,7 +53,9 @@ SnackBar getAlertStyle({
     content: Row(
       children: [
         icon,
-        const SizedBox(width: 8.0),
+        const AppGlobalHorizontalSpacing(
+          value: 8.0,
+        ),
         Expanded(
           child: Column(
             mainAxisSize: MainAxisSize.min,

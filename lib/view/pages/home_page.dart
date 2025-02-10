@@ -8,15 +8,13 @@ import 'package:tchilla/resources/app_size.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/pages/view_more_page.dart';
-import 'package:tchilla/view/widgets/app_global_data_picker.dart';
-import 'package:tchilla/view/widgets/app_global_dropdown_menu.dart';
-import 'package:tchilla/view/widgets/app_global_input.dart';
-import 'package:tchilla/view/widgets/app_global_service_tags_manager.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
-import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_circular_liner.dart';
+import 'package:tchilla/view/widgets/form_local.dart';
+import 'package:tchilla/view/widgets/form_local_end_service.dart';
+import 'package:tchilla/view/widgets/form_service.dart';
 import 'package:tchilla/viewmodel/home_viewmodel.dart';
 
 class HomePage extends StatefulWidget {
@@ -227,247 +225,21 @@ class _HomePageState extends State<HomePage>
         child: IndexedStack(
           index: _tabController.index,
           children: [
-            _buildFormLocal(),
-            _buildFormService(),
-            _buildFormLocalEndService(),
+            // Head
+            FormLocal(
+              locationFocusNode: _locationFocusNode,
+              viewmodel: viewmodel,
+            ),
+            FormLocalEndService(
+              locationFocusNode: _locationFocusNode,
+              viewmodel: viewmodel,
+            ),
+            FormService(
+              locationFocusNode: _locationFocusNode,
+              viewmodel: viewmodel,
+            ),
           ],
         ),
-      ),
-    );
-  }
-
-  _buildFormLocal() {
-    return Form(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          AppGlobalInput(
-            helpText: "Local Evento",
-            hintText: "EX: provincia/municipio/bairro",
-            keyboardType: TextInputType.text,
-            textInputAction: TextInputAction.done,
-            focusNode: _locationFocusNode,
-          ),
-          AppGlobalVericalSpacing(
-            value: 2.h,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              AppGlobalDatePicker(
-                helpText: "Data do Evento",
-                hintText: "25 NOV 2025",
-                width: 37.w,
-                firstDate: DateTime(2020),
-                lastDate: DateTime(2030),
-                onDateSelected: (DateTime date) {
-                  print("Data selecionada: $date");
-                },
-              ),
-              AppGlobalDropdownMenu(
-                helpText: "Tipo Evento",
-                hintText: "Casamento",
-                width: 37.w,
-                dropdownMenuEntries: const [
-                  DropdownMenuEntry(value: "OP1", label: "Casamento"),
-                  DropdownMenuEntry(value: "OP1", label: "Pedido"),
-                  DropdownMenuEntry(value: "OP1", label: "Aniversário"),
-                  DropdownMenuEntry(value: "OP1", label: "Noivado"),
-                ],
-              ),
-            ],
-          ),
-          AppGlobalVericalSpacing(
-            value: 2.h,
-          ),
-          AppGlobalDropdownMenu(
-            helpText: "N de Convidados",
-            hintText: "150 Convidados",
-            width: 80.w,
-            dropdownMenuEntries: const [
-              DropdownMenuEntry(value: "OP1", label: "150 Convidados"),
-              DropdownMenuEntry(value: "OP1", label: "300 Convidadoso"),
-              DropdownMenuEntry(value: "OP1", label: "600 Convidados"),
-              DropdownMenuEntry(value: "OP1", label: "1200 Convidados"),
-            ],
-          ),
-          AppGlobalVericalSpacing(
-            value: 4.h,
-          ),
-          AppGlobalTextButton(
-            minWidth: 80.w,
-            textButton: "Pesquisar",
-            onPressed: viewmodel.navigateToResultSearchPage,
-          ),
-
-          // HomeIndicatorBanner()
-        ],
-      ),
-    );
-  }
-
-  _buildFormLocalEndService() {
-    return Form(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          AppGlobalInput(
-            helpText: "Local Evento",
-            hintText: "EX: provincia/municipio/bairro",
-            keyboardType: TextInputType.text,
-            textInputAction: TextInputAction.done,
-            focusNode: _locationFocusNode,
-          ),
-          AppGlobalVericalSpacing(
-            value: 2.h,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              AppGlobalDatePicker(
-                helpText: "Data do Evento",
-                hintText: "25 NOV 2025",
-                width: 37.w,
-                firstDate: DateTime(2020),
-                lastDate: DateTime(2030),
-                onDateSelected: (DateTime date) {
-                  print("Data selecionada: $date");
-                },
-              ),
-              AppGlobalDropdownMenu(
-                helpText: "Tipo Evento",
-                hintText: "Casamento",
-                width: 37.w,
-                dropdownMenuEntries: const [
-                  DropdownMenuEntry(value: "OP1", label: "Casamento"),
-                  DropdownMenuEntry(value: "OP1", label: "Pedido"),
-                  DropdownMenuEntry(value: "OP1", label: "Aniversário"),
-                  DropdownMenuEntry(value: "OP1", label: "Noivado"),
-                ],
-              ),
-            ],
-          ),
-          AppGlobalVericalSpacing(
-            value: 2.h,
-          ),
-          AppGlobalDropdownMenu(
-            helpText: "N de Convidados",
-            hintText: "150 Convidados",
-            width: 80.w,
-            dropdownMenuEntries: const [
-              DropdownMenuEntry(value: "OP1", label: "150 Convidados"),
-              DropdownMenuEntry(value: "OP1", label: "300 Convidadoso"),
-              DropdownMenuEntry(value: "OP1", label: "600 Convidados"),
-              DropdownMenuEntry(value: "OP1", label: "1200 Convidados"),
-            ],
-          ),
-          AppGlobalVericalSpacing(
-            value: 2.h,
-          ),
-          AppGlobalServiceTagsManager(
-            helpText: "Adicionar Serviço",
-            hintText: "Selecione um serviço",
-            dropdownMenuEntries: const [
-              DropdownMenuEntry(value: "Decoracao", label: "Decoração"),
-              DropdownMenuEntry(value: "DJ", label: "DJ"),
-              DropdownMenuEntry(value: "Confeiteiro", label: "Confeiteiro"),
-              DropdownMenuEntry(value: "Bartender", label: "Bartender"),
-            ],
-            onChanged: (selectedTags) {
-              print("Tags Selecionadas: $selectedTags");
-            },
-          ),
-          AppGlobalTextButton(
-            minWidth: 80.w,
-            textButton: "Pesquisar",
-            onPressed: viewmodel.navigateToResultSearchPage,
-          ),
-        ],
-      ),
-    );
-  }
-
-  _buildFormService() {
-    return Form(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          AppGlobalInput(
-            helpText: "Local Evento",
-            hintText: "EX: provincia/municipio/bairro",
-            keyboardType: TextInputType.text,
-            textInputAction: TextInputAction.done,
-            focusNode: _locationFocusNode,
-          ),
-          AppGlobalVericalSpacing(
-            value: 2.h,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              AppGlobalDatePicker(
-                helpText: "Data do Evento",
-                hintText: "25 NOV 2025",
-                width: 37.w,
-                firstDate: DateTime(2020),
-                lastDate: DateTime(2030),
-                onDateSelected: (DateTime date) {
-                  print("Data selecionada: $date");
-                },
-              ),
-              AppGlobalDropdownMenu(
-                helpText: "Tipo Evento",
-                hintText: "Casamento",
-                width: 37.w,
-                dropdownMenuEntries: const [
-                  DropdownMenuEntry(value: "OP1", label: "Casamento"),
-                  DropdownMenuEntry(value: "OP1", label: "Pedido"),
-                  DropdownMenuEntry(value: "OP1", label: "Aniversário"),
-                  DropdownMenuEntry(value: "OP1", label: "Noivado"),
-                ],
-              ),
-            ],
-          ),
-          AppGlobalVericalSpacing(
-            value: 2.h,
-          ),
-          AppGlobalDropdownMenu(
-            helpText: "N de Convidados",
-            hintText: "150 Convidados",
-            width: 80.w,
-            dropdownMenuEntries: const [
-              DropdownMenuEntry(value: "OP1", label: "150 Convidados"),
-              DropdownMenuEntry(value: "OP1", label: "300 Convidadoso"),
-              DropdownMenuEntry(value: "OP1", label: "600 Convidados"),
-              DropdownMenuEntry(value: "OP1", label: "1200 Convidados"),
-            ],
-          ),
-          AppGlobalVericalSpacing(
-            value: 2.h,
-          ),
-          AppGlobalDropdownMenu(
-            helpText: "Adicionar Serviço",
-            hintText: "Selecione um serviço",
-            width: 80.w,
-            dropdownMenuEntries: const [
-              DropdownMenuEntry(value: "Decoracao", label: "Decoração"),
-              DropdownMenuEntry(value: "DJ", label: "DJ"),
-              DropdownMenuEntry(value: "Confeiteiro", label: "Confeiteiro"),
-              DropdownMenuEntry(value: "Bartender", label: "Bartender"),
-            ],
-          ),
-          AppGlobalVericalSpacing(
-            value: 2.h,
-          ),
-          AppGlobalTextButton(
-            minWidth: 80.w,
-            textButton: "Pesquisar",
-            onPressed: viewmodel.navigateToResultSearchPage,
-          ),
-        ],
       ),
     );
   }
