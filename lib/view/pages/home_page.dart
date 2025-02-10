@@ -12,6 +12,7 @@ import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_circular_liner.dart';
+import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/form_local.dart';
 import 'package:tchilla/view/widgets/form_local_end_service.dart';
 import 'package:tchilla/view/widgets/form_service.dart';
@@ -58,55 +59,37 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
-        statusBarColor: primary50,
-        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: primary950,
+        statusBarIconBrightness: Brightness.light,
       ),
       child: Scaffold(
-        body: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          behavior: HitTestBehavior.opaque,
-          child: CustomScrollView(
-            slivers: [
-              _buildSliverAppBar(),
-              _buildSliverContainerMan(),
-            ],
+        body: SingleChildScrollView(
+          child: GestureDetector(
+            onTap: () {
+              FocusScope.of(context).unfocus();
+            },
+            behavior: HitTestBehavior.opaque,
+            child: Column(
+              children: [
+                Obx(
+                  () => SizedBox(
+                    height: viewmodel.adptiveSilverExpade.value,
+                    child: Stack(
+                      children: [
+                        _buildBackground(),
+                        _buildContainerMan(),
+                      ],
+                    ),
+                  ),
+                ),
+               
+                const AppLayoutpage(
+                  body: ViewMorePage(),
+                )
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildSliverAppBar() {
-    return Obx(
-      () => SliverAppBar(
-        expandedHeight: viewmodel.adptiveSilverExpade.value,
-        // pinned: true,
-        floating: false,
-        systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.light,
-        ),
-        backgroundColor: primary50,
-
-        flexibleSpace: FlexibleSpaceBar(
-          background: Stack(
-            children: [
-              _buildBackground(),
-              _buildContainerMan(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSliverContainerMan() {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 5.w),
-        child: const ViewMorePage(),
       ),
     );
   }
@@ -168,6 +151,7 @@ class _HomePageState extends State<HomePage>
         children: [
           _buildTabBar(),
           _buildForms(),
+          
         ],
       ),
     );
@@ -230,11 +214,12 @@ class _HomePageState extends State<HomePage>
               locationFocusNode: _locationFocusNode,
               viewmodel: viewmodel,
             ),
-            FormLocalEndService(
+
+            FormService(
               locationFocusNode: _locationFocusNode,
               viewmodel: viewmodel,
             ),
-            FormService(
+             FormLocalEndService(
               locationFocusNode: _locationFocusNode,
               viewmodel: viewmodel,
             ),

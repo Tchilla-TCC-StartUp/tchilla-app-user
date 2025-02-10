@@ -6,8 +6,8 @@ import 'package:tchilla/view/widgets/app_global_input.dart';
 import 'package:tchilla/view/widgets/app_global_service_tags_manager.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
+import 'package:tchilla/view/widgets/app_global_time_picker.dart';
 import 'package:tchilla/viewmodel/home_viewmodel.dart';
-
 
 class FormLocalEndService extends StatelessWidget {
   const FormLocalEndService({
@@ -24,7 +24,7 @@ class FormLocalEndService extends StatelessWidget {
     return Form(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           AppGlobalInput(
             helpText: "Local Evento",
@@ -34,7 +34,7 @@ class FormLocalEndService extends StatelessWidget {
             focusNode: _locationFocusNode,
           ),
           AppGlobalVericalSpacing(
-            value: 2.h,
+            value: 1.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -63,7 +63,27 @@ class FormLocalEndService extends StatelessWidget {
             ],
           ),
           AppGlobalVericalSpacing(
-            value: 2.h,
+            value: 1.h,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              AppGlobalTimePicker(
+                helpText: 'Horade Início',
+                hintText: "00:00",
+                width: 37.w,
+                onDateSelected: (value) {},
+              ),
+              AppGlobalTimePicker(
+                helpText: 'Hora de Fim',
+                hintText: "00:00",
+                width: 37.w,
+                onDateSelected: (value) {},
+              ),
+            ],
+          ),
+          AppGlobalVericalSpacing(
+            value: 1.h,
           ),
           AppGlobalDropdownMenu(
             helpText: "N de Convidados",
@@ -77,7 +97,7 @@ class FormLocalEndService extends StatelessWidget {
             ],
           ),
           AppGlobalVericalSpacing(
-            value: 2.h,
+            value: 1.h,
           ),
           AppGlobalServiceTagsManager(
             helpText: "Adicionar Serviço",

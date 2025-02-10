@@ -8,7 +8,7 @@ class HomeViewModel extends GetxController {
   final Navigation navigator;
   RxInt selectedIndex = 0.obs;
   RxDouble adptiveHeight = 520.px.obs;
-  RxDouble adptiveSilverExpade = 650.px.obs;
+  RxDouble adptiveSilverExpade = 760.px.obs;
 
   HomeViewModel({
     required this.navigator,
@@ -36,19 +36,19 @@ class HomeViewModel extends GetxController {
     switch (selectedIndex.value) {
       case 0:
         adptiveHeight.value = 520.px;
-        adptiveSilverExpade.value = 750.px;
+        adptiveSilverExpade.value = 760.px;
         break;
       case 1:
-        adptiveHeight.value = 600.px;
-        adptiveSilverExpade.value = 830.px;
+        adptiveHeight.value = 625.px;
+        adptiveSilverExpade.value = 860.px;
         break;
       case 2:
-        adptiveHeight.value = 630.px;
-        adptiveSilverExpade.value = 860.px;
+        adptiveHeight.value = 635.px;
+        adptiveSilverExpade.value = 875.px;
         break;
       default:
         adptiveHeight.value = 520.px;
-        adptiveSilverExpade.value = 750.px;
+        adptiveSilverExpade.value = 760.px;
         break;
     }
   }
