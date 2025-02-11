@@ -9,6 +9,7 @@ import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/angola_price.dart';
+import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
@@ -171,17 +172,10 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
             onPageChanged: (index) => viewmodel.updateCurrentIndex(index),
             itemCount: viewmodel.listImages.length,
             itemBuilder: (context, index) {
-              return CachedNetworkImage(
+              return AppGlobalNetworkImage(
+                image: viewmodel.listImages[index],
                 width: 100.w,
                 height: 35.h,
-                imageUrl: viewmodel.listImages[index],
-                placeholder: (context, url) => ShimmerLoading(
-                  width: 100.w,
-                  height: 35.h,
-                ),
-                errorWidget: (context, url, error) =>
-                    const Icon(Icons.error, color: Colors.red),
-                fit: BoxFit.cover,
               );
             },
           ),
@@ -274,12 +268,11 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
         Row(
           children: [
             ClipOval(
-              child: CachedNetworkImage(
+              child: AppGlobalNetworkImage(
+                image: imageUser,
                 width: 45.px,
                 height: 45.px,
                 fit: BoxFit.cover,
-                imageUrl:
-                    "https://img.freepik.com/free-photo/clueless-unbothered-black-man-shrugging-with-indifferent-look_1258-26279.jpg?t=st=1738253477~exp=1738257077~hmac=2cb8d21e3aab0749da2b048d33b6b5ffe409e5356ab249b7ee43ab009a4da117&w=1060",
               ),
             ),
             const AppGlobalHorizontalSpacing(),
@@ -325,14 +318,6 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
   }
 
   _buildServiceView() {
-    final listServices = [
-      {"name": "Bufê", "image": bufeImage, "selected": true},
-      {"name": "Garçom", "image": garcomImage, "selected": true},
-      {"name": "DJ", "image": djImage, "selected": true},
-      {"name": "Decoração", "image": decoracoaImage, "selected": false},
-      {"name": "Doces e Salgados", "image": doceImage, "selected": true},
-      {"name": "Fotógrafo", "image": fotografoImage, "selected": false},
-    ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -348,9 +333,9 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
               mainAxisSpacing: 1.h,
               childAspectRatio: 2,
             ),
-            itemCount: listServices.length,
+            itemCount: viewmodel.listServices.length,
             itemBuilder: (context, index) {
-              final service = listServices[index];
+              final service = viewmodel.listServices[index];
               return _buildCardService(service);
             },
           ),
@@ -398,6 +383,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
         itemCount: viewmodel.galeryImages.length,
         itemBuilder: (context, index) {
           var item = viewmodel.galeryImages[index];
+
           return Card(
             elevation: 4,
             clipBehavior: Clip.hardEdge,
@@ -406,23 +392,86 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
             ),
             color: primary50,
             shadowColor: primary500,
-            child: CachedNetworkImage(
-              imageUrl: item,
-              fit: BoxFit.cover,
+            child: AppGlobalNetworkImage(
+              image: item,
+              width: 60.w,
+              height: 15.h,
             ),
           );
         });
   }
 
   _buildReviewsView() {
-    return Column(
-      children: [
-        Center(
-            child: Text(
-          "Avaliações",
-        )),
-        // Adicione mais conteúdo ou widgets conforme necessário
-      ],
+    return ListView.builder(
+      itemCount: viewmodel.listReviews.length,
+      itemBuilder: (context, index) {
+        var item = viewmodel.listReviews[index];
+        return Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Container(
+            width: 275.px,
+            height: 150.px,
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: primary50,
+              borderRadius: BorderRadius.circular(8.px),
+              boxShadow: const [
+                BoxShadow(
+                  color: primary300,
+                  blurRadius: 5,
+                  offset: Offset(0, 5),
+                )
+              ],
+            ),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    ClipOval(
+                      child: AppGlobalNetworkImage(
+                        image: item["image"],
+                        width: 45.px,
+                        height: 45.px,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    const AppGlobalHorizontalSpacing(),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AppGlobalText(
+                          text: item["name"],
+                          style: TextStyleEnum.p_bold,
+                        ),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.star_rounded,
+                              color: Colors.amber,
+                            ),
+                            AppGlobalText(
+                              text: item["rating"].toString(),
+                              style: TextStyleEnum.p_bold,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                const AppGlobalVericalSpacing(),
+                AppGlobalText(
+                  text: item["comment"].toString(),
+                  style: TextStyleEnum.p_normal,
+                  maxLines: 10,
+                  align: TextAlign.start,
+                  color: gray700,
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 

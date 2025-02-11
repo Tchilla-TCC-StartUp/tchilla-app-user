@@ -36,6 +36,8 @@ const userImageDefult =
 const defultProposedImage =
     "https://upload.wikimedia.org/wikipedia/commons/3/3b/Copacabana_Palace_-_Sal%C3%A3o_de_festas_%281%29.jpg";
 
+const imageUser =
+    "https://img.freepik.com/free-photo/clueless-unbothered-black-man-shrugging-with-indifferent-look_1258-26279.jpg?t=st=1738253477~exp=1738257077~hmac=2cb8d21e3aab0749da2b048d33b6b5ffe409e5356ab249b7ee43ab009a4da117&w=1060";
 const bufeImage = '${imagesPash}buffet_1683726.svg';
 const djImage = '${imagesPash}dj_7615043.svg';
 const doceImage = '${imagesPash}wedding-cake_4474320.svg';

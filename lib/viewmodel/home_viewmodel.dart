@@ -7,8 +7,10 @@ import 'package:tchilla/util/events/navigation.dart';
 class HomeViewModel extends GetxController {
   final Navigation navigator;
   RxInt selectedIndex = 0.obs;
-  RxDouble adptiveHeight = 520.px.obs;
-  RxDouble adptiveSilverExpade = 760.px.obs;
+  RxDouble adptiveHeight = 510.px.obs;
+  RxDouble adptiveSilverExpade = 780.px.obs;
+
+  
 
   RxList<String> tabTitlesForm = ["Local", "Serviços", "Local+Serviços"].obs;
 
@@ -38,19 +40,19 @@ class HomeViewModel extends GetxController {
     switch (selectedIndex.value) {
       case 0:
         adptiveHeight.value = 520.px;
-        adptiveSilverExpade.value = 760.px;
+        adptiveSilverExpade.value = 780.px;
         break;
       case 1:
         adptiveHeight.value = 625.px;
-        adptiveSilverExpade.value = 860.px;
+        adptiveSilverExpade.value = 880.px;
         break;
       case 2:
         adptiveHeight.value = 625.px;
-        adptiveSilverExpade.value = 860.px;
+        adptiveSilverExpade.value = 880.px;
         break;
       default:
         adptiveHeight.value = 520.px;
-        adptiveSilverExpade.value = 760.px;
+        adptiveSilverExpade.value = 780.px;
         break;
     }
   }

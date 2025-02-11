@@ -6,6 +6,7 @@ import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/angola_price.dart';
+import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/shimmer_loading.dart';
@@ -204,17 +205,10 @@ class CardMoreRequested extends StatelessWidget {
   }
 
   Widget _buildImage() {
-    return CachedNetworkImage(
+    return AppGlobalNetworkImage(
+      image: defultProposedImage,
       width: 60.w,
       height: 15.h,
-      imageUrl: defultProposedImage,
-      placeholder: (context, url) => ShimmerLoading(
-        width: 60.w,
-        height: 12.h,
-      ),
-      errorWidget: (context, url, error) =>
-          const Icon(Icons.error, color: Colors.red),
-      fit: BoxFit.cover,
     );
   }
 }
