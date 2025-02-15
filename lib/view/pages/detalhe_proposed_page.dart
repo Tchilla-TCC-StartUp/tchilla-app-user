@@ -142,7 +142,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
   }
 
   _buildTabViews() {
-    return Container(
+    return SizedBox(
       // color: primary400,
       height: 44.h,
       child: TabBarView(
