@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_custom_list_card.dart';
@@ -118,8 +119,8 @@ class _ResultSearchPageState extends State<ResultSearchPage>
       leading: const SizedBox.shrink(),
       centerTitle: true,
       leadingWidth: 0,
-      title: const AppCustomListCard(
-        iconPath: locationIconoSvg,
+      title: AppCustomListCard(
+        iconPath: AppAssetsImages.locationIconSvg,
         title: "Benfica, Zona Verde II",
         subtitle: "25 Nov 2025",
       ),

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
@@ -39,10 +40,10 @@ class _ProfilePageState extends State<ProfilePage> {
       body: AppLayoutpage(
           body: Column(
         children: [
-          const ProfileSectionCard(
+          ProfileSectionCard(
             leading: CircleAvatar(
               backgroundImage: AssetImage(
-                userImageDefult,
+                AppAssetsImages.defaultUserImage,
               ),
               backgroundColor: primary50,
             ),
@@ -50,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           ProfileSectionCard(
             leading: SvgPicture.asset(
-              listIconSvg,
+              AppAssetsImages.listIconSvg,
               colorFilter: const ColorFilter.mode(
                 primary900,
                 BlendMode.srcIn,
@@ -60,7 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           ProfileSectionCard(
             leading: SvgPicture.asset(
-              notificationIconSvg,
+              AppAssetsImages.notificationIconSvg,
               colorFilter: const ColorFilter.mode(
                 primary900,
                 BlendMode.srcIn,
@@ -93,7 +94,7 @@ class _ProfilePageState extends State<ProfilePage> {
         const AppGlobalVericalSpacing(),
         ProfileSectionCard(
           leading: SvgPicture.asset(
-            notepadIconSvg,
+            AppAssetsImages.notepadIconSvg,
             colorFilter: const ColorFilter.mode(
               primary900,
               BlendMode.srcIn,
@@ -103,7 +104,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         ProfileSectionCard(
           leading: SvgPicture.asset(
-            questionIconSvg,
+            AppAssetsImages.questionIconSvg,
             colorFilter: const ColorFilter.mode(
               primary900,
               BlendMode.srcIn,
@@ -126,7 +127,7 @@ class _ProfilePageState extends State<ProfilePage> {
         const AppGlobalVericalSpacing(),
         ProfileSectionCard(
           leading: SvgPicture.asset(
-            securiteIconSvg,
+            AppAssetsImages.securityIconSvg,
             colorFilter: const ColorFilter.mode(
               primary900,
               BlendMode.srcIn,
@@ -136,7 +137,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         ProfileSectionCard(
           leading: SvgPicture.asset(
-            monIconSvg,
+            AppAssetsImages.moonIconSvg,
             colorFilter: const ColorFilter.mode(
               primary900,
               BlendMode.srcIn,
@@ -157,7 +158,7 @@ class _ProfilePageState extends State<ProfilePage> {
         // color: primary400,
       ),
       leading: SvgPicture.asset(
-        logoutIconSvg,
+        AppAssetsImages.logoutIconSvg,
         width: 24.px,
         height: 24.px,
         colorFilter: ColorFilter.mode(
@@ -175,7 +176,7 @@ class _ProfilePageState extends State<ProfilePage> {
         GestureDetector(
           onTap: Get.find<Navigation>().navigateToBack,
           child: SvgPicture.asset(
-            arrowBackSvg2,
+            AppAssetsImages.arrowBackSvg2,
             width: 24.px,
             height: 24.px,
             colorFilter: const ColorFilter.mode(

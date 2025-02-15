@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
@@ -217,7 +219,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
             ),
             child: Center(
               child: SvgPicture.asset(
-                arrowBackSvg,
+                AppAssetsImages.arrowBackSvg,
                 width: 25.px,
                 height: 25.px,
               ),
@@ -269,7 +271,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
           children: [
             ClipOval(
               child: AppGlobalNetworkImage(
-                image: imageUser,
+                image: AppAssetsImages.defaultUserImage,
                 width: 45.px,
                 height: 45.px,
                 fit: BoxFit.cover,
@@ -353,20 +355,25 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
       ),
       color: isSelected ? primary950 : primary50,
       shadowColor: isSelected ? primary950 : primary500,
-      child: Row(
-        children: [
-          SizedBox(width: 2.w),
-          SvgPicture.asset(
-            service["image"]!,
-            placeholderBuilder: (context) =>
-                const Icon(Icons.image_not_supported),
-          ),
-          AppGlobalText(
-            text: service["name"]!,
-            style: TextStyleEnum.p_bold,
-            color: isSelected ? primary50 : primary950,
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.asset(
+              service["image"]!,
+              width: 24.px,
+              height: 24.px,
+            ),
+            const AppGlobalHorizontalSpacing(),
+            AppGlobalText(
+              text: service["name"]!,
+              style: TextStyleEnum.p_bold,
+              color: isSelected ? primary50 : primary950,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/view/widgets/app_global_border_button.dart';
@@ -25,8 +26,8 @@ class WelcomePage extends StatelessWidget {
             AppGlobalVericalSpacing(
               value: 2.h,
             ),
-            const OnboardingBody(
-              image: welconeImage,
+            OnboardingBody(
+              image: AppAssetsImages.welcomeImage,
               title: "Seja bem vindo ao Tchilla",
               description:
                   "Estamos grato por ter baixado o nosso aplicativo, crie conta, faz login, ou explore a App.",

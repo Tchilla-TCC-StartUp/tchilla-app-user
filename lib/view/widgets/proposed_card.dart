@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
@@ -117,7 +118,7 @@ class ProposedCard extends StatelessWidget {
           Row(
             children: [
               SvgPicture.asset(
-                personsIconoSvg,
+                AppAssetsImages.personsIconSvg,
                 colorFilter: const ColorFilter.mode(
                   primary900,
                   BlendMode.srcIn,
@@ -154,7 +155,7 @@ class ProposedCard extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10.px),
       child: AppGlobalNetworkImage(
-        image: defultProposedImage,
+        image: AppAssetsImages.defaultProposedImage,
         width: 35.w,
         height: 12.h,
       ),

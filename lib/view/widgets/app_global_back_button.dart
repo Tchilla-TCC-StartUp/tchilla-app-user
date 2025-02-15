@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/util/events/navigation.dart';
@@ -27,7 +28,7 @@ class AppGlobalBackButton extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             SvgPicture.asset(
-              arrowBackSvg,
+              AppAssetsImages.arrowBackSvg,
               colorFilter: const ColorFilter.mode(
                 primaryBorder,
                 BlendMode.srcIn,

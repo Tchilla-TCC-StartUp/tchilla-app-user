@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
@@ -26,7 +27,7 @@ class HomeIndicatorBanner extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SvgPicture.asset(
-                arrowDowntSvg,
+                AppAssetsImages.arrowDownSvg,
                 width: 20.sp,
                 height: 25.sp,
               ),
@@ -37,7 +38,7 @@ class HomeIndicatorBanner extends StatelessWidget {
                 maxLines: 3,
               ),
               SvgPicture.asset(
-                arrowDowntSvg,
+                AppAssetsImages.arrowDownSvg,
                 width: 20.sp,
                 height: 25.sp,
               ),

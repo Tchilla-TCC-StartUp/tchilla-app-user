@@ -3,11 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/resources/app_size.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/pages/view_more_page.dart';
+import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
@@ -225,9 +227,12 @@ class _HomePageState extends State<HomePage>
       children: [
         GestureDetector(
           onTap: () => viewmodel.navigateToProfilePage("id"),
-          child: const CircleAvatar(
-            backgroundImage: AssetImage(userImageDefult),
-            backgroundColor: primary50,
+          child: ClipOval(
+            child: AppGlobalNetworkImage(
+              image: AppAssetsImages.defaultUserImage,
+              width: 40.px,
+              height: 40.px,
+            ),
           ),
         ),
         const AppGlobalHorizontalSpacing(),

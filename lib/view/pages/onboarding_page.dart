@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
@@ -21,20 +22,20 @@ class OnboardingPage extends StatelessWidget {
     final viewModel = Get.find<OnboardingViewModel>();
 
     final onboardingList = [
-      const OnboardingBody(
-        image: onbordingImage1,
+      OnboardingBody(
+        image: AppAssetsImages.onboardingImage1,
         title: "Economize tempo na sua busca.",
         description:
             "Com apenas alguns cliques, encontre o local ideal para qualquer evento social com as melhores opções do mercado, eliminando as dores de cabeça na procura.",
       ),
-      const OnboardingBody(
-        image: onbordingImage2,
+      OnboardingBody(
+        image: AppAssetsImages.onboardingImage2,
         title: "Serviços de Decoração no Pacote",
         description:
             "Tudo o que você precisa para um ambiente único e encantador! Nosso pacote inclui serviços de decoração personalizados para tornar seu espaço inesquecível.",
       ),
-      const OnboardingBody(
-        image: onbordingImage3,
+      OnboardingBody(
+        image: AppAssetsImages.onboardingImage3,
         title: "Agende, Realize, Avalie com Confiança.",
         description:
             "Com poucos toques, agende os serviços que precisa, acompanhe a execução e avalie a experiência com total transparência. Confiança e qualidade na palma da sua mão!",
@@ -100,7 +101,7 @@ class OnboardingPage extends StatelessWidget {
                         style: TextStyleEnum.h3_bold,
                       ),
                       const AppGlobalHorizontalSpacing(),
-                      SvgPicture.asset(arrowRightSvg)
+                      SvgPicture.asset(AppAssetsImages.arrowRightSvg)
                     ],
                   )),
               AppGlobalVericalSpacing(

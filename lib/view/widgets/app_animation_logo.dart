@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/view/widgets/app_global_show_and_hide_animation.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
@@ -20,7 +21,7 @@ class AppAnimationLogo extends StatelessWidget {
           value: 2.h,
         ),
         Image.asset(
-          logotipoPng,
+          AppAssetsImages.logotipoPng,
           width: 40.w,
         ),
         AppGlobalVericalSpacing(
