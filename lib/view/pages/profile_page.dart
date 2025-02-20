@@ -4,10 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
-import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/util/events/navigation.dart';
+import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
@@ -41,11 +41,12 @@ class _ProfilePageState extends State<ProfilePage> {
           body: Column(
         children: [
           ProfileSectionCard(
-            leading: CircleAvatar(
-              backgroundImage: AssetImage(
-                AppAssetsImages.defaultUserImage,
+            leading: ClipOval(
+              child: AppGlobalNetworkImage(
+                image: AppAssetsImages.defaultUserImage,
+                width: 40.px,
+                height: 40.px,
               ),
-              backgroundColor: primary50,
             ),
             title: "Celson Paixão",
           ),

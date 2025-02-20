@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tchilla/resources/app_routes.dart';
 import 'app_gets.dart';
 import 'app_router.dart';
 import 'style/colors.dart';
@@ -22,9 +22,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return GetMaterialApp(
       title: 'Tchilla',
-      routerConfig: Get.find<AppRouter>().router,
+      initialRoute: AppRoutes.initialRoute,
+      getPages: AppGetAppRoutes.routes,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: primary500),
         useMaterial3: true,

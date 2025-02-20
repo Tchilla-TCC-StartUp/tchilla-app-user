@@ -19,8 +19,7 @@ O **Tchilla App** é uma plataforma onde os clientes podem solicitar serviços a
 
 - **Flutter**: Framework utilizado para o desenvolvimento do aplicativo
 - **Dart**: Linguagem de programação para lógica de negócios
-- **GetX**: Para gerenciamento de estado e dependências
-- **goRuter**: Para gerenciamento de rotas 
+- **GetX**: Para gerenciamento de estado,dependências e para gerenciamento de rotas
 
 ## Como Rodar o Projeto
 

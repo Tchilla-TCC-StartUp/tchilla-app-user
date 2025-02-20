@@ -16,7 +16,8 @@ class AppAssetsImages {
   static const String _notificationIconSvg =
       '${_vectorsPath}notification-icon.svg';
   static const String _securityIconSvg = '${_vectorsPath}securite-icon.svg';
-  static const String _moonIconSvg = '${_vectorsPath}noun-money-7460748.svg';
+  static const String _moneyIconSvg = '${_vectorsPath}noun-money-7460748.svg ';
+  static const String _moonIconSvg = '${_vectorsPath}mon-icon.svg';
   static const String _notepadIconSvg = '${_vectorsPath}notepad-icon.svg';
   static const String _questionIconSvg = '${_vectorsPath}question-icon.svg';
   static const String _logoutIconSvg = '${_vectorsPath}logout-icon.svg';
@@ -68,6 +69,7 @@ class AppAssetsImages {
   static String get notificationIconSvg => _notificationIconSvg;
   static String get securityIconSvg => _securityIconSvg;
   static String get moonIconSvg => _moonIconSvg;
+  static String get moneyIconSvg => _moneyIconSvg;
   static String get notepadIconSvg => _notepadIconSvg;
   static String get questionIconSvg => _questionIconSvg;
   static String get logoutIconSvg => _logoutIconSvg;
