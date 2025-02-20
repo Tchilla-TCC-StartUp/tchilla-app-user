@@ -6,7 +6,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/colors.dart';
-import 'package:tchilla/util/events/navigation.dart';
+import 'package:tchilla/services/events/navigation.dart';
 
 class AppGlobalBackButton extends StatelessWidget {
   final double? minWidth;

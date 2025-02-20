@@ -6,23 +6,24 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
-import 'package:tchilla/util/events/navigation.dart';
+import 'package:tchilla/services/events/navigation.dart';
 import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/profile_section_card.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tchilla/viewmodel/profile_viewmodel.dart';
 
 class ProfilePage extends StatefulWidget {
-  final String id;
-  const ProfilePage({super.key, required this.id});
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final viewmodel = Get.find<ProfileViewmodel>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
           body: Column(
         children: [
           ProfileSectionCard(
+            onTap: () => viewmodel.goToUserDataPage("1kwd"),
             leading: ClipOval(
               child: AppGlobalNetworkImage(
                 image: AppAssetsImages.defaultUserImage,

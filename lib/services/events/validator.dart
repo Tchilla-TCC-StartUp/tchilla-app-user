@@ -1,4 +1,4 @@
-import 'package:tchilla/util/interface/ivalidator.dart';
+import 'package:tchilla/services/interface/ivalidator.dart';
 
 class Validator extends Ivalidator {
   static final RegExp _emailRegex =

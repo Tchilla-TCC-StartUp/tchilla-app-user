@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:tchilla/resources/app_routes.dart';
-import 'package:tchilla/util/events/navigation.dart';
-import 'package:tchilla/util/events/notificator.dart';
-import 'package:tchilla/util/events/validator.dart';
+import 'package:tchilla/services/events/navigation.dart';
+import 'package:tchilla/services/events/notificator.dart';
+import 'package:tchilla/services/events/validator.dart';
 import 'package:tchilla/viewmodel/detalhesproposedviewmodel.dart';
 
 import 'package:tchilla/viewmodel/forgont_password_viewmodel.dart';
@@ -86,8 +86,8 @@ class AppGets {
         notificator: Get.find(),
       ),
     );
-    Get.lazyPut<ProfileViewmodel>(
-      () => ProfileViewmodel(
+    Get.put<ProfileViewmodel>(
+      ProfileViewmodel(
         navigator: Get.find(),
         notificator: Get.find(),
       ),

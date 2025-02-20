@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tchilla/style/app_alert_style.dart';
-import 'package:tchilla/util/interface/inotificator.dart';
+import 'package:tchilla/services/interface/inotificator.dart';
 
 class Notificator extends INotificator {
   @override

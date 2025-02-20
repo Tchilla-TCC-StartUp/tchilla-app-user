@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-import 'package:tchilla/util/interface/inavigation.dart';
 import 'package:tchilla/resources/app_routes.dart';
+import 'package:tchilla/services/interface/inavigation.dart';
 
 class Navigation extends INavigation {
   @override
@@ -66,7 +66,12 @@ class Navigation extends INavigation {
   }
 
   @override
-  navigateToProfilePage(String id) {
-    Get.toNamed(AppRoutes.profilePage, arguments: id);
+  navigateToProfilePage() {
+    Get.toNamed(AppRoutes.profilePage);
+  }
+
+  @override
+  navigateToUserDataPage(String id) {
+    Get.toNamed(AppRoutes.userdataPage, arguments: id);
   }
 }

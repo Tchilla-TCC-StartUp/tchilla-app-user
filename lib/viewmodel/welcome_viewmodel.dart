@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:tchilla/util/events/navigation.dart';
+import 'package:tchilla/services/events/navigation.dart';
 
 class WelcomeViewmodel {
   final Navigation navigator;

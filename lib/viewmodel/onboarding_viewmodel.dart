@@ -2,7 +2,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-import 'package:tchilla/util/events/navigation.dart';
+import 'package:tchilla/services/events/navigation.dart';
 
 class OnboardingViewModel extends GetxController {
   final Navigation navigator;

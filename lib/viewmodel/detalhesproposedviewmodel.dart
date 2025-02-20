@@ -6,7 +6,7 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
 
 import 'package:tchilla/resources/app_constats.dart';
-import 'package:tchilla/util/events/navigation.dart';
+import 'package:tchilla/services/events/navigation.dart';
 
 class DetalheProposedViewModel extends GetxController {
   final Navigation navigator;

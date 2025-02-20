@@ -12,6 +12,7 @@ import 'package:tchilla/view/pages/redefine_password_page.dart';
 import 'package:tchilla/view/pages/register_page.dart';
 import 'package:tchilla/view/pages/result_search_page.dart';
 import 'package:tchilla/view/pages/splash_page.dart';
+import 'package:tchilla/view/pages/user_page.dart';
 import 'package:tchilla/view/pages/welcome_page.dart';
 
 class AppGetAppRoutes {
@@ -41,14 +42,33 @@ class AppGetAppRoutes {
       const ForgotPasswordConfirmationPinPage(),
     ),
     _buildStaticRoute(
-        AppRoutes.redefinePasswordPage, const RedefinePasswordPage()),
-    _buildStaticRoute(AppRoutes.onboardingPage, const OnboardingPage()),
-    _buildStaticRoute(AppRoutes.resultSearchPage, const ResultSearchPage()),
-    _buildStaticRoute(AppRoutes.welcomePage, const WelcomePage()),
+      AppRoutes.redefinePasswordPage,
+      const RedefinePasswordPage(),
+    ),
+    _buildStaticRoute(
+      AppRoutes.onboardingPage,
+      const OnboardingPage(),
+    ),
+    _buildStaticRoute(
+      AppRoutes.resultSearchPage,
+      const ResultSearchPage(),
+    ),
+    _buildStaticRoute(
+      AppRoutes.welcomePage,
+      const WelcomePage(),
+    ),
     _buildDynamicRoute<String>(
-        AppRoutes.detailsPage, (id) => DetalheProposedPage(id: id)),
+      AppRoutes.detailsPage,
+      (id) => DetalheProposedPage(id: id),
+    ),
+    _buildStaticRoute(
+      AppRoutes.profilePage,
+      const ProfilePage(),
+    ),
     _buildDynamicRoute<String>(
-        AppRoutes.profilePage, (id) => ProfilePage(id: id)),
+      AppRoutes.userdataPage,
+      (id) => UserDataPage(id: id),
+    ),
   ];
 
   static GetPage _buildStaticRoute(String path, Widget page) {

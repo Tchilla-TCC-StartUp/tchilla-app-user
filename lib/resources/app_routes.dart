@@ -11,16 +11,16 @@ class AppRoutes {
   static const String _profilePage = "$_mainRouter/profile";
   static const String _resultSearchPage = "$_homePage/result_search";
   static const String _detailsPage = "$_resultSearchPage/detalhes";
+  static const String _userdataPage = "$_profilePage/user_data";
 
   // Auth Pages
   static const String _loginPage = "$_mainRouter/login";
   static const String _registerPage = "$_mainRouter/register";
-  static const String _forgotPasswordEmail =
-      "$_mainRouter/forgot_password/auth_email_page";
+  static const String _forgotPasswordEmail = "$_mainRouter/forgotd/auth_email";
   static const String _forgotPasswordConfirmationPin =
-      "$_forgotPasswordEmail/forgot_password/confirmation_pin";
+      "$_forgotPasswordEmail/confirmation_pin";
   static const String _redefinePasswordPage =
-      "$_forgotPasswordConfirmationPin/redefinePasswordPage";
+      "$_forgotPasswordConfirmationPin/redefine_password";
 
   // Welcome Pages
   static const String _welcomePage = "$_mainRouter/welcome";
@@ -44,4 +44,6 @@ class AppRoutes {
   static String get redefinePasswordPage => _redefinePasswordPage;
 
   static String get welcomePage => _welcomePage;
+
+  static String get userdataPage => _userdataPage;
 }

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:tchilla/util/events/navigation.dart';
-import 'package:tchilla/util/events/notificator.dart';
+import 'package:tchilla/services/events/navigation.dart';
+import 'package:tchilla/services/events/notificator.dart';
 
 class SplashViewmodel {
   final Navigation navigator;

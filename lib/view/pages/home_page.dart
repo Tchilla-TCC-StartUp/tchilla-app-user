@@ -227,7 +227,7 @@ class _HomePageState extends State<HomePage>
     return Row(
       children: [
         GestureDetector(
-          onTap: () => viewmodel.navigateToProfilePage("id"),
+          onTap: () => viewmodel.navigateToProfilePage(),
           child: ClipOval(
             child: AppGlobalNetworkImage(
               image: AppAssetsImages.defaultUserImage,
@@ -241,7 +241,7 @@ class _HomePageState extends State<HomePage>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-             AppLocalizations.of(context)!.hello,
+              AppLocalizations.of(context)!.hello,
               style: GoogleFonts.inter(
                 color: primary50,
                 fontSize: 12.spa,

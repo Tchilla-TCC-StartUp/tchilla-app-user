@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tchilla/style/app_alert_style.dart';
-import 'package:tchilla/util/events/navigation.dart';
-import 'package:tchilla/util/events/notificator.dart';
-import 'package:tchilla/util/events/validator.dart';
+import 'package:tchilla/services/events/navigation.dart';
+import 'package:tchilla/services/events/notificator.dart';
+import 'package:tchilla/services/events/validator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class LoginViewmodel {
   final Navigation navigator;
