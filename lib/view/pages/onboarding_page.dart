@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
-import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_global_image_button.dart';
@@ -13,6 +12,7 @@ import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/onboarding_body.dart';
 import 'package:tchilla/viewmodel/onboarding_viewmodel.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
@@ -24,21 +24,18 @@ class OnboardingPage extends StatelessWidget {
     final onboardingList = [
       OnboardingBody(
         image: AppAssetsImages.onboardingImage1,
-        title: "Economize tempo na sua busca.",
-        description:
-            "Com apenas alguns cliques, encontre o local ideal para qualquer evento social com as melhores opções do mercado, eliminando as dores de cabeça na procura.",
+        title: AppLocalizations.of(context)!.onboarding_title_1,
+        description: AppLocalizations.of(context)!.onboarding_description_1,
       ),
       OnboardingBody(
         image: AppAssetsImages.onboardingImage2,
-        title: "Serviços de Decoração no Pacote",
-        description:
-            "Tudo o que você precisa para um ambiente único e encantador! Nosso pacote inclui serviços de decoração personalizados para tornar seu espaço inesquecível.",
+        title: AppLocalizations.of(context)!.onboarding_title_2,
+        description: AppLocalizations.of(context)!.onboarding_description_2,
       ),
       OnboardingBody(
         image: AppAssetsImages.onboardingImage3,
-        title: "Agende, Realize, Avalie com Confiança.",
-        description:
-            "Com poucos toques, agende os serviços que precisa, acompanhe a execução e avalie a experiência com total transparência. Confiança e qualidade na palma da sua mão!",
+        title: AppLocalizations.of(context)!.onboarding_title_3,
+        description: AppLocalizations.of(context)!.onboarding_description_3,
       ),
     ];
 
@@ -55,7 +52,7 @@ class OnboardingPage extends StatelessWidget {
                 child: GestureDetector(
                   onTap: viewModel.clickSkip,
                   child: AppGlobalText(
-                    text: "Pular",
+                    text: AppLocalizations.of(context)!.skip,
                     style: TextStyleEnum.h3_medium,
                   ),
                 ),
@@ -96,7 +93,7 @@ class OnboardingPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       AppGlobalText(
-                        text: "Prosseguir",
+                        text: AppLocalizations.of(context)!.proceed,
                         color: primary50,
                         style: TextStyleEnum.h3_bold,
                       ),

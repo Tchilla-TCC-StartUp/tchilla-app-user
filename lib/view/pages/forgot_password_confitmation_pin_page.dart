@@ -8,24 +8,25 @@ import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/headerpage.dart';
-import '../../viewmodel/forenge_password_viewmodel.dart';
+import 'package:tchilla/viewmodel/forgont_password_viewmodel.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ForengePasswordConfirmationPinPage extends StatefulWidget {
-  const ForengePasswordConfirmationPinPage({super.key});
+class ForgotPasswordConfirmationPinPage extends StatefulWidget {
+  const ForgotPasswordConfirmationPinPage({super.key});
 
   @override
-  State<ForengePasswordConfirmationPinPage> createState() =>
-      _ForengePasswordConfirmationPinPageState();
+  State<ForgotPasswordConfirmationPinPage> createState() =>
+      _ForgotPasswordConfirmationPinPageState();
 }
 
-class _ForengePasswordConfirmationPinPageState
-    extends State<ForengePasswordConfirmationPinPage> {
+class _ForgotPasswordConfirmationPinPageState
+    extends State<ForgotPasswordConfirmationPinPage> {
   final List<TextEditingController> _controllers = List.generate(
     6,
     (_) => TextEditingController(),
   );
 
-  final viewmodel = Get.find<ForengePasswordViewmodel>();
+  final viewmodel = Get.find<ForgontPasswordViewmodel>();
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +39,13 @@ class _ForengePasswordConfirmationPinPageState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Headerpage(
-                title: "Pin de confirmação",
-                description: "Enviamos um pin ao seu email para a\nconfirmação",
+              Headerpage(
+                title: AppLocalizations.of(context)!.confirmation_pin,
+                description:
+                    AppLocalizations.of(context)!.confirmation_pin_description,
               ),
               AppGlobalText(
-                text: "Pin",
+                text: AppLocalizations.of(context)!.pin,
                 style: TextStyleEnum.h3_bold,
               ),
               const AppGlobalVericalSpacing(),
@@ -56,7 +58,7 @@ class _ForengePasswordConfirmationPinPageState
                   final pin = _controllers.map((c) => c.text).join();
                   viewmodel.confirmPin(pin, context);
                 },
-                textButton: "Confirmar",
+                textButton: AppLocalizations.of(context)!.confirm,
                 minWidth: 100.w,
               ),
             ],

@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
-import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_animation_logo.dart';
@@ -15,6 +14,7 @@ import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/viewmodel/login_viewmodel.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             AppGlobalText(
-              text: "Fazer Login",
+              text: AppLocalizations.of(context)!.sign_in,
               style: TextStyleEnum.h2_bold,
             ),
             AppGlobalVericalSpacing(
@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 AppGlobalInput(
                   focusNode: emailFocusNode,
-                  helpText: "Endereco de email",
+                  helpText: AppLocalizations.of(context)!.email_address,
                   hintText: "celson.paixao@gmail.com",
                   keyboardType: TextInputType.emailAddress,
                   controller: emailController,
@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                 GestureDetector(
                   onTap: viewmodel.navigateToForengePasswordPage,
                   child: AppGlobalText(
-                    text: "Esqueceu sua senha?",
+                    text: AppLocalizations.of(context)!.forgot_password,
                     style: TextStyleEnum.p_normal,
                     color: primary500,
                   ),
@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
             const AppGlobalVericalSpacing(),
             AppGlobalInput(
               focusNode: passwordFocusNode,
-              helpText: "Senha",
+              helpText: AppLocalizations.of(context)!.password,
               controller: passwordController,
               hintText: "*******",
               keyboardType: TextInputType.visiblePassword,
@@ -93,12 +93,12 @@ class _LoginPageState extends State<LoginPage> {
                 passwordController.text,
                 context,
               ),
-              textButton: "Entrar",
+              textButton: AppLocalizations.of(context)!.login,
             ),
             AppGlobalVericalSpacing(
               value: 3.h,
             ),
-            const AppAuthDivider(text: "Ou tembém\npode"),
+            AppAuthDivider(text: AppLocalizations.of(context)!.or_you_can_also),
             AppGlobalVericalSpacing(
               value: 3.h,
             ),
@@ -116,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const AppGlobalHorizontalSpacing(),
                   AppGlobalText(
-                    text: "Logar com o Google",
+                    text: AppLocalizations.of(context)!.sign_up_with_google,
                     style: TextStyleEnum.p_normal,
                     color: gray600,
                   )
@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
               child: GestureDetector(
                 onTap: viewmodel.navigateToRegisterPage,
                 child: AppGlobalText(
-                  text: "Crie uma conta",
+                  text: AppLocalizations.of(context)!.create_account_button,
                   style: TextStyleEnum.h3_bold,
                   color: primary500,
                   align: TextAlign.center,

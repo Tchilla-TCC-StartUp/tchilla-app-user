@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
-import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/view/widgets/app_global_border_button.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
@@ -11,6 +10,7 @@ import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/onboarding_body.dart';
 import 'package:tchilla/viewmodel/welcome_viewmodel.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -28,9 +28,8 @@ class WelcomePage extends StatelessWidget {
             ),
             OnboardingBody(
               image: AppAssetsImages.welcomeImage,
-              title: "Seja bem vindo ao Tchilla",
-              description:
-                  "Estamos grato por ter baixado o nosso aplicativo, crie conta, faz login, ou explore a App.",
+              title: AppLocalizations.of(context)!.welcome_title,
+              description: AppLocalizations.of(context)!.welcome_description,
             ),
             AppGlobalVericalSpacing(
               value: 4.h,
@@ -38,14 +37,14 @@ class WelcomePage extends StatelessWidget {
             AppGlobalTextButton(
               minWidth: 100.w,
               onPressed: viewmodel.navigateToRegister,
-              textButton: "Crie uma conta",
+              textButton: AppLocalizations.of(context)!.create_account_button,
             ),
             AppGlobalVericalSpacing(
               value: 3.h,
             ),
             AppGlobalBorderButton(
               minWidth: 100.w,
-              textButton: "Login",
+              textButton: AppLocalizations.of(context)!.login,
               onPressed: viewmodel.navigateToLogin,
             ),
             AppGlobalVericalSpacing(
@@ -53,7 +52,7 @@ class WelcomePage extends StatelessWidget {
             ),
             GestureDetector(
               child: AppGlobalText(
-                text: "Entrar como Visitante",
+                text: AppLocalizations.of(context)!.guest_login,
                 style: TextStyleEnum.h3_bold,
               ),
               onTap: viewmodel.enteraVisitor,

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
-import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/resources/app_size.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
@@ -19,6 +18,7 @@ import 'package:tchilla/view/widgets/form_local.dart';
 import 'package:tchilla/view/widgets/form_local_end_service.dart';
 import 'package:tchilla/view/widgets/form_service.dart';
 import 'package:tchilla/viewmodel/home_viewmodel.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -121,7 +121,7 @@ class _HomePageState extends State<HomePage>
                   left: getAdaptativeWidth(6.w, 4.w, 2.w),
                   right: getAdaptativeWidth(6.w, 4.w, 2.w),
                   child: AppGlobalText(
-                    text: "Organize seu evento\nem questão de minutos",
+                    text: AppLocalizations.of(context)!.organize_event,
                     style: TextStyleEnum.h2_bold,
                     color: primary50,
                   ),
@@ -241,7 +241,7 @@ class _HomePageState extends State<HomePage>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Olá👋",
+             AppLocalizations.of(context)!.hello,
               style: GoogleFonts.inter(
                 color: primary50,
                 fontSize: 12.spa,
@@ -249,7 +249,7 @@ class _HomePageState extends State<HomePage>
               ),
             ),
             Text(
-              "Sr(a) Visitante",
+              AppLocalizations.of(context)!.visitor,
               style: GoogleFonts.inter(
                 color: primary50,
                 fontSize: 14.spa,

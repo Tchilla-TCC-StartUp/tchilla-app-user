@@ -7,6 +7,7 @@ import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_global_time_picker.dart';
 import 'package:tchilla/viewmodel/home_viewmodel.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FormLocal extends StatelessWidget {
   const FormLocal({
@@ -26,8 +27,8 @@ class FormLocal extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           AppGlobalInput(
-            helpText: "Local Evento",
-            hintText: "EX: provincia/municipio/bairro",
+            helpText: AppLocalizations.of(context)!.event_location,
+            hintText: AppLocalizations.of(context)!.event_location_placeholder,
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.done,
             focusNode: _locationFocusNode,
@@ -37,7 +38,7 @@ class FormLocal extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AppGlobalDatePicker(
-                helpText: "Data do Evento",
+                helpText: AppLocalizations.of(context)!.event_date,
                 hintText: "25 NOV 2025",
                 width: 37.w,
                 firstDate: DateTime(2020),
@@ -47,7 +48,7 @@ class FormLocal extends StatelessWidget {
                 },
               ),
               AppGlobalDropdownMenu(
-                helpText: "Tipo Evento",
+                helpText: AppLocalizations.of(context)!.event_type,
                 hintText: "Casamento",
                 width: 37.w,
                 dropdownMenuEntries: const [
@@ -64,13 +65,13 @@ class FormLocal extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AppGlobalTimePicker(
-                helpText: 'Horade Início',
+                helpText: AppLocalizations.of(context)!.start_time,
                 hintText: "00:00",
                 width: 37.w,
                 onDateSelected: (value) {},
               ),
               AppGlobalTimePicker(
-                helpText: 'Hora de Fim',
+                helpText: AppLocalizations.of(context)!.end_time,
                 hintText: "00:00",
                 width: 37.w,
                 onDateSelected: (value) {},
@@ -80,7 +81,7 @@ class FormLocal extends StatelessWidget {
 
           const AppGlobalVericalSpacing(),
           AppGlobalDropdownMenu(
-            helpText: "N de Convidados",
+            helpText: AppLocalizations.of(context)!.number_of_guests,
             hintText: "150 Convidados",
             width: 80.w,
             dropdownMenuEntries: const [
@@ -93,7 +94,7 @@ class FormLocal extends StatelessWidget {
           const AppGlobalVericalSpacing(),
           AppGlobalTextButton(
             minWidth: 80.w,
-            textButton: "Pesquisar",
+            textButton: AppLocalizations.of(context)!.search,
             onPressed: viewmodel.navigateToResultSearchPage,
           ),
 
