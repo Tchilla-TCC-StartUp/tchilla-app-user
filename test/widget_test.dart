@@ -7,7 +7,6 @@ import 'package:tchilla/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    final appRouter = AppRouter();
     await tester.pumpWidget(const MyApp());
 
     expect(find.text('0'), findsOneWidget);

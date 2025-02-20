@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
-import 'package:tchilla/app_router.dart';
+import 'package:tchilla/resources/app_routes.dart';
 import 'package:tchilla/util/events/navigation.dart';
 import 'package:tchilla/util/events/notificator.dart';
 import 'package:tchilla/util/events/validator.dart';
@@ -18,31 +17,15 @@ import 'package:tchilla/viewmodel/welcome_viewmodel.dart';
 
 class AppGets {
   static void init() {
-    Get.lazyPut<AppRouter>(() => AppRouter());
-    registerEvents(Get.find<AppRouter>().router);
-    registerGets();
+    Get.lazyPut<AppRoutes>(() => AppRoutes());
+    registerEvents();
     registerViewmodels();
   }
 
-  static void registerEvents(GoRouter router) {
-    Get.lazyPut(() => Navigation(router));
-    Get.lazyPut(() => Notificator());
-    Get.lazyPut(() => Validator());
-    Get.lazyPut(() {});
-  }
-
-  static void registerGets() {
-    Get.lazyPut<OnboardingViewModel>(
-      () => OnboardingViewModel(
-        navigator: Get.find(),
-      ),
-    );
-    Get.lazyPut<ResultSearchViewModel>(
-      () => ResultSearchViewModel(
-        navigator: Get.find(),
-        notificator: Get.find(),
-      ),
-    );
+  static void registerEvents() {
+    Get.put(Navigation());
+    Get.put(Notificator());
+    Get.put(Validator());
   }
 
   static void registerViewmodels() {
@@ -52,50 +35,64 @@ class AppGets {
         notificator: Get.find(),
       ),
     );
-    Get.lazyPut<LoginViewmodel>(
-      () => LoginViewmodel(
-        navigator: Get.find(),
-        notificator: Get.find(),
-        validator: Get.find(),
-      ),
-    );
-    Get.lazyPut<RegisterViewmodel>(
-      () => RegisterViewmodel(
-        navigator: Get.find(),
-        notificator: Get.find(),
-        validator: Get.find(),
-      ),
-    );
-    Get.lazyPut<ForengePasswordViewmodel>(
-      () => ForengePasswordViewmodel(
-        navigator: Get.find(),
-        notificator: Get.find(),
-        validator: Get.find(),
-      ),
-    );
-    Get.lazyPut<HomeViewModel>(
-      () => HomeViewModel(
+    Get.lazyPut<OnboardingViewModel>(
+      () => OnboardingViewModel(
         navigator: Get.find(),
       ),
     );
+
     Get.lazyPut<WelcomeViewmodel>(
       () => WelcomeViewmodel(
         navigator: Get.find(),
       ),
     );
-    Get.lazyPut<DetalheProposedViewModel>(
-      () => DetalheProposedViewModel(
+
+    Get.put<LoginViewmodel>(
+      LoginViewmodel(
+        navigator: Get.find(),
+        notificator: Get.find(),
+        validator: Get.find(),
+      ),
+    );
+    Get.put<RegisterViewmodel>(
+      RegisterViewmodel(
+        navigator: Get.find(),
+        notificator: Get.find(),
+        validator: Get.find(),
+      ),
+    );
+    Get.put<ForengePasswordViewmodel>(
+      ForengePasswordViewmodel(
+        navigator: Get.find(),
+        notificator: Get.find(),
+        validator: Get.find(),
+      ),
+    );
+    Get.put<HomeViewModel>(
+      HomeViewModel(
         navigator: Get.find(),
       ),
     );
-    Get.lazyPut<ViewMoreViewmodel>(
-      () => ViewMoreViewmodel(
+
+    Get.put<DetalheProposedViewModel>(
+      DetalheProposedViewModel(
+        navigator: Get.find(),
+      ),
+    );
+    Get.put<ViewMoreViewmodel>(
+      ViewMoreViewmodel(
         navigator: Get.find(),
         notificator: Get.find(),
       ),
     );
     Get.lazyPut<ProfileViewmodel>(
       () => ProfileViewmodel(
+        navigator: Get.find(),
+        notificator: Get.find(),
+      ),
+    );
+    Get.put<ResultSearchViewModel>(
+      ResultSearchViewModel(
         navigator: Get.find(),
         notificator: Get.find(),
       ),
