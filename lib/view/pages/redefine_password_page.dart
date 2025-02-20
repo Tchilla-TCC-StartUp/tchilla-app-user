@@ -4,11 +4,12 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/view/widgets/app_global_back_button.dart';
 import 'package:tchilla/view/widgets/app_global_input.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
-import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/headerpage.dart';
-import 'package:tchilla/viewmodel/forenge_password_viewmodel.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../viewmodel/forgont_password_viewmodel.dart';
 
 class RedefinePasswordPage extends StatefulWidget {
   const RedefinePasswordPage({super.key});
@@ -18,7 +19,7 @@ class RedefinePasswordPage extends StatefulWidget {
 }
 
 class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
-  final viewmodel = Get.find<ForengePasswordViewmodel>();
+  final viewmodel = Get.find<ForgontPasswordViewmodel>();
   final passordController = TextEditingController();
   final confirmPassordController = TextEditingController();
   @override
@@ -32,13 +33,13 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
             body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Headerpage(
-              title: "Redefinir senha",
+            Headerpage(
+              title: AppLocalizations.of(context)!.reset_password,
               description:
-                  "Redefina sua senha com uma mais segura\n e facil de lembrar",
+                  AppLocalizations.of(context)!.reset_password_description,
             ),
             AppGlobalInput(
-              helpText: "Senha",
+              helpText: AppLocalizations.of(context)!.password,
               hintText: "***********",
               keyboardType: TextInputType.visiblePassword,
               controller: passordController,
@@ -47,7 +48,7 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
               value: 2.h,
             ),
             AppGlobalInput(
-              helpText: "Confirmar senha ",
+              helpText: AppLocalizations.of(context)!.confirm_password,
               hintText: "***********",
               keyboardType: TextInputType.visiblePassword,
               controller: confirmPassordController,
@@ -58,13 +59,13 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
             AppGlobalTextButton(
               minWidth: 100.w,
               onPressed: () {
-                viewmodel.resetPassord(
+                viewmodel.resetPassword(
                   passordController.text,
                   confirmPassordController.text,
                   context,
                 );
               },
-              textButton: "Redefinir",
+              textButton: AppLocalizations.of(context)!.redefine,
             )
           ],
         )),

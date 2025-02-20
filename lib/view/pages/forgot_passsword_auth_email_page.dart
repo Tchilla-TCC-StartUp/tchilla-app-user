@@ -2,29 +2,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/view/widgets/app_global_back_button.dart';
 import 'package:tchilla/view/widgets/app_global_input.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
-import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/headerpage.dart';
-import 'package:tchilla/viewmodel/forenge_password_viewmodel.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tchilla/viewmodel/forgont_password_viewmodel.dart';
 
-class ForengePassswordAuthEmailPage extends StatefulWidget {
-  const ForengePassswordAuthEmailPage({super.key});
+class ForgotPassswordAuthEmailPage extends StatefulWidget {
+  const ForgotPassswordAuthEmailPage({super.key});
 
   @override
-  State<ForengePassswordAuthEmailPage> createState() =>
+  State<ForgotPassswordAuthEmailPage> createState() =>
       _ForengePassswordAuthEmailPageState();
 }
 
 class _ForengePassswordAuthEmailPageState
-    extends State<ForengePassswordAuthEmailPage> {
+    extends State<ForgotPassswordAuthEmailPage> {
   final FocusNode emailFocus = FocusNode();
   final _emailController = TextEditingController();
-  final viewmodel = Get.find<ForengePasswordViewmodel>();
+  final viewmodel = Get.find<ForgontPasswordViewmodel>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,12 +34,13 @@ class _ForengePassswordAuthEmailPageState
           body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Headerpage(
-            title: "Esqueceu sua senha?",
-            description: "Digite seu email para recuperar a senha",
+          Headerpage(
+            title: AppLocalizations.of(context)!.forgot_password,
+            description:
+                AppLocalizations.of(context)!.forgot_password_description,
           ),
           AppGlobalInput(
-            helpText: "Endereço de email",
+            helpText: AppLocalizations.of(context)!.email_address,
             hintText: "celson.paixao@gmail.com",
             focusNode: emailFocus,
             controller: _emailController,
@@ -55,7 +55,7 @@ class _ForengePassswordAuthEmailPageState
               _emailController.text,
               context,
             ),
-            textButton: "Confirmar",
+            textButton: AppLocalizations.of(context)!.confirm,
           )
         ],
       )),

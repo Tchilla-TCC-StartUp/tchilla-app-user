@@ -12,6 +12,7 @@ import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/profile_section_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfilePage extends StatefulWidget {
   final String id;
@@ -58,7 +59,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 BlendMode.srcIn,
               ),
             ),
-            title: "Meus Agendamentos",
+            title: AppLocalizations.of(context)!.my_schedules,
           ),
           ProfileSectionCard(
             leading: SvgPicture.asset(
@@ -68,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 BlendMode.srcIn,
               ),
             ),
-            title: "Notificacoes",
+            title: AppLocalizations.of(context)!.notifications,
           ),
           const Divider(
             color: primary200,
@@ -89,7 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AppGlobalText(
-          text: "Suporte",
+          text: AppLocalizations.of(context)!.support,
           style: TextStyleEnum.h3_bold,
         ),
         const AppGlobalVericalSpacing(),
@@ -101,7 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
               BlendMode.srcIn,
             ),
           ),
-          title: "Centro de apoio",
+          title: AppLocalizations.of(context)!.help_center,
         ),
         ProfileSectionCard(
           leading: SvgPicture.asset(
@@ -111,7 +112,7 @@ class _ProfilePageState extends State<ProfilePage> {
               BlendMode.srcIn,
             ),
           ),
-          title: "FAQs",
+          title: AppLocalizations.of(context)!.faqs,
         ),
       ],
     );
@@ -122,7 +123,7 @@ class _ProfilePageState extends State<ProfilePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AppGlobalText(
-          text: "Definições & preferencias",
+          text: AppLocalizations.of(context)!.settings_preferences,
           style: TextStyleEnum.h3_bold,
         ),
         const AppGlobalVericalSpacing(),
@@ -134,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
               BlendMode.srcIn,
             ),
           ),
-          title: "Seguranca",
+          title: AppLocalizations.of(context)!.security,
         ),
         ProfileSectionCard(
           leading: SvgPicture.asset(
@@ -144,7 +145,7 @@ class _ProfilePageState extends State<ProfilePage> {
               BlendMode.srcIn,
             ),
           ),
-          title: "Modo Dark",
+          title: AppLocalizations.of(context)!.dark_mode,
         ),
       ],
     );
@@ -153,7 +154,7 @@ class _ProfilePageState extends State<ProfilePage> {
   _buidLogoutButton() {
     return ListTile(
       title: AppGlobalText(
-        text: "Sair",
+        text: AppLocalizations.of(context)!.logout,
         style: TextStyleEnum.h3_bold,
         color: Colors.red.shade700,
         // color: primary400,
@@ -187,7 +188,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
         AppGlobalText(
-          text: "Meu Perfil",
+          text: AppLocalizations.of(context)!.my_profile,
           style: TextStyleEnum.h3_bold,
         ),
         Container()

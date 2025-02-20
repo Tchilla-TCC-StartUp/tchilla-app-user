@@ -4,24 +4,27 @@ import 'package:tchilla/style/app_alert_style.dart';
 import 'package:tchilla/util/events/navigation.dart';
 import 'package:tchilla/util/events/notificator.dart';
 import 'package:tchilla/util/events/validator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ForengePasswordViewmodel extends GetxController {
+class ForgontPasswordViewmodel extends GetxController {
   final Navigation navigator;
   final Notificator notificator;
   final Validator validator;
 
-  ForengePasswordViewmodel({
+  ForgontPasswordViewmodel({
     required this.navigator,
     required this.notificator,
     required this.validator,
   });
 
-  confirmPin(String pin, BuildContext context) {
+  void confirmPin(String pin, BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     if (pin.length != 6) {
       notificator.showLocalAlert(
         AlertStyleEnum.pedding,
-        "Atensão",
-        "Por favor, preencha todos os campos.",
+        localizations.alert_attention,
+        localizations.error_fill_all_fields,
         context,
       );
     } else {
@@ -29,34 +32,36 @@ class ForengePasswordViewmodel extends GetxController {
     }
   }
 
-  Future<void> resetPassord(
-    String passord,
-    String confirmPassord,
+  Future<void> resetPassword(
+    String password,
+    String confirmPassword,
     BuildContext context,
   ) async {
-    if (passord.isEmpty || confirmPassord.isEmpty) {
+    final localizations = AppLocalizations.of(context)!;
+
+    if (password.isEmpty || confirmPassword.isEmpty) {
       notificator.showLocalAlert(
         AlertStyleEnum.pedding,
-        "Atenção",
-        "Os campos de senha são obrigatórios.",
+        localizations.alert_attention,
+        localizations.error_password_required,
         context,
       );
       return;
     }
-    if (passord != confirmPassord) {
+    if (password != confirmPassword) {
       notificator.showLocalAlert(
         AlertStyleEnum.pedding,
-        "Atenção",
-        "As senhas não coincidem.",
+        localizations.alert_attention,
+        localizations.error_password_mismatch,
         context,
       );
       return;
     }
-    if (passord.length < 6) {
+    if (password.length < 6) {
       notificator.showLocalAlert(
         AlertStyleEnum.pedding,
-        "Atenção",
-        "A senha deve ter pelo menos 6 caracteres.",
+        localizations.alert_attention,
+        localizations.error_password_length,
         context,
       );
       return;
@@ -64,8 +69,8 @@ class ForengePasswordViewmodel extends GetxController {
 
     notificator.showLocalAlert(
       AlertStyleEnum.sucess,
-      "Sucesso",
-      "A senha Redefimnida com sucesso",
+      localizations.alert_success,
+      localizations.success_password_reset,
       context,
     );
     await Future.delayed(const Duration(seconds: 3));
@@ -73,11 +78,13 @@ class ForengePasswordViewmodel extends GetxController {
   }
 
   Future<void> submitEmail(String email, BuildContext context) async {
+    final localizations = AppLocalizations.of(context)!;
+
     if (email.isEmpty) {
       notificator.showLocalAlert(
         AlertStyleEnum.pedding,
-        "Atenção",
-        "O campo de email é obrigatório.",
+        localizations.alert_attention,
+        localizations.error_email_required,
         context,
       );
       return;
@@ -86,8 +93,8 @@ class ForengePasswordViewmodel extends GetxController {
     if (!validator.validatEmail(email)) {
       notificator.showLocalAlert(
         AlertStyleEnum.pedding,
-        "Atenção",
-        "Este email é inválido.",
+        localizations.alert_attention,
+        localizations.error_invalid_email,
         context,
       );
       return;

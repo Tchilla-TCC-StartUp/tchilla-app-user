@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
-import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_animation_logo.dart';
@@ -14,7 +13,7 @@ import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/viewmodel/register_viewmodel.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../widgets/app_global_image_button.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -28,12 +27,15 @@ class _RegisterPageState extends State<RegisterPage> {
   final FocusNode nameFocusNode = FocusNode();
   final FocusNode emailFocusNode = FocusNode();
   final FocusNode passwordFocusNode = FocusNode();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   final viewmodel = Get.find<RegisterViewmodel>();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: AppLayoutpage(
+    return Scaffold(
+      body: SafeArea(
+        child: AppLayoutpage(
             body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -45,7 +47,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ],
             ),
             AppGlobalText(
-              text: "Fazer Cadastro",
+              text: AppLocalizations.of(context)!.sign_up,
               style: TextStyleEnum.h2_bold,
             ),
             AppGlobalVericalSpacing(
@@ -53,7 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             AppGlobalInput(
               focusNode: nameFocusNode,
-              helpText: "Nome",
+              helpText: AppLocalizations.of(context)!.name,
               hintText: "Celson Paixão",
               keyboardType: TextInputType.name,
               textInputAction: TextInputAction.next,
@@ -63,7 +65,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             AppGlobalInput(
               focusNode: emailFocusNode,
-              helpText: "Endereco de email",
+              helpText: AppLocalizations.of(context)!.email_address,
               hintText: "celson.paixao@gmail.com",
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
@@ -73,7 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             AppGlobalInput(
               focusNode: passwordFocusNode,
-              helpText: "Senha",
+              helpText: AppLocalizations.of(context)!.password,
               hintText: "*******",
               keyboardType: TextInputType.visiblePassword,
               textInputAction: TextInputAction.done,
@@ -84,13 +86,18 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             AppGlobalTextButton(
               minWidth: 100.w,
-              onPressed: viewmodel.navigateToLoginPage,
-              textButton: "Criar Conta",
+              onPressed: () => viewmodel.register(
+                nameController.text,
+                emailController.text,
+                passwordController.text,
+                context,
+              ),
+              textButton: AppLocalizations.of(context)!.create_account_button,
             ),
             AppGlobalVericalSpacing(
               value: 3.h,
             ),
-            const AppAuthDivider(text: "Ou tembém\npode"),
+            AppAuthDivider(text: AppLocalizations.of(context)!.or_you_can_also),
             AppGlobalVericalSpacing(
               value: 3.h,
             ),
@@ -108,7 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const AppGlobalHorizontalSpacing(),
                   AppGlobalText(
-                    text: "Cadastrar com o Google",
+                    text: AppLocalizations.of(context)!.sign_up_with_google,
                     style: TextStyleEnum.p_normal,
                     color: gray600,
                   ),
@@ -123,7 +130,7 @@ class _RegisterPageState extends State<RegisterPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 AppGlobalText(
-                  text: "Ja tem uma conta?",
+                  text: AppLocalizations.of(context)!.already_have_account,
                   style: TextStyleEnum.p_medium,
                   color: gray600,
                 ),
@@ -131,7 +138,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 GestureDetector(
                   onTap: viewmodel.navigateToLoginPage,
                   child: AppGlobalText(
-                    text: "Faca login aqui",
+                    text: AppLocalizations.of(context)!.login_here,
                     style: TextStyleEnum.p_medium,
                     color: primary500,
                   ),
