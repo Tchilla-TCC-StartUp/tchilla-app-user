@@ -17,8 +17,9 @@ class AppGlobalInput extends StatelessWidget {
   final IconData? suffixIcon;
   final VoidCallback? onSuffixIconPressed;
   final String? helpText;
-final FocusNode? focusNode;
-  
+  final FocusNode? focusNode;
+  final void Function(String)? onFieldSubmitted;
+
   const AppGlobalInput({
     super.key,
     this.controller,
@@ -31,8 +32,9 @@ final FocusNode? focusNode;
     this.prefixIcon,
     this.suffixIcon,
     this.onSuffixIconPressed,
-    this.helpText, this.focusNode,
-
+    this.helpText,
+    this.focusNode,
+    this.onFieldSubmitted,
   });
 
   @override
@@ -56,6 +58,7 @@ final FocusNode? focusNode;
           obscureText: obscureText,
           textInputAction: textInputAction,
           validator: validator,
+          onFieldSubmitted:onFieldSubmitted,
           style: GoogleFonts.inter(
             fontWeight: FontWeight.w500,
             fontSize: 15.sp,

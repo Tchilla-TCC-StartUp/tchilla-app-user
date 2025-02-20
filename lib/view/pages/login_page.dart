@@ -80,8 +80,13 @@ class _LoginPageState extends State<LoginPage> {
               controller: passwordController,
               hintText: "*******",
               keyboardType: TextInputType.visiblePassword,
-              textInputAction: TextInputAction.done,
+              textInputAction: TextInputAction.send,
               obscureText: true,
+              onFieldSubmitted: (value) => viewmodel.login(
+                emailController.text,
+                passwordController.text,
+                context,
+              ),
             ),
             AppGlobalVericalSpacing(
               value: 6.h,

@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage>
               children: [
                 Obx(
                   () => SizedBox(
-                    height: viewmodel.adptiveSilverExpade.value,
+                    height: viewmodel.adptiveSilverExpade.value + 2.h,
                     child: Stack(
                       children: [
                         _buildBackground(),
