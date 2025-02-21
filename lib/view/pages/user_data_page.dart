@@ -54,49 +54,51 @@ class _UserDataPageState extends State<UserDataPage> {
         title: _buildAppbar(),
       ),
       body: AppLayoutpage(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              width: 200.px,
-              height: 200.px,
-              clipBehavior: Clip.hardEdge,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(20)),
-              child: AppGlobalNetworkImage(
-                image: AppAssetsImages.defaultUserImage,
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                width: 200.px,
+                height: 200.px,
+                clipBehavior: Clip.hardEdge,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                child: AppGlobalNetworkImage(
+                  image: AppAssetsImages.defaultUserImage,
+                ),
               ),
-            ),
-            AppGlobalVericalSpacing(value: 18.px),
-            _buildUserDataCard(
-              controller: nameController,
-              helpText: AppLocalizations.of(context)!.name,
-              isEditable: viewmodel.isNameEditable,
-              onToggleEditable: viewmodel.toggleNameEditable,
-            ),
-            AppGlobalVericalSpacing(value: 18.px),
-            _buildUserDataCard(
-              controller: emailController,
-              helpText: AppLocalizations.of(context)!.email_address,
-              isEditable: viewmodel.isEmailEditable,
-              onToggleEditable: viewmodel.toggleEmailEditable,
-            ),
-            AppGlobalVericalSpacing(value: 18.px),
-            _buildUserDataCard(
-              controller: passwordController,
-              helpText: AppLocalizations.of(context)!.password,
-              isEditable: viewmodel.isPasswordEditable,
-              onToggleEditable: viewmodel.togglePasswordEditable,
-              isPassword: true,
-            ),
-            AppGlobalVericalSpacing(value: 28.px),
-            AppGlobalTextButton(
-              textButton: AppLocalizations.of(context)!.save,
-              minWidth: 100.w,
-              onPressed: () {},
-            )
-          ],
+              AppGlobalVericalSpacing(value: 18.px),
+              _buildUserDataCard(
+                controller: nameController,
+                helpText: AppLocalizations.of(context)!.name,
+                isEditable: viewmodel.isNameEditable,
+                onToggleEditable: viewmodel.toggleNameEditable,
+              ),
+              AppGlobalVericalSpacing(value: 18.px),
+              _buildUserDataCard(
+                controller: emailController,
+                helpText: AppLocalizations.of(context)!.email_address,
+                isEditable: viewmodel.isEmailEditable,
+                onToggleEditable: viewmodel.toggleEmailEditable,
+              ),
+              AppGlobalVericalSpacing(value: 18.px),
+              _buildUserDataCard(
+                controller: passwordController,
+                helpText: AppLocalizations.of(context)!.password,
+                isEditable: viewmodel.isPasswordEditable,
+                onToggleEditable: viewmodel.togglePasswordEditable,
+                isPassword: true,
+              ),
+              AppGlobalVericalSpacing(value: 28.px),
+              AppGlobalTextButton(
+                textButton: AppLocalizations.of(context)!.save,
+                minWidth: 100.w,
+                onPressed: () {},
+              )
+            ],
+          ),
         ),
       ),
     );
