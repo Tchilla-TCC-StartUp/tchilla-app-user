@@ -4,6 +4,7 @@ import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_global_input.dart';
 import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
+import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -89,6 +90,12 @@ class _UserDataPageState extends State<UserDataPage> {
               onToggleEditable: viewmodel.togglePasswordEditable,
               isPassword: true,
             ),
+            AppGlobalVericalSpacing(value: 28.px),
+            AppGlobalTextButton(
+              textButton: AppLocalizations.of(context)!.save,
+              minWidth: 100.w,
+              onPressed: () {},
+            )
           ],
         ),
       ),

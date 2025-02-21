@@ -8,7 +8,11 @@ class ProfileViewmodel extends GetMaterialController {
 
   ProfileViewmodel({required this.navigator, required this.notificator});
 
-  Future<void> goToUserDataPage(String id) {
+  goToUserDataPage(String id) {
     return navigator.navigateToUserDataPage(id);
+  }
+
+  logout() {
+    return navigator.navigateToWelcomePage();
   }
 }

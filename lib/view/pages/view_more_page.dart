@@ -9,6 +9,7 @@ import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/card_more_requested.dart';
 import 'package:tchilla/view/widgets/proposed_card.dart';
 import 'package:tchilla/viewmodel/view_more_viewmodel.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ViewMorePage extends StatefulWidget {
   const ViewMorePage({super.key});
@@ -43,7 +44,7 @@ class _ViewMorePageState extends State<ViewMorePage>
       children: [
         AppGlobalVericalSpacing(value: 2.h),
         AppGlobalText(
-          text: "Mais solicitados",
+          text: AppLocalizations.of(context)!.most_requested,
           style: TextStyleEnum.h3_bold,
         ),
         AppGlobalVericalSpacing(value: 2.h),
@@ -72,7 +73,7 @@ class _ViewMorePageState extends State<ViewMorePage>
         ),
         AppGlobalVericalSpacing(value: 2.h),
         AppGlobalText(
-          text: "Sugestões da Casa",
+          text: AppLocalizations.of(context)!.house_suggestions,
           style: TextStyleEnum.h3_bold,
         ),
         AppGlobalVericalSpacing(value: 1.h),

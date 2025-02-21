@@ -97,7 +97,10 @@
   "error_email_required": "Email is required.",
   "error_invalid_email": "The provided email is invalid.",
   "error_password_required": "Password is required.",
-  "error_password_length": "Password must be at least 6 characters long."
+  "error_password_length": "Password must be at least 6 characters long.",
+
+   "save": "Save"
+
 
 
 

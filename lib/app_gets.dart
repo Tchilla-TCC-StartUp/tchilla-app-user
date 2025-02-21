@@ -43,8 +43,8 @@ class AppGets {
       ),
     );
 
-    Get.lazyPut<WelcomeViewmodel>(
-      () => WelcomeViewmodel(
+    Get.put<WelcomeViewmodel>(
+      WelcomeViewmodel(
         navigator: Get.find(),
       ),
     );

@@ -97,7 +97,9 @@
   "error_email_required": "O email é obrigatório.",
   "error_invalid_email": "O email informado é inválido.",
   "error_password_required": "A senha é obrigatória.",
-  "error_password_length": "A senha deve ter pelo menos 6 caracteres."
+  "error_password_length": "A senha deve ter pelo menos 6 caracteres.",
+
+  "save": "Salvar"
 
 
 }

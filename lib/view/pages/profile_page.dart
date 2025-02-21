@@ -161,6 +161,7 @@ class _ProfilePageState extends State<ProfilePage> {
         color: Colors.red.shade700,
         // color: primary400,
       ),
+      onTap: viewmodel.logout,
       leading: SvgPicture.asset(
         AppAssetsImages.logoutIconSvg,
         width: 24.px,
