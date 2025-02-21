@@ -12,7 +12,7 @@ import 'package:tchilla/view/pages/redefine_password_page.dart';
 import 'package:tchilla/view/pages/register_page.dart';
 import 'package:tchilla/view/pages/result_search_page.dart';
 import 'package:tchilla/view/pages/splash_page.dart';
-import 'package:tchilla/view/pages/user_page.dart';
+import 'package:tchilla/view/pages/user_data_page.dart';
 import 'package:tchilla/view/pages/welcome_page.dart';
 
 class AppGetAppRoutes {
@@ -41,9 +41,11 @@ class AppGetAppRoutes {
       AppRoutes.forgotPasswordConfirmationPin,
       const ForgotPasswordConfirmationPinPage(),
     ),
-    _buildStaticRoute(
+    _buildDynamicRoute<String>(
       AppRoutes.redefinePasswordPage,
-      const RedefinePasswordPage(),
+      (previousWalk) => RedefinePasswordPage(
+        previousWalk: previousWalk,
+      ),
     ),
     _buildStaticRoute(
       AppRoutes.onboardingPage,

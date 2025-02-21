@@ -13,6 +13,7 @@ import 'package:tchilla/viewmodel/profile_viewmodel.dart';
 import 'package:tchilla/viewmodel/register_viewmodel.dart';
 import 'package:tchilla/viewmodel/result_search_viewmodel.dart';
 import 'package:tchilla/viewmodel/splash_viewmodel.dart';
+import 'package:tchilla/viewmodel/user_data_viewmodel.dart';
 import 'package:tchilla/viewmodel/view_more_viewmodel.dart';
 import 'package:tchilla/viewmodel/welcome_viewmodel.dart';
 
@@ -96,6 +97,13 @@ class AppGets {
       ResultSearchViewModel(
         navigator: Get.find(),
         notificator: Get.find(),
+      ),
+    );
+    Get.put<UserDataViewModel>(
+      UserDataViewModel(
+        navigator: Get.find(),
+        notificator: Get.find(),
+        validator: Get.find(),
       ),
     );
   }

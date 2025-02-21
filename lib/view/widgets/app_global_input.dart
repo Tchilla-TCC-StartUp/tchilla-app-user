@@ -17,6 +17,11 @@ class AppGlobalInput extends StatelessWidget {
   final IconData? suffixIcon;
   final VoidCallback? onSuffixIconPressed;
   final String? helpText;
+  final Widget? suffix;
+  final TextAlign? textAlign;
+  final bool? readOnly;
+  final BoxConstraints? suffixIconConstraints;
+  final EdgeInsetsGeometry? contentPadding;
   final FocusNode? focusNode;
   final void Function(String)? onFieldSubmitted;
 
@@ -35,6 +40,10 @@ class AppGlobalInput extends StatelessWidget {
     this.helpText,
     this.focusNode,
     this.onFieldSubmitted,
+    this.readOnly,
+    this.suffix,
+    this.textAlign,
+    this.suffixIconConstraints, this.contentPadding,
   });
 
   @override
@@ -52,57 +61,63 @@ class AppGlobalInput extends StatelessWidget {
             ),
           ),
         TextFormField(
+          readOnly: readOnly ?? false,
           focusNode: focusNode,
           controller: controller,
           keyboardType: keyboardType,
+          textAlign: textAlign ?? TextAlign.start,
           obscureText: obscureText,
           textInputAction: textInputAction,
           validator: validator,
-          onFieldSubmitted:onFieldSubmitted,
+          onFieldSubmitted: onFieldSubmitted,
           style: GoogleFonts.inter(
             fontWeight: FontWeight.w500,
             fontSize: 15.sp,
             color: primary950,
           ),
           decoration: InputDecoration(
-              labelText: label,
-              hintText: hintText,
-              hintStyle: GoogleFonts.inter(
-                fontWeight: FontWeight.w600,
-                fontSize: 15.sp,
-                color: const Color(0xffAFBACA),
+            labelText: label,
+            hintText: hintText,
+            hintStyle: GoogleFonts.inter(
+              fontWeight: FontWeight.w600,
+              fontSize: 15.sp,
+              color: const Color(0xffAFBACA),
+            ),
+            contentPadding: contentPadding,
+            prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
+            suffix: suffix,
+            suffixIconConstraints: suffixIconConstraints,
+            suffixIcon: suffixIcon != null
+                ? IconButton(
+                    icon: Icon(
+                      suffixIcon,
+                      color: primary400,
+                    ),
+                    onPressed: onSuffixIconPressed,
+                  )
+                : null,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(6),
+              borderSide: const BorderSide(
+                color: Color(0xffAFBACA),
+                width: 1,
               ),
-              prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
-              suffixIcon: suffixIcon != null
-                  ? IconButton(
-                      icon: Icon(
-                        suffixIcon,
-                        color: primary400,
-                      ),
-                      onPressed: onSuffixIconPressed,
-                    )
-                  : null,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
-                borderSide: const BorderSide(
-                  color: Color(0xffAFBACA),
-                  width: 1,
-                ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(6),
+              borderSide: const BorderSide(
+                color: Color(0xffAFBACA),
+                width: 1,
               ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
-                borderSide: const BorderSide(
-                  color: Color(0xffAFBACA),
-                  width: 1,
-                ),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(6),
+              borderSide: const BorderSide(
+                color: Color(0xffAFBACA),
+                width: 1,
               ),
-              disabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
-                borderSide: const BorderSide(
-                  color: Color(0xffAFBACA),
-                  width: 1,
-                ),
-              )),
+            ),
+          ),
         ),
       ],
     );

@@ -12,7 +12,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../viewmodel/forgont_password_viewmodel.dart';
 
 class RedefinePasswordPage extends StatefulWidget {
-  const RedefinePasswordPage({super.key});
+  final String previousWalk;
+  const RedefinePasswordPage({super.key, required this.previousWalk});
 
   @override
   State<RedefinePasswordPage> createState() => _RedefinePasswordPageState();
@@ -43,6 +44,8 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
               hintText: "***********",
               keyboardType: TextInputType.visiblePassword,
               controller: passordController,
+              obscureText: true,
+              textInputAction: TextInputAction.next,
             ),
             AppGlobalVericalSpacing(
               value: 2.h,
@@ -52,6 +55,16 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
               hintText: "***********",
               keyboardType: TextInputType.visiblePassword,
               controller: confirmPassordController,
+              obscureText: true,
+              textInputAction: TextInputAction.send,
+              onFieldSubmitted: (p0) {
+                viewmodel.resetPassword(
+                  passordController.text,
+                  confirmPassordController.text,
+                  context,
+                  widget.previousWalk,
+                );
+              },
             ),
             AppGlobalVericalSpacing(
               value: 4.h,
@@ -63,6 +76,7 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
                   passordController.text,
                   confirmPassordController.text,
                   context,
+                  widget.previousWalk,
                 );
               },
               textButton: AppLocalizations.of(context)!.redefine,

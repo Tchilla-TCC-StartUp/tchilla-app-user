@@ -17,28 +17,18 @@ class RegisterViewmodel {
   });
 
   Future<void> register(
-    String fullName,
+    String name,
     String email,
     String password,
     BuildContext context,
   ) async {
     final localizations = AppLocalizations.of(context)!;
 
-    if (fullName.isEmpty) {
+    if (name.isEmpty) {
       notificator.showLocalAlert(
         AlertStyleEnum.pedding,
         localizations.alert_attention,
         localizations.error_full_name_required,
-        context,
-      );
-      return;
-    }
-
-    if (fullName.length < 10) {
-      notificator.showLocalAlert(
-        AlertStyleEnum.pedding,
-        localizations.alert_attention,
-        localizations.error_invalid_full_name,
         context,
       );
       return;
@@ -84,7 +74,7 @@ class RegisterViewmodel {
       return;
     }
 
-    await navigator.navigateToHome();
+    await navigateToLoginPage();
   }
 
   navigateToLoginPage() {

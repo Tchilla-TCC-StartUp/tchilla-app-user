@@ -7,7 +7,7 @@ abstract class INavigation {
 
   navigateToForengePassewordEmailPage();
   navigateToConfirmationPage();
-  navigateToRefefinePasswordPage();
+  navigateToRefefinePasswordPage( String previousWalk);
 
   navigateToResultSearchPage();
   navigateToWelcomePage();

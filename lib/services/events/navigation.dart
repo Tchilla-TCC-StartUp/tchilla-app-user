@@ -41,8 +41,8 @@ class Navigation extends INavigation {
   }
 
   @override
-  navigateToRefefinePasswordPage() {
-    Get.toNamed(AppRoutes.redefinePasswordPage);
+  navigateToRefefinePasswordPage(String previousWalk) {
+    Get.toNamed(AppRoutes.redefinePasswordPage, arguments: previousWalk);
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tchilla/resources/app_routes.dart';
 import 'package:tchilla/style/app_alert_style.dart';
 import 'package:tchilla/services/events/navigation.dart';
 import 'package:tchilla/services/events/notificator.dart';
@@ -28,7 +29,8 @@ class ForgontPasswordViewmodel extends GetxController {
         context,
       );
     } else {
-      return navigator.navigateToRefefinePasswordPage();
+      return navigator
+          .navigateToRefefinePasswordPage(AppRoutes.redefinePasswordPage);
     }
   }
 
@@ -36,6 +38,7 @@ class ForgontPasswordViewmodel extends GetxController {
     String password,
     String confirmPassword,
     BuildContext context,
+    final String previousWalk,
   ) async {
     final localizations = AppLocalizations.of(context)!;
 
@@ -74,7 +77,12 @@ class ForgontPasswordViewmodel extends GetxController {
       context,
     );
     await Future.delayed(const Duration(seconds: 3));
-    await navigator.navigateToLoginPage();
+
+    if (previousWalk == AppRoutes.userdataPage) {
+      await navigator.navigateToBack();
+    } else {
+      await navigator.navigateToLoginPage();
+    }
   }
 
   Future<void> submitEmail(String email, BuildContext context) async {

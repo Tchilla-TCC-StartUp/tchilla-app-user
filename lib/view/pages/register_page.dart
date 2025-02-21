@@ -54,6 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
               value: 2.h,
             ),
             AppGlobalInput(
+              controller: nameController,
               focusNode: nameFocusNode,
               helpText: AppLocalizations.of(context)!.name,
               hintText: "Celson Paixão",
@@ -64,6 +65,7 @@ class _RegisterPageState extends State<RegisterPage> {
               value: 2.h,
             ),
             AppGlobalInput(
+              controller: emailController,
               focusNode: emailFocusNode,
               helpText: AppLocalizations.of(context)!.email_address,
               hintText: "celson.paixao@gmail.com",
@@ -74,11 +76,18 @@ class _RegisterPageState extends State<RegisterPage> {
               value: 2.h,
             ),
             AppGlobalInput(
+              controller: passwordController,
               focusNode: passwordFocusNode,
               helpText: AppLocalizations.of(context)!.password,
               hintText: "*******",
               keyboardType: TextInputType.visiblePassword,
-              textInputAction: TextInputAction.done,
+              textInputAction: TextInputAction.send,
+              onFieldSubmitted: (p0) => viewmodel.register(
+                nameController.text,
+                emailController.text,
+                passwordController.text,
+                context,
+              ),
               obscureText: true,
             ),
             AppGlobalVericalSpacing(
