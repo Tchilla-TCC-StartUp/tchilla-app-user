@@ -14,35 +14,32 @@ import 'package:tchilla/view/widgets/onboarding_body.dart';
 import 'package:tchilla/viewmodel/onboarding_viewmodel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class OnboardingPage extends StatelessWidget {
+class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
 
   @override
+  State<OnboardingPage> createState() => _OnboardingPageState();
+}
+
+class _OnboardingPageState extends State<OnboardingPage> {
+  final viewModel = Get.find<OnboardingViewModel>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    viewModel.getOnboarding();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final viewModel = Get.find<OnboardingViewModel>();
-
-    final onboardingList = [
-      OnboardingBody(
-        image: AppAssetsImages.onboardingImage1,
-        title: AppLocalizations.of(context)!.onboarding_title_1,
-        description: AppLocalizations.of(context)!.onboarding_description_1,
-      ),
-      OnboardingBody(
-        image: AppAssetsImages.onboardingImage2,
-        title: AppLocalizations.of(context)!.onboarding_title_2,
-        description: AppLocalizations.of(context)!.onboarding_description_2,
-      ),
-      OnboardingBody(
-        image: AppAssetsImages.onboardingImage3,
-        title: AppLocalizations.of(context)!.onboarding_title_3,
-        description: AppLocalizations.of(context)!.onboarding_description_3,
-      ),
-    ];
-
     return Scaffold(
       body: SafeArea(
-        child: AppLayoutpage(
-          body: Column(
+        child: AppLayoutpage(body: Obx(() {
+          if (viewModel.onboarding.isEmpty) {
+            return Container();
+          }
+          return Column(
             children: [
               AppGlobalVericalSpacing(
                 value: 2.h,
@@ -61,21 +58,28 @@ class OnboardingPage extends StatelessWidget {
                 value: 4.h,
               ),
               Expanded(
-                child: PageView.builder(
-                  controller: viewModel.pageController,
-                  physics: const NeverScrollableScrollPhysics(),
-                  onPageChanged: (index) {
-                    viewModel.currentPage.value = index;
-                  },
-                  itemCount: onboardingList.length,
-                  itemBuilder: (context, index) {
-                    return onboardingList[index];
-                  },
-                ),
+                child: Obx(() {
+                  return PageView.builder(
+                    controller: viewModel.pageController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    onPageChanged: (index) {
+                      viewModel.currentPage.value = index;
+                    },
+                    itemCount: viewModel.onboarding.length,
+                    itemBuilder: (context, index) {
+                      var item = viewModel.onboarding[index];
+                      return OnboardingBody(
+                        image: item.url,
+                        title: item.title,
+                        description: item.description,
+                      );
+                    },
+                  );
+                }),
               ),
               SmoothPageIndicator(
                 controller: viewModel.pageController,
-                count: onboardingList.length,
+                count: viewModel.onboarding.length,
                 effect: ExpandingDotsEffect(
                   dotColor: gray400,
                   activeDotColor: primary950,
@@ -84,7 +88,7 @@ class OnboardingPage extends StatelessWidget {
                 ),
               ),
               AppGlobalVericalSpacing(
-                value: 10.h,
+                value: 20.h,
               ),
               AppGlobalImageButton(
                   onPressed: viewModel.nextPage,
@@ -105,8 +109,8 @@ class OnboardingPage extends StatelessWidget {
                 value: 6.h,
               )
             ],
-          ),
-        ),
+          );
+        })),
       ),
     );
   }

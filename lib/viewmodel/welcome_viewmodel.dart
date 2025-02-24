@@ -1,20 +1,42 @@
 import 'package:get/get.dart';
+import 'package:tchilla/model/welcome_model.dart';
+import 'package:tchilla/repository/events/welcome_repository.dart';
 import 'package:tchilla/services/events/navigation.dart';
 
-class WelcomeViewmodel {
+
+class WelcomeViewmodel extends GetxController {
   final Navigation navigator;
+  final WelcomeRepository repository;
 
-  WelcomeViewmodel({required this.navigator});
+  final Rxn<WelcomeModel> _welcomeData = Rxn<WelcomeModel>();
 
-  navigateToLogin() {
+  WelcomeViewmodel({
+    required this.navigator,
+    required this.repository,
+  });
+
+
+  WelcomeModel? get welcomeData => _welcomeData.value;
+
+
+  Future<void> fetchWelcomeData(String lang) async {
+    try {
+      final data = await repository.fetchWelcomeData(lang);
+      _welcomeData.value = data; 
+    } catch (e) {
+      print("Erro ao buscar os dados de boas-vindas: $e");
+    }
+  }
+
+  void navigateToLogin() {
     navigator.navigateToLoginPage();
   }
 
-  navigateToRegister() {
+  void navigateToRegister() {
     navigator.navigateToRegisterPage();
   }
 
-  enteraVisitor() {
+  void enterAsVisitor() {
     navigator.navigateToHome();
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -102,6 +103,11 @@ class _HomePageState extends State<HomePage>
                   child: _buildHelloUser(),
                 ),
                 Positioned(
+                  top: 6.h,
+                  right: 12.w,
+                  child: _buildNotificationIcon(),
+                ),
+                Positioned(
                   top: 5.h,
                   right: 5.w,
                   child: Transform.scale(
@@ -131,6 +137,20 @@ class _HomePageState extends State<HomePage>
           ),
         ),
       ],
+    );
+  }
+
+  Container _buildNotificationIcon() {
+    return Container(
+      padding: const EdgeInsets.all(2),
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(6)),
+          border: Border.all(
+            color: primaryBorder,
+          )),
+      child: SvgPicture.asset(
+        AppAssetsImages.notificationIconSvg,
+      ),
     );
   }
 

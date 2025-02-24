@@ -1,4 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:tchilla/repository/events/onboarding_repository.dart';
+import 'package:tchilla/repository/events/welcome_repository.dart';
+import 'package:tchilla/resources/%20app_interceptor.dart';
+import 'package:tchilla/resources/app_constats.dart';
+import 'package:tchilla/resources/app_logs.dart';
 import 'package:tchilla/resources/app_routes.dart';
 import 'package:tchilla/services/events/navigation.dart';
 import 'package:tchilla/services/events/notificator.dart';
@@ -19,8 +25,12 @@ import 'package:tchilla/viewmodel/welcome_viewmodel.dart';
 
 class AppGets {
   static void init() {
+    final dio = Dio(
+      BaseOptions(baseUrl: AppConstats.baseUrl),
+    )..interceptors.add(AppInterceptor());
     Get.lazyPut<AppRoutes>(() => AppRoutes());
     registerEvents();
+    registerRepositorys(dio);
     registerViewmodels();
   }
 
@@ -28,6 +38,20 @@ class AppGets {
     Get.put(Navigation());
     Get.put(Notificator());
     Get.put(Validator());
+    Get.put(AppLogs());
+  }
+
+  static void registerRepositorys(Dio dio) {
+    Get.lazyPut<OnboardingRepository>(
+      () => OnboardingRepository(
+        dio: dio,
+      ),
+    );
+    Get.lazyPut<WelcomeRepository>(
+      () => WelcomeRepository(
+        dio: dio,
+      ),
+    );
   }
 
   static void registerViewmodels() {
@@ -40,13 +64,13 @@ class AppGets {
     Get.lazyPut<OnboardingViewModel>(
       () => OnboardingViewModel(
         navigator: Get.find(),
+        repository: Get.find(),
+        logs: Get.find(),
       ),
     );
 
     Get.put<WelcomeViewmodel>(
-      WelcomeViewmodel(
-        navigator: Get.find(),
-      ),
+      WelcomeViewmodel(navigator: Get.find(), repository: Get.find()),
     );
 
     Get.put<LoginViewmodel>(

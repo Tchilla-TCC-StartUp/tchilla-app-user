@@ -15,7 +15,7 @@ import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/viewmodel/user_data_viewmodel.dart';
-
+ 
 class UserDataPage extends StatefulWidget {
   final String id;
   const UserDataPage({super.key, required this.id});
@@ -60,11 +60,11 @@ class _UserDataPageState extends State<UserDataPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                width: 200.px,
-                height: 200.px,
+                width: 150.px,
+                height: 150.px,
                 clipBehavior: Clip.hardEdge,
                 decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                    BoxDecoration(borderRadius: BorderRadius.circular(100.w)),
                 child: AppGlobalNetworkImage(
                   image: AppAssetsImages.defaultUserImage,
                 ),

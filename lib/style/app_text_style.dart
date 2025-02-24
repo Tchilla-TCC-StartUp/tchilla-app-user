@@ -119,7 +119,7 @@ TextStyle getTextStyle(TextStyleEnum style, {Color color = primary950,}) {
       );
     case TextStyleEnum.onboarding_title:
       return GoogleFonts.inter(
-        fontSize: 22.sp,
+        fontSize: 21.sp,
         fontWeight: FontWeight.w900,
         color: color,
       );

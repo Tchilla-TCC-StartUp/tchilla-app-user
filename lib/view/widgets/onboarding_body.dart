@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
+import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 
@@ -21,10 +21,13 @@ class OnboardingBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SvgPicture.asset(
-          image,
-          width: 90.w,
-          height: 40.h,
+        AppGlobalNetworkImage(
+          image: image,
+          width: 350.px,
+          height: 350.px,
+        ),
+        AppGlobalVericalSpacing(
+          value: 2.h,
         ),
         AppGlobalText(
           text: title,
@@ -33,7 +36,7 @@ class OnboardingBody extends StatelessWidget {
           maxLines: 2,
         ),
         AppGlobalVericalSpacing(
-          value: 2.h,
+          value: 1.h,
         ),
         AppGlobalText(
           text: description,
