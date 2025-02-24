@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tchilla/view/widgets/app_global_shimmer.dart';
-import 'package:tchilla/view/widgets/shimmer_loading.dart';
+
 
 class AppGlobalNetworkImage extends StatelessWidget {
   const AppGlobalNetworkImage({
@@ -11,10 +11,12 @@ class AppGlobalNetworkImage extends StatelessWidget {
     this.width,
     this.height,
     this.fit,
+    this.border,
   });
 
   final String image;
   final double? width;
+  final double? border;
   final double? height;
   final BoxFit? fit;
 
@@ -31,24 +33,25 @@ class AppGlobalNetworkImage extends StatelessWidget {
               width: width,
               height: height,
               fit: fit ?? BoxFit.cover,
-              placeholderBuilder: (context) => _buildShimmer(),
+              placeholderBuilder: (context) => _buildShimmer(border),
             )
           : CachedNetworkImage(
               width: width,
               height: height,
               imageUrl: image,
               fit: fit ?? BoxFit.cover,
-              placeholder: (context, url) => _buildShimmer(),
+              placeholder: (context, url) => _buildShimmer(border),
               errorWidget: (context, url, error) =>
                   const Icon(Icons.error, color: Colors.red),
             ),
     );
   }
 
-  Widget _buildShimmer() {
+  Widget _buildShimmer(double? border) {
     return AppGlobalShimmer(
       width: width ?? 50,
       height: height ?? 50,
+      borderRadius: BorderRadius.circular(border ?? 8),
     );
   }
 }

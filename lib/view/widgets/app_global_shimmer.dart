@@ -46,9 +46,9 @@ class _AppGlobalShimmerState extends State<AppGlobalShimmer>
               Offset(bounds.width * _animation.value, 0),
               Offset(bounds.width * (_animation.value + 1), 0),
               [
-                Colors.grey[300]!,
+                Colors.grey[200]!,
                 Colors.grey[100]!,
-                Colors.grey[300]!,
+                Colors.grey[200]!,
               ],
               [0.2, 0.5, 0.8],
               TileMode.mirror,

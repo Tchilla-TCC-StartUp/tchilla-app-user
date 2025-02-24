@@ -88,7 +88,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 ),
               ),
               AppGlobalVericalSpacing(
-                value: 20.h,
+                value: 5.h,
               ),
               AppGlobalImageButton(
                   onPressed: viewModel.nextPage,
@@ -106,7 +106,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     ],
                   )),
               AppGlobalVericalSpacing(
-                value: 6.h,
+                value: 8.h,
               )
             ],
           );

@@ -11,7 +11,7 @@ import 'package:tchilla/view/widgets/angola_price.dart';
 import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
-import 'package:tchilla/view/widgets/shimmer_loading.dart';
+
 
 class ProposedCard extends StatelessWidget {
   final String? id;

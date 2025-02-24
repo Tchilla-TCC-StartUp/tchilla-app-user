@@ -25,6 +25,7 @@ class OnboardingBody extends StatelessWidget {
           image: image,
           width: 350.px,
           height: 350.px,
+          border: 5,
         ),
         AppGlobalVericalSpacing(
           value: 2.h,

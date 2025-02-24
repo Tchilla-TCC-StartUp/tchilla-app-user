@@ -10,7 +10,7 @@ import 'package:tchilla/view/widgets/angola_price.dart';
 import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
-import 'package:tchilla/view/widgets/shimmer_loading.dart';
+
 
 class CardMoreRequested extends StatelessWidget {
   final String? id;
@@ -210,6 +210,7 @@ class CardMoreRequested extends StatelessWidget {
       image: AppAssetsImages.defaultProposedImage,
       width: 60.w,
       height: 15.h,
+      border: 0,
     );
   }
 }
