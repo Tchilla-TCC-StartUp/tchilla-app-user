@@ -93,11 +93,14 @@ class _LoginPageState extends State<LoginPage> {
             ),
             AppGlobalTextButton(
               minWidth: 100.w,
-              onPressed: () => viewmodel.login(
-                emailController.text,
-                passwordController.text,
-                context,
-              ),
+              onPressed: () {
+                print("Botão de login pressionado");
+                viewmodel.login(
+                  emailController.text,
+                  passwordController.text,
+                  context,
+                );
+              },
               textButton: AppLocalizations.of(context)!.login,
             ),
             AppGlobalVericalSpacing(

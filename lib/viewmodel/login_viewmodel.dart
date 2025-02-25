@@ -13,37 +13,37 @@ class LoginViewmodel extends BaseViewlmodel {
     return navigator.navigateToRegisterPage();
   }
 
-  Future<void> login(
-      String email, String password, BuildContext context) async {
-    final localizations = AppLocalizations.of(context)!;
+  login(String email, String password, BuildContext context) async {
+    print("Método login chamado");
 
     if (email.isEmpty || password.isEmpty) {
-      notificator.showLocalAlert(
-        localizations.alert_attention,
-        localizations.login_required_fields,
+      loger.info("Campos vazios detectados");
+      return notificator.showLocalAlert(
+        AppLocalizations.of(context)!.alert_attention,
+        AppLocalizations.of(context)!.login_required_fields,
         context,
       );
-      return;
     }
 
     if (!validator.validatEmail(email)) {
-      notificator.showLocalAlert(
-        localizations.alert_attention,
-        localizations.login_invalid_email,
+      loger.info("Email inválido");
+      return notificator.showLocalAlert(
+        AppLocalizations.of(context)!.alert_attention,
+        AppLocalizations.of(context)!.login_invalid_email,
         context,
       );
-      return;
     }
 
     if (password.length < 6) {
-      notificator.showLocalAlert(
-        localizations.alert_attention,
-        localizations.login_password_length,
+      loger.info("Senha curta");
+      return notificator.showLocalAlert(
+        AppLocalizations.of(context)!.alert_attention,
+        AppLocalizations.of(context)!.login_password_length,
         context,
       );
-      return;
     }
 
+    loger.info("Navegando para Home");
     await navigator.navigateToHome();
   }
 

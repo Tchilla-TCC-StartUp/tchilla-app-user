@@ -5,7 +5,6 @@ import 'package:tchilla/resources/app_routes.dart';
 import 'app_gets.dart';
 import 'app_router.dart';
 import 'style/colors.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {

@@ -7,12 +7,14 @@ class Notificator extends INotificator {
   showLocalAlert(
     String title,
     String message,
-    final BuildContext context,
+    BuildContext context,
   ) {
-    getAlertStyle(
-      type: AlertStyleEnum.pedding,
-      title: title,
-      message: message,
+    ScaffoldMessenger.of(context).showSnackBar(
+      getAlertStyle(
+        type: AlertStyleEnum.pedding,
+        title: title,
+        message: message,
+      ),
     );
   }
 

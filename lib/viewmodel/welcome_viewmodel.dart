@@ -22,7 +22,7 @@ class WelcomeViewmodel extends BaseViewlmodel {
 
   Future<void> fetchWelcomeData(String lang, BuildContext context) async {
     try {
-      loger.info("Buscando dados do onboarding para o idioma: $lang");
+      loger.info("Buscando dados do  welcome para o idioma: $lang");
       final data = await repository.fetchWelcomeData(lang);
       loger.info("Dados do welcome carregados com sucesso.");
       loger.printJson(data);
