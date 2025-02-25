@@ -12,6 +12,7 @@ class AppRoutes {
   static const String _resultSearchPage = "$_homePage/result_search";
   static const String _detailsPage = "$_resultSearchPage/detalhes";
   static const String _userdataPage = "$_profilePage/user_data";
+  static const String _summaryPage = "$_detailsPage/summary";
 
   // Auth Pages
   static const String _loginPage = "$_mainRouter/login";
@@ -46,4 +47,5 @@ class AppRoutes {
   static String get welcomePage => _welcomePage;
 
   static String get userdataPage => _userdataPage;
+  static String get summaryPage => _summaryPage;
 }

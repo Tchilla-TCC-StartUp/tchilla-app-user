@@ -99,7 +99,13 @@
   "error_password_required": "Password is required.",
   "error_password_length": "Password must be at least 6 characters long.",
 
-   "save": "Save"
+   "save": "Save",
+   "schedule":"Schedule",
+   "reviews":"Reviews",
+   "appointment_summary": "Appointment summary",
+   "responsible":"Responsible",
+   "service":"Services",
+   "error":"Error"
 
 
 

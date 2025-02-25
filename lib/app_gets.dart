@@ -9,6 +9,7 @@ import 'package:tchilla/resources/app_routes.dart';
 import 'package:tchilla/services/events/navigation.dart';
 import 'package:tchilla/services/events/notificator.dart';
 import 'package:tchilla/services/events/validator.dart';
+import 'package:tchilla/viewmodel/base_viewlmodel.dart';
 import 'package:tchilla/viewmodel/detalhesproposedviewmodel.dart';
 
 import 'package:tchilla/viewmodel/forgont_password_viewmodel.dart';
@@ -19,6 +20,7 @@ import 'package:tchilla/viewmodel/profile_viewmodel.dart';
 import 'package:tchilla/viewmodel/register_viewmodel.dart';
 import 'package:tchilla/viewmodel/result_search_viewmodel.dart';
 import 'package:tchilla/viewmodel/splash_viewmodel.dart';
+import 'package:tchilla/viewmodel/summary_viewmodel.dart';
 import 'package:tchilla/viewmodel/user_data_viewmodel.dart';
 import 'package:tchilla/viewmodel/view_more_viewmodel.dart';
 import 'package:tchilla/viewmodel/welcome_viewmodel.dart';
@@ -55,27 +57,44 @@ class AppGets {
   }
 
   static void registerViewmodels() {
-    Get.lazyPut<SplashViewmodel>(
-      () => SplashViewmodel(
+    Get.lazyPut<BaseViewlmodel>(
+      () => BaseViewlmodel(
         navigator: Get.find(),
         notificator: Get.find(),
+        loger: Get.find(),
+        validator: Get.find(),
       ),
+    );
+    Get.lazyPut<SplashViewmodel>(
+      () => SplashViewmodel(
+          navigator: Get.find(),
+          notificator: Get.find(),
+          loger: Get.find(),
+          validator: Get.find()),
     );
     Get.lazyPut<OnboardingViewModel>(
       () => OnboardingViewModel(
         navigator: Get.find(),
+        loger: Get.find(),
         repository: Get.find(),
-        logs: Get.find(),
+        notificator: Get.find(),
+        validator: Get.find(),
       ),
     );
 
     Get.put<WelcomeViewmodel>(
-      WelcomeViewmodel(navigator: Get.find(), repository: Get.find()),
+      WelcomeViewmodel(
+          navigator: Get.find(),
+          loger: Get.find(),
+          repository: Get.find(),
+          notificator: Get.find(),
+          validator: Get.find()),
     );
 
     Get.put<LoginViewmodel>(
       LoginViewmodel(
         navigator: Get.find(),
+        loger: Get.find(),
         notificator: Get.find(),
         validator: Get.find(),
       ),
@@ -84,51 +103,71 @@ class AppGets {
       RegisterViewmodel(
         navigator: Get.find(),
         notificator: Get.find(),
+        loger: Get.find(),
         validator: Get.find(),
       ),
     );
     Get.put<ForgontPasswordViewmodel>(
       ForgontPasswordViewmodel(
         navigator: Get.find(),
+        loger: Get.find(),
         notificator: Get.find(),
         validator: Get.find(),
       ),
     );
     Get.put<HomeViewModel>(
       HomeViewModel(
+        loger: Get.find(),
         navigator: Get.find(),
+        notificator: Get.find(),
+        validator: Get.find(),
       ),
     );
 
     Get.put<DetalheProposedViewModel>(
       DetalheProposedViewModel(
         navigator: Get.find(),
+        notificator: Get.find(),
+        loger: Get.find(),
+        validator: Get.find(),
       ),
     );
     Get.put<ViewMoreViewmodel>(
       ViewMoreViewmodel(
         navigator: Get.find(),
+        loger: Get.find(),
         notificator: Get.find(),
+        validator: Get.find(),
       ),
     );
     Get.put<ProfileViewmodel>(
       ProfileViewmodel(
-        navigator: Get.find(),
-        notificator: Get.find(),
-      ),
+          navigator: Get.find(),
+          loger: Get.find(),
+          notificator: Get.find(),
+          validator: Get.find()),
     );
     Get.put<ResultSearchViewModel>(
       ResultSearchViewModel(
-        navigator: Get.find(),
-        notificator: Get.find(),
-      ),
+          navigator: Get.find(),
+          loger: Get.find(),
+          notificator: Get.find(),
+          validator: Get.find()),
     );
     Get.put<UserDataViewModel>(
       UserDataViewModel(
         navigator: Get.find(),
+        loger: Get.find(),
         notificator: Get.find(),
         validator: Get.find(),
       ),
+    );
+    Get.put<SummaryViewmodel>(
+      SummaryViewmodel(
+          navigator: Get.find(),
+          loger: Get.find(),
+          notificator: Get.find(),
+          validator: Get.find()),
     );
   }
 }

@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:tchilla/resources/app_routes.dart';
-import 'package:tchilla/style/app_alert_style.dart';
-import 'package:tchilla/services/events/navigation.dart';
-import 'package:tchilla/services/events/notificator.dart';
-import 'package:tchilla/services/events/validator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tchilla/viewmodel/base_viewlmodel.dart';
 
-class ForgontPasswordViewmodel extends GetxController {
-  final Navigation navigator;
-  final Notificator notificator;
-  final Validator validator;
-
+class ForgontPasswordViewmodel extends BaseViewlmodel {
   ForgontPasswordViewmodel({
-    required this.navigator,
-    required this.notificator,
-    required this.validator,
+    required super.navigator,
+    required super.notificator,
+    required super.validator,
+    required super.loger,
   });
 
   void confirmPin(String pin, BuildContext context) {
@@ -23,14 +16,14 @@ class ForgontPasswordViewmodel extends GetxController {
 
     if (pin.length != 6) {
       notificator.showLocalAlert(
-        AlertStyleEnum.pedding,
         localizations.alert_attention,
         localizations.error_fill_all_fields,
         context,
       );
     } else {
-      return navigator
-          .navigateToRefefinePasswordPage(AppRoutes.redefinePasswordPage);
+      return this.navigator.navigateToRefefinePasswordPage(
+            AppRoutes.redefinePasswordPage,
+          );
     }
   }
 
@@ -44,7 +37,6 @@ class ForgontPasswordViewmodel extends GetxController {
 
     if (password.isEmpty || confirmPassword.isEmpty) {
       notificator.showLocalAlert(
-        AlertStyleEnum.pedding,
         localizations.alert_attention,
         localizations.error_password_required,
         context,
@@ -53,7 +45,6 @@ class ForgontPasswordViewmodel extends GetxController {
     }
     if (password != confirmPassword) {
       notificator.showLocalAlert(
-        AlertStyleEnum.pedding,
         localizations.alert_attention,
         localizations.error_password_mismatch,
         context,
@@ -62,7 +53,6 @@ class ForgontPasswordViewmodel extends GetxController {
     }
     if (password.length < 6) {
       notificator.showLocalAlert(
-        AlertStyleEnum.pedding,
         localizations.alert_attention,
         localizations.error_password_length,
         context,
@@ -70,8 +60,7 @@ class ForgontPasswordViewmodel extends GetxController {
       return;
     }
 
-    notificator.showLocalAlert(
-      AlertStyleEnum.sucess,
+    notificator.showLocalASucess(
       localizations.alert_success,
       localizations.success_password_reset,
       context,
@@ -79,9 +68,9 @@ class ForgontPasswordViewmodel extends GetxController {
     await Future.delayed(const Duration(seconds: 3));
 
     if (previousWalk == AppRoutes.userdataPage) {
-      await navigator.navigateToBack();
+      await this.navigator.navigateToBack();
     } else {
-      await navigator.navigateToLoginPage();
+      await this.navigator.navigateToLoginPage();
     }
   }
 
@@ -90,7 +79,6 @@ class ForgontPasswordViewmodel extends GetxController {
 
     if (email.isEmpty) {
       notificator.showLocalAlert(
-        AlertStyleEnum.pedding,
         localizations.alert_attention,
         localizations.error_email_required,
         context,
@@ -100,7 +88,6 @@ class ForgontPasswordViewmodel extends GetxController {
 
     if (!validator.validatEmail(email)) {
       notificator.showLocalAlert(
-        AlertStyleEnum.pedding,
         localizations.alert_attention,
         localizations.error_invalid_email,
         context,
@@ -108,6 +95,6 @@ class ForgontPasswordViewmodel extends GetxController {
       return;
     }
 
-    await navigator.navigateToConfirmationPage();
+    await this.navigator.navigateToConfirmationPage();
   }
 }

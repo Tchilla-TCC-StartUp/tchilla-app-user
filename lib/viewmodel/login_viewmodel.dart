@@ -1,31 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:tchilla/style/app_alert_style.dart';
-import 'package:tchilla/services/events/navigation.dart';
-import 'package:tchilla/services/events/notificator.dart';
-import 'package:tchilla/services/events/validator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-class LoginViewmodel {
-  final Navigation navigator;
-  final Notificator notificator;
-  final Validator validator;
+import 'package:tchilla/viewmodel/base_viewlmodel.dart';
 
-  LoginViewmodel({
-    required this.navigator,
-    required this.notificator,
-    required this.validator,
-  });
+class LoginViewmodel extends BaseViewlmodel {
+  LoginViewmodel(
+      {required super.notificator,
+      required super.validator,
+      required super.navigator,
+      required super.loger});
 
   Future<void> navigateToRegisterPage() {
     return navigator.navigateToRegisterPage();
   }
 
-Future<void> login(
+  Future<void> login(
       String email, String password, BuildContext context) async {
     final localizations = AppLocalizations.of(context)!;
 
     if (email.isEmpty || password.isEmpty) {
       notificator.showLocalAlert(
-        AlertStyleEnum.pedding,
         localizations.alert_attention,
         localizations.login_required_fields,
         context,
@@ -35,7 +28,6 @@ Future<void> login(
 
     if (!validator.validatEmail(email)) {
       notificator.showLocalAlert(
-        AlertStyleEnum.pedding,
         localizations.alert_attention,
         localizations.login_invalid_email,
         context,
@@ -45,7 +37,6 @@ Future<void> login(
 
     if (password.length < 6) {
       notificator.showLocalAlert(
-        AlertStyleEnum.pedding,
         localizations.alert_attention,
         localizations.login_password_length,
         context,
@@ -55,7 +46,6 @@ Future<void> login(
 
     await navigator.navigateToHome();
   }
-
 
   navigateToForengePasswordPage() {
     navigator.navigateToForengePassewordEmailPage();

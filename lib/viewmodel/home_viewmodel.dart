@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tchilla/viewmodel/base_viewlmodel.dart';
 
-import 'package:tchilla/services/events/navigation.dart';
-
-class HomeViewModel extends GetxController {
-  final Navigation navigator;
+class HomeViewModel extends BaseViewlmodel {
   RxInt selectedIndex = 0.obs;
   RxDouble adptiveHeight = 510.px.obs;
   RxDouble adptiveSilverExpade = 780.px.obs;
@@ -13,7 +11,10 @@ class HomeViewModel extends GetxController {
   RxList<String> tabTitlesForm = ["Local", "Serviços", "Local+Serviços"].obs;
 
   HomeViewModel({
-    required this.navigator,
+    required super.notificator,
+    required super.validator,
+    required super.navigator,
+    required super.loger,
   });
 
   void selectTab(int index) {
@@ -22,16 +23,16 @@ class HomeViewModel extends GetxController {
   }
 
   void navigateToProfilePage() {
-    navigator.navigateToProfilePage();
+    this.navigator.navigateToProfilePage();
   }
 
   navigateToResultSearchPage() {
-    return navigator.navigateToResultSearchPage();
+    return this.navigator.navigateToResultSearchPage();
   }
 
   Future<void> searchLocal(
       String local, DateTime data, int envitNumber, BuildContext context) {
-    return navigator.navigateToResultSearchPage();
+    return this.navigator.navigateToResultSearchPage();
   }
 
   void updateAdaptiveHeight() {

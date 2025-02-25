@@ -12,6 +12,7 @@ import 'package:tchilla/view/pages/redefine_password_page.dart';
 import 'package:tchilla/view/pages/register_page.dart';
 import 'package:tchilla/view/pages/result_search_page.dart';
 import 'package:tchilla/view/pages/splash_page.dart';
+import 'package:tchilla/view/pages/summary_page.dart';
 import 'package:tchilla/view/pages/user_data_page.dart';
 import 'package:tchilla/view/pages/welcome_page.dart';
 
@@ -70,6 +71,10 @@ class AppGetAppRoutes {
     _buildDynamicRoute<String>(
       AppRoutes.userdataPage,
       (id) => UserDataPage(id: id),
+    ),
+    _buildDynamicRoute<String>(
+      AppRoutes.summaryPage,
+      (id) => SummaryPage(id: id),
     ),
   ];
 

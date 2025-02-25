@@ -28,7 +28,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   void initState() {
     super.initState();
 
-    viewModel.getOnboarding();
+    viewModel.getOnboarding(context);
   }
 
   @override

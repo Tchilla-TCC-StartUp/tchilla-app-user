@@ -1,15 +1,11 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+
 import 'package:tchilla/resources/app_assets_images.dart';
 
-import 'package:tchilla/resources/app_constats.dart';
-import 'package:tchilla/services/events/navigation.dart';
+import 'package:tchilla/viewmodel/base_viewlmodel.dart';
 
-class DetalheProposedViewModel extends GetxController {
-  final Navigation navigator;
+class DetalheProposedViewModel extends BaseViewlmodel {
   RxInt selectedIndex = 0.obs;
   RxList<String> tabTitles = [
     'Sobre',
@@ -93,7 +89,10 @@ class DetalheProposedViewModel extends GetxController {
 
   var currentIndex = 0.obs;
   DetalheProposedViewModel({
-    required this.navigator,
+    required super.navigator,
+    required super.notificator,
+    required super.validator,
+    required super.loger,
   });
   final pageController = PageController();
 
@@ -102,7 +101,7 @@ class DetalheProposedViewModel extends GetxController {
   }
 
   goBack() {
-    navigator.navigateToBack();
+    this.navigator.navigateToBack();
   }
 
   void selectTab(int index) {
@@ -110,6 +109,10 @@ class DetalheProposedViewModel extends GetxController {
   }
 
   selectProposed(String id) {
-    navigator.navigateToDetalhesPage(id);
+    this.navigator.navigateToDetalhesPage(id);
+  }
+
+  scheduleproposal(String id) {
+    this.navigator.navigateToSummaryPage(id);
   }
 }

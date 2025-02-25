@@ -14,7 +14,9 @@ import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
+import 'package:tchilla/view/widgets/app_responsible_card.dart';
 import 'package:tchilla/viewmodel/detalhesproposedviewmodel.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetalheProposedPage extends StatefulWidget {
   final String id;
@@ -116,8 +118,8 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
             _buildTabs(),
             _buildTabViews(),
             AppGlobalTextButton(
-              onPressed: () {},
-              textButton: "Agendar",
+              onPressed: () => viewmodel.scheduleproposal("11"),
+              textButton: AppLocalizations.of(context)!.schedule,
               minWidth: 100.w,
             ),
             AppGlobalVericalSpacing(
@@ -234,7 +236,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
           value: 2.h,
         ),
         AppGlobalText(
-          text: "Descrição",
+          text: AppLocalizations.of(context)!.description,
           style: TextStyleEnum.h3_bold,
         ),
         const AppGlobalVericalSpacing(),
@@ -249,68 +251,13 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
         AppGlobalVericalSpacing(
           value: 30.px,
         ),
-        AppGlobalText(
-          text: "Responsavel",
-          style: TextStyleEnum.h3_bold,
-        ),
-        const AppGlobalVericalSpacing(),
-        _buildResponsibleCard(),
-      ],
-    );
-  }
-
-  _buildResponsibleCard() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            ClipOval(
-              child: AppGlobalNetworkImage(
-                image: AppAssetsImages.defaultUserImage,
-                width: 45.px,
-                height: 45.px,
-                fit: BoxFit.cover,
-              ),
-            ),
-            const AppGlobalHorizontalSpacing(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppGlobalText(
-                  text: "Genilda Neto",
-                  style: TextStyleEnum.p_bold,
-                ),
-                AppGlobalText(
-                  text: "Prestadora de Serviço",
-                  style: TextStyleEnum.p_normal,
-                )
-              ],
-            ),
-          ],
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Row(
-              children: [
-                const Icon(
-                  Icons.star_rounded,
-                  color: Colors.amber,
-                ),
-                AppGlobalText(
-                  text: "4.5",
-                  style: TextStyleEnum.p_bold,
-                ),
-              ],
-            ),
-            AppGlobalText(
-              text: "(450 Avaliações)",
-              style: TextStyleEnum.p_normal,
-              color: gray700,
-            )
-          ],
-        ),
+        AppResponsibleCard(
+          name: "Celson Paixão",
+          role: "Admin",
+          imageUrl: AppAssetsImages.defaultUserImage,
+          rating: 4.6,
+          reviews: 100,
+        )
       ],
     );
   }

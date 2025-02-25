@@ -7,7 +7,7 @@ abstract class INavigation {
 
   navigateToForengePassewordEmailPage();
   navigateToConfirmationPage();
-  navigateToRefefinePasswordPage( String previousWalk);
+  navigateToRefefinePasswordPage(String previousWalk);
 
   navigateToResultSearchPage();
   navigateToWelcomePage();
@@ -15,4 +15,5 @@ abstract class INavigation {
   navigateToDetalhesPage(String id);
   navigateToProfilePage();
   navigateToUserDataPage(String id);
+  navigateToSummaryPage(String id);
 }

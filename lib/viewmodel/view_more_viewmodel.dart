@@ -1,11 +1,7 @@
 import 'package:get/get.dart';
-import 'package:tchilla/services/events/navigation.dart';
-import 'package:tchilla/services/events/notificator.dart';
+import 'package:tchilla/viewmodel/base_viewlmodel.dart';
 
-class ViewMoreViewmodel extends GetxController {
-  final Navigation navigator;
-  final Notificator notificator;
-
+class ViewMoreViewmodel extends BaseViewlmodel {
   RxList<String> tabTitlesSegestions = [
     "Casamento",
     "Pedido",
@@ -17,17 +13,21 @@ class ViewMoreViewmodel extends GetxController {
 
   RxInt selectedIndex = 0.obs;
 
-  ViewMoreViewmodel({required this.navigator, required this.notificator});
+  ViewMoreViewmodel(
+      {required super.notificator,
+      required super.validator,
+      required super.navigator,
+      required super.loger});
 
   void selectTab(int index) {
     selectedIndex.value = index;
   }
 
   void selectProposed(String id) {
-    navigator.navigateToDetalhesPage(id);
+    this.navigator.navigateToDetalhesPage(id);
   }
 
   navigateToResultSearchPage() {
-    return navigator.navigateToResultSearchPage();
+    return this.navigator.navigateToResultSearchPage();
   }
 }

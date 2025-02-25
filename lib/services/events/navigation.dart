@@ -74,4 +74,9 @@ class Navigation extends INavigation {
   navigateToUserDataPage(String id) {
     Get.toNamed(AppRoutes.userdataPage, arguments: id);
   }
+
+  @override
+  navigateToSummaryPage(String id) {
+    Get.toNamed(AppRoutes.summaryPage, arguments: id);
+  }
 }

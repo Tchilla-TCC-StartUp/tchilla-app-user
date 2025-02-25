@@ -99,7 +99,13 @@
   "error_password_required": "A senha é obrigatória.",
   "error_password_length": "A senha deve ter pelo menos 6 caracteres.",
 
-  "save": "Salvar"
+  "save": "Salvar",
+  "schedule": "Agendar",
+   "reviews":"Avaliações",
+  "appointment_summary": "Resumo do agendamento",
+  "responsible":"Responsavel",
+  "service":"Serviços",
+  "error":"Erro"
 
 
 }

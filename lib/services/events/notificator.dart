@@ -4,14 +4,35 @@ import 'package:tchilla/services/interface/inotificator.dart';
 
 class Notificator extends INotificator {
   @override
-  showLocalAlert(AlertStyleEnum type, String title, String message,
-      final BuildContext context) {
+  showLocalAlert(
+    String title,
+    String message,
+    final BuildContext context,
+  ) {
+    getAlertStyle(
+      type: AlertStyleEnum.pedding,
+      title: title,
+      message: message,
+    );
+  }
+
+  @override
+  showLocalASucess(String title, String message, BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       getAlertStyle(
-        type: type,
+        type: AlertStyleEnum.sucess,
         title: title,
         message: message,
       ),
+    );
+  }
+
+  @override
+  showLocalError(String title, String message, BuildContext context) {
+    getAlertStyle(
+      type: AlertStyleEnum.error,
+      title: title,
+      message: message,
     );
   }
 }

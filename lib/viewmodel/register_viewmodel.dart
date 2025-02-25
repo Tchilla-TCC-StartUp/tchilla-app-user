@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tchilla/style/app_alert_style.dart';
-import 'package:tchilla/services/events/navigation.dart';
-import 'package:tchilla/services/events/notificator.dart';
-import 'package:tchilla/services/events/validator.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tchilla/viewmodel/base_viewlmodel.dart';
 
-class RegisterViewmodel {
-  final Navigation navigator;
-  final Notificator notificator;
-  final Validator validator;
-
+class RegisterViewmodel extends BaseViewlmodel {
   RegisterViewmodel({
-    required this.navigator,
-    required this.notificator,
-    required this.validator,
+    required super.notificator,
+    required super.validator,
+    required super.navigator,
+    required super.loger,
   });
 
   Future<void> register(
@@ -26,7 +21,6 @@ class RegisterViewmodel {
 
     if (name.isEmpty) {
       notificator.showLocalAlert(
-        AlertStyleEnum.pedding,
         localizations.alert_attention,
         localizations.error_full_name_required,
         context,
@@ -36,7 +30,6 @@ class RegisterViewmodel {
 
     if (email.isEmpty) {
       notificator.showLocalAlert(
-        AlertStyleEnum.pedding,
         localizations.alert_attention,
         localizations.error_email_required,
         context,
@@ -46,7 +39,6 @@ class RegisterViewmodel {
 
     if (!validator.validatEmail(email)) {
       notificator.showLocalAlert(
-        AlertStyleEnum.pedding,
         localizations.alert_attention,
         localizations.error_invalid_email,
         context,
@@ -56,7 +48,6 @@ class RegisterViewmodel {
 
     if (password.isEmpty) {
       notificator.showLocalAlert(
-        AlertStyleEnum.pedding,
         localizations.alert_attention,
         localizations.error_password_required,
         context,
@@ -66,7 +57,6 @@ class RegisterViewmodel {
 
     if (password.length < 6) {
       notificator.showLocalAlert(
-        AlertStyleEnum.pedding,
         localizations.alert_attention,
         localizations.error_password_length,
         context,

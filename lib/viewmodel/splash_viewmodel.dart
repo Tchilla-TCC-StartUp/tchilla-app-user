@@ -1,14 +1,11 @@
-import 'package:get/get.dart';
-import 'package:tchilla/services/events/navigation.dart';
-import 'package:tchilla/services/events/notificator.dart';
+import 'package:tchilla/viewmodel/base_viewlmodel.dart';
 
-class SplashViewmodel {
-  final Navigation navigator;
-  final Notificator notificator;
-
+class SplashViewmodel extends BaseViewlmodel {
   SplashViewmodel({
-    required this.navigator,
-    required this.notificator,
+    required super.notificator,
+    required super.validator,
+    required super.navigator,
+    required super.loger,
   });
 
   navigateToHomePage() async {

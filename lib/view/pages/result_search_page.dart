@@ -5,6 +5,7 @@ import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_custom_list_card.dart';
+import 'package:tchilla/view/widgets/app_global_back_button.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
@@ -116,9 +117,8 @@ class _ResultSearchPageState extends State<ResultSearchPage>
 
   AppBar _buildAppbar() {
     return AppBar(
-      leading: const SizedBox.shrink(),
+      leading: AppGlobalBackButton(),
       centerTitle: true,
-      leadingWidth: 0,
       title: AppCustomListCard(
         iconPath: AppAssetsImages.locationIconSvg,
         title: "Benfica, Zona Verde II",

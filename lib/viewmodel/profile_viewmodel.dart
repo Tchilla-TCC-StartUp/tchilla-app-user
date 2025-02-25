@@ -1,12 +1,12 @@
-import 'package:get/get.dart';
-import 'package:tchilla/services/events/navigation.dart';
-import 'package:tchilla/services/events/notificator.dart';
+import 'package:tchilla/viewmodel/base_viewlmodel.dart';
 
-class ProfileViewmodel extends GetMaterialController {
-  final Navigation navigator;
-  final Notificator notificator;
-
-  ProfileViewmodel({required this.navigator, required this.notificator});
+class ProfileViewmodel extends BaseViewlmodel {
+  ProfileViewmodel({
+    required super.notificator,
+    required super.validator,
+    required super.navigator,
+    required super.loger,
+  });
 
   goToUserDataPage(String id) {
     return navigator.navigateToUserDataPage(id);
