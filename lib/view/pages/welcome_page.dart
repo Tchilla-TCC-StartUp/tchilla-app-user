@@ -26,7 +26,7 @@ class _WelcomePageState extends State<WelcomePage> {
   void initState() {
     super.initState();
     final lang = Get.deviceLocale?.languageCode ?? "en";
-    viewmodel.fetchWelcomeData(lang);
+    viewmodel.fetchWelcomeData(lang, context);
   }
 
   @override

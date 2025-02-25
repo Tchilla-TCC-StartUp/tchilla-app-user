@@ -1,7 +1,8 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:tchilla/model/welcome_model.dart';
 import 'package:tchilla/repository/events/welcome_repository.dart';
-import 'package:tchilla/services/events/navigation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/viewmodel/base_viewlmodel.dart';
 
 class WelcomeViewmodel extends BaseViewlmodel {
@@ -19,12 +20,20 @@ class WelcomeViewmodel extends BaseViewlmodel {
 
   WelcomeModel? get welcomeData => _welcomeData.value;
 
-  Future<void> fetchWelcomeData(String lang) async {
+  Future<void> fetchWelcomeData(String lang, BuildContext context) async {
     try {
+      loger.info("Buscando dados do onboarding para o idioma: $lang");
       final data = await repository.fetchWelcomeData(lang);
+      loger.info("Dados do welcome carregados com sucesso.");
+      loger.printJson(data);
       _welcomeData.value = data;
     } catch (e) {
-      print("Erro ao buscar os dados de boas-vindas: $e");
+      loger.error("Erro ao buscar os dados de boas-vindas: $e");
+      notificator.showLocalError(
+        AppLocalizations.of(context)!.error,
+        e.toString(),
+        context,
+      );
     }
   }
 
