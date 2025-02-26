@@ -84,4 +84,9 @@ class Navigation extends INavigation {
   navigateToErrorPage(void Function() tryAgainEvet) {
     Get.toNamed(AppRoutes.errorPage, arguments: tryAgainEvet);
   }
+
+  @override
+  navigateToTiketPage(String id) {
+    Get.toNamed(AppRoutes.tiketPage, arguments: id);
+  }
 }

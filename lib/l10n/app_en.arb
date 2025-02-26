@@ -105,7 +105,18 @@
    "appointment_summary": "Appointment summary",
    "responsible":"Responsible",
    "service":"Services",
-   "error":"Error"
+   "error":"Error",
+   "total":"Total",
+   "cancel":"Cancel",
+   "lb_continue":"Continue",
+   "something_went_wrong":"Something went wrong",
+   "try_again":"Try again",
+  "reservation": "Reservation",
+  "reservationTicket": "Reservation Ticket",
+  "amountPaid": "Amount Paid",
+  "downloadReceipt": "Download Receipt",
+  "paid_amount": "Paid Amount"
+
 
 
 

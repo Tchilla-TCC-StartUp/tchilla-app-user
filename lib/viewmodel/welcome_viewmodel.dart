@@ -2,7 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:tchilla/model/welcome_model.dart';
 import 'package:tchilla/repository/events/welcome_repository.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/viewmodel/base_viewlmodel.dart';
 
 class WelcomeViewmodel extends BaseViewlmodel {
@@ -33,7 +32,7 @@ class WelcomeViewmodel extends BaseViewlmodel {
       _welcomeData.value = data;
     } catch (e, stacktrace) {
       loger.error("Erro ao buscar os dados de boas-vindas: $e");
-      this.handleError(context, e, stacktrace);
+      handleError(context, e, stacktrace);
     } finally {
       _isLoading.value = false;
     }

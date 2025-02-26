@@ -105,7 +105,17 @@
   "appointment_summary": "Resumo do agendamento",
   "responsible":"Responsavel",
   "service":"Serviços",
-  "error":"Erro"
+  "error":"Erro",
+  "total":"Total",
+  "cancel":"Cancelar",
+  "lb_continue":"Continuar",
+  "something_went_wrong":"Alguma Coisa deu errado",
+  "try_again":"Tentar Novamnte",
+  "reservation": "Reserva",
+  "reservationTicket": "Bilhete de reserva",
+  "amountPaid": "Valor pago",
+  "downloadReceipt": "Baixar comprovativo",
+    "paid_amount": "Valor pago"
 
 
 }

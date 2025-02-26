@@ -4,6 +4,7 @@ import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ErrorPage extends StatelessWidget {
   final void Function([dynamic]) tryAgainEvet;
@@ -20,7 +21,7 @@ class ErrorPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           AppGlobalText(
-            text: "Alguma Coisa deu errado",
+            text: AppLocalizations.of(context)!.something_went_wrong,
             style: TextStyleEnum.h3_bold,
           ),
           AppGlobalVericalSpacing(
@@ -28,7 +29,7 @@ class ErrorPage extends StatelessWidget {
           ),
           AppGlobalTextButton(
             onPressed: tryAgainEvet,
-            textButton: "Tentar Novamnte",
+            textButton: AppLocalizations.of(context)!.try_again,
             minWidth: 90.w,
           )
         ],

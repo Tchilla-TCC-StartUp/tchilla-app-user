@@ -7,11 +7,13 @@ import 'package:tchilla/view/widgets/app_global_text.dart';
 class AngolaPrice extends StatelessWidget {
   final double price;
   final TextStyleEnum? style;
+  final Color? color;
 
   const AngolaPrice({
     super.key,
     required this.price,
     this.style,
+    this.color,
   });
 
   String _formatPrice(double value) {
@@ -28,7 +30,7 @@ class AngolaPrice extends StatelessWidget {
     return AppGlobalText(
       text: _formatPrice(price),
       style: style ?? TextStyleEnum.p_bold,
-      color: primary800,
+      color: color ?? primary800,
     );
   }
 }

@@ -16,5 +16,6 @@ abstract class INavigation {
   navigateToProfilePage();
   navigateToUserDataPage(String id);
   navigateToSummaryPage(String id);
+  navigateToTiketPage(String id);
   navigateToErrorPage(void Function() tryAgainEvet);
 }

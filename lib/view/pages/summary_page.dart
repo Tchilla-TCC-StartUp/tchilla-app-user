@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
+import 'package:tchilla/view/widgets/angola_price.dart';
 import 'package:tchilla/view/widgets/app_global_back_button.dart';
 import 'package:tchilla/view/widgets/app_global_border_button.dart';
 import 'package:tchilla/view/widgets/app_global_network_image.dart';
@@ -13,6 +15,7 @@ import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/view/widgets/app_responsible_card.dart';
+import 'package:tchilla/viewmodel/summary_viewmodel.dart';
 
 class SummaryPage extends StatefulWidget {
   final String id;
@@ -23,6 +26,7 @@ class SummaryPage extends StatefulWidget {
 }
 
 class _SummaryPageState extends State<SummaryPage> {
+  final viewmodel = Get.find<SummaryViewmodel>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,13 +103,14 @@ class _SummaryPageState extends State<SummaryPage> {
           Row(
             children: [
               AppGlobalText(
-                text: "Total:",
+                text: "${AppLocalizations.of(context)!.total}:",
                 style: TextStyleEnum.h3_medium,
               ),
               const AppGlobalHorizontalSpacing(),
-              AppGlobalText(
-                text: formatAngolaPrice(380000),
+              AngolaPrice(
+                price: 308000,
                 style: TextStyleEnum.h3_bold,
+                color: primary950,
               ),
             ],
           ),
@@ -115,14 +120,14 @@ class _SummaryPageState extends State<SummaryPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AppGlobalBorderButton(
-                onPressed: () {},
-                textButton: "Cancelar",
+                onPressed: viewmodel.navigator.navigateToBack,
+                textButton: AppLocalizations.of(context)!.cancel,
                 minWidth: 180.px,
               ),
               AppGlobalTextButton(
                 minWidth: 180.px,
-                onPressed: () {},
-                textButton: "Continuar",
+                onPressed: () => viewmodel.clickContinue("pjk,d"),
+                textButton: AppLocalizations.of(context)!.lb_continue,
               )
             ],
           ),

@@ -7,4 +7,8 @@ class SummaryViewmodel extends BaseViewlmodel {
     required super.navigator,
     required super.loger,
   });
+
+  void clickContinue(String id) {
+    navigator.navigateToTiketPage(id);
+  }
 }
