@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:tchilla/model/onboarding_model.dart';
 import 'package:tchilla/repository/events/onboarding_repository.dart';
 import 'package:tchilla/viewmodel/base_viewlmodel.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OnboardingViewModel extends BaseViewlmodel {
   final OnboardingRepository repository;
@@ -17,11 +16,15 @@ class OnboardingViewModel extends BaseViewlmodel {
 
   final pageController = PageController();
   final RxInt currentPage = 0.obs;
+
   final RxList<OnboardingModel> _onboarding = <OnboardingModel>[].obs;
+  final RxBool _isLoading = false.obs;
+  RxBool get isLoading => _isLoading;
   RxList<OnboardingModel> get onboarding => _onboarding;
 
   void getOnboarding(BuildContext context) async {
     try {
+      _isLoading.value = true;
       final lang = Get.deviceLocale?.languageCode ?? "en";
       loger.info("Buscando dados do onboarding para o idioma: $lang");
       final List<OnboardingModel> data = await repository.fetchOnboadData(lang);
@@ -29,15 +32,9 @@ class OnboardingViewModel extends BaseViewlmodel {
       _onboarding.assignAll(data);
       loger.info("Dados do onboarding carregados com sucesso.");
     } catch (e, stacktrace) {
-      loger.error(
-        "Erro ao buscar dados do onboarding: ${e.toString()}",
-        stacktrace,
-      );
-      notificator.showLocalError(
-        AppLocalizations.of(context)!.error,
-        e.toString(),
-        context,
-      );
+      handleError(context, e, stacktrace, );
+    } finally {
+      _isLoading.value = false;
     }
   }
 

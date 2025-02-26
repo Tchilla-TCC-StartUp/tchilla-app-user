@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tchilla/resources/app_routes.dart';
 import 'package:tchilla/view/pages/detalhe_proposed_page.dart';
+import 'package:tchilla/view/pages/error_page.dart';
 import 'package:tchilla/view/pages/forgot_passsword_auth_email_page.dart';
 import 'package:tchilla/view/pages/forgot_password_confitmation_pin_page.dart';
 import 'package:tchilla/view/pages/home_page.dart';
@@ -75,6 +76,10 @@ class AppGetAppRoutes {
     _buildDynamicRoute<String>(
       AppRoutes.summaryPage,
       (id) => SummaryPage(id: id),
+    ),
+    _buildDynamicRoute(
+      AppRoutes.summaryPage,
+      (tryAgainEvet) => ErrorPage(tryAgainEvet: ([dynamic]) => tryAgainEvet),
     ),
   ];
 

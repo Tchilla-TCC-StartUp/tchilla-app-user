@@ -9,6 +9,8 @@ class WelcomeViewmodel extends BaseViewlmodel {
   final WelcomeRepository repository;
 
   final Rxn<WelcomeModel> _welcomeData = Rxn<WelcomeModel>();
+  final RxBool _isLoading = false.obs;
+  RxBool get isLoading => _isLoading;
 
   WelcomeViewmodel({
     required this.repository,
@@ -20,20 +22,20 @@ class WelcomeViewmodel extends BaseViewlmodel {
 
   WelcomeModel? get welcomeData => _welcomeData.value;
 
-  Future<void> fetchWelcomeData(String lang, BuildContext context) async {
+  Future<void> fetchWelcomeData(BuildContext context) async {
     try {
+      final lang = Get.deviceLocale?.languageCode ?? "en";
+      _isLoading.value = true;
       loger.info("Buscando dados do  welcome para o idioma: $lang");
       final data = await repository.fetchWelcomeData(lang);
       loger.info("Dados do welcome carregados com sucesso.");
       loger.printJson(data);
       _welcomeData.value = data;
-    } catch (e) {
+    } catch (e, stacktrace) {
       loger.error("Erro ao buscar os dados de boas-vindas: $e");
-      notificator.showLocalError(
-        AppLocalizations.of(context)!.error,
-        e.toString(),
-        context,
-      );
+      this.handleError(context, e, stacktrace);
+    } finally {
+      _isLoading.value = false;
     }
   }
 

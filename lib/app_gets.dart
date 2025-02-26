@@ -9,7 +9,6 @@ import 'package:tchilla/resources/app_routes.dart';
 import 'package:tchilla/services/events/navigation.dart';
 import 'package:tchilla/services/events/notificator.dart';
 import 'package:tchilla/services/events/validator.dart';
-import 'package:tchilla/viewmodel/base_viewlmodel.dart';
 import 'package:tchilla/viewmodel/detalhesproposedviewmodel.dart';
 
 import 'package:tchilla/viewmodel/forgont_password_viewmodel.dart';
@@ -28,7 +27,12 @@ import 'package:tchilla/viewmodel/welcome_viewmodel.dart';
 class AppGets {
   static void init() {
     final dio = Dio(
-      BaseOptions(baseUrl: AppConstats.baseUrl),
+      BaseOptions(
+        baseUrl: AppConstats.baseUrl,
+        sendTimeout: const Duration(minutes: 1),
+        connectTimeout: const Duration(minutes: 1),
+        receiveTimeout: const Duration(minutes: 1),
+      ),
     )..interceptors.add(AppInterceptor());
     Get.lazyPut<AppRoutes>(() => AppRoutes());
     registerEvents();
@@ -57,14 +61,6 @@ class AppGets {
   }
 
   static void registerViewmodels() {
-    Get.lazyPut<BaseViewlmodel>(
-      () => BaseViewlmodel(
-        navigator: Get.find(),
-        notificator: Get.find(),
-        loger: Get.find(),
-        validator: Get.find(),
-      ),
-    );
     Get.lazyPut<SplashViewmodel>(
       () => SplashViewmodel(
           navigator: Get.find(),

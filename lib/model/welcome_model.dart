@@ -1,14 +1,13 @@
 import 'dart:convert';
 
 class WelcomeModel {
-  final String title;
-  final String url;
-  final String description;
-
+  final String? title;
+  final String? url;
+  final String? description;
   WelcomeModel({
-    required this.title,
-    required this.url,
-    required this.description,
+    this.title,
+    this.url,
+    this.description,
   });
 
   Map<String, dynamic> toMap() {
@@ -21,14 +20,13 @@ class WelcomeModel {
 
   factory WelcomeModel.fromMap(Map<String, dynamic> map) {
     return WelcomeModel(
-      title: map['title'] as String,
-      url: map['url'] as String,
-      description: map['description'] as String,
+      title: map['title'] != null ? map['title'] as String : null,
+      url: map['url'] != null ? map['url'] as String : null,
+      description: map['description'] != null ? map['description'] as String : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory WelcomeModel.fromJson(String source) =>
-      WelcomeModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory WelcomeModel.fromJson(String source) => WelcomeModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

@@ -35,83 +35,95 @@ class _OnboardingPageState extends State<OnboardingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: AppLayoutpage(body: Obx(() {
-          if (viewModel.onboarding.isEmpty) {
-            return Container();
-          }
-          return Column(
-            children: [
-              AppGlobalVericalSpacing(
-                value: 2.h,
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: GestureDetector(
-                  onTap: viewModel.clickSkip,
-                  child: AppGlobalText(
-                    text: AppLocalizations.of(context)!.skip,
-                    style: TextStyleEnum.h3_medium,
-                  ),
-                ),
-              ),
-              AppGlobalVericalSpacing(
-                value: 4.h,
-              ),
-              Expanded(
-                child: Obx(() {
-                  return PageView.builder(
-                    controller: viewModel.pageController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    onPageChanged: (index) {
-                      viewModel.currentPage.value = index;
-                    },
-                    itemCount: viewModel.onboarding.length,
-                    itemBuilder: (context, index) {
-                      var item = viewModel.onboarding[index];
-                      return OnboardingBody(
-                        image: item.url,
-                        title: item.title,
-                        description: item.description,
-                      );
-                    },
-                  );
-                }),
-              ),
-              SmoothPageIndicator(
-                controller: viewModel.pageController,
-                count: viewModel.onboarding.length,
-                effect: ExpandingDotsEffect(
-                  dotColor: gray400,
-                  activeDotColor: primary950,
-                  dotWidth: 2.w,
-                  dotHeight: 1.h,
-                ),
-              ),
-              AppGlobalVericalSpacing(
-                value: 5.h,
-              ),
-              AppGlobalImageButton(
-                  onPressed: viewModel.nextPage,
-                  color: primary950,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      AppGlobalText(
-                        text: AppLocalizations.of(context)!.proceed,
-                        color: primary50,
-                        style: TextStyleEnum.h3_bold,
-                      ),
-                      const AppGlobalHorizontalSpacing(),
-                      SvgPicture.asset(AppAssetsImages.arrowRightSvg)
-                    ],
-                  )),
-              AppGlobalVericalSpacing(
-                value: 8.h,
-              )
-            ],
-          );
-        })),
+        child: AppLayoutpage(
+          body: Obx(
+            () {
+              return viewModel.isLoading.value
+                  ? const Center(child: CircularProgressIndicator())
+                  : viewModel.loadedErrorValidator(
+                      loaded: viewModel.onboarding.isNotEmpty,
+                      tryAgainEvet: ([args]) =>
+                          viewModel.getOnboarding(context),
+                      view: _buildBody(context),
+                    );
+            },
+          ),
+        ),
       ),
+    );
+  }
+
+  Column _buildBody(BuildContext context) {
+    return Column(
+      children: [
+        AppGlobalVericalSpacing(
+          value: 2.h,
+        ),
+        Align(
+          alignment: Alignment.centerRight,
+          child: GestureDetector(
+            onTap: viewModel.clickSkip,
+            child: AppGlobalText(
+              text: AppLocalizations.of(context)!.skip,
+              style: TextStyleEnum.h3_medium,
+            ),
+          ),
+        ),
+        AppGlobalVericalSpacing(
+          value: 4.h,
+        ),
+        Expanded(
+          child: Obx(() {
+            return PageView.builder(
+              controller: viewModel.pageController,
+              physics: const NeverScrollableScrollPhysics(),
+              onPageChanged: (index) {
+                viewModel.currentPage.value = index;
+              },
+              itemCount: viewModel.onboarding.length,
+              itemBuilder: (context, index) {
+                var item = viewModel.onboarding[index];
+                return OnboardingBody(
+                  image: item.url!,
+                  title: item.title!,
+                  description: item.description!,
+                );
+              },
+            );
+          }),
+        ),
+        SmoothPageIndicator(
+          controller: viewModel.pageController,
+          count: viewModel.onboarding.length,
+          effect: ExpandingDotsEffect(
+            dotColor: gray400,
+            activeDotColor: primary950,
+            dotWidth: 2.w,
+            dotHeight: 1.h,
+          ),
+        ),
+        AppGlobalVericalSpacing(
+          value: 5.h,
+        ),
+        AppGlobalImageButton(
+            onPressed: viewModel.nextPage,
+            color: primary950,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AppGlobalText(
+                  text: AppLocalizations.of(context)!.proceed,
+                  color: primary50,
+                  style: TextStyleEnum.h3_bold,
+                ),
+                const AppGlobalHorizontalSpacing(),
+                SvgPicture.asset(AppAssetsImages.arrowRightSvg)
+              ],
+            )),
+        AppGlobalVericalSpacing(
+          value: 8.h,
+        )
+      ],
     );
   }
 }

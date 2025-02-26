@@ -1,14 +1,14 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class OnboardingModel {
-  final String title;
-  final String url;
-  final String description;
-
+  final String? title;
+  final String? url;
+  final String? description;
   OnboardingModel({
-    required this.title,
-    required this.url,
-    required this.description,
+    this.title,
+    this.url,
+    this.description,
   });
 
   Map<String, dynamic> toMap() {
@@ -21,9 +21,10 @@ class OnboardingModel {
 
   factory OnboardingModel.fromMap(Map<String, dynamic> map) {
     return OnboardingModel(
-      title: map['title'] as String,
-      url: map['url'] as String,
-      description: map['description'] as String,
+      title: map['title'] != null ? map['title'] as String : null,
+      url: map['url'] != null ? map['url'] as String : null,
+      description:
+          map['description'] != null ? map['description'] as String : null,
     );
   }
 

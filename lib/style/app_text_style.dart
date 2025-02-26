@@ -8,12 +8,15 @@ enum TextStyleEnum {
   p_light,
   p_medium,
   p_bold,
+  h1_normal,
   h1_bold,
   h1_medium,
+  h2_normal,
   h2_bold,
   h2_medium,
   h3_bold,
   h3_medium,
+  h3_normal,
   italic,
   underline,
   caption,
@@ -23,7 +26,10 @@ enum TextStyleEnum {
   onboarding_title,
 }
 
-TextStyle getTextStyle(TextStyleEnum style, {Color color = primary950,}) {
+TextStyle getTextStyle(
+  TextStyleEnum style, {
+  Color color = primary950,
+}) {
   switch (style) {
     case TextStyleEnum.p_normal:
       return GoogleFonts.inter(
@@ -61,6 +67,12 @@ TextStyle getTextStyle(TextStyleEnum style, {Color color = primary950,}) {
         fontWeight: FontWeight.w500,
         color: color,
       );
+    case TextStyleEnum.h1_normal:
+      return GoogleFonts.inter(
+        fontSize: 30.sp,
+        fontWeight: FontWeight.normal,
+        color: color,
+      );
     case TextStyleEnum.h2_bold:
       return GoogleFonts.inter(
         fontSize: 20.sp,
@@ -73,10 +85,22 @@ TextStyle getTextStyle(TextStyleEnum style, {Color color = primary950,}) {
         fontWeight: FontWeight.w500,
         color: color,
       );
+    case TextStyleEnum.h2_normal:
+      return GoogleFonts.inter(
+        fontSize: 20.sp,
+        fontWeight: FontWeight.normal,
+        color: color,
+      );
     case TextStyleEnum.h3_bold:
       return GoogleFonts.inter(
         fontSize: 16.sp,
         fontWeight: FontWeight.bold,
+        color: color,
+      );
+    case TextStyleEnum.h3_normal:
+      return GoogleFonts.inter(
+        fontSize: 16.sp,
+        fontWeight: FontWeight.normal,
         color: color,
       );
     case TextStyleEnum.h3_medium:

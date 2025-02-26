@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/view/widgets/app_global_border_button.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
@@ -25,62 +24,70 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   void initState() {
     super.initState();
-    final lang = Get.deviceLocale?.languageCode ?? "en";
-    viewmodel.fetchWelcomeData(lang, context);
+
+    viewmodel.fetchWelcomeData(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: AppLayoutpage(body: Obx(
-          () {
-            final welcomeData = viewmodel.welcomeData;
-            if (welcomeData == null) {
-              return Container();
-            }
-            return Column(
-              children: [
-                AppGlobalVericalSpacing(
-                  value: 3.h,
-                ),
-                OnboardingBody(
-                  image: welcomeData.url,
-                  title: welcomeData.title,
-                  description: welcomeData.description,
-                ),
-                AppGlobalVericalSpacing(
-                  value: 4.h,
-                ),
-                AppGlobalTextButton(
-                  minWidth: 100.w,
-                  onPressed: viewmodel.navigateToRegister,
-                  textButton:
-                      AppLocalizations.of(context)!.create_account_button,
-                ),
-                AppGlobalVericalSpacing(
-                  value: 3.h,
-                ),
-                AppGlobalBorderButton(
-                  minWidth: 100.w,
-                  textButton: AppLocalizations.of(context)!.login,
-                  onPressed: viewmodel.navigateToLogin,
-                ),
-                AppGlobalVericalSpacing(
-                  value: 3.h,
-                ),
-                GestureDetector(
-                  onTap: viewmodel.enterAsVisitor,
-                  child: AppGlobalText(
-                    text: AppLocalizations.of(context)!.guest_login,
-                    style: TextStyleEnum.h3_bold,
-                  ),
-                )
-              ],
-            );
-          },
-        )),
+        child: AppLayoutpage(
+          body: Obx(
+            () {
+              return viewmodel.isLoading.value
+                  ? const Center(child: CircularProgressIndicator())
+                  : viewmodel.loadedErrorValidator(
+                      loaded: viewmodel.welcomeData != null,
+                      tryAgainEvet: ([p0]) =>
+                          viewmodel.fetchWelcomeData(context),
+                      view: _buildBody(context),
+                    );
+            },
+          ),
+        ),
       ),
+    );
+  }
+
+  Column _buildBody(BuildContext context) {
+    return Column(
+      children: [
+        AppGlobalVericalSpacing(
+          value: 3.h,
+        ),
+        OnboardingBody(
+          image: viewmodel.welcomeData?.url ?? "",
+          title: viewmodel.welcomeData?.title ?? '',
+          description: viewmodel.welcomeData?.description ?? '',
+        ),
+        AppGlobalVericalSpacing(
+          value: 4.h,
+        ),
+        AppGlobalTextButton(
+          minWidth: 100.w,
+          onPressed: viewmodel.navigateToRegister,
+          textButton: AppLocalizations.of(context)!.create_account_button,
+        ),
+        AppGlobalVericalSpacing(
+          value: 3.h,
+        ),
+        AppGlobalBorderButton(
+          minWidth: 100.w,
+          textButton: AppLocalizations.of(context)!.login,
+          onPressed: viewmodel.navigateToLogin,
+        ),
+        AppGlobalVericalSpacing(
+          value: 3.h,
+        ),
+        GestureDetector(
+          onTap: viewmodel.enterAsVisitor,
+          child: AppGlobalText(
+            text: AppLocalizations.of(context)!.guest_login,
+            style: TextStyleEnum.h3_bold,
+          ),
+        )
+      ],
     );
   }
 }

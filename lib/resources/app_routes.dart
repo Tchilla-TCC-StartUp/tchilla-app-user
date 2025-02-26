@@ -5,6 +5,7 @@ class AppRoutes {
 
   // Onboarding Pages
   static const String _onboardingPage = "$_mainRouter/onboarding";
+  static const String _errorPage = "$_mainRouter/error";
 
   // Home Pages
   static const String _homePage = "$_mainRouter/home";
@@ -48,4 +49,5 @@ class AppRoutes {
 
   static String get userdataPage => _userdataPage;
   static String get summaryPage => _summaryPage;
+  static String get errorPage => _errorPage;
 }

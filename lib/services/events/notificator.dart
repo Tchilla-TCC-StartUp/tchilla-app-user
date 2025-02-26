@@ -31,10 +31,10 @@ class Notificator extends INotificator {
 
   @override
   showLocalError(String title, String message, BuildContext context) {
-    getAlertStyle(
+    ScaffoldMessenger.of(context).showSnackBar(getAlertStyle(
       type: AlertStyleEnum.error,
       title: title,
       message: message,
-    );
+    ));
   }
 }

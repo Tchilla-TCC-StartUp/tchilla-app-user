@@ -79,4 +79,9 @@ class Navigation extends INavigation {
   navigateToSummaryPage(String id) {
     Get.toNamed(AppRoutes.summaryPage, arguments: id);
   }
+
+  @override
+  navigateToErrorPage(void Function() tryAgainEvet) {
+    Get.toNamed(AppRoutes.errorPage, arguments: tryAgainEvet);
+  }
 }
