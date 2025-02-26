@@ -14,32 +14,27 @@ class LoginViewmodel extends BaseViewlmodel {
   }
 
   login(String email, String password, BuildContext context) async {
-    print("Método login chamado");
-
     if (email.isEmpty || password.isEmpty) {
       loger.info("Campos vazios detectados");
-      return notificator.showLocalAlert(
-        AppLocalizations.of(context)!.alert_attention,
-        AppLocalizations.of(context)!.login_required_fields,
+      return showWarning(
         context,
+        AppLocalizations.of(context)!.login_required_fields,
       );
     }
 
     if (!validator.validatEmail(email)) {
       loger.info("Email inválido");
-      return notificator.showLocalAlert(
-        AppLocalizations.of(context)!.alert_attention,
-        AppLocalizations.of(context)!.login_invalid_email,
+      return showWarning(
         context,
+        AppLocalizations.of(context)!.login_invalid_email,
       );
     }
 
     if (password.length < 6) {
       loger.info("Senha curta");
-      return notificator.showLocalAlert(
-        AppLocalizations.of(context)!.alert_attention,
-        AppLocalizations.of(context)!.login_password_length,
+      return showWarning(
         context,
+        AppLocalizations.of(context)!.login_password_length,
       );
     }
 

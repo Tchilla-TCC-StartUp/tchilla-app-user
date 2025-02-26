@@ -1,8 +1,5 @@
 import 'package:get/get.dart';
 import 'package:tchilla/resources/app_routes.dart';
-import 'package:tchilla/services/events/navigation.dart';
-import 'package:tchilla/services/events/notificator.dart';
-import 'package:tchilla/services/events/validator.dart';
 import 'package:tchilla/viewmodel/base_viewlmodel.dart';
 
 class UserDataViewModel extends BaseViewlmodel {

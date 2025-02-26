@@ -20,48 +20,38 @@ class RegisterViewmodel extends BaseViewlmodel {
     final localizations = AppLocalizations.of(context)!;
 
     if (name.isEmpty) {
-      notificator.showLocalAlert(
-        localizations.alert_attention,
-        localizations.error_full_name_required,
+      return showWarning(
         context,
+        localizations.error_full_name_required,
       );
-      return;
     }
 
     if (email.isEmpty) {
-      notificator.showLocalAlert(
-        localizations.alert_attention,
-        localizations.error_email_required,
+      return showWarning(
         context,
+        localizations.error_email_required,
       );
-      return;
     }
 
     if (!validator.validatEmail(email)) {
-      notificator.showLocalAlert(
-        localizations.alert_attention,
-        localizations.error_invalid_email,
+      return showWarning(
         context,
+        localizations.error_invalid_email,
       );
-      return;
     }
 
     if (password.isEmpty) {
-      notificator.showLocalAlert(
-        localizations.alert_attention,
-        localizations.error_password_required,
+      return showWarning(
         context,
+        localizations.error_password_required,
       );
-      return;
     }
 
     if (password.length < 6) {
-      notificator.showLocalAlert(
-        localizations.alert_attention,
-        localizations.error_password_length,
+      return showWarning(
         context,
+        localizations.error_password_length,
       );
-      return;
     }
 
     await navigateToLoginPage();

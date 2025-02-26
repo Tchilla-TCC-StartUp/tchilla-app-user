@@ -15,15 +15,14 @@ class ForgontPasswordViewmodel extends BaseViewlmodel {
     final localizations = AppLocalizations.of(context)!;
 
     if (pin.length != 6) {
-      notificator.showLocalAlert(
-        localizations.alert_attention,
-        localizations.error_fill_all_fields,
+      showWarning(
         context,
+        localizations.error_fill_all_fields,
       );
     } else {
-      return this.navigator.navigateToRefefinePasswordPage(
-            AppRoutes.redefinePasswordPage,
-          );
+      return navigator.navigateToRefefinePasswordPage(
+        AppRoutes.redefinePasswordPage,
+      );
     }
   }
 
@@ -36,41 +35,31 @@ class ForgontPasswordViewmodel extends BaseViewlmodel {
     final localizations = AppLocalizations.of(context)!;
 
     if (password.isEmpty || confirmPassword.isEmpty) {
-      notificator.showLocalAlert(
-        localizations.alert_attention,
-        localizations.error_password_required,
-        context,
-      );
+      showWarning(context, localizations.error_password_required);
       return;
     }
     if (password != confirmPassword) {
-      notificator.showLocalAlert(
-        localizations.alert_attention,
-        localizations.error_password_mismatch,
-        context,
-      );
+      showWarning(context, localizations.error_password_mismatch);
       return;
     }
     if (password.length < 6) {
-      notificator.showLocalAlert(
-        localizations.alert_attention,
-        localizations.error_password_length,
+      showWarning(
         context,
+        localizations.error_password_length,
       );
       return;
     }
-
-    notificator.showLocalASucess(
-      localizations.alert_success,
-      localizations.success_password_reset,
+    showSuccess(
       context,
+      localizations.success_password_reset,
     );
+
     await Future.delayed(const Duration(seconds: 3));
 
     if (previousWalk == AppRoutes.userdataPage) {
-      await this.navigator.navigateToBack();
+      await navigator.navigateToBack();
     } else {
-      await this.navigator.navigateToLoginPage();
+      await navigator.navigateToLoginPage();
     }
   }
 
@@ -78,23 +67,22 @@ class ForgontPasswordViewmodel extends BaseViewlmodel {
     final localizations = AppLocalizations.of(context)!;
 
     if (email.isEmpty) {
-      notificator.showLocalAlert(
-        localizations.alert_attention,
-        localizations.error_email_required,
+      showWarning(
         context,
+        localizations.error_email_required,
       );
       return;
     }
 
     if (!validator.validatEmail(email)) {
-      notificator.showLocalAlert(
-        localizations.alert_attention,
-        localizations.error_invalid_email,
+      showWarning(
         context,
+        localizations.error_invalid_email,
       );
+
       return;
     }
 
-    await this.navigator.navigateToConfirmationPage();
+    await navigator.navigateToConfirmationPage();
   }
 }
