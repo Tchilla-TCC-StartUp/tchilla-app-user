@@ -1,40 +1,38 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:logger/logger.dart';
+import 'package:tchilla/resources/app_logs.dart';
 
 class AppInterceptor extends Interceptor {
-  final Logger logger = Logger();
+  final AppLogs logger;
+
+  AppInterceptor({required this.logger});
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    logger.i("🌍 [REQUEST] ${options.method} ${options.uri}");
-    logger.d("🔹 Headers: ${options.headers}");
-
-    if (options.data != null) {
-      logger.d("📤 Body: ${jsonEncode(options.data)}");
-    }
-
-    if (options.queryParameters.isNotEmpty) {
-      logger.d("📝 Query Params: ${options.queryParameters}");
-    }
+    logger.printRequest(
+      url: options.uri.toString(),
+      method: options.method,
+      headers: options.headers,
+      body: options.data,
+      queryParameters: options.queryParameters,
+    );
 
     super.onRequest(options, handler);
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    logger.i(
-        "✅ [RESPONSE] ${response.statusCode} ${response.requestOptions.uri}");
-    logger.d("📥 Data: ${jsonEncode(response.data)}");
+  void onResponse(response, ResponseInterceptorHandler handler) {
+    logger.printResponse(
+      statusCode: response.statusCode,
+      body: response.data,
+    );
 
     super.onResponse(response, handler);
   }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    logger.e("❌ [ERROR] ${err.response?.statusCode} ${err.requestOptions.uri}");
-    logger.e("📝 Response Data: ${err.response?.data}");
-    logger.e("🔴 Error Message: ${err.message}");
+    logger.printError(info: err.response?.statusMessage);
+    logger.logDioError(err);
 
     super.onError(err, handler);
   }

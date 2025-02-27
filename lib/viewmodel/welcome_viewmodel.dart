@@ -2,14 +2,12 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:tchilla/model/welcome_model.dart';
 import 'package:tchilla/repository/events/welcome_repository.dart';
-import 'package:tchilla/viewmodel/base_viewlmodel.dart';
+import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
-class WelcomeViewmodel extends BaseViewlmodel {
+class WelcomeViewmodel extends BaseViewModel {
   final WelcomeRepository repository;
 
   final Rxn<WelcomeModel> _welcomeData = Rxn<WelcomeModel>();
-  final RxBool _isLoading = false.obs;
-  RxBool get isLoading => _isLoading;
 
   WelcomeViewmodel({
     required this.repository,
@@ -24,17 +22,15 @@ class WelcomeViewmodel extends BaseViewlmodel {
   Future<void> fetchWelcomeData(BuildContext context) async {
     try {
       final lang = Get.deviceLocale?.languageCode ?? "en";
-      _isLoading.value = true;
-      loger.info("Buscando dados do  welcome para o idioma: $lang");
+      startLoading();
       final data = await repository.fetchWelcomeData(lang);
       loger.info("Dados do welcome carregados com sucesso.");
-      loger.printJson(data);
       _welcomeData.value = data;
     } catch (e, stacktrace) {
-      loger.error("Erro ao buscar os dados de boas-vindas: $e");
+      emitError();
       handleError(context, e, stacktrace);
     } finally {
-      _isLoading.value = false;
+      stopLoading();
     }
   }
 

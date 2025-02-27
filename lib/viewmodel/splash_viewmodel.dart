@@ -1,6 +1,6 @@
-import 'package:tchilla/viewmodel/base_viewlmodel.dart';
+import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
-class SplashViewmodel extends BaseViewlmodel {
+class SplashViewmodel extends BaseViewModel {
   SplashViewmodel({
     required super.notificator,
     required super.validator,

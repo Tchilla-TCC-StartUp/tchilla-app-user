@@ -41,7 +41,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               return viewModel.isLoading.value
                   ? const Center(child: CircularProgressIndicator())
                   : viewModel.loadedErrorValidator(
-                      loaded: viewModel.onboarding.isNotEmpty,
+                      error: viewModel.isError.value,
                       tryAgainEvet: ([args]) =>
                           viewModel.getOnboarding(context),
                       view: _buildBody(context),

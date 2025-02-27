@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:tchilla/viewmodel/base_viewlmodel.dart';
+import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
-class ViewMoreViewmodel extends BaseViewlmodel {
+class ViewMoreViewmodel extends BaseViewModel {
   RxList<String> tabTitlesSegestions = [
     "Casamento",
     "Pedido",

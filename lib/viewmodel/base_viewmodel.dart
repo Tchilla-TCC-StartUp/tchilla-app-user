@@ -7,24 +7,44 @@ import 'package:tchilla/services/events/notificator.dart';
 import 'package:tchilla/services/events/validator.dart';
 import 'package:tchilla/view/pages/error_page.dart';
 
-class BaseViewlmodel extends GetxController {
+class BaseViewModel extends GetxController {
   final Notificator notificator;
   final Validator validator;
   final Navigation navigator;
   final AppLogs loger;
-  BaseViewlmodel({
+
+  final RxBool isLoading = false.obs;
+  final RxBool isError = false.obs;
+
+  BaseViewModel({
     required this.notificator,
     required this.validator,
     required this.navigator,
     required this.loger,
   });
 
+  void startLoading() {
+    isLoading.value = true;
+    resetError();
+  }
+
+  void stopLoading() {
+    isLoading.value = false;
+  }
+
+  void resetError() {
+    isError.value = false;
+  }
+
+  void emitError() {
+    isError.value = true;
+  }
+
   void handleError(
     BuildContext context,
     dynamic error,
     StackTrace? stacktrace,
   ) {
-    loger.error("Erro: ${error.toString()}", stacktrace);
     notificator.showLocalError(
       AppLocalizations.of(context)!.error,
       error.toString(),
@@ -33,11 +53,11 @@ class BaseViewlmodel extends GetxController {
   }
 
   Widget loadedErrorValidator({
-    required bool loaded,
+    required bool error,
     required void Function([dynamic]) tryAgainEvet,
     required Widget view,
   }) {
-    return loaded ? view : ErrorPage(tryAgainEvet: tryAgainEvet);
+    return error ? ErrorPage(tryAgainEvet: tryAgainEvet) : view;
   }
 
   void showWarning(BuildContext context, String message) {

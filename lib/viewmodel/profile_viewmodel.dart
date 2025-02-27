@@ -1,6 +1,6 @@
-import 'package:tchilla/viewmodel/base_viewlmodel.dart';
+import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
-class ProfileViewmodel extends BaseViewlmodel {
+class ProfileViewmodel extends BaseViewModel {
   ProfileViewmodel({
     required super.notificator,
     required super.validator,

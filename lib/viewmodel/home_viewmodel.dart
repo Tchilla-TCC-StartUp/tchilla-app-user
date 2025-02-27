@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:tchilla/viewmodel/base_viewlmodel.dart';
+import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
-class HomeViewModel extends BaseViewlmodel {
+class HomeViewModel extends BaseViewModel {
   RxInt selectedIndex = 0.obs;
   RxDouble adptiveHeight = 510.px.obs;
   RxDouble adptiveSilverExpade = 780.px.obs;

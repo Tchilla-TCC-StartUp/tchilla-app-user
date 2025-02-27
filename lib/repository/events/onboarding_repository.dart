@@ -18,7 +18,6 @@ class OnboardingRepository extends IonboardingRepository {
           onboarding.add(OnboardingModel.fromMap(item));
         }
       } else {
-        print("ALguma coisa deu errado ${response.statusMessage}");
         throw Exception("ALguma coisa deu errado ${response.statusMessage}");
       }
     } catch (e) {
@@ -27,6 +26,4 @@ class OnboardingRepository extends IonboardingRepository {
 
     return onboarding;
   }
-
-  
 }

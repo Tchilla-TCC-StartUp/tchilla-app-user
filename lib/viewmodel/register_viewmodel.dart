@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:tchilla/viewmodel/base_viewlmodel.dart';
+import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
-class RegisterViewmodel extends BaseViewlmodel {
+class RegisterViewmodel extends BaseViewModel {
   RegisterViewmodel({
     required super.notificator,
     required super.validator,

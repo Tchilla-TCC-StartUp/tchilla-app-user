@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:tchilla/viewmodel/base_viewlmodel.dart';
+import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
-class LoginViewmodel extends BaseViewlmodel {
+class LoginViewmodel extends BaseViewModel {
   LoginViewmodel(
       {required super.notificator,
       required super.validator,

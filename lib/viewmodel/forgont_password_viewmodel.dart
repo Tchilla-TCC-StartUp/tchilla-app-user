@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tchilla/resources/app_routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:tchilla/viewmodel/base_viewlmodel.dart';
+import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
-class ForgontPasswordViewmodel extends BaseViewlmodel {
+class ForgontPasswordViewmodel extends BaseViewModel {
   ForgontPasswordViewmodel({
     required super.navigator,
     required super.notificator,

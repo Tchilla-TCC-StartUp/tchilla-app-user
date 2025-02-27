@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 
 import 'package:tchilla/resources/app_assets_images.dart';
 
-import 'package:tchilla/viewmodel/base_viewlmodel.dart';
+import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
-class DetalheProposedViewModel extends BaseViewlmodel {
+class DetalheProposedViewModel extends BaseViewModel {
   RxInt selectedIndex = 0.obs;
   RxList<String> tabTitles = [
     'Sobre',

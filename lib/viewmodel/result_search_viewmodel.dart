@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:tchilla/services/events/navigation.dart';
 import 'package:tchilla/services/events/notificator.dart';
-import 'package:tchilla/viewmodel/base_viewlmodel.dart';
+import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
-class ResultSearchViewModel extends BaseViewlmodel {
+class ResultSearchViewModel extends BaseViewModel {
   RxInt selectedIndex = 0.obs;
   RxList<String> tabTitles = [
     'Todas Ofertas',

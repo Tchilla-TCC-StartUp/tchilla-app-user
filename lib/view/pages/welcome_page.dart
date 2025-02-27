@@ -38,7 +38,7 @@ class _WelcomePageState extends State<WelcomePage> {
               return viewmodel.isLoading.value
                   ? const Center(child: CircularProgressIndicator())
                   : viewmodel.loadedErrorValidator(
-                      loaded: viewmodel.welcomeData != null,
+                      error: viewmodel.isError.value,
                       tryAgainEvet: ([p0]) =>
                           viewmodel.fetchWelcomeData(context),
                       view: _buildBody(context),

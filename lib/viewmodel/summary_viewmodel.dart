@@ -1,6 +1,6 @@
-import 'package:tchilla/viewmodel/base_viewlmodel.dart';
+import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
-class SummaryViewmodel extends BaseViewlmodel {
+class SummaryViewmodel extends BaseViewModel {
   SummaryViewmodel({
     required super.notificator,
     required super.validator,
