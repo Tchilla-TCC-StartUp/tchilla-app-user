@@ -5,9 +5,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/services/events/navigation.dart';
 import 'package:tchilla/services/events/notificator.dart';
 import 'package:tchilla/services/events/validator.dart';
-import 'package:tchilla/view/pages/error_page.dart';
+import 'package:tchilla/view/pages/error_try_again.dart';
 
-class BaseViewModel extends GetxController {
+abstract class BaseViewModel extends GetxController {
   final Notificator notificator;
   final Validator validator;
   final Navigation navigator;
@@ -15,6 +15,7 @@ class BaseViewModel extends GetxController {
 
   final RxBool isLoading = false.obs;
   final RxBool isError = false.obs;
+  final RxString errorMessage = "".obs;
 
   BaseViewModel({
     required this.notificator,
@@ -36,8 +37,9 @@ class BaseViewModel extends GetxController {
     isError.value = false;
   }
 
-  void emitError() {
+  void emitError(final String message) {
     isError.value = true;
+    errorMessage.value = message;
   }
 
   void handleError(
@@ -48,16 +50,21 @@ class BaseViewModel extends GetxController {
     notificator.showLocalError(
       AppLocalizations.of(context)!.error,
       error.toString(),
-      context,
     );
   }
 
-  Widget loadedErrorValidator({
+  Widget buildErrorValidatedView({
     required bool error,
     required void Function([dynamic]) tryAgainEvet,
     required Widget view,
+    required String message,
   }) {
-    return error ? ErrorPage(tryAgainEvet: tryAgainEvet) : view;
+    return error
+        ? ErrorTryAgain(
+            tryAgainEvet: tryAgainEvet,
+            message: message,
+          )
+        : view;
   }
 
   void showWarning(BuildContext context, String message) {
@@ -65,7 +72,6 @@ class BaseViewModel extends GetxController {
     notificator.showLocalAlert(
       AppLocalizations.of(context)!.alert_attention,
       message,
-      context,
     );
   }
 
@@ -74,7 +80,6 @@ class BaseViewModel extends GetxController {
     notificator.showLocalASucess(
       AppLocalizations.of(context)!.alert_success,
       message,
-      context,
     );
   }
 }

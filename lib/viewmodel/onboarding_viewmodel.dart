@@ -26,14 +26,11 @@ class OnboardingViewModel extends BaseViewModel {
       startLoading();
       final lang = Get.deviceLocale?.languageCode ?? "en";
       loger.info("Buscando dados do onboarding para o idioma: $lang");
-
       final List<OnboardingModel> data = await repository.fetchOnboadData(lang);
       loger.info("Dados do onboarding carregados com sucesso");
-
       _onboarding.assignAll(data);
-    } catch (e, stacktrace) {
-      emitError();
-      handleError(context, e, stacktrace);
+    } catch (e) {
+      emitError(e.toString());
     } finally {
       stopLoading();
     }

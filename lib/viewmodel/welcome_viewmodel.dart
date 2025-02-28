@@ -26,9 +26,8 @@ class WelcomeViewmodel extends BaseViewModel {
       final data = await repository.fetchWelcomeData(lang);
       loger.info("Dados do welcome carregados com sucesso.");
       _welcomeData.value = data;
-    } catch (e, stacktrace) {
-      emitError();
-      handleError(context, e, stacktrace);
+    } catch (e) {
+      emitError(e.toString());
     } finally {
       stopLoading();
     }

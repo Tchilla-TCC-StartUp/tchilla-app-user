@@ -56,18 +56,26 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
         statusBarIconBrightness: Brightness.light,
       ),
       child: Scaffold(
-        backgroundColor: primary50,
-        body: SizedBox(
-          width: double.maxFinite,
-          height: double.maxFinite,
-          child: Stack(
-            children: [
-              _buildImageSlide(),
-              _buildBody(),
-            ],
-          ),
-        ),
-      ),
+          backgroundColor: primary50,
+          body: Obx(
+            () {
+              return viewmodel.buildErrorValidatedView(
+                error: viewmodel.isError.value,
+                message: viewmodel.errorMessage.value,
+                tryAgainEvet: ([p0]) {},
+                view: SizedBox(
+                  width: double.maxFinite,
+                  height: double.maxFinite,
+                  child: Stack(
+                    children: [
+                      _buildImageSlide(),
+                      _buildBody(),
+                    ],
+                  ),
+                ),
+              );
+            },
+          )),
     );
   }
 

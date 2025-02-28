@@ -60,6 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
               hintText: "Celson Paixão",
               keyboardType: TextInputType.name,
               textInputAction: TextInputAction.next,
+              
             ),
             AppGlobalVericalSpacing(
               value: 2.h,

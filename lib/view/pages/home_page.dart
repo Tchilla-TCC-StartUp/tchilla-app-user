@@ -9,6 +9,7 @@ import 'package:tchilla/resources/app_size.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/pages/view_more_page.dart';
+import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
@@ -65,17 +66,23 @@ class _HomePageState extends State<HomePage>
             behavior: HitTestBehavior.opaque,
             child: Column(
               children: [
-                Obx(
-                  () => SizedBox(
-                    height: viewmodel.adptiveSilverExpade.value + 2.h,
-                    child: Stack(
-                      children: [
-                        _buildBackground(),
-                        _buildContainerMan(),
-                      ],
-                    ),
-                  ),
-                ),
+                Obx(() {
+                  return viewmodel.isLoading.value
+                      ? const AppGlobalLoading()
+                      : viewmodel.buildErrorValidatedView(
+                          error: viewmodel.isError.value,
+                          message: viewmodel.errorMessage.value,
+                          tryAgainEvet: ([p0]) {},
+                          view: SizedBox(
+                            height: viewmodel.adptiveSilverExpade.value + 2.h,
+                            child: Stack(
+                              children: [
+                                _buildBackground(),
+                                _buildContainerMan(),
+                              ],
+                            ),
+                          ));
+                }),
                 const AppLayoutpage(
                   body: ViewMorePage(),
                 )

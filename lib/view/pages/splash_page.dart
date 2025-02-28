@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
-import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/resources/app_size.dart';
 import 'package:tchilla/viewmodel/splash_viewmodel.dart';
 
@@ -15,12 +14,11 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  late final SplashViewmodel viewmodel;
+  final viewmodel = Get.find<SplashViewmodel>();
 
   @override
   void initState() {
     super.initState();
-    viewmodel = Get.find<SplashViewmodel>();
     viewmodel.navigateToHomePage();
   }
 

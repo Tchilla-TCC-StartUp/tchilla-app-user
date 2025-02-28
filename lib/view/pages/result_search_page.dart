@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
-import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_custom_list_card.dart';
 import 'package:tchilla/view/widgets/app_global_back_button.dart';
+import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
@@ -80,9 +80,31 @@ class _ResultSearchPageState extends State<ResultSearchPage>
           viewmodel.tabTitles.length,
           (index) {
             if (index == 0) {
-              return _builAllProposedSection();
+              return Obx(
+                () {
+                  return viewmodel.isLoading.value
+                      ? const AppGlobalLoading()
+                      : viewmodel.buildErrorValidatedView(
+                          error: viewmodel.isError.value,
+                          message: viewmodel.errorMessage.value,
+                          tryAgainEvet: ([p0]) {},
+                          view: _builAllProposedSection(),
+                        );
+                },
+              );
             }
-            return _builFilterProposedSection(index + 1);
+            return Obx(
+              () {
+                return viewmodel.isLoading.value
+                    ? const AppGlobalLoading()
+                    : viewmodel.buildErrorValidatedView(
+                        error: viewmodel.isError.value,
+                        message: viewmodel.errorMessage.value,
+                        tryAgainEvet: ([p0]) {},
+                        view: _builFilterProposedSection(index + 1),
+                      );
+              },
+            );
           },
         ),
       ),
@@ -117,7 +139,7 @@ class _ResultSearchPageState extends State<ResultSearchPage>
 
   AppBar _buildAppbar() {
     return AppBar(
-      leading: AppGlobalBackButton(),
+      leading: const AppGlobalBackButton(),
       centerTitle: true,
       title: AppCustomListCard(
         iconPath: AppAssetsImages.locationIconSvg,

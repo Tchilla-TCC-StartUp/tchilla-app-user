@@ -7,6 +7,7 @@ import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_global_image_button.dart';
+import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
@@ -22,13 +23,13 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
-  final viewModel = Get.find<OnboardingViewModel>();
+  final viewmodel = Get.find<OnboardingViewModel>();
 
   @override
   void initState() {
     super.initState();
 
-    viewModel.getOnboarding(context);
+    viewmodel.getOnboarding(context);
   }
 
   @override
@@ -38,12 +39,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
         child: AppLayoutpage(
           body: Obx(
             () {
-              return viewModel.isLoading.value
-                  ? const Center(child: CircularProgressIndicator())
-                  : viewModel.loadedErrorValidator(
-                      error: viewModel.isError.value,
+              return viewmodel.isLoading.value
+                  ? const AppGlobalLoading()
+                  : viewmodel.buildErrorValidatedView(
+                      message: viewmodel.errorMessage.value,
+                      error: viewmodel.isError.value,
                       tryAgainEvet: ([args]) =>
-                          viewModel.getOnboarding(context),
+                          viewmodel.getOnboarding(context),
                       view: _buildBody(context),
                     );
             },
@@ -62,7 +64,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
         Align(
           alignment: Alignment.centerRight,
           child: GestureDetector(
-            onTap: viewModel.clickSkip,
+            onTap: viewmodel.clickSkip,
             child: AppGlobalText(
               text: AppLocalizations.of(context)!.skip,
               style: TextStyleEnum.h3_medium,
@@ -75,14 +77,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
         Expanded(
           child: Obx(() {
             return PageView.builder(
-              controller: viewModel.pageController,
+              controller: viewmodel.pageController,
               physics: const NeverScrollableScrollPhysics(),
               onPageChanged: (index) {
-                viewModel.currentPage.value = index;
+                viewmodel.currentPage.value = index;
               },
-              itemCount: viewModel.onboarding.length,
+              itemCount: viewmodel.onboarding.length,
               itemBuilder: (context, index) {
-                var item = viewModel.onboarding[index];
+                var item = viewmodel.onboarding[index];
                 return OnboardingBody(
                   image: item.url!,
                   title: item.title!,
@@ -93,8 +95,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
           }),
         ),
         SmoothPageIndicator(
-          controller: viewModel.pageController,
-          count: viewModel.onboarding.length,
+          controller: viewmodel.pageController,
+          count: viewmodel.onboarding.length,
           effect: ExpandingDotsEffect(
             dotColor: gray400,
             activeDotColor: primary950,
@@ -106,7 +108,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           value: 5.h,
         ),
         AppGlobalImageButton(
-            onPressed: viewModel.nextPage,
+            onPressed: viewmodel.nextPage,
             color: primary950,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
