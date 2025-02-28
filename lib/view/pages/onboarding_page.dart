@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_global_image_button.dart';
 import 'package:tchilla/view/widgets/app_global_loading.dart';
+import 'package:tchilla/view/widgets/app_global_page_indicator.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
@@ -94,15 +94,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
             );
           }),
         ),
-        SmoothPageIndicator(
+        AppGlobalPageIndicator(
           controller: viewmodel.pageController,
           count: viewmodel.onboarding.length,
-          effect: ExpandingDotsEffect(
-            dotColor: gray400,
-            activeDotColor: primary950,
-            dotWidth: 2.w,
-            dotHeight: 1.h,
-          ),
         ),
         AppGlobalVericalSpacing(
           value: 5.h,

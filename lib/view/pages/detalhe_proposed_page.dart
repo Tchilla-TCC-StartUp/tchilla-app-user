@@ -3,13 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/angola_price.dart';
 import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_network_image.dart';
+import 'package:tchilla/view/widgets/app_global_page_indicator.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
@@ -195,15 +195,13 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: EdgeInsets.only(bottom: 4.h),
-              child: SmoothPageIndicator(
+              child: AppGlobalPageIndicator(
                 controller: viewmodel.pageController,
                 count: viewmodel.listImages.length,
-                effect: ExpandingDotsEffect(
-                  dotColor: gray400,
-                  activeDotColor: gray50,
-                  dotWidth: 2.w,
-                  dotHeight: 1.h,
-                ),
+                dotColor: gray400,
+                activeDotColor: gray50,
+                dotWidth: 2.w,
+                dotHeight: 1.h,
               ),
             ),
           ),
