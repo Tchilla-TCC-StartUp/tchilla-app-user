@@ -1,23 +1,32 @@
-import 'package:dio/dio.dart';
 import 'package:tchilla/model/welcome_model.dart';
+import 'package:tchilla/repository/base_repository.dart';
 import 'package:tchilla/repository/interfaces/iwelcome_repository.dart';
 
-class WelcomeRepository extends IwelcomeRepository {
-  final Dio dio;
+class WelcomeRepository extends BaseRepository implements IwelcomeRepository {
+  WelcomeRepository({
+    required super.dio,
+    required super.navigator,
+    required super.notificator,
+  });
 
-  WelcomeRepository({required this.dio});
   @override
   Future<WelcomeModel> fetchWelcomeData(String lang) async {
+    late WelcomeModel welcome;
     try {
       final response = await dio.get("/Resource/welcome?lang=$lang");
 
-      if (response.statusCode == 200 && response.data != null) {
-        return WelcomeModel.fromMap(response.data);
+      if (response.statusCode == 200) {
+        welcome = WelcomeModel.fromMap(response.data);
       } else {
-        throw Exception("Erro ao buscar dados: Código ${response.statusCode}");
+        notificator.showLocalError(
+          response.statusCode.toString(),
+          response.statusMessage.toString(),
+        );
       }
     } catch (e) {
-      throw Exception("Erro inesperado ao buscar dados do welcome. $e");
+      throw Exception(e);
     }
+
+    return welcome;
   }
 }

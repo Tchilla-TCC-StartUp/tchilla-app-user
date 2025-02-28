@@ -4,6 +4,7 @@ import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum AlertStyleEnum {
   sucess,
@@ -14,23 +15,27 @@ enum AlertStyleEnum {
 
 SnackBar getAlertStyle({
   required AlertStyleEnum type,
-  required String title,
   required String message,
+  required BuildContext context,
 }) {
   Color backgroundColor;
   Icon icon;
-
+  String title;
   switch (type) {
     case AlertStyleEnum.sucess:
       backgroundColor = Colors.green.shade600;
       icon = const Icon(Icons.check_circle, color: Colors.white);
+      title = AppLocalizations.of(context)!.alert_success;
       break;
     case AlertStyleEnum.error:
       backgroundColor = Colors.red.shade600;
       icon = const Icon(Icons.error, color: Colors.white);
+      title = AppLocalizations.of(context)!.error;
+      ;
       break;
     case AlertStyleEnum.pedding:
       backgroundColor = Colors.orange.shade600;
+         title = AppLocalizations.of(context)!.alert_attention;
       icon = const Icon(
         Icons.hourglass_bottom,
         color: Colors.white,
@@ -38,6 +43,7 @@ SnackBar getAlertStyle({
       break;
     case AlertStyleEnum.info:
       backgroundColor = primary600;
+         title = AppLocalizations.of(context)!.alert_attention;
       icon = const Icon(
         Icons.info,
         color: Colors.white,

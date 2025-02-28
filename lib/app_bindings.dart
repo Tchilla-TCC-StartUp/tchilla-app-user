@@ -23,7 +23,12 @@ import 'package:tchilla/viewmodel/view_more_viewmodel.dart';
 import 'package:tchilla/viewmodel/welcome_viewmodel.dart';
 import 'package:tchilla/resources/ app_interceptor.dart';
 
-class AppGets {
+class AppBindings implements Bindings {
+  @override
+  void dependencies() {
+    init();
+  }
+
   static void init() {
     registerEvents();
     // ---------- Configuração do Dio ----------
@@ -55,8 +60,16 @@ class AppGets {
 
   // ---------- Registro de Repositórios ----------
   static void registerRepositories(Dio dio) {
-    Get.lazyPut<OnboardingRepository>(() => OnboardingRepository(dio: dio));
-    Get.lazyPut<WelcomeRepository>(() => WelcomeRepository(dio: dio));
+    Get.lazyPut<OnboardingRepository>(() => OnboardingRepository(
+          dio: dio,
+          navigator: Get.find(),
+          notificator: Get.find(),
+        ));
+    Get.lazyPut<WelcomeRepository>(() => WelcomeRepository(
+          dio: dio,
+          navigator: Get.find(),
+          notificator: Get.find(),
+        ));
   }
 
   // ---------- Registro de ViewModels ----------

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/view/widgets/app_global_border_button.dart';
+import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
@@ -36,9 +37,10 @@ class _WelcomePageState extends State<WelcomePage> {
           body: Obx(
             () {
               return viewmodel.isLoading.value
-                  ? const Center(child: CircularProgressIndicator())
-                  : viewmodel.loadedErrorValidator(
+                  ? const AppGlobalLoading()
+                  : viewmodel.buildErrorValidatedView(
                       error: viewmodel.isError.value,
+                      message: viewmodel.errorMessage.value,
                       tryAgainEvet: ([p0]) =>
                           viewmodel.fetchWelcomeData(context),
                       view: _buildBody(context),

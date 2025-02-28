@@ -39,3 +39,4 @@ const gray900 = Color(0xFF37322D);
 
 const primaryBorder = Color(0xffAFBACA);
 const primaryTag = Color(0xff14AAE940);
+const Color primaryHighligth = Color(0xFF14AAE9);

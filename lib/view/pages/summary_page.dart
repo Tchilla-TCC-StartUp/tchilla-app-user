@@ -8,6 +8,7 @@ import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/angola_price.dart';
 import 'package:tchilla/view/widgets/app_global_back_button.dart';
 import 'package:tchilla/view/widgets/app_global_border_button.dart';
+import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
@@ -39,54 +40,69 @@ class _SummaryPageState extends State<SummaryPage> {
         ),
       ),
       body: AppLayoutpage(
-        body: Column(
-          children: [
-            Expanded(
-              flex: 7,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    AppGlobalVericalSpacing(
-                      value: 1.h,
-                    ),
-                    ClipRRect(
-                      clipBehavior: Clip.hardEdge,
-                      borderRadius: BorderRadius.circular(10),
-                      child: AppGlobalNetworkImage(
-                        image: AppAssetsImages.defaultProposedImage,
-                        width: 100.w,
-                        height: 180.px,
-                      ),
-                    ),
-                    AppGlobalVericalSpacing(
-                      value: 3.h,
-                    ),
-                    AppResponsibleCard(
-                      name: "Celson Paixão",
-                      role: "Admin",
-                      imageUrl: AppAssetsImages.defaultUserImage,
-                    ),
-                    AppGlobalVericalSpacing(
-                      value: 3.h,
-                    ),
-                    _buildEventSummaryData(
-                      context: context,
-                      eventData: "25/Novembro/2035 - 18h",
-                      eventType: "Casamento",
-                      numberOfGuests: 200,
-                      services: ["Dj", "Decoração"],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: _buildBottomInfo(),
-            )
-          ],
+        body: Obx(
+          () {
+            return viewmodel.isLoading.value
+                ? const AppGlobalLoading()
+                : viewmodel.buildErrorValidatedView(
+                    error: viewmodel.isError.value,
+                    message: viewmodel.errorMessage.value,
+                    tryAgainEvet: ([p0]) {},
+                    view: _buildBody(context),
+                  );
+          },
         ),
       ),
+    );
+  }
+
+  Column _buildBody(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          flex: 7,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                AppGlobalVericalSpacing(
+                  value: 1.h,
+                ),
+                ClipRRect(
+                  clipBehavior: Clip.hardEdge,
+                  borderRadius: BorderRadius.circular(10),
+                  child: AppGlobalNetworkImage(
+                    image: AppAssetsImages.defaultProposedImage,
+                    width: 100.w,
+                    height: 180.px,
+                  ),
+                ),
+                AppGlobalVericalSpacing(
+                  value: 3.h,
+                ),
+                AppResponsibleCard(
+                  name: "Celson Paixão",
+                  role: "Admin",
+                  imageUrl: AppAssetsImages.defaultUserImage,
+                ),
+                AppGlobalVericalSpacing(
+                  value: 3.h,
+                ),
+                _buildEventSummaryData(
+                  context: context,
+                  eventData: "25/Novembro/2035 - 18h",
+                  eventType: "Casamento",
+                  numberOfGuests: 200,
+                  services: ["Dj", "Decoração"],
+                ),
+              ],
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: _buildBottomInfo(),
+        )
+      ],
     );
   }
 
@@ -96,9 +112,10 @@ class _SummaryPageState extends State<SummaryPage> {
         color: primary50,
       ),
       width: 100.w,
-      height: 100.px,
+      height: 100.px + 1.h,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
             children: [
@@ -122,10 +139,10 @@ class _SummaryPageState extends State<SummaryPage> {
               AppGlobalBorderButton(
                 onPressed: viewmodel.navigator.navigateToBack,
                 textButton: AppLocalizations.of(context)!.cancel,
-                minWidth: 180.px,
+                minWidth: 40.w,
               ),
               AppGlobalTextButton(
-                minWidth: 180.px,
+                minWidth: 40.w,
                 onPressed: () => viewmodel.clickContinue("pjk,d"),
                 textButton: AppLocalizations.of(context)!.lb_continue,
               )

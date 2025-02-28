@@ -1,6 +1,6 @@
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
-class SplashViewmodel extends BaseViewModel {
+class SplashViewmodel extends BaseViewModel  {
   SplashViewmodel({
     required super.notificator,
     required super.validator,
@@ -13,4 +13,5 @@ class SplashViewmodel extends BaseViewModel {
     await navigator.navigateToOnboarding();
     // await _navigation.navigateToHome();
   }
+
 }

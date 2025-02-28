@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
+import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
@@ -39,6 +40,19 @@ class _ViewMorePageState extends State<ViewMorePage>
 
   @override
   Widget build(BuildContext context) {
+    return Obx(() {
+      return viewmodel.isLoading.value
+          ? const AppGlobalLoading()
+          : viewmodel.buildErrorValidatedView(
+              error: viewmodel.isError.value,
+              message: viewmodel.errorMessage.value,
+              tryAgainEvet: ([p0]) {},
+              view: _buildBody(context),
+            );
+    });
+  }
+
+  Column _buildBody(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

@@ -3,38 +3,33 @@ import 'package:tchilla/style/app_alert_style.dart';
 import 'package:tchilla/services/interface/inotificator.dart';
 
 class Notificator extends INotificator {
-  @override
-  showLocalAlert(
-    String title,
-    String message,
-    BuildContext context,
-  ) {
-    ScaffoldMessenger.of(context).showSnackBar(
+  static final Notificator _instance = Notificator._internal();
+  factory Notificator() => _instance;
+  Notificator._internal();
+  final GlobalKey<ScaffoldMessengerState> snackbarKey =
+      GlobalKey<ScaffoldMessengerState>();
+  void _showAlert(String title, String message, AlertStyleEnum type) {
+    snackbarKey.currentState?.showSnackBar(
       getAlertStyle(
-        type: AlertStyleEnum.pedding,
-        title: title,
+        type: type,
         message: message,
+        context: snackbarKey.currentContext!,
       ),
     );
   }
 
   @override
-  showLocalASucess(String title, String message, BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      getAlertStyle(
-        type: AlertStyleEnum.sucess,
-        title: title,
-        message: message,
-      ),
-    );
+  showLocalAlert(String title, String message) {
+    _showAlert(title, message, AlertStyleEnum.pedding);
   }
 
   @override
-  showLocalError(String title, String message, BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(getAlertStyle(
-      type: AlertStyleEnum.error,
-      title: title,
-      message: message,
-    ));
+  showLocalASucess(String title, String message) {
+    _showAlert(title, message, AlertStyleEnum.sucess);
+  }
+
+  @override
+  showLocalError(String title, String message) {
+    _showAlert(title, message, AlertStyleEnum.error);
   }
 }

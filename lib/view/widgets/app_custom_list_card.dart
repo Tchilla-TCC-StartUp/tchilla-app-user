@@ -26,11 +26,11 @@ class AppCustomListCard extends StatelessWidget {
         SvgPicture.asset(
           iconPath,
           colorFilter: const ColorFilter.mode(
-            primary700,
+            primaryHighligth,
             BlendMode.srcIn,
           ),
-          width: 35.px,
-          height: 35.px,
+          width: 34.px,
+          height: 34.px,
         ),
         AppGlobalHorizontalSpacing(
           value: 2.w,
@@ -41,7 +41,7 @@ class AppCustomListCard extends StatelessWidget {
             AppGlobalText(
               text: "$title - $subtitle",
               style: TextStyleEnum.p_bold,
-              color: primary700,
+              color: primary900,
               align: TextAlign.justify,
             ),
           ],
