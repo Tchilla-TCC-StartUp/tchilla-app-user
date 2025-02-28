@@ -8,6 +8,7 @@ import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/angola_price.dart';
+import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
@@ -59,21 +60,23 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
           backgroundColor: primary50,
           body: Obx(
             () {
-              return viewmodel.buildErrorValidatedView(
-                error: viewmodel.isError.value,
-                message: viewmodel.errorMessage.value,
-                tryAgainEvet: ([p0]) {},
-                view: SizedBox(
-                  width: double.maxFinite,
-                  height: double.maxFinite,
-                  child: Stack(
-                    children: [
-                      _buildImageSlide(),
-                      _buildBody(),
-                    ],
-                  ),
-                ),
-              );
+              return viewmodel.isLoading.value
+                  ? const AppGlobalLoading()
+                  : viewmodel.buildErrorValidatedView(
+                      error: viewmodel.isError.value,
+                      message: viewmodel.errorMessage.value,
+                      tryAgainEvet: ([p0]) {},
+                      view: SizedBox(
+                        width: double.maxFinite,
+                        height: double.maxFinite,
+                        child: Stack(
+                          children: [
+                            _buildImageSlide(),
+                            _buildBody(),
+                          ],
+                        ),
+                      ),
+                    );
             },
           )),
     );
