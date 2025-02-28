@@ -61,13 +61,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
         AppGlobalVericalSpacing(
           value: 2.h,
         ),
-        Align(
-          alignment: Alignment.centerRight,
-          child: GestureDetector(
-            onTap: viewmodel.clickSkip,
-            child: AppGlobalText(
-              text: AppLocalizations.of(context)!.skip,
-              style: TextStyleEnum.h3_medium,
+        Visibility(
+          visible: viewmodel.currentPage.value < 2,
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: GestureDetector(
+              onTap: viewmodel.clickSkip,
+              child: AppGlobalText(
+                text: AppLocalizations.of(context)!.skip,
+                style: TextStyleEnum.h3_medium,
+              ),
             ),
           ),
         ),
