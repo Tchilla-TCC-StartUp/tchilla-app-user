@@ -17,25 +17,27 @@ class ErrorTryAgain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        AppGlobalText(
-          text: message,
-          style: TextStyleEnum.p_bold,
-          maxLines: 5,
-          align: TextAlign.center,
-        ),
-        AppGlobalVericalSpacing(
-          value: 1.h,
-        ),
-        AppGlobalTextButton(
-          onPressed: tryAgainEvet,
-          textButton: AppLocalizations.of(context)!.try_again,
-          minWidth: 90.w,
-        )
-      ],
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          AppGlobalText(
+            text: message,
+            style: TextStyleEnum.p_bold,
+            maxLines: 5,
+            align: TextAlign.center,
+          ),
+          AppGlobalVericalSpacing(
+            value: 1.h,
+          ),
+          AppGlobalTextButton(
+            onPressed: tryAgainEvet,
+            textButton: AppLocalizations.of(context)!.try_again,
+            minWidth: 90.w,
+          )
+        ],
+      ),
     );
   }
 }
