@@ -71,13 +71,18 @@ class _HomePageState extends State<HomePage>
                   return viewmodel.isLoading.value
                       ? const AppGlobalLoading()
                       : viewmodel.isError.value
-                          ? ErrorTryAgain(message: viewmodel.errorMessage.value)
-                          : Stack(
-                              children: [
-                                _buildBackground(),
-                                _buildContainerMan(),
-                              ],
-                            );
+                          ? ErrorTryAgain(
+                              message: viewmodel.errorMessage.value,
+                            )
+                          : SizedBox(
+                            height: viewmodel.adptiveSilverExpade.value + 1.h,
+                            child: Stack(
+                                children: [
+                                  _buildBackground(),
+                                  _buildContainerMan(),
+                                ],
+                              ),
+                          );
                 }),
                 const AppLayoutpage(
                   body: ViewMorePage(),

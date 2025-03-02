@@ -15,41 +15,35 @@ class RegisterViewmodel extends BaseViewModel {
     String name,
     String email,
     String password,
-    BuildContext context,
   ) async {
     final localizations = AppLocalizations.of(context)!;
 
     if (name.isEmpty) {
       return showWarning(
-        context,
         localizations.error_full_name_required,
       );
     }
 
     if (email.isEmpty) {
       return showWarning(
-        context,
         localizations.error_email_required,
       );
     }
 
     if (!validator.validatEmail(email)) {
       return showWarning(
-        context,
         localizations.error_invalid_email,
       );
     }
 
     if (password.isEmpty) {
       return showWarning(
-        context,
         localizations.error_password_required,
       );
     }
 
     if (password.length < 6) {
       return showWarning(
-        context,
         localizations.error_password_length,
       );
     }
