@@ -1,13 +1,16 @@
+import 'dart:async';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tchilla/resources/app_exception.dart';
 import 'package:tchilla/resources/app_logs.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/services/events/navigation.dart';
 import 'package:tchilla/services/events/notificator.dart';
 import 'package:tchilla/services/events/validator.dart';
-import 'package:tchilla/view/pages/error_try_again.dart';
 
-abstract class BaseViewModel extends GetxController {
+class BaseViewModel extends GetxController {
   final Notificator notificator;
   final Validator validator;
   final Navigation navigator;
@@ -16,6 +19,9 @@ abstract class BaseViewModel extends GetxController {
   final RxBool isLoading = false.obs;
   final RxBool isError = false.obs;
   final RxString errorMessage = "".obs;
+  final lang = Get.deviceLocale?.languageCode ?? "en";
+
+  final Rxn<VoidCallback> lastRequest = Rxn<VoidCallback>();
 
   BaseViewModel({
     required this.notificator,
@@ -42,29 +48,47 @@ abstract class BaseViewModel extends GetxController {
     errorMessage.value = message;
   }
 
-  void handleError(
-    BuildContext context,
+  void showError(
     dynamic error,
-    StackTrace? stacktrace,
   ) {
     notificator.showLocalError(
-      AppLocalizations.of(context)!.error,
+      AppLocalizations.of(notificator.snackbarKey.currentContext!)!.error,
       error.toString(),
     );
   }
 
-  Widget buildErrorValidatedView({
-    required bool error,
-    required void Function([dynamic]) tryAgainEvet,
-    required Widget view,
-    required String message,
-  }) {
-    return error
-        ? ErrorTryAgain(
-            tryAgainEvet: tryAgainEvet,
-            message: message,
-          )
-        : view;
+  Future<T> request<T>({
+    required Future<T> event,
+    VoidCallback? onStart,
+    ValueChanged<T>? onSuccess,
+    ValueChanged<String>? onError,
+    VoidCallback? onComplete,
+  }) async {
+    loger.info("✅ Última requisição armazenada!");
+    onStart?.call();
+    startLoading();
+
+    return event.then((value) {
+      onSuccess?.call(value);
+      return value;
+    }).catchError((error, stackTrace) {
+      loger.printError(info: "Erro: $error");
+      loger.printError(info: "StackTrace: $stackTrace");
+
+      if (error is SocketException ||
+          error is NetworkException ||
+          error is UnknownException) {
+        emitError(error.message);
+      } else {
+        showError(error.toString());
+      }
+
+      onError?.call(error);
+      throw error;
+    }).whenComplete(() {
+      stopLoading();
+      onComplete?.call();
+    });
   }
 
   void showWarning(BuildContext context, String message) {

@@ -115,7 +115,17 @@
   "reservationTicket": "Reservation Ticket",
   "amountPaid": "Amount Paid",
   "downloadReceipt": "Download Receipt",
-  "paid_amount": "Paid Amount"
+  "paid_amount": "Paid Amount",
+   "invalidRequest": "Invalid request.",
+  "unauthorizedAccess": "Unauthorized access.",
+  "resourceNotFound": "Resource not found.",
+  "internalServerError": "Internal server error.",
+  "unknownError": "Unknown error. Code:",
+  "connectionTimeout": "Connection timeout.",
+  "serverResponseError": "Error processing server response.",
+  "requestCancelled": "Request cancelled.",
+  "noInternetConnection": "No internet connection. Check your network.",
+  "unexpectedConnectionError": "Unexpected connection error."
 
 
 
