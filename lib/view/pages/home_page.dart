@@ -8,6 +8,7 @@ import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/resources/app_size.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
+import 'package:tchilla/view/pages/error_try_again.dart';
 import 'package:tchilla/view/pages/view_more_page.dart';
 import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_network_image.dart';
@@ -69,19 +70,14 @@ class _HomePageState extends State<HomePage>
                 Obx(() {
                   return viewmodel.isLoading.value
                       ? const AppGlobalLoading()
-                      : viewmodel.buildErrorValidatedView(
-                          error: viewmodel.isError.value,
-                          message: viewmodel.errorMessage.value,
-                          tryAgainEvet: ([p0]) {},
-                          view: SizedBox(
-                            height: viewmodel.adptiveSilverExpade.value + 2.h,
-                            child: Stack(
+                      : viewmodel.isError.value
+                          ? ErrorTryAgain(message: viewmodel.errorMessage.value)
+                          : Stack(
                               children: [
                                 _buildBackground(),
                                 _buildContainerMan(),
                               ],
-                            ),
-                          ));
+                            );
                 }),
                 const AppLayoutpage(
                   body: ViewMorePage(),

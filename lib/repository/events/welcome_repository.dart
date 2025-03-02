@@ -11,22 +11,7 @@ class WelcomeRepository extends BaseRepository implements IwelcomeRepository {
 
   @override
   Future<WelcomeModel> fetchWelcomeData(String lang) async {
-    late WelcomeModel welcome;
-    try {
-      final response = await dio.get("/Resource/welcome?lang=$lang");
-
-      if (response.statusCode == 200) {
-        welcome = WelcomeModel.fromMap(response.data);
-      } else {
-        notificator.showLocalError(
-          response.statusCode.toString(),
-          response.statusMessage.toString(),
-        );
-      }
-    } catch (e) {
-      throw Exception(e);
-    }
-
-    return welcome;
+    final response = await dio.get("/Resource/welcome?lang=$lang");
+    return WelcomeModel.fromMap(response.data);
   }
 }

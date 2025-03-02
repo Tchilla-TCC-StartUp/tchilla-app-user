@@ -115,7 +115,17 @@
   "reservationTicket": "Bilhete de reserva",
   "amountPaid": "Valor pago",
   "downloadReceipt": "Baixar comprovativo",
-    "paid_amount": "Valor pago"
+  "paid_amount": "Valor pago",
+  "invalidRequest": "Requisição inválida.",
+  "unauthorizedAccess": "Acesso não autorizado.",
+  "resourceNotFound": "Recurso não encontrado.",
+  "internalServerError": "Erro interno do servidor.",
+  "unknownError": "Erro desconhecido. Código:",
+  "connectionTimeout": "Tempo de conexão esgotado.",
+  "serverResponseError": "Erro ao processar resposta do servidor.",
+  "requestCancelled": "Requisição cancelada.",
+  "noInternetConnection": "Sem conexão com a internet. Verifique sua rede.",
+  "unexpectedConnectionError": "Erro inesperado na conexão."
 
 
 }

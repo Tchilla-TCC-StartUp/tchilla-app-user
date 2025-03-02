@@ -5,7 +5,7 @@ class AppException implements Exception {
   AppException(this.message, {this.code});
 
   @override
-  String toString() => "AppException: $message";
+  String toString() => message;
 }
 
 class NetworkException extends AppException {
@@ -26,4 +26,8 @@ class ServerException extends AppException {
 
 class UnknownException extends AppException {
   UnknownException(String message, {int? code}) : super(message, code: code);
+}
+
+class SocketException extends AppException {
+  SocketException(String message, {int? code}) : super(message, code: code);
 }

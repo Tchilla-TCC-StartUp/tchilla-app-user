@@ -5,6 +5,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
+import 'package:tchilla/view/pages/error_try_again.dart';
 import 'package:tchilla/view/widgets/app_global_image_button.dart';
 import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_page_indicator.dart';
@@ -28,8 +29,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   void initState() {
     super.initState();
-
-    viewmodel.getOnboarding(context);
+    viewmodel.getOnboarding();
   }
 
   @override
@@ -41,13 +41,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
             () {
               return viewmodel.isLoading.value
                   ? const AppGlobalLoading()
-                  : viewmodel.buildErrorValidatedView(
-                      message: viewmodel.errorMessage.value,
-                      error: viewmodel.isError.value,
-                      tryAgainEvet: ([args]) =>
-                          viewmodel.getOnboarding(context),
-                      view: _buildBody(context),
-                    );
+                  : viewmodel.isError.value
+                      ? ErrorTryAgain(
+                          message: viewmodel.errorMessage.value,
+                          event: viewmodel.getOnboarding,
+                        )
+                      : _buildBody(context);
             },
           ),
         ),

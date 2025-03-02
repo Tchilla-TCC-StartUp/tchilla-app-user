@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:tchilla/model/welcome_model.dart';
 import 'package:tchilla/repository/events/welcome_repository.dart';
@@ -19,18 +18,15 @@ class WelcomeViewmodel extends BaseViewModel {
 
   WelcomeModel? get welcomeData => _welcomeData.value;
 
-  Future<void> fetchWelcomeData(BuildContext context) async {
-    try {
-      final lang = Get.deviceLocale?.languageCode ?? "en";
-      startLoading();
-      final data = await repository.fetchWelcomeData(lang);
-      loger.info("Dados do welcome carregados com sucesso.");
-      _welcomeData.value = data;
-    } catch (e) {
-      emitError(e.toString());
-    } finally {
-      stopLoading();
-    }
+  void getWelcomeData() async {
+    await request(
+      event: repository.fetchWelcomeData(lang),
+      onSuccess: (value) {
+        _welcomeData.value = value;
+      },
+    );
+
+    lastRequest.value = getWelcomeData;
   }
 
   void navigateToLogin() {

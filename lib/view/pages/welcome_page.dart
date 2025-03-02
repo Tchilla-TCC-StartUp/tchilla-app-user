@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/style/app_text_style.dart';
+import 'package:tchilla/view/pages/error_try_again.dart';
 import 'package:tchilla/view/widgets/app_global_border_button.dart';
 import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
@@ -26,7 +27,7 @@ class _WelcomePageState extends State<WelcomePage> {
   void initState() {
     super.initState();
 
-    viewmodel.fetchWelcomeData(context);
+    viewmodel.getWelcomeData();
   }
 
   @override
@@ -38,13 +39,12 @@ class _WelcomePageState extends State<WelcomePage> {
             () {
               return viewmodel.isLoading.value
                   ? const AppGlobalLoading()
-                  : viewmodel.buildErrorValidatedView(
-                      error: viewmodel.isError.value,
-                      message: viewmodel.errorMessage.value,
-                      tryAgainEvet: ([p0]) =>
-                          viewmodel.fetchWelcomeData(context),
-                      view: _buildBody(context),
-                    );
+                  : viewmodel.isError.value
+                      ? ErrorTryAgain(
+                          message: viewmodel.errorMessage.value,
+                          event: viewmodel.getWelcomeData,
+                        )
+                      : _buildBody(context);
             },
           ),
         ),

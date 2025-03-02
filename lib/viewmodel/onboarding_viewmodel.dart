@@ -21,19 +21,13 @@ class OnboardingViewModel extends BaseViewModel {
 
   RxList<OnboardingModel> get onboarding => _onboarding;
 
-  void getOnboarding(BuildContext context) async {
-    try {
-      startLoading();
-      final lang = Get.deviceLocale?.languageCode ?? "en";
-      loger.info("Buscando dados do onboarding para o idioma: $lang");
-      final List<OnboardingModel> data = await repository.fetchOnboadData(lang);
-      loger.info("Dados do onboarding carregados com sucesso");
-      _onboarding.assignAll(data);
-    } catch (e) {
-      emitError(e.toString());
-    } finally {
-      stopLoading();
-    }
+  void getOnboarding() async {
+    await request(
+      event: repository.fetchOnboadData(lang),
+      onSuccess: (value) {
+        _onboarding.assignAll(value);
+      },
+    );
   }
 
   void nextPage() {

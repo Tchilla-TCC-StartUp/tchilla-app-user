@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/style/colors.dart';
+import 'package:tchilla/view/pages/error_try_again.dart';
 import 'package:tchilla/view/widgets/app_custom_list_card.dart';
 import 'package:tchilla/view/widgets/app_global_back_button.dart';
 import 'package:tchilla/view/widgets/app_global_loading.dart';
@@ -84,12 +85,9 @@ class _ResultSearchPageState extends State<ResultSearchPage>
                 () {
                   return viewmodel.isLoading.value
                       ? const AppGlobalLoading()
-                      : viewmodel.buildErrorValidatedView(
-                          error: viewmodel.isError.value,
-                          message: viewmodel.errorMessage.value,
-                          tryAgainEvet: ([p0]) {},
-                          view: _builAllProposedSection(),
-                        );
+                      : viewmodel.isError.value
+                          ? ErrorTryAgain(message: viewmodel.errorMessage.value)
+                          : _builAllProposedSection();
                 },
               );
             }
@@ -97,12 +95,9 @@ class _ResultSearchPageState extends State<ResultSearchPage>
               () {
                 return viewmodel.isLoading.value
                     ? const AppGlobalLoading()
-                    : viewmodel.buildErrorValidatedView(
-                        error: viewmodel.isError.value,
-                        message: viewmodel.errorMessage.value,
-                        tryAgainEvet: ([p0]) {},
-                        view: _builFilterProposedSection(index + 1),
-                      );
+                    : viewmodel.isError.value
+                        ? ErrorTryAgain(message: viewmodel.errorMessage.value)
+                        : _builFilterProposedSection(index + 1);
               },
             );
           },
