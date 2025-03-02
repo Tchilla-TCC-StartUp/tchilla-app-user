@@ -16,7 +16,6 @@ class ForgontPasswordViewmodel extends BaseViewModel {
 
     if (pin.length != 6) {
       showWarning(
-        context,
         localizations.error_fill_all_fields,
       );
     } else {
@@ -35,22 +34,20 @@ class ForgontPasswordViewmodel extends BaseViewModel {
     final localizations = AppLocalizations.of(context)!;
 
     if (password.isEmpty || confirmPassword.isEmpty) {
-      showWarning(context, localizations.error_password_required);
+      showWarning(localizations.error_password_required);
       return;
     }
     if (password != confirmPassword) {
-      showWarning(context, localizations.error_password_mismatch);
+      showWarning(localizations.error_password_mismatch);
       return;
     }
     if (password.length < 6) {
       showWarning(
-        context,
         localizations.error_password_length,
       );
       return;
     }
     showSuccess(
-      context,
       localizations.success_password_reset,
     );
 
@@ -68,7 +65,6 @@ class ForgontPasswordViewmodel extends BaseViewModel {
 
     if (email.isEmpty) {
       showWarning(
-        context,
         localizations.error_email_required,
       );
       return;
@@ -76,7 +72,6 @@ class ForgontPasswordViewmodel extends BaseViewModel {
 
     if (!validator.validatEmail(email)) {
       showWarning(
-        context,
         localizations.error_invalid_email,
       );
 

@@ -29,7 +29,6 @@ class _LoginPageState extends State<LoginPage> {
   final FocusNode passwordFocusNode = FocusNode();
   final passwordController = TextEditingController();
   final viewmodel = Get.find<LoginViewmodel>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +84,6 @@ class _LoginPageState extends State<LoginPage> {
               onFieldSubmitted: (value) => viewmodel.login(
                 emailController.text,
                 passwordController.text,
-                context,
               ),
             ),
             AppGlobalVericalSpacing(
@@ -93,14 +91,10 @@ class _LoginPageState extends State<LoginPage> {
             ),
             AppGlobalTextButton(
               minWidth: 100.w,
-              onPressed: () {
-                print("Botão de login pressionado");
-                viewmodel.login(
-                  emailController.text,
-                  passwordController.text,
-                  context,
-                );
-              },
+              onPressed: () => viewmodel.login(
+                emailController.text,
+                passwordController.text,
+              ),
               textButton: AppLocalizations.of(context)!.login,
             ),
             AppGlobalVericalSpacing(

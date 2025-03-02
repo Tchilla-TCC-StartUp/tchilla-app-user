@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tchilla/resources/app_exception.dart';
@@ -29,6 +27,7 @@ class BaseViewModel extends GetxController {
     required this.navigator,
     required this.loger,
   });
+  BuildContext get context => notificator.snackbarKey.currentContext!;
 
   void startLoading() {
     isLoading.value = true;
@@ -52,7 +51,7 @@ class BaseViewModel extends GetxController {
     dynamic error,
   ) {
     notificator.showLocalError(
-      AppLocalizations.of(notificator.snackbarKey.currentContext!)!.error,
+      AppLocalizations.of(context)!.error,
       error.toString(),
     );
   }
@@ -91,7 +90,7 @@ class BaseViewModel extends GetxController {
     });
   }
 
-  void showWarning(BuildContext context, String message) {
+  void showWarning(String message) {
     loger.info("Aviso: $message");
     notificator.showLocalAlert(
       AppLocalizations.of(context)!.alert_attention,
@@ -99,7 +98,7 @@ class BaseViewModel extends GetxController {
     );
   }
 
-  void showSuccess(BuildContext context, String message) {
+  void showSuccess(String message) {
     loger.info("Sucesso: $message");
     notificator.showLocalASucess(
       AppLocalizations.of(context)!.alert_success,

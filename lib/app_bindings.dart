@@ -57,6 +57,7 @@ class AppBindings implements Bindings {
     Get.put(Notificator());
     Get.put(Validator());
     Get.put(AppLogs());
+    
   }
 
   // ---------- Registro de Repositórios ----------

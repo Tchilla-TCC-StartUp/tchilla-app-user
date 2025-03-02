@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
@@ -13,11 +12,10 @@ class LoginViewmodel extends BaseViewModel {
     return navigator.navigateToRegisterPage();
   }
 
-  login(String email, String password, BuildContext context) async {
+  login(String email, String password) async {
     if (email.isEmpty || password.isEmpty) {
       loger.info("Campos vazios detectados");
       return showWarning(
-        context,
         AppLocalizations.of(context)!.login_required_fields,
       );
     }
@@ -25,7 +23,6 @@ class LoginViewmodel extends BaseViewModel {
     if (!validator.validatEmail(email)) {
       loger.info("Email inválido");
       return showWarning(
-        context,
         AppLocalizations.of(context)!.login_invalid_email,
       );
     }
@@ -33,7 +30,6 @@ class LoginViewmodel extends BaseViewModel {
     if (password.length < 6) {
       loger.info("Senha curta");
       return showWarning(
-        context,
         AppLocalizations.of(context)!.login_password_length,
       );
     }

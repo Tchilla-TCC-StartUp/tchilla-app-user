@@ -59,19 +59,23 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
       ),
       child: Scaffold(
           backgroundColor: primary50,
-          body: Obx(
-            () {
-              return viewmodel.isLoading.value
-                  ? const AppGlobalLoading()
-                  : viewmodel.isError.value
-                      ? ErrorTryAgain(message: viewmodel.errorMessage.value)
-                      : Stack(
-                          children: [
-                            _buildImageSlide(),
-                            _buildBody(),
-                          ],
-                        );
-            },
+          body: SizedBox(
+            width: Device.width,
+            height: Device.height,
+            child: Obx(
+              () {
+                return viewmodel.isLoading.value
+                    ? const AppGlobalLoading()
+                    : viewmodel.isError.value
+                        ? ErrorTryAgain(message: viewmodel.errorMessage.value)
+                        : Stack(
+                            children: [
+                              _buildImageSlide(),
+                              _buildBody(),
+                            ],
+                          );
+              },
+            ),
           )),
     );
   }

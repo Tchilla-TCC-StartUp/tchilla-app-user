@@ -60,7 +60,6 @@ class _RegisterPageState extends State<RegisterPage> {
               hintText: "Celson Paixão",
               keyboardType: TextInputType.name,
               textInputAction: TextInputAction.next,
-              
             ),
             AppGlobalVericalSpacing(
               value: 2.h,
@@ -87,7 +86,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 nameController.text,
                 emailController.text,
                 passwordController.text,
-                context,
               ),
               obscureText: true,
             ),
@@ -100,7 +98,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 nameController.text,
                 emailController.text,
                 passwordController.text,
-                context,
               ),
               textButton: AppLocalizations.of(context)!.create_account_button,
             ),
