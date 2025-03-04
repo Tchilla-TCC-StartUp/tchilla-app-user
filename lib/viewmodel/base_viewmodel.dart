@@ -63,7 +63,6 @@ class BaseViewModel extends GetxController {
     ValueChanged<String>? onError,
     VoidCallback? onComplete,
   }) async {
-    loger.info("✅ Última requisição armazenada!");
     onStart?.call();
     startLoading();
 
