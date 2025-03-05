@@ -4,12 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
 class ForgontPasswordViewmodel extends BaseViewModel {
-  ForgontPasswordViewmodel({
-    required super.navigator,
-    required super.notificator,
-    required super.validator,
-    required super.loger,
-  });
+
 
   void confirmPin(String pin, BuildContext context) {
     final localizations = AppLocalizations.of(context)!;

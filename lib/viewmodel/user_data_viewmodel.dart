@@ -7,11 +7,6 @@ class UserDataViewModel extends BaseViewModel {
   final RxBool isEmailEditable = false.obs;
   final RxBool isPasswordEditable = false.obs;
 
-  UserDataViewModel(
-      {required super.notificator,
-      required super.validator,
-      required super.navigator,
-      required super.loger});
 
   void toggleNameEditable() {
     isNameEditable.value = !isNameEditable.value;

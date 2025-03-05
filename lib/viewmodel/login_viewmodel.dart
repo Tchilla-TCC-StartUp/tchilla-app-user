@@ -1,12 +1,13 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tchilla/repository/events/user_repository.dart';
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
 class LoginViewmodel extends BaseViewModel {
-  LoginViewmodel(
-      {required super.notificator,
-      required super.validator,
-      required super.navigator,
-      required super.loger});
+  LoginViewmodel({
+    required this.repository,
+  });
+
+  final UserRepository repository;
 
   Future<void> navigateToRegisterPage() {
     return navigator.navigateToRegisterPage();
@@ -34,8 +35,16 @@ class LoginViewmodel extends BaseViewModel {
       );
     }
 
-    loger.info("Navegando para Home");
-    await navigator.navigateToHome();
+    await request(
+      event: repository.authUser(email: email, password: password),
+      onSuccess: (value) async {
+        await dataToken.saveToken(value.data!);
+        navigator.navigateToHome();
+      },
+      onError: (value) {
+        showError(value.errorMessage);
+      },
+    );
   }
 
   navigateToForengePasswordPage() {

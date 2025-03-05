@@ -1,3 +1,4 @@
+import 'package:get/get.dart' as getx;
 import 'package:dio/dio.dart';
 import 'package:tchilla/resources/app_exception.dart';
 import 'package:tchilla/services/events/navigation.dart';
@@ -6,15 +7,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
 
 class BaseRepository {
-  final Navigation navigator;
-  final Notificator notificator;
-  final Dio dio;
+  final Navigation navigator = getx.Get.find();
+  final Notificator notificator = getx.Get.find();
+  final Dio dio = getx.Get.find();
 
-  BaseRepository({
-    required this.dio,
-    required this.navigator,
-    required this.notificator,
-  });
+  BuildContext get context => notificator.snackbarKey.currentContext!;
 
   /// Método genérico para requisições GET
   Future<T> get<T>(String endpoint,
@@ -30,8 +27,7 @@ class BaseRepository {
   }
 
   /// Método genérico para requisições POST
-  Future<T> post<T>(BuildContext context, String endpoint,
-      {dynamic data}) async {
+  Future<T> post<T>(String endpoint, {dynamic data}) async {
     try {
       final response = await dio.post(endpoint, data: data);
       return _handleResponse<T>(context, response);
@@ -41,8 +37,7 @@ class BaseRepository {
   }
 
   /// Método genérico para requisições PUT
-  Future<T> put<T>(BuildContext context, String endpoint,
-      {dynamic data}) async {
+  Future<T> put<T>(String endpoint, {dynamic data}) async {
     try {
       final response = await dio.put(endpoint, data: data);
       return _handleResponse<T>(context, response);
@@ -52,7 +47,7 @@ class BaseRepository {
   }
 
   /// Método genérico para requisições DELETE
-  Future<T> delete<T>(BuildContext context, String endpoint) async {
+  Future<T> delete<T>(String endpoint) async {
     try {
       final response = await dio.delete(endpoint);
       return _handleResponse<T>(context, response);
@@ -76,7 +71,7 @@ class BaseRepository {
     } else if (response.statusCode == 404) {
       throw NetworkException(response.statusMessage ?? l10n.resourceNotFound);
     } else if (response.statusCode == 500) {
-      throw ServerException(response.statusMessage ?? l10n.internalServerError);
+      throw ServerException(response.statusMessage  ?? l10n.internalServerError);
     } else {
       throw UnknownException("${l10n.unknownError} ${response.statusCode}");
     }
@@ -86,19 +81,45 @@ class BaseRepository {
     final l10n = AppLocalizations.of(context)!;
 
     if (error is DioException) {
+      String errorMessage = _getErrorMessage(error, l10n);
+
       if (error.type == DioExceptionType.connectionTimeout ||
           error.type == DioExceptionType.receiveTimeout) {
-        return NetworkException(l10n.connectionTimeout);
+        return NetworkException(errorMessage);
       } else if (error.type == DioExceptionType.badResponse) {
-        return ServerException(l10n.serverResponseError);
+        return ServerException(errorMessage);
       } else if (error.type == DioExceptionType.cancel) {
-        return UnknownException(l10n.requestCancelled);
+        return UnknownException(errorMessage);
       } else if (error.type == DioExceptionType.connectionError) {
-        return SocketException(l10n.noInternetConnection);
+        return SocketException(errorMessage);
       } else {
-        return UnknownException(l10n.unexpectedConnectionError);
+        return UnknownException(errorMessage);
       }
     }
     return UnknownException(error.toString());
   }
+
+  /// Método que extrai a mensagem de erro do response ou usa o l10n como fallback
+  String _getErrorMessage(DioException error, AppLocalizations l10n) {
+    if (error.response?.data is Map<String, dynamic>) {
+      final data = error.response!.data as Map<String, dynamic>;
+      if (data.containsKey("error") && data["error"] is String) {
+        return data["error"];
+      }
+    }
+    switch (error.type) {
+      case DioExceptionType.connectionTimeout:
+      case DioExceptionType.receiveTimeout:
+        return l10n.connectionTimeout;
+      case DioExceptionType.badResponse:
+        return l10n.serverResponseError;
+      case DioExceptionType.cancel:
+        return l10n.requestCancelled;
+      case DioExceptionType.connectionError:
+        return l10n.noInternetConnection;
+      default:
+        return l10n.unexpectedConnectionError;
+    }
+  }
+
 }

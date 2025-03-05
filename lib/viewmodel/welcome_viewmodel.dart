@@ -10,10 +10,7 @@ class WelcomeViewmodel extends BaseViewModel {
 
   WelcomeViewmodel({
     required this.repository,
-    required super.notificator,
-    required super.validator,
-    required super.navigator,
-    required super.loger,
+
   });
 
   WelcomeModel? get welcomeData => _welcomeData.value;

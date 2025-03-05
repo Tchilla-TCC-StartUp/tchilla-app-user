@@ -9,10 +9,6 @@ class OnboardingViewModel extends BaseViewModel {
 
   OnboardingViewModel({
     required this.repository,
-    required super.notificator,
-    required super.validator,
-    required super.navigator,
-    required super.loger,
   });
 
   final pageController = PageController();

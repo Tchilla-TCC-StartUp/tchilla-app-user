@@ -88,12 +88,7 @@ class DetalheProposedViewModel extends BaseViewModel {
   ];
 
   var currentIndex = 0.obs;
-  DetalheProposedViewModel({
-    required super.navigator,
-    required super.notificator,
-    required super.validator,
-    required super.loger,
-  });
+
   final pageController = PageController();
 
   void updateCurrentIndex(int index) {

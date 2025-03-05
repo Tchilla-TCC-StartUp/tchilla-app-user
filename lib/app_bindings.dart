@@ -1,8 +1,12 @@
-import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tchilla/data/base_local_data.dart';
+import 'package:tchilla/data/event/local_token_data.dart';
 import 'package:tchilla/repository/events/onboarding_repository.dart';
+import 'package:tchilla/repository/events/user_repository.dart';
 import 'package:tchilla/repository/events/welcome_repository.dart';
 import 'package:tchilla/resources/app_constats.dart';
+import 'package:tchilla/resources/app_dio.dart';
 import 'package:tchilla/resources/app_logs.dart';
 import 'package:tchilla/resources/app_routes.dart';
 import 'package:tchilla/services/events/navigation.dart';
@@ -22,7 +26,6 @@ import 'package:tchilla/viewmodel/summary_viewmodel.dart';
 import 'package:tchilla/viewmodel/user_data_viewmodel.dart';
 import 'package:tchilla/viewmodel/view_more_viewmodel.dart';
 import 'package:tchilla/viewmodel/welcome_viewmodel.dart';
-import 'package:tchilla/resources/ app_interceptor.dart';
 
 class AppBindings implements Bindings {
   @override
@@ -31,148 +34,66 @@ class AppBindings implements Bindings {
   }
 
   static void init() {
-    registerEvents();
-    // ---------- Configuração do Dio ----------
-    final dio = Dio(
-      BaseOptions(
-        baseUrl: AppConstats.baseUrl,
-        sendTimeout: const Duration(minutes: 1),
-        connectTimeout: const Duration(minutes: 1),
-        receiveTimeout: const Duration(minutes: 1),
-      ),
-    )..interceptors.add(
-        AppInterceptor(logger: Get.find()),
-      );
-
-    // ---------- Registrações ----------
-    Get.lazyPut<AppRoutes>(() => AppRoutes());
-
-    registerRepositories(dio);
+    registerServices();
+    localData();
+    registerRepositories();
     registerViewmodels();
   }
 
   // ---------- Registro de Eventos ----------
-  static void registerEvents() {
+  static void registerServices() {
+    Get.put(AppConstats());
+    Get.put<AppRoutes>(AppRoutes());
     Get.put(Navigation());
     Get.put(Notificator());
     Get.put(Validator());
     Get.put(AppLogs());
-    
+    Get.put(AppDio().dio);
+  }
+
+  // ---------- Registro de Dados Locais ----------
+  static void localData() {
+    Get.put(BaseLocalData());
+    Get.put(LocalTokenData());
   }
 
   // ---------- Registro de Repositórios ----------
-  static void registerRepositories(Dio dio) {
-    Get.lazyPut<OnboardingRepository>(() => OnboardingRepository(
-          dio: dio,
-          navigator: Get.find(),
-          notificator: Get.find(),
-        ));
-    Get.lazyPut<WelcomeRepository>(() => WelcomeRepository(
-          dio: dio,
-          navigator: Get.find(),
-          notificator: Get.find(),
-        ));
+  static void registerRepositories() {
+    Get.lazyPut<OnboardingRepository>(() => OnboardingRepository());
+    Get.lazyPut<WelcomeRepository>(() => WelcomeRepository());
+
+    Get.lazyPut<UserRepository>(() => UserRepository());
   }
 
   // ---------- Registro de ViewModels ----------
   static void registerViewmodels() {
-    Get.put<BaseViewModel>(BaseViewModel(
-      navigator: Get.find(),
-      notificator: Get.find(),
-      loger: Get.find(),
-      validator: Get.find(),
-    ));
-    Get.lazyPut<SplashViewmodel>(() => SplashViewmodel(
-          navigator: Get.find(),
-          notificator: Get.find(),
-          loger: Get.find(),
-          validator: Get.find(),
-        ));
+    Get.put<BaseViewModel>(BaseViewModel());
+    Get.put<SplashViewmodel>(SplashViewmodel());
 
-    Get.lazyPut<OnboardingViewModel>(() => OnboardingViewModel(
-          navigator: Get.find(),
-          loger: Get.find(),
-          repository: Get.find(),
-          notificator: Get.find(),
-          validator: Get.find(),
-        ));
+    Get.put<OnboardingViewModel>(OnboardingViewModel(repository: Get.find()));
 
     Get.put<WelcomeViewmodel>(WelcomeViewmodel(
-      navigator: Get.find(),
-      loger: Get.find(),
       repository: Get.find(),
-      notificator: Get.find(),
-      validator: Get.find(),
     ));
 
-    Get.put<LoginViewmodel>(LoginViewmodel(
-      navigator: Get.find(),
-      loger: Get.find(),
-      notificator: Get.find(),
-      validator: Get.find(),
-    ));
+    Get.put<LoginViewmodel>(LoginViewmodel(repository: Get.find()));
 
-    Get.put<RegisterViewmodel>(RegisterViewmodel(
-      navigator: Get.find(),
-      notificator: Get.find(),
-      loger: Get.find(),
-      validator: Get.find(),
-    ));
+    Get.put<RegisterViewmodel>(RegisterViewmodel());
 
-    Get.put<ForgontPasswordViewmodel>(ForgontPasswordViewmodel(
-      navigator: Get.find(),
-      loger: Get.find(),
-      notificator: Get.find(),
-      validator: Get.find(),
-    ));
+    Get.put<ForgontPasswordViewmodel>(ForgontPasswordViewmodel());
 
-    Get.put<HomeViewModel>(HomeViewModel(
-      loger: Get.find(),
-      navigator: Get.find(),
-      notificator: Get.find(),
-      validator: Get.find(),
-    ));
+    Get.put<HomeViewModel>(HomeViewModel());
 
-    Get.put<DetalheProposedViewModel>(DetalheProposedViewModel(
-      navigator: Get.find(),
-      notificator: Get.find(),
-      loger: Get.find(),
-      validator: Get.find(),
-    ));
+    Get.put<DetalheProposedViewModel>(DetalheProposedViewModel());
 
-    Get.put<ViewMoreViewmodel>(ViewMoreViewmodel(
-      navigator: Get.find(),
-      loger: Get.find(),
-      notificator: Get.find(),
-      validator: Get.find(),
-    ));
+    Get.put<ViewMoreViewmodel>(ViewMoreViewmodel());
 
-    Get.put<ProfileViewmodel>(ProfileViewmodel(
-      navigator: Get.find(),
-      loger: Get.find(),
-      notificator: Get.find(),
-      validator: Get.find(),
-    ));
+    Get.put<ProfileViewmodel>(ProfileViewmodel());
 
-    Get.put<ResultSearchViewModel>(ResultSearchViewModel(
-      navigator: Get.find(),
-      loger: Get.find(),
-      notificator: Get.find(),
-      validator: Get.find(),
-    ));
+    Get.put<ResultSearchViewModel>(ResultSearchViewModel());
 
-    Get.put<UserDataViewModel>(UserDataViewModel(
-      navigator: Get.find(),
-      loger: Get.find(),
-      notificator: Get.find(),
-      validator: Get.find(),
-    ));
+    Get.put<UserDataViewModel>(UserDataViewModel());
 
-    Get.put<SummaryViewmodel>(SummaryViewmodel(
-      navigator: Get.find(),
-      loger: Get.find(),
-      notificator: Get.find(),
-      validator: Get.find(),
-    ));
+    Get.put<SummaryViewmodel>(SummaryViewmodel());
   }
 }
