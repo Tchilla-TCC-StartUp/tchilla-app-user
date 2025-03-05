@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tchilla/resources/app_routes.dart';
 import 'package:tchilla/services/events/notificator.dart';
 import 'app_bindings.dart';
@@ -8,7 +9,10 @@ import 'app_router.dart';
 import 'style/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final sharedPreferences = await SharedPreferences.getInstance();
+  Get.put<SharedPreferences>(sharedPreferences);
   runApp(
     ResponsiveSizer(
       builder: (context, orientation, screenType) {

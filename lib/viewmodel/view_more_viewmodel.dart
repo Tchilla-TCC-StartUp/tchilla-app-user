@@ -13,11 +13,7 @@ class ViewMoreViewmodel extends BaseViewModel {
 
   RxInt selectedIndex = 0.obs;
 
-  ViewMoreViewmodel(
-      {required super.notificator,
-      required super.validator,
-      required super.navigator,
-      required super.loger});
+
 
   void selectTab(int index) {
     selectedIndex.value = index;

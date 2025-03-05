@@ -4,12 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
 class RegisterViewmodel extends BaseViewModel {
-  RegisterViewmodel({
-    required super.notificator,
-    required super.validator,
-    required super.navigator,
-    required super.loger,
-  });
+
 
   Future<void> register(
     String name,

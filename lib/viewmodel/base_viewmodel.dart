@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tchilla/data/event/local_token_data.dart';
 import 'package:tchilla/resources/app_exception.dart';
 import 'package:tchilla/resources/app_logs.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -9,11 +10,11 @@ import 'package:tchilla/services/events/notificator.dart';
 import 'package:tchilla/services/events/validator.dart';
 
 class BaseViewModel extends GetxController {
-  final Notificator notificator;
-  final Validator validator;
-  final Navigation navigator;
-  final AppLogs loger;
-
+  final Notificator notificator = Get.find();
+  final Validator validator = Get.find();
+  final Navigation navigator = Get.find();
+  final AppLogs loger = Get.find();
+  final LocalTokenData dataToken = Get.find();
   final RxBool isLoading = false.obs;
   final RxBool isError = false.obs;
   final RxString errorMessage = "".obs;
@@ -21,12 +22,6 @@ class BaseViewModel extends GetxController {
 
   final Rxn<VoidCallback> lastRequest = Rxn<VoidCallback>();
 
-  BaseViewModel({
-    required this.notificator,
-    required this.validator,
-    required this.navigator,
-    required this.loger,
-  });
   BuildContext get context => notificator.snackbarKey.currentContext!;
 
   void startLoading() {
@@ -60,7 +55,7 @@ class BaseViewModel extends GetxController {
     required Future<T> event,
     VoidCallback? onStart,
     ValueChanged<T>? onSuccess,
-    ValueChanged<String>? onError,
+    ValueChanged<T>? onError,
     VoidCallback? onComplete,
   }) async {
     onStart?.call();
@@ -75,10 +70,12 @@ class BaseViewModel extends GetxController {
 
       if (error is SocketException ||
           error is NetworkException ||
-          error is UnknownException) {
+          error is UnknownException ||
+          error is ServerException) {
         emitError(error.message);
+        showError(error);
       } else {
-        showError(error.toString());
+        showError(error);
       }
 
       onError?.call(error);
@@ -87,6 +84,28 @@ class BaseViewModel extends GetxController {
       stopLoading();
       onComplete?.call();
     });
+  }
+
+  Future<bool> checkinLogin() async {
+    try {
+      final token = await dataToken.fetchToken();
+
+      if (token?.isNotEmpty ?? false) {
+        loger.info("Usuário já está logado. Token encontrado: $token");
+        return true;
+      }
+      loger.printInfo(info: "Usuário não está logado. Token ausente.");
+      return false;
+    } catch (e) {
+      loger.info(
+        "Erro ao verificar login: $e",
+      );
+      return false;
+    }
+  }
+
+  Future<void> cleanToken() {
+    return dataToken.deletoken();
   }
 
   void showWarning(String message) {

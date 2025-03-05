@@ -22,6 +22,7 @@
   "sign_up": "Sign Up",
   "name": "Name",
   "email_address": "Email Address",
+  "telephone_number": "Telephone Number",
   "password": "Password",
   "confirm": "Confirm",
   "create_account_button": "Create Account",
@@ -126,6 +127,7 @@
   "requestCancelled": "Request cancelled.",
   "noInternetConnection": "No internet connection. Check your network.",
   "unexpectedConnectionError": "Unexpected connection error."
+
 
 
 

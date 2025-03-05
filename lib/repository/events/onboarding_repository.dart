@@ -5,11 +5,7 @@ import 'package:tchilla/repository/interfaces/ionboarding_repository.dart';
 
 class OnboardingRepository extends BaseRepository
     implements IonboardingRepository {
-  OnboardingRepository({
-    required super.dio,
-    required super.navigator,
-    required super.notificator,
-  });
+
 
   @override
   Future<List<OnboardingModel>> fetchOnboadData(String? lang) async {

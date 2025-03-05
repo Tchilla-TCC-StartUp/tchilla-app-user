@@ -10,12 +10,7 @@ class HomeViewModel extends BaseViewModel {
 
   RxList<String> tabTitlesForm = ["Local", "Serviços", "Local+Serviços"].obs;
 
-  HomeViewModel({
-    required super.notificator,
-    required super.validator,
-    required super.navigator,
-    required super.loger,
-  });
+
 
   void selectTab(int index) {
     selectedIndex.value = index;

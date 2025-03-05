@@ -125,7 +125,8 @@
   "serverResponseError": "Erro ao processar resposta do servidor.",
   "requestCancelled": "Requisição cancelada.",
   "noInternetConnection": "Sem conexão com a internet. Verifique sua rede.",
-  "unexpectedConnectionError": "Erro inesperado na conexão."
+  "unexpectedConnectionError": "Erro inesperado na conexão.",
+  "telephone_number": "Número de telefone"
 
 
 }
