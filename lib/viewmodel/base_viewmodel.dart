@@ -8,6 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/services/events/navigation.dart';
 import 'package:tchilla/services/events/notificator.dart';
 import 'package:tchilla/services/events/validator.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class BaseViewModel extends GetxController {
   final Notificator notificator = Get.find();
@@ -122,5 +123,31 @@ class BaseViewModel extends GetxController {
       AppLocalizations.of(context)!.alert_success,
       message,
     );
+  }
+
+  String connectionTypeLabel(List<ConnectivityResult> result) {
+    switch (result) {
+      case ConnectivityResult.wifi:
+        return "Wi-Fi";
+      case ConnectivityResult.mobile:
+        return "Dados móveis";
+      case ConnectivityResult.ethernet:
+        return "Cabo Ethernet";
+      case ConnectivityResult.bluetooth:
+        return "Bluetooth";
+      case ConnectivityResult.none:
+        return "Sem conexão";
+      default:
+        return "Desconhecido";
+    }
+  }
+
+  Future<bool> checkInNetworkConnection() async {
+    final connectivityResult = await Connectivity().checkConnectivity();
+
+    final connectionType = connectionTypeLabel(connectivityResult);
+    loger.info("O app está conectado com a internet via: $connectionType");
+
+    return connectivityResult != ConnectivityResult.none;
   }
 }

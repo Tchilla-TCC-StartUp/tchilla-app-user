@@ -67,8 +67,6 @@ class _FormLocalEndServiceState extends State<FormLocalEndService> {
                     helpText: AppLocalizations.of(context)!.event_date,
                     hintText: "25 NOV 2025",
                     width: 37.w,
-                    firstDate: DateTime(2020),
-                    lastDate: DateTime(2030),
                     onDateSelected: (DateTime date) {
                       print("Data selecionada: $date");
                     },
@@ -110,10 +108,10 @@ class _FormLocalEndServiceState extends State<FormLocalEndService> {
                 hintText: "150 Convidados",
                 width: 80.w,
                 dropdownMenuEntries: const [
-                  DropdownMenuEntry(value: "OP1", label: "150 Convidados"),
-                  DropdownMenuEntry(value: "OP1", label: "300 Convidadoso"),
-                  DropdownMenuEntry(value: "OP1", label: "600 Convidados"),
-                  DropdownMenuEntry(value: "OP1", label: "1200 Convidados"),
+                  DropdownMenuEntry(value: 1, label: "150 Convidados"),
+                  DropdownMenuEntry(value: 2, label: "300 Convidadoso"),
+                  DropdownMenuEntry(value: 3, label: "600 Convidados"),
+                  DropdownMenuEntry(value: 4, label: "1200 Convidados"),
                 ],
               ),
               const AppGlobalVericalSpacing(),
@@ -121,10 +119,10 @@ class _FormLocalEndServiceState extends State<FormLocalEndService> {
                 helpText: AppLocalizations.of(context)!.add_services,
                 hintText: AppLocalizations.of(context)!.select_service,
                 dropdownMenuEntries: const [
-                  DropdownMenuEntry(value: "Decoracao", label: "Decoração"),
-                  DropdownMenuEntry(value: "DJ", label: "DJ"),
-                  DropdownMenuEntry(value: "Confeiteiro", label: "Confeiteiro"),
-                  DropdownMenuEntry(value: "Bartender", label: "Bartender"),
+                  DropdownMenuEntry(value: 1, label: "Decoração"),
+                  DropdownMenuEntry(value: 2, label: "DJ"),
+                  DropdownMenuEntry(value: 3, label: "Confeiteiro"),
+                  DropdownMenuEntry(value: 4, label: "Bartender"),
                 ],
                 onChanged: (selectedTags) {
                   print("Tags Selecionadas: $selectedTags");

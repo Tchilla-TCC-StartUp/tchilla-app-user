@@ -72,8 +72,6 @@ class _FormLocalState extends State<FormLocal> {
                     helpText: AppLocalizations.of(context)!.event_date,
                     hintText: "25 NOV 2025",
                     width: 37.w,
-                    firstDate: DateTime(2020),
-                    lastDate: DateTime(2030),
                     onDateSelected: (date) {
                       dataEventController = date;
                       widget.viewmodel.loger

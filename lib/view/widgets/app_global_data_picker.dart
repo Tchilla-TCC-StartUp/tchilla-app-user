@@ -1,5 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
@@ -11,24 +13,26 @@ class AppGlobalDatePicker extends StatefulWidget {
   final DateTime? initialDate;
   final DateTime firstDate;
   final DateTime lastDate;
-  final ValueChanged<DateTime> onDateSelected;
+  final void Function(DateTime) onDateSelected;
   final TextStyle? hintTextStyle;
   final TextStyle? selectedTextStyle;
-  final BoxDecoration? decoration;
+  final InputDecoration? decoration;
 
-  const AppGlobalDatePicker({
-    Key? key,
+  AppGlobalDatePicker({
+    super.key,
     this.helpText,
     required this.hintText,
     required this.width,
-    this.initialDate,
-    required this.firstDate,
-    required this.lastDate,
+    DateTime? initialDate,
+    DateTime? firstDate,
+    DateTime? lastDate,
     required this.onDateSelected,
     this.hintTextStyle,
     this.selectedTextStyle,
     this.decoration,
-  }) : super(key: key);
+  })  : initialDate = initialDate,
+        firstDate = firstDate ?? DateTime.now(),
+        lastDate = lastDate ?? DateTime.now();
 
   @override
   _AppGlobalDatePickerState createState() => _AppGlobalDatePickerState();

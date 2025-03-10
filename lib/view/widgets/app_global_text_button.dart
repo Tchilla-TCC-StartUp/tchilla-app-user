@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
+import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 
 class AppGlobalTextButton extends StatelessWidget {
@@ -20,47 +21,22 @@ class AppGlobalTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedSwitcher(
-      duration: const Duration(microseconds: 800),
-      transitionBuilder: (child, animation) {
-        return FadeTransition(
-          opacity: animation,
-          child: child,
-        );
-      },
+    return MaterialButton(
+      color: primary950,
+      splashColor: primary900,
+      elevation: 0,
+      minWidth: minWidth,
+      height: 55.px,
+      onPressed: onPressed,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.px),
+      ),
       child: isLoading
-          ? Center(
-              key: const ValueKey<int>(1), 
-              child: Container(
-                width: 150.px,
-                height: 55.px,
-                decoration: BoxDecoration(
-                  color: primary950,
-                  borderRadius: BorderRadius.circular(8.px),
-                ),
-                child: const Center(
-                  child: CircularProgressIndicator(
-                    color: primary50,
-                  ),
-                ),
-              ),
-            )
-          : MaterialButton(
-              key: const ValueKey<int>(2), 
-              color: primary950,
-              splashColor: primary900,
-              elevation: 0,
-              minWidth: minWidth,
-              height: 55.px,
-              onPressed: onPressed,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.px),
-              ),
-              child: AppGlobalText(
-                text: textButton,
-                style: TextStyleEnum.h3_medium,
-                color: primary50,
-              ),
+          ? const AppGlobalLoading( color: primary50,)
+          : AppGlobalText(
+              text: textButton,
+              style: TextStyleEnum.h3_medium,
+              color: primary50,
             ),
     );
   }

@@ -9,9 +9,9 @@ import 'package:tchilla/view/widgets/app_global_text.dart';
 class AppGlobalServiceTagsManager extends StatefulWidget {
   final String? helpText;
   final String? hintText;
-  final List<DropdownMenuEntry<String>> dropdownMenuEntries;
-  final List<String> initialSelected;
-  final void Function(List<String>)? onChanged;
+  final List<DropdownMenuEntry<int>> dropdownMenuEntries;
+  final List<int> initialSelected;
+  final void Function(List<int>)? onChanged;
 
   const AppGlobalServiceTagsManager({
     Key? key,
@@ -29,34 +29,41 @@ class AppGlobalServiceTagsManager extends StatefulWidget {
 
 class _AppGlobalServiceTagsManagerState
     extends State<AppGlobalServiceTagsManager> {
-  late List<String> _selectedTags;
+  late List<int> _selectedTagIds;
 
   @override
   void initState() {
     super.initState();
-    _selectedTags = List<String>.from(widget.initialSelected);
+    _selectedTagIds = List<int>.from(widget.initialSelected);
   }
 
-  void _addTag(String tag) {
-    if (!_selectedTags.contains(tag)) {
+  void _addTag(int tagId) {
+    if (!_selectedTagIds.contains(tagId)) {
       setState(() {
-        _selectedTags.add(tag);
+        _selectedTagIds.add(tagId);
       });
-      // _triggerCallback();
+      _triggerCallback();
     }
   }
 
-  void _removeTag(String tag) {
+  void _removeTag(int tagId) {
     setState(() {
-      _selectedTags.remove(tag);
+      _selectedTagIds.remove(tagId);
     });
     _triggerCallback();
   }
 
   void _triggerCallback() {
     if (widget.onChanged != null) {
-      widget.onChanged!(_selectedTags);
+      widget.onChanged!(_selectedTagIds);
     }
+  }
+
+  /// Método auxiliar para buscar o label do ID
+  String _getLabelById(int id) {
+    final found = widget.dropdownMenuEntries.firstWhere((e) => e.value == id,
+        orElse: () => DropdownMenuEntry(label: 'Desconhecido', value: id));
+    return found.label;
   }
 
   @override
@@ -73,7 +80,7 @@ class _AppGlobalServiceTagsManagerState
               color: primary950,
             ),
           ),
-        DropdownButtonFormField<String>(
+        DropdownButtonFormField<int>(
           icon: const Icon(
             Icons.keyboard_arrow_down,
             color: primaryBorder,
@@ -84,7 +91,7 @@ class _AppGlobalServiceTagsManagerState
             color: primary950,
           ),
           decoration: InputDecoration(
-            hintText: widget.hintText, // Mantém o hint text no campo
+            hintText: widget.hintText,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
               borderSide: const BorderSide(
@@ -115,8 +122,7 @@ class _AppGlobalServiceTagsManagerState
             ),
           ),
           hint: Text(
-            // Adiciona o texto do hint fixo
-            widget.hintText!,
+            widget.hintText ?? '',
             style: GoogleFonts.inter(
               fontWeight: FontWeight.w400,
               fontSize: 15.sp,
@@ -124,35 +130,38 @@ class _AppGlobalServiceTagsManagerState
             ),
           ),
           items: widget.dropdownMenuEntries.map((entry) {
-            return DropdownMenuItem(
+            return DropdownMenuItem<int>(
               value: entry.value,
               child: Text(entry.label),
             );
           }).toList(),
-          onChanged: (String? value) {
+          onChanged: (int? value) {
             if (value != null) {
               _addTag(value);
             }
           },
         ),
-        if (_selectedTags.isEmpty) AppGlobalVericalSpacing(value: 1.h),
+        if (_selectedTagIds.isEmpty) AppGlobalVericalSpacing(value: 1.h),
         SingleChildScrollView(
-          scrollDirection: Axis.horizontal, // Define rolagem horizontal
+          scrollDirection: Axis.horizontal,
           child: Row(
-            children: _selectedTags.map((String tag) {
+            children: _selectedTagIds.map((int id) {
               return Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: Chip(
                   backgroundColor: primary400,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.px),
-                      side: const BorderSide(width: 0, color: primary400)),
-                  label: Text(
-                    tag,
-                    style:
-                        GoogleFonts.inter(fontSize: 9.spa, color: Colors.white),
+                    borderRadius: BorderRadius.circular(25.px),
+                    side: const BorderSide(width: 0, color: primary400),
                   ),
-                  onDeleted: () => _removeTag(tag),
+                  label: Text(
+                    _getLabelById(id),
+                    style: GoogleFonts.inter(
+                      fontSize: 9.spa,
+                      color: Colors.white,
+                    ),
+                  ),
+                  onDeleted: () => _removeTag(id),
                   deleteIcon: const Icon(
                     Icons.close,
                     size: 12,
