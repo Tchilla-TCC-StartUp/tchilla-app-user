@@ -62,7 +62,7 @@ class _AppGlobalPhoneNumberInputState extends State<AppGlobalPhoneNumberInput> {
           readOnly: widget.readOnly ?? false,
           focusNode: widget.focusNode,
           controller: widget.controller,
-          maxLength: 8,
+          maxLength: 9,
           keyboardType: TextInputType.phone,
           textInputAction: widget.textInputAction,
           validator: widget.validator,

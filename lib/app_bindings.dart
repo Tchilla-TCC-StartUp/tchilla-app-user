@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tchilla/data/base_local_data.dart';
 import 'package:tchilla/data/event/local_token_data.dart';
 import 'package:tchilla/repository/events/onboarding_repository.dart';

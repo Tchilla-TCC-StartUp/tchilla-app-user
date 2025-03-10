@@ -21,6 +21,12 @@ class FormLocal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localController = TextEditingController();
+    TimeOfDay startTimeController;
+    TimeOfDay endTimeController;
+    DateTime dataEventController;
+    int eventTypeController;
+    int guestsNumberController;
     return Form(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,6 +38,7 @@ class FormLocal extends StatelessWidget {
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.done,
             focusNode: _locationFocusNode,
+            controller: localController,
           ),
           const AppGlobalVericalSpacing(),
           Row(
@@ -43,19 +50,24 @@ class FormLocal extends StatelessWidget {
                 width: 37.w,
                 firstDate: DateTime(2020),
                 lastDate: DateTime(2030),
-                onDateSelected: (DateTime date) {
-                  print("Data selecionada: $date");
+                onDateSelected: (date) {
+                  dataEventController = date;
+                  viewmodel.loger.info('Data do evento: ${date.toString()}');
                 },
               ),
               AppGlobalDropdownMenu(
                 helpText: AppLocalizations.of(context)!.event_type,
                 hintText: "Casamento",
                 width: 37.w,
+                onSelected: (value) {
+                  eventTypeController = value ?? '';
+                  viewmodel.loger.info('Tipo de evento: ${value.toString()}');
+                },
                 dropdownMenuEntries: const [
-                  DropdownMenuEntry(value: "OP1", label: "Casamento"),
-                  DropdownMenuEntry(value: "OP1", label: "Pedido"),
-                  DropdownMenuEntry(value: "OP1", label: "Aniversário"),
-                  DropdownMenuEntry(value: "OP1", label: "Noivado"),
+                  DropdownMenuEntry(value: 1, label: "Casamento"),
+                  DropdownMenuEntry(value: 2, label: "Pedido"),
+                  DropdownMenuEntry(value: 3, label: "Aniversário"),
+                  DropdownMenuEntry(value: 4, label: "Aniversário"),
                 ],
               ),
             ],
@@ -68,13 +80,19 @@ class FormLocal extends StatelessWidget {
                 helpText: AppLocalizations.of(context)!.start_time,
                 hintText: "00:00",
                 width: 37.w,
-                onDateSelected: (value) {},
+                onDateSelected: (value) {
+                  startTimeController = value;
+                  viewmodel.loger.info('Hora de início: $value');
+                },
               ),
               AppGlobalTimePicker(
                 helpText: AppLocalizations.of(context)!.end_time,
                 hintText: "00:00",
                 width: 37.w,
-                onDateSelected: (value) {},
+                onDateSelected: (value) {
+                  endTimeController = value;
+                  viewmodel.loger.info('Hora de termino: $value}');
+                },
               ),
             ],
           ),
@@ -84,11 +102,15 @@ class FormLocal extends StatelessWidget {
             helpText: AppLocalizations.of(context)!.number_of_guests,
             hintText: "150 Convidados",
             width: 80.w,
+            onSelected: (value) {
+              guestsNumberController = value;
+              viewmodel.loger.info('Numero de Convidados: ${value.toString()}');
+            },
             dropdownMenuEntries: const [
-              DropdownMenuEntry(value: "OP1", label: "150 Convidados"),
-              DropdownMenuEntry(value: "OP1", label: "300 Convidadoso"),
-              DropdownMenuEntry(value: "OP1", label: "600 Convidados"),
-              DropdownMenuEntry(value: "OP1", label: "1200 Convidados"),
+              DropdownMenuEntry(value: 150, label: "150 Convidados"),
+              DropdownMenuEntry(value: 300, label: "300 Convidadoso"),
+              DropdownMenuEntry(value: 600, label: "600 Convidados"),
+              DropdownMenuEntry(value: 1299, label: "1200 Convidados"),
             ],
           ),
           const AppGlobalVericalSpacing(),

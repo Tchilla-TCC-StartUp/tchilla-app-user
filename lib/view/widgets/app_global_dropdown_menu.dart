@@ -13,11 +13,13 @@ class AppGlobalDropdownMenu extends StatelessWidget {
     this.width,
     this.hintText,
     this.helpText,
+    this.onSelected
   });
-  final List<DropdownMenuEntry<String>> dropdownMenuEntries;
+  final List<DropdownMenuEntry<dynamic>> dropdownMenuEntries;
   final double? width;
   final String? hintText;
   final String? helpText;
+  final void Function(dynamic?)? onSelected;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -48,6 +50,7 @@ class AppGlobalDropdownMenu extends StatelessWidget {
             Icons.keyboard_arrow_down,
             color: primaryBorder,
           ),
+          onSelected: onSelected,
           dropdownMenuEntries: dropdownMenuEntries,
           inputDecorationTheme: InputDecorationTheme(
             enabledBorder: OutlineInputBorder(
