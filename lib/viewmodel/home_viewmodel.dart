@@ -7,14 +7,14 @@ class HomeViewModel extends BaseViewModel {
   RxInt selectedIndex = 0.obs;
   RxDouble adptiveHeight = 510.px.obs;
   RxDouble adptiveSilverExpade = 780.px.obs;
+  final RxBool isVisible = true.obs;
 
   RxList<String> tabTitlesForm = ["Local", "Serviços", "Local+Serviços"].obs;
 
-
-
-  void selectTab(int index) {
+  void selectTab(int index, FocusNode focusNode) {
+    focusNode.unfocus();
     selectedIndex.value = index;
-    updateAdaptiveHeight();
+    updateAdaptiveHeight(focusNode);
   }
 
   void navigateToProfilePage() {
@@ -26,11 +26,21 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<void> searchLocal(
-      String local, DateTime data, int envitNumber, BuildContext context) {
+    String local,
+    DateTime data,
+    int envitNumber,
+    BuildContext context,
+  ) {
     return this.navigator.navigateToResultSearchPage();
   }
 
-  void updateAdaptiveHeight() {
+  void onFocus(FocusNode focusNode) {
+    var focus = isVisible.value = focusNode.hasFocus;
+    adptiveHeight.value = focus ? 220.px : 520.px;
+    adptiveSilverExpade.value = focus ? 480.px : 780.px;
+  }
+
+  void updateAdaptiveHeight(FocusNode focusNode) {
     switch (selectedIndex.value) {
       case 0:
         adptiveHeight.value = 520.px;

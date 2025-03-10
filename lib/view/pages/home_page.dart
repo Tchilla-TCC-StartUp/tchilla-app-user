@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage>
       vsync: this,
     );
     _tabController.addListener(() {
-      viewmodel.selectTab(_tabController.index);
+      viewmodel.selectTab(_tabController.index, _locationFocusNode);
     });
   }
 
@@ -74,15 +74,17 @@ class _HomePageState extends State<HomePage>
                           ? ErrorTryAgain(
                               message: viewmodel.errorMessage.value,
                             )
-                          : SizedBox(
-                            height: viewmodel.adptiveSilverExpade.value + 1.h,
-                            child: Stack(
+                          : AnimatedContainer(
+                              duration: const Duration(milliseconds: 660),
+                              curve: Curves.easeInOut,
+                              height: viewmodel.adptiveSilverExpade.value + 1.h,
+                              child: Stack(
                                 children: [
                                   _buildBackground(),
                                   _buildContainerMan(),
                                 ],
                               ),
-                          );
+                            );
                 }),
                 const AppLayoutpage(
                   body: ViewMorePage(),
@@ -197,7 +199,7 @@ class _HomePageState extends State<HomePage>
         () => AppGlobalTabBar(
           tabController: _tabController,
           tabs: viewmodel.tabTitlesForm.value,
-          onTap: viewmodel.selectTab,
+          onTap: (index) => viewmodel.selectTab(index, _locationFocusNode),
           unselectedLabelColor: primaryBorder,
           labelColor: primary950,
           indicatorColor: primary950,
@@ -212,43 +214,48 @@ class _HomePageState extends State<HomePage>
   }
 
   Widget _buildForms() {
-    return Container(
-      height: viewmodel.adptiveHeight.value,
-      decoration: BoxDecoration(
-        color: primary50,
-        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(20)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
-        child: IndexedStack(
-          index: _tabController.index,
-          children: [
-            // Head
-            FormLocal(
-              locationFocusNode: _locationFocusNode,
-              viewmodel: viewmodel,
-            ),
-
-            FormService(
-              locationFocusNode: _locationFocusNode,
-              viewmodel: viewmodel,
-            ),
-            FormLocalEndService(
-              locationFocusNode: _locationFocusNode,
-              viewmodel: viewmodel,
+    return Obx(() {
+      return AnimatedContainer(
+        duration: const Duration(milliseconds: 600),
+        curve: Curves.easeInOut,
+        height: viewmodel.adptiveHeight.value,
+        decoration: BoxDecoration(
+          color: primary50,
+          borderRadius:
+              const BorderRadius.vertical(bottom: Radius.circular(20)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 10,
+              offset: const Offset(0, 4),
             ),
           ],
         ),
-      ),
-    );
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+          child: IndexedStack(
+            index: _tabController.index,
+            children: [
+              // Head
+              FormLocal(
+                focusNode: _locationFocusNode,
+                viewmodel: viewmodel,
+              ),
+
+              FormService(
+                focusNode: _locationFocusNode,
+                viewmodel: viewmodel,
+              ),
+              FormLocalEndService(
+                focusNode: _locationFocusNode,
+                viewmodel: viewmodel,
+              ),
+            ],
+          ),
+        ),
+      );
+    });
   }
 
   Widget _buildHelloUser() {

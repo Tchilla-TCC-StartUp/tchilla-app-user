@@ -43,7 +43,8 @@ class AppGlobalInput extends StatelessWidget {
     this.readOnly,
     this.suffix,
     this.textAlign,
-    this.suffixIconConstraints, this.contentPadding,
+    this.suffixIconConstraints,
+    this.contentPadding,
   });
 
   @override
