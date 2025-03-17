@@ -79,6 +79,7 @@ class AppGlobalInput extends StatelessWidget {
           decoration: InputDecoration(
             labelText: label,
             hintText: hintText,
+            alignLabelWithHint: true,
             hintStyle: GoogleFonts.inter(
               fontWeight: FontWeight.w600,
               fontSize: 15.sp,
@@ -87,20 +88,22 @@ class AppGlobalInput extends StatelessWidget {
             contentPadding: contentPadding,
             prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
             suffix: suffix,
-            suffixIconConstraints: suffixIconConstraints,
-            suffixIcon: suffixIcon != null
-                ? IconButton(
-                    icon: Icon(
-                      suffixIcon,
-                      color: primary400,
-                    ),
-                    onPressed: onSuffixIconPressed,
-                  )
-                : null,
+            suffixIconConstraints: suffixIconConstraints ??
+                BoxConstraints(
+                  maxHeight: 5.px,
+                  maxWidth: 5.px,
+                ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
               borderSide: const BorderSide(
                 color: Color(0xffAFBACA),
+                width: 1,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(6),
+              borderSide: const BorderSide(
+                color: primary700,
                 width: 1,
               ),
             ),

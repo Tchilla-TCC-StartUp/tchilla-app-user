@@ -15,8 +15,8 @@ class BaseViewModel extends GetxController {
   final Validator validator = Get.find();
   final Navigation navigator = Get.find();
   final AppLogs loger = Get.find();
-  final LocalTokenData dataToken = Get.find();
   final RxBool isLoading = false.obs;
+  final LocalTokenData dataToken = Get.find();
   final RxBool isError = false.obs;
   final RxString errorMessage = "".obs;
   final lang = Get.deviceLocale?.languageCode ?? "en";
@@ -52,7 +52,7 @@ class BaseViewModel extends GetxController {
     );
   }
 
-  Future<T> request<T>({
+  Future<T> onRequest<T>({
     required Future<T> event,
     VoidCallback? onStart,
     ValueChanged<T>? onSuccess,
@@ -74,7 +74,6 @@ class BaseViewModel extends GetxController {
           error is UnknownException ||
           error is ServerException) {
         emitError(error.message);
-        showError(error);
       } else {
         showError(error);
       }

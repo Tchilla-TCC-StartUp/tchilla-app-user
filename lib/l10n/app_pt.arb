@@ -126,7 +126,11 @@
   "requestCancelled": "Requisição cancelada.",
   "noInternetConnection": "Sem conexão com a internet. Verifique sua rede.",
   "unexpectedConnectionError": "Erro inesperado na conexão.",
-  "telephone_number": "Número de telefone"
+  "telephone_number": "Número de telefone",
+  "deposit": "Depósito",
+   "add_or_search_deposit_methods": "Adicionar ou procurar métodos\n de depósito",
+   "choose_payment_method": "Escolha um método de pagamento de sua preferência",
+   "search": "Pesquisar"
 
 
 }

@@ -126,11 +126,11 @@
   "serverResponseError": "Error processing server response.",
   "requestCancelled": "Request cancelled.",
   "noInternetConnection": "No internet connection. Check your network.",
-  "unexpectedConnectionError": "Unexpected connection error."
-
-
-
-
+  "unexpectedConnectionError": "Unexpected connection error.",
+   "deposit": "Deposit",
+   "add_or_search_deposit_methods": "Add or search for deposit\n methods",
+   "choose_payment_method": "Choose a payment method of your choice",
+   "search": "Search"
 
 
 

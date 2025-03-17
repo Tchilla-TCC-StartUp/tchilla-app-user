@@ -15,7 +15,7 @@ import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/viewmodel/user_data_viewmodel.dart';
- 
+
 class UserDataPage extends StatefulWidget {
   final String id;
   const UserDataPage({super.key, required this.id});
@@ -120,6 +120,7 @@ class _UserDataPageState extends State<UserDataPage> {
         suffix: GestureDetector(
           onTap: onToggleEditable,
           child: Icon(
+            size: 16.px,
             isEditable.value ? Icons.check : Icons.edit_note_rounded,
             color: isEditable.value ? Colors.greenAccent.shade700 : primary800,
           ),

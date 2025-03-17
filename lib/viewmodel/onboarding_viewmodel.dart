@@ -18,7 +18,7 @@ class OnboardingViewModel extends BaseViewModel {
   RxList<OnboardingModel> get onboarding => _onboarding;
 
   void getOnboarding() async {
-    await request(
+    await onRequest(
       event: repository.fetchOnboadData(lang),
       onSuccess: (value) {
         _onboarding.assignAll(value);

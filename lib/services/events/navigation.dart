@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import 'package:tchilla/resources/app_routes.dart';
 import 'package:tchilla/services/interface/inavigation.dart';
 
@@ -88,5 +87,10 @@ class Navigation extends INavigation {
   @override
   navigateToTiketPage(String id) {
     Get.toNamed(AppRoutes.tiketPage, arguments: id);
+  }
+
+  @override
+  navigateToChoosePaymentPage() {
+    Get.toNamed(AppRoutes.chosePaymentPage);
   }
 }

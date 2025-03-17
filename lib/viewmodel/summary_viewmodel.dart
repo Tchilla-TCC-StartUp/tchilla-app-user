@@ -4,6 +4,6 @@ class SummaryViewmodel extends BaseViewModel {
 
 
   void clickContinue(String id) {
-    navigator.navigateToTiketPage(id);
+    navigator.navigateToChoosePaymentPage();
   }
 }

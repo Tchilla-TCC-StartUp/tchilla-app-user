@@ -17,8 +17,16 @@ class HomeViewModel extends BaseViewModel {
     updateAdaptiveHeight(focusNode);
   }
 
-  void navigateToProfilePage() {
-    this.navigator.navigateToProfilePage();
+  void navigateToProfilePage() async {
+    final bool isAuth = await checkinLogin();
+
+    if (isAuth) {
+      this.navigator.navigateToProfilePage();
+      return;
+    }
+    return showError('Vc não pode acessar essa pagina como visitante');
+
+    // return this.navigator.navigateToProfilePage();
   }
 
   navigateToResultSearchPage() {

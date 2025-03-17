@@ -28,9 +28,11 @@ class _RegisterPageState extends State<RegisterPage> {
   final FocusNode nameFocusNode = FocusNode();
   final FocusNode emailFocusNode = FocusNode();
   final FocusNode passwordFocusNode = FocusNode();
+  final FocusNode phoneNumberFocusNode = FocusNode();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final phoneNumberController = TextEditingController();
   final viewmodel = Get.find<RegisterViewmodel>();
   @override
   Widget build(BuildContext context) {
@@ -38,9 +40,9 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SafeArea(
         child: AppLayoutpage(
             body: SingleChildScrollView(
-              child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               AppAnimationLogo(
                 focusNode: [
                   nameFocusNode,
@@ -80,7 +82,8 @@ class _RegisterPageState extends State<RegisterPage> {
               AppGlobalPhoneNumberInput(
                 label: AppLocalizations.of(context)!.telephone_number,
                 hintText: '923 445 566',
-                controller: TextEditingController(),
+                controller: phoneNumberController,
+                focusNode: phoneNumberFocusNode,
               ),
               AppGlobalVericalSpacing(
                 value: 2.h,
@@ -114,7 +117,8 @@ class _RegisterPageState extends State<RegisterPage> {
               AppGlobalVericalSpacing(
                 value: 3.h,
               ),
-              AppAuthDivider(text: AppLocalizations.of(context)!.or_you_can_also),
+              AppAuthDivider(
+                  text: AppLocalizations.of(context)!.or_you_can_also),
               AppGlobalVericalSpacing(
                 value: 3.h,
               ),
@@ -162,9 +166,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ],
               ),
-                        ],
-                      ),
-            )),
+            ],
+          ),
+        )),
       ),
     );
   }

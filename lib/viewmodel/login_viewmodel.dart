@@ -35,7 +35,7 @@ class LoginViewmodel extends BaseViewModel {
       );
     }
 
-    await request(
+    await onRequest(
       event: repository.authUser(email: email, password: password),
       onSuccess: (value) async {
         await dataToken.saveToken(value.data!);

@@ -84,7 +84,7 @@ class _AppGlobalPhoneNumberInputState extends State<AppGlobalPhoneNumberInput> {
               padding: EdgeInsets.symmetric(horizontal: 8.px),
               child: Container(
                 alignment: Alignment.center,
-                width: 100.px,
+                width: 90.px,
                 decoration: BoxDecoration(
                   color: primary100,
                   borderRadius: BorderRadius.circular(20.px),
@@ -93,7 +93,7 @@ class _AppGlobalPhoneNumberInputState extends State<AppGlobalPhoneNumberInput> {
                   child: DropdownButton<String>(
                     icon: Icon(
                       Icons.keyboard_arrow_down_outlined,
-                      size: 1.sp,
+                      size: 16.px,
                     ),
                     value: selectedCountry,
                     items: countryCodes.keys.map((String country) {
@@ -107,7 +107,7 @@ class _AppGlobalPhoneNumberInputState extends State<AppGlobalPhoneNumberInput> {
                               style: TextStyle(fontSize: 16.sp),
                             ),
                             AppGlobalHorizontalSpacing(
-                              value: 8.px,
+                              value: 3.px,
                             ),
                             Text(
                               countryCodes[country]!,
@@ -136,6 +136,13 @@ class _AppGlobalPhoneNumberInputState extends State<AppGlobalPhoneNumberInput> {
               borderRadius: BorderRadius.circular(6),
               borderSide: const BorderSide(
                 color: Color(0xffAFBACA),
+                width: 1,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(6),
+              borderSide: const BorderSide(
+                color: primary700,
                 width: 1,
               ),
             ),

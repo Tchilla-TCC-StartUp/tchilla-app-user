@@ -5,18 +5,16 @@ import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
 class WelcomeViewmodel extends BaseViewModel {
   final WelcomeRepository repository;
-
   final Rxn<WelcomeModel> _welcomeData = Rxn<WelcomeModel>();
 
   WelcomeViewmodel({
     required this.repository,
-
   });
 
   WelcomeModel? get welcomeData => _welcomeData.value;
 
   void getWelcomeData() async {
-    await request(
+    await onRequest(
       event: repository.fetchWelcomeData(lang),
       onSuccess: (value) {
         _welcomeData.value = value;
