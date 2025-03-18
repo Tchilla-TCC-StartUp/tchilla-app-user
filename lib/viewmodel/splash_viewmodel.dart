@@ -9,7 +9,7 @@ class SplashViewmodel extends BaseViewModel {
     if (isLogin) {
       return await navigator.navigateToHome();
     }
-    // await navigator.navigateToOnboarding();
-    await navigator.navigateToHome();
+    await navigator.navigateToOnboarding();
+    // await navigator.navigateToHome();
   }
 }
