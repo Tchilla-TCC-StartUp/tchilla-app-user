@@ -1,0 +1,138 @@
+{
+  "@@locale": "en",
+  "onboarding_title_1": "Save time in your search.",
+  "onboarding_description_1": "With just a few clicks, find the ideal venue for any social event with the best market options, eliminating the hassle of searching.",
+  
+  "onboarding_title_2": "Decoration Services Included",
+  "onboarding_description_2": "Everything you need for a unique and charming environment! Our package includes personalized decoration services to make your space unforgettable.",
+  
+  "onboarding_title_3": "Schedule, Execute, and Review with Confidence.",
+  "onboarding_description_3": "With just a few taps, schedule the services you need, track execution, and review the experience with total transparency. Confidence and quality at your fingertips!",
+  
+  "skip": "Skip",
+  "proceed": "Proceed",
+
+  "welcome_title": "Welcome to Tchilla",
+  "welcome_description": "We are grateful that you downloaded our app. Create an account, log in, or explore the app.",
+  
+  "create_account": "Create an account",
+  "login": "Login",
+  "guest_login": "Enter as Guest",
+  
+  "sign_up": "Sign Up",
+  "name": "Name",
+  "email_address": "Email Address",
+  "telephone_number": "Telephone Number",
+  "password": "Password",
+  "confirm": "Confirm",
+  "create_account_button": "Create Account",
+  "or_you_can_also": "Or you can also",
+  "sign_up_with_google": "Sign up with Google",
+  "already_have_account": "Already have an account?",
+  "login_here": "Log in here",
+  "sign_in": "Sign In",
+  
+  "forgot_password": "Forgot your password?",
+  "forgot_password_description": "Enter your email to recover your password",
+
+  "confirmation_pin": "Confirmation PIN",
+  "confirmation_pin_description": "We have sent a PIN to your email for confirmation",
+  "pin": "PIN",
+  "reset_password": "Reset Password",
+  "reset_password_description": "Reset your password with a more secure and easy-to-remember one",
+  "confirm_password": "Confirm Password",
+  "redefine": "Redefine",
+
+  "organize_event": "Organize your event\nin minutes",
+  "visitor": "Mr./Ms. Visitor",
+  "hello": "Hello👋",
+  "event_location": "Event Location",
+  "event_location_placeholder": "E.g.: province/city/district",
+  "event_date": "Event Date",
+  "event_type": "Event Type",
+  "wedding": "Wedding",
+  "start_time": "Start Time",
+  "end_time": "End Time",
+  
+  "search": "Search",
+  "add_services": "Add Services",
+  "select_service": "Select a service",
+  
+  "most_requested": "Most Requested",
+  "house_suggestions": "House Suggestions",
+
+  "my_schedules": "My Schedules",
+  "notifications": "Notifications",
+  "support": "Support",
+  "help_center": "Help Center",
+  "faqs": "FAQs",
+  "settings_preferences": "Settings & Preferences",
+  "security": "Security",
+  "dark_mode": "Dark Mode",
+  "logout": "Logout",
+
+  "schedule": "Schedule",
+  "description": "Description",
+  "responsible": "Responsible",
+  
+  "my_profile": "My Profile",
+  "number_of_guests": "Number of Guests",
+   
+  "alert_attention": "Attention",
+  "login_required_fields": "All fields are required for login.",
+  "login_invalid_email": "This email is invalid.",
+  "login_password_length": "The password must be at least 6 characters long.",
+
+  "alert_success": "Success",
+  "error_fill_all_fields": "Please fill in all fields.",
+  "error_password_required": "Password fields are required.",
+  "error_password_mismatch": "Passwords do not match.",
+  "error_password_length": "The password must be at least 6 characters long.",
+  "success_password_reset": "Password successfully reset.",
+  "error_email_required": "The email field is required.",
+  "error_invalid_email": "This email is invalid.",
+
+  
+  "error_full_name_required": "Full name is required.",
+  "error_invalid_full_name": "Please provide both first and last name.",
+  "error_email_required": "Email is required.",
+  "error_invalid_email": "The provided email is invalid.",
+  "error_password_required": "Password is required.",
+  "error_password_length": "Password must be at least 6 characters long.",
+
+   "save": "Save",
+   "schedule":"Schedule",
+   "reviews":"Reviews",
+   "appointment_summary": "Appointment summary",
+   "responsible":"Responsible",
+   "service":"Services",
+   "error":"Error",
+   "total":"Total",
+   "cancel":"Cancel",
+   "lb_continue":"Continue",
+   "something_went_wrong":"Something went wrong",
+   "try_again":"Try again",
+  "reservation": "Reservation",
+  "reservationTicket": "Reservation Ticket",
+  "amountPaid": "Amount Paid",
+  "downloadReceipt": "Download Receipt",
+  "paid_amount": "Paid Amount",
+   "invalidRequest": "Invalid request.",
+  "unauthorizedAccess": "Unauthorized access.",
+  "resourceNotFound": "Resource not found.",
+  "internalServerError": "Internal server error.",
+  "unknownError": "Unknown error. Code:",
+  "connectionTimeout": "Connection timeout.",
+  "serverResponseError": "Error processing server response.",
+  "requestCancelled": "Request cancelled.",
+  "noInternetConnection": "No internet connection. Check your network.",
+  "unexpectedConnectionError": "Unexpected connection error.",
+   "deposit": "Deposit",
+   "add_or_search_deposit_methods": "Add or search for deposit\n methods",
+   "choose_payment_method": "Choose a payment method of your choice",
+   "search": "Search"
+
+
+
+
+}
