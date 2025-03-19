@@ -16,6 +16,11 @@ class AppGlobalPhoneNumberInput extends StatefulWidget {
   final void Function(String)? onFieldSubmitted;
   final bool? readOnly;
 
+
+  final String initialCountryCode;
+
+  final void Function(String)? onCountryCodeChanged;
+
   const AppGlobalPhoneNumberInput({
     super.key,
     this.controller,
@@ -26,23 +31,57 @@ class AppGlobalPhoneNumberInput extends StatefulWidget {
     this.focusNode,
     this.onFieldSubmitted,
     this.readOnly,
+    this.initialCountryCode = 'AO',
+    this.onCountryCodeChanged,
   });
 
   @override
-  State<AppGlobalPhoneNumberInput> createState() =>
-      _AppGlobalPhoneNumberInputState();
+  State<AppGlobalPhoneNumberInput> createState() => _AppGlobalPhoneNumberInputState();
 }
 
 class _AppGlobalPhoneNumberInputState extends State<AppGlobalPhoneNumberInput> {
-  String selectedCountry = 'AO';
+  late String selectedCountry;
 
   final Map<String, String> countryCodes = {
     'AO': '+244',
+    'BR': '+55',
+    'US': '+1',
+    'PT': '+351',
+    'FR': '+33',
+    'NG': '+234',
+    'ZA': '+27',
   };
 
   final Map<String, String> countryFlags = {
     'AO': '🇦🇴',
+    'BR': '🇧🇷',
+    'US': '🇺🇸',
+    'PT': '🇵🇹',
+    'FR': '🇫🇷',
+    'NG': '🇳🇬',
+    'ZA': '🇿🇦',
   };
+  final Map<String, int> maxLengths = {
+    'AO': 9,
+    'BR': 11,
+    'US': 10,
+    'PT': 9,
+    'FR': 9,
+    'NG': 10,
+    'ZA': 9,
+  };
+
+
+  @override
+  void initState() {
+    super.initState();
+    selectedCountry = countryCodes.containsKey(widget.initialCountryCode)
+        ? widget.initialCountryCode
+        : 'AO';
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      widget.onCountryCodeChanged?.call(countryCodes[selectedCountry]!);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +101,7 @@ class _AppGlobalPhoneNumberInputState extends State<AppGlobalPhoneNumberInput> {
           readOnly: widget.readOnly ?? false,
           focusNode: widget.focusNode,
           controller: widget.controller,
-          maxLength: 9,
+          maxLength: maxLengths[selectedCountry] ?? 9,
           keyboardType: TextInputType.phone,
           textInputAction: widget.textInputAction,
           validator: widget.validator,
@@ -103,14 +142,12 @@ class _AppGlobalPhoneNumberInputState extends State<AppGlobalPhoneNumberInput> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              countryFlags[country]!,
+                              countryFlags[country] ?? '',
                               style: TextStyle(fontSize: 16.sp),
                             ),
-                            AppGlobalHorizontalSpacing(
-                              value: 3.px,
-                            ),
+                            AppGlobalHorizontalSpacing(value: 3.px),
                             Text(
-                              countryCodes[country]!,
+                              countryCodes[country] ?? '',
                               style: GoogleFonts.inter(
                                 fontSize: 13.sp,
                                 fontWeight: FontWeight.w600,
@@ -126,6 +163,7 @@ class _AppGlobalPhoneNumberInputState extends State<AppGlobalPhoneNumberInput> {
                         setState(() {
                           selectedCountry = newValue;
                         });
+                        widget.onCountryCodeChanged?.call(countryCodes[newValue]!);
                       }
                     },
                   ),
@@ -134,24 +172,15 @@ class _AppGlobalPhoneNumberInputState extends State<AppGlobalPhoneNumberInput> {
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
-              borderSide: const BorderSide(
-                color: Color(0xffAFBACA),
-                width: 1,
-              ),
+              borderSide: const BorderSide(color: Color(0xffAFBACA), width: 1),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
-              borderSide: const BorderSide(
-                color: primary700,
-                width: 1,
-              ),
+              borderSide: const BorderSide(color: primary700, width: 1),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
-              borderSide: const BorderSide(
-                color: Color(0xffAFBACA),
-                width: 1,
-              ),
+              borderSide: const BorderSide(color: Color(0xffAFBACA), width: 1),
             ),
           ),
         ),

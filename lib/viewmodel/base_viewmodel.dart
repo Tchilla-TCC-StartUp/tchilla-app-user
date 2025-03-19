@@ -74,6 +74,7 @@ class BaseViewModel extends GetxController {
           error is UnknownException ||
           error is ServerException) {
         emitError(error.message);
+        showError(error);
       } else {
         showError(error);
       }

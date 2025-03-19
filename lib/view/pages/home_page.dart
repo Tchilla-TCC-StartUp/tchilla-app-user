@@ -51,6 +51,12 @@ class _HomePageState extends State<HomePage>
   }
 
   @override
+  void dispose() {
+    _locationFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
