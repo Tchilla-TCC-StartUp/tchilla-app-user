@@ -290,7 +290,7 @@ class _HomePageState extends State<HomePage>
               ),
             ),
             Text(
-              AppLocalizations.of(context)!.visitor,
+              viewmodel.homeData.value!.userName ?? '',
               style: GoogleFonts.inter(
                 color: primary50,
                 fontSize: 14.spa,

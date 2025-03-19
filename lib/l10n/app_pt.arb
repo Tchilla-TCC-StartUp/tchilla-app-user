@@ -130,7 +130,17 @@
   "deposit": "Depósito",
    "add_or_search_deposit_methods": "Adicionar ou procurar métodos\n de depósito",
    "choose_payment_method": "Escolha um método de pagamento de sua preferência",
-   "search": "Pesquisar"
+   "search": "Pesquisar",
+   "search": "Search",
+   "tabLocal": "Local",
+  "tabServices": "Serviços",
+  "tabVenueAndServices": "Local+Serviços",
+  "visitorAccessDenied": "Você não pode acessar esta página como visitante",
+  "guests": "Convidados",
+  "wedding": "Casamento"
+
+
+
 
 
 }

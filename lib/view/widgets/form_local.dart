@@ -80,19 +80,23 @@ class _FormLocalState extends State<FormLocal> {
                   ),
                   AppGlobalDropdownMenu(
                     helpText: AppLocalizations.of(context)!.event_type,
-                    hintText: "Casamento",
+                    hintText: widget.viewmodel.localizations.wedding,
                     width: 37.w,
                     onSelected: (value) {
                       eventTypeController = value ?? '';
                       widget.viewmodel.loger
                           .info('Tipo de evento: ${value.toString()}');
                     },
-                    dropdownMenuEntries: const [
-                      DropdownMenuEntry(value: 1, label: "Casamento"),
-                      DropdownMenuEntry(value: 2, label: "Pedido"),
-                      DropdownMenuEntry(value: 3, label: "Aniversário"),
-                      DropdownMenuEntry(value: 4, label: "Aniversário"),
-                    ],
+                    dropdownMenuEntries:
+                        widget.viewmodel.homeData.value?.eventTypes
+                                ?.map(
+                                  (e) => DropdownMenuEntry(
+                                    value: e.id,
+                                    label: e.label ?? '',
+                                  ),
+                                )
+                                .toList() ??
+                            [],
                   ),
                 ],
               ),
@@ -123,19 +127,22 @@ class _FormLocalState extends State<FormLocal> {
               const AppGlobalVericalSpacing(),
               AppGlobalDropdownMenu(
                 helpText: AppLocalizations.of(context)!.number_of_guests,
-                hintText: "150 Convidados",
+                hintText: "200 ${widget.viewmodel.localizations.guests}",
                 width: 80.w,
                 onSelected: (value) {
                   guestsNumberController = value;
                   widget.viewmodel.loger
                       .info('Numero de Convidados: ${value.toString()}');
                 },
-                dropdownMenuEntries: const [
-                  DropdownMenuEntry(value: 150, label: "150 Convidados"),
-                  DropdownMenuEntry(value: 300, label: "300 Convidadoso"),
-                  DropdownMenuEntry(value: 600, label: "600 Convidados"),
-                  DropdownMenuEntry(value: 1299, label: "1200 Convidados"),
-                ],
+                dropdownMenuEntries:
+                    widget.viewmodel.homeData.value?.guestNumbers
+                            ?.map((e) => DropdownMenuEntry(
+                                  value: e,
+                                  label:
+                                      '${e.toString()} ${widget.viewmodel.localizations.guests}',
+                                ))
+                            .toList() ??
+                        [],
               ),
             ],
           ),

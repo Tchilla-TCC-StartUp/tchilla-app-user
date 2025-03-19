@@ -80,14 +80,19 @@ class _FormServiceState extends State<FormService> {
                   ),
                   AppGlobalDropdownMenu(
                     helpText: AppLocalizations.of(context)!.event_type,
-                    hintText: "Casamento",
+                    hintText: widget.viewmodel.localizations.wedding,
                     width: 37.w,
-                    dropdownMenuEntries: const [
-                      DropdownMenuEntry(value: 1, label: "Casamento"),
-                      DropdownMenuEntry(value: 2, label: "Pedido"),
-                      DropdownMenuEntry(value: 3, label: "Aniversário"),
-                      DropdownMenuEntry(value: 4, label: "Noivado"),
-                    ],
+                    onSelected: (value) {
+                      eventTypeController = value ?? '';
+                      widget.viewmodel.loger
+                          .info('Tipo de evento: ${value.toString()}');
+                    },
+                    dropdownMenuEntries: widget
+                            .viewmodel.homeData.value?.eventTypes
+                            ?.map((e) => DropdownMenuEntry(
+                                value: e.id, label: e.label ?? ''))
+                            .toList() ??
+                        [],
                   ),
                 ],
               ),
@@ -112,25 +117,37 @@ class _FormServiceState extends State<FormService> {
               const AppGlobalVericalSpacing(),
               AppGlobalDropdownMenu(
                 helpText: AppLocalizations.of(context)!.number_of_guests,
-                hintText: "150 Convidados",
+                hintText: "200 ${widget.viewmodel.localizations.guests}",
                 width: 80.w,
-                dropdownMenuEntries: const [
-                  DropdownMenuEntry(value: 1, label: "150 Convidados"),
-                  DropdownMenuEntry(value: 2, label: "300 Convidadoso"),
-                  DropdownMenuEntry(value: 3, label: "600 Convidados"),
-                  DropdownMenuEntry(value: 4, label: "1200 Convidados"),
-                ],
+                onSelected: (value) {
+                  guestsNumberController = value;
+                  widget.viewmodel.loger
+                      .info('Numero de Convidados: ${value.toString()}');
+                },
+                dropdownMenuEntries:
+                    widget.viewmodel.homeData.value?.guestNumbers
+                            ?.map((e) => DropdownMenuEntry(
+                                  value: e,
+                                  label:
+                                      '${e.toString()} ${widget.viewmodel.localizations.guests}',
+                                ))
+                            .toList() ??
+                        [],
               ),
               const AppGlobalVericalSpacing(),
               AppGlobalServiceTagsManager(
                 helpText: AppLocalizations.of(context)!.add_services,
                 hintText: AppLocalizations.of(context)!.select_service,
-                dropdownMenuEntries: const [
-                  DropdownMenuEntry(value: 1, label: "Decoração"),
-                  DropdownMenuEntry(value: 2, label: "DJ"),
-                  DropdownMenuEntry(value: 3, label: "Confeiteiro"),
-                  DropdownMenuEntry(value: 4, label: "Bartender"),
-                ],
+                dropdownMenuEntries: widget.viewmodel.homeData.value?.services
+                        ?.where((e) => e.id != null)
+                        .map(
+                          (e) => DropdownMenuEntry<int>(
+                            value: e.id!,
+                            label: e.label ?? '',
+                          ),
+                        )
+                        .toList() ??
+                    [],
                 onChanged: (selectedTags) {
                   print("Tags Selecionadas: $selectedTags");
                 },
