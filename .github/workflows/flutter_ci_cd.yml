@@ -106,10 +106,10 @@ jobs:
       # 📤 Enviar AAB
       - name: Upload AAB to Release
         uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: artifacts/app-release.aab
           asset_name: tchilla-release.aab
           asset_content_type: application/octet-stream
+          token: ${{ secrets.TOKEN }}
