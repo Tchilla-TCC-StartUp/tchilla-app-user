@@ -51,6 +51,12 @@ class _HomePageState extends State<HomePage>
   }
 
   @override
+  void dispose() {
+    _locationFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
@@ -284,7 +290,7 @@ class _HomePageState extends State<HomePage>
               ),
             ),
             Text(
-              AppLocalizations.of(context)!.visitor,
+              viewmodel.homeData.value!.userName ?? '',
               style: GoogleFonts.inter(
                 color: primary50,
                 fontSize: 14.spa,

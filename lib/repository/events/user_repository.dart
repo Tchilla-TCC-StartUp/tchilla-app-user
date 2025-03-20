@@ -12,7 +12,7 @@ class UserRepository extends BaseRepository implements IuserRepository {
     String? lang,
   }) async {
     final respose = await post(
-      "/Auth/cliente/login",
+      "/Auth/login",
       data: {"emailOrUsername": email, "password": password},
     );
 
@@ -23,12 +23,18 @@ class UserRepository extends BaseRepository implements IuserRepository {
   Future<AuthModel> registerUser({
     required String email,
     required String name,
-    required String nif,
     required String password,
     required String telefone,
     String? lang,
-  }) {
-    // TODO: implement registerUser
-    throw UnimplementedError();
+  }) async {
+   final respose = await post("/Auth/register", data: {
+     "nome": name,
+     "email": email,
+     "telefone": telefone,
+     "senha": password,
+     "tipo": 0
+   });
+
+   return AuthModel.fromMap(respose);
   }
 }

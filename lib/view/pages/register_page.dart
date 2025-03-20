@@ -34,7 +34,25 @@ class _RegisterPageState extends State<RegisterPage> {
   final passwordController = TextEditingController();
   final phoneNumberController = TextEditingController();
   final viewmodel = Get.find<RegisterViewmodel>();
+
   @override
+  void dispose() {
+    emailFocusNode.dispose();
+    nameFocusNode.dispose();
+    passwordFocusNode.dispose();
+    phoneNumberFocusNode.dispose();
+    emailController.dispose();
+    nameController.dispose();
+    passwordController.dispose();
+    phoneNumberController.dispose();
+    super.dispose();
+  }
+
+  void onRegisterUser() {
+    viewmodel.register(nameController.text, emailController.text,
+        passwordController.text, phoneNumberController.text);
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -48,6 +66,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   nameFocusNode,
                   emailFocusNode,
                   passwordFocusNode,
+                  phoneNumberFocusNode
                 ],
               ),
               AppGlobalText(
@@ -82,6 +101,12 @@ class _RegisterPageState extends State<RegisterPage> {
               AppGlobalPhoneNumberInput(
                 label: AppLocalizations.of(context)!.telephone_number,
                 hintText: '923 445 566',
+                initialCountryCode: '+244',
+                textInputAction: TextInputAction.next,
+                onCountryCodeChanged: (code) {
+                  viewmodel.countryCode.value = code;
+                  print(code);
+                },
                 controller: phoneNumberController,
                 focusNode: phoneNumberFocusNode,
               ),
@@ -95,24 +120,20 @@ class _RegisterPageState extends State<RegisterPage> {
                 hintText: "*******",
                 keyboardType: TextInputType.visiblePassword,
                 textInputAction: TextInputAction.send,
-                onFieldSubmitted: (p0) => viewmodel.register(
-                  nameController.text,
-                  emailController.text,
-                  passwordController.text,
-                ),
+                onFieldSubmitted: (p0) => onRegisterUser(),
                 obscureText: true,
               ),
               AppGlobalVericalSpacing(
                 value: 6.h,
               ),
-              AppGlobalTextButton(
-                minWidth: 100.w,
-                onPressed: () => viewmodel.register(
-                  nameController.text,
-                  emailController.text,
-                  passwordController.text,
+              Obx(
+                () => AppGlobalTextButton(
+                  minWidth: 100.w,
+                  isLoading: viewmodel.isLoading.value,
+                  onPressed: () => onRegisterUser(),
+                  textButton:
+                      AppLocalizations.of(context)!.create_account_button,
                 ),
-                textButton: AppLocalizations.of(context)!.create_account_button,
               ),
               AppGlobalVericalSpacing(
                 value: 3.h,

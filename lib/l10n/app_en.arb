@@ -130,7 +130,15 @@
    "deposit": "Deposit",
    "add_or_search_deposit_methods": "Add or search for deposit\n methods",
    "choose_payment_method": "Choose a payment method of your choice",
-   "search": "Search"
+   "tabLocal": "Venue",
+  "tabServices": "Services",
+  "tabVenueAndServices": "Venue + Services",
+  "visitorAccessDenied": "You cannot access this page as a guest",
+  "guests": "Guests",
+  "wedding": "Wedding"
+
+
+
 
 
 

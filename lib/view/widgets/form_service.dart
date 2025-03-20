@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tchilla/model/event_type_model.dart';
 import 'package:tchilla/view/widgets/app_global_data_picker.dart';
-import 'package:tchilla/view/widgets/app_global_dropdown_menu.dart';
+import 'package:tchilla/view/widgets/app_global_searchI_input.dart';
 import 'package:tchilla/view/widgets/app_global_input.dart';
 import 'package:tchilla/view/widgets/app_global_service_tags_manager.dart';
 import 'package:tchilla/view/widgets/app_global_show_and_hide_animation.dart';
@@ -10,6 +11,8 @@ import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_global_time_picker.dart';
 import 'package:tchilla/viewmodel/home_viewmodel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../model/service_model.dart';
 
 class FormService extends StatefulWidget {
   const FormService({
@@ -48,9 +51,9 @@ class _FormServiceState extends State<FormService> {
     TimeOfDay startTimeController;
     TimeOfDay endTimeController;
     DateTime dataEventController;
-    int eventTypeController;
+    EventTypeModel? eventTypeController;
     int guestsNumberController;
-    List<int> serviceList = [];
+    List<ServiceModel> serviceList = [];
     return Form(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,16 +81,18 @@ class _FormServiceState extends State<FormService> {
                       print("Data selecionada: $date");
                     },
                   ),
-                  AppGlobalDropdownMenu(
+                  AppGlobalSearchInput<EventTypeModel>(
+                    displayStringForOption: (EventTypeModel option) =>
+                        option.label ?? '',
                     helpText: AppLocalizations.of(context)!.event_type,
-                    hintText: "Casamento",
+                    hintText: widget.viewmodel.localizations.wedding,
                     width: 37.w,
-                    dropdownMenuEntries: const [
-                      DropdownMenuEntry(value: 1, label: "Casamento"),
-                      DropdownMenuEntry(value: 2, label: "Pedido"),
-                      DropdownMenuEntry(value: 3, label: "Aniversário"),
-                      DropdownMenuEntry(value: 4, label: "Noivado"),
-                    ],
+                    items: widget.viewmodel.homeData.value?.eventTypes ?? [],
+                    onSelected: (value) {
+                      eventTypeController = value;
+                      widget.viewmodel.loger
+                          .info('Tipo de evento: ${value?.label}');
+                    },
                   ),
                 ],
               ),
@@ -110,30 +115,25 @@ class _FormServiceState extends State<FormService> {
                 ],
               ),
               const AppGlobalVericalSpacing(),
-              AppGlobalDropdownMenu(
+              AppGlobalSearchInput<int>(
                 helpText: AppLocalizations.of(context)!.number_of_guests,
-                hintText: "150 Convidados",
+                hintText: "200 ${widget.viewmodel.localizations.guests}",
                 width: 80.w,
-                dropdownMenuEntries: const [
-                  DropdownMenuEntry(value: 1, label: "150 Convidados"),
-                  DropdownMenuEntry(value: 2, label: "300 Convidadoso"),
-                  DropdownMenuEntry(value: 3, label: "600 Convidados"),
-                  DropdownMenuEntry(value: 4, label: "1200 Convidados"),
-                ],
+                items: widget.viewmodel.homeData.value?.guestNumbers ?? [],
+                displayStringForOption: (option) =>
+                    '$option ${widget.viewmodel.localizations.guests}',
+                onSelected: (value) {
+                  guestsNumberController = value!;
+                  widget.viewmodel.loger
+                      .info('Número de convidados: ${value.toString()}');
+                },
               ),
               const AppGlobalVericalSpacing(),
               AppGlobalServiceTagsManager(
                 helpText: AppLocalizations.of(context)!.add_services,
                 hintText: AppLocalizations.of(context)!.select_service,
-                dropdownMenuEntries: const [
-                  DropdownMenuEntry(value: 1, label: "Decoração"),
-                  DropdownMenuEntry(value: 2, label: "DJ"),
-                  DropdownMenuEntry(value: 3, label: "Confeiteiro"),
-                  DropdownMenuEntry(value: 4, label: "Bartender"),
-                ],
-                onChanged: (selectedTags) {
-                  print("Tags Selecionadas: $selectedTags");
-                },
+                services: widget.viewmodel.homeData.value?.services ?? [],
+                onChanged: (selectedTags) {},
               ),
             ],
           ),

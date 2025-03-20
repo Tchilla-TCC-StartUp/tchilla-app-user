@@ -22,8 +22,8 @@ class BaseViewModel extends GetxController {
   final lang = Get.deviceLocale?.languageCode ?? "en";
 
   final Rxn<VoidCallback> lastRequest = Rxn<VoidCallback>();
-
   BuildContext get context => notificator.snackbarKey.currentContext!;
+ AppLocalizations get localizations => AppLocalizations.of(context)!;
 
   void startLoading() {
     isLoading.value = true;
@@ -74,6 +74,7 @@ class BaseViewModel extends GetxController {
           error is UnknownException ||
           error is ServerException) {
         emitError(error.message);
+        showError(error);
       } else {
         showError(error);
       }

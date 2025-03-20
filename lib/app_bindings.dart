@@ -77,7 +77,7 @@ class AppBindings implements Bindings {
 
     Get.put<LoginViewmodel>(LoginViewmodel(repository: Get.find()));
 
-    Get.put<RegisterViewmodel>(RegisterViewmodel());
+    Get.put<RegisterViewmodel>(RegisterViewmodel( repository: Get.find()));
 
     Get.put<ForgontPasswordViewmodel>(ForgontPasswordViewmodel());
 

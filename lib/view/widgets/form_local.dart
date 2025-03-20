@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tchilla/model/event_type_model.dart';
 import 'package:tchilla/view/widgets/app_global_data_picker.dart';
-import 'package:tchilla/view/widgets/app_global_dropdown_menu.dart';
+import 'package:tchilla/view/widgets/app_global_searchI_input.dart';
 import 'package:tchilla/view/widgets/app_global_input.dart';
 import 'package:tchilla/view/widgets/app_global_show_and_hide_animation.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
@@ -25,8 +26,17 @@ class FormLocal extends StatefulWidget {
 }
 
 class _FormLocalState extends State<FormLocal> {
+  late TextEditingController localController;
+  TimeOfDay? startTimeController;
+  TimeOfDay? endTimeController;
+  DateTime? dataEventController;
+  EventTypeModel? eventTypeController;
+  int? guestsNumberController;
+
+  @override
   void initState() {
     super.initState();
+    localController = TextEditingController();
     widget.locationFocusNode.addListener(_handleFocusChange);
   }
 
@@ -37,17 +47,12 @@ class _FormLocalState extends State<FormLocal> {
   @override
   void dispose() {
     widget.locationFocusNode.removeListener(_handleFocusChange);
+    localController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final localController = TextEditingController();
-    TimeOfDay startTimeController;
-    TimeOfDay endTimeController;
-    DateTime dataEventController;
-    int eventTypeController;
-    int guestsNumberController;
     return Form(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,25 +79,21 @@ class _FormLocalState extends State<FormLocal> {
                     width: 37.w,
                     onDateSelected: (date) {
                       dataEventController = date;
-                      widget.viewmodel.loger
-                          .info('Data do evento: ${date.toString()}');
+                      widget.viewmodel.loger.info('Data do evento: $date');
                     },
                   ),
-                  AppGlobalDropdownMenu(
+                  AppGlobalSearchInput<EventTypeModel>(
+                    displayStringForOption: (EventTypeModel option) =>
+                        option.label ?? '',
                     helpText: AppLocalizations.of(context)!.event_type,
-                    hintText: "Casamento",
+                    hintText: widget.viewmodel.localizations.wedding,
                     width: 37.w,
+                    items: widget.viewmodel.homeData.value?.eventTypes ?? [],
                     onSelected: (value) {
-                      eventTypeController = value ?? '';
+                      eventTypeController = value;
                       widget.viewmodel.loger
-                          .info('Tipo de evento: ${value.toString()}');
+                          .info('Tipo de evento: ${value?.label}');
                     },
-                    dropdownMenuEntries: const [
-                      DropdownMenuEntry(value: 1, label: "Casamento"),
-                      DropdownMenuEntry(value: 2, label: "Pedido"),
-                      DropdownMenuEntry(value: 3, label: "Aniversário"),
-                      DropdownMenuEntry(value: 4, label: "Aniversário"),
-                    ],
                   ),
                 ],
               ),
@@ -115,27 +116,24 @@ class _FormLocalState extends State<FormLocal> {
                     width: 37.w,
                     onDateSelected: (value) {
                       endTimeController = value;
-                      widget.viewmodel.loger.info('Hora de termino: $value}');
+                      widget.viewmodel.loger.info('Hora de término: $value');
                     },
                   ),
                 ],
               ),
               const AppGlobalVericalSpacing(),
-              AppGlobalDropdownMenu(
+              AppGlobalSearchInput<int>(
+                displayStringForOption: (int option) =>
+                    '$option ${widget.viewmodel.localizations.guests}',
                 helpText: AppLocalizations.of(context)!.number_of_guests,
-                hintText: "150 Convidados",
+                hintText: "200 ${widget.viewmodel.localizations.guests}",
                 width: 80.w,
+                items: widget.viewmodel.homeData.value?.guestNumbers ?? [],
                 onSelected: (value) {
                   guestsNumberController = value;
                   widget.viewmodel.loger
-                      .info('Numero de Convidados: ${value.toString()}');
+                      .info('Número de convidados: ${value.toString()}');
                 },
-                dropdownMenuEntries: const [
-                  DropdownMenuEntry(value: 150, label: "150 Convidados"),
-                  DropdownMenuEntry(value: 300, label: "300 Convidadoso"),
-                  DropdownMenuEntry(value: 600, label: "600 Convidados"),
-                  DropdownMenuEntry(value: 1299, label: "1200 Convidados"),
-                ],
               ),
             ],
           ),
@@ -145,8 +143,6 @@ class _FormLocalState extends State<FormLocal> {
             textButton: AppLocalizations.of(context)!.search,
             onPressed: widget.viewmodel.navigateToResultSearchPage,
           ),
-
-          // HomeIndicatorBanner()
         ],
       ),
     );

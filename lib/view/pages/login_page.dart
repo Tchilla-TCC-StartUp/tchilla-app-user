@@ -29,7 +29,17 @@ class _LoginPageState extends State<LoginPage> {
   final FocusNode passwordFocusNode = FocusNode();
   final passwordController = TextEditingController();
   final viewmodel = Get.find<LoginViewmodel>();
+
   @override
+  void dispose(){
+    emailController.dispose();
+    passwordController.dispose();
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
+    super.dispose();
+  }
+  @override
+
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
