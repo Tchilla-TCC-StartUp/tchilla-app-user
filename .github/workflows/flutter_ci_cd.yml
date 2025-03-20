@@ -58,58 +58,54 @@ jobs:
           name: tchilla-release-aab
           path: build/app/outputs/bundle/release/app-release.aab
 
-  release:
-    name: Create GitHub Release
-    needs: build
-    runs-on: ubuntu-latest
+ release:
+  name: Create GitHub Release
+  needs: build
+  runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      # ⬇️ Baixar os artefatos do job anterior
-      - name: Download APK
-        uses: actions/download-artifact@v4
-        with:
-          name: tchilla-release-apk
-          path: artifacts
+    - name: Download APK
+      uses: actions/download-artifact@v4
+      with:
+        name: tchilla-release-apk
+        path: artifacts
 
-      - name: Download AAB
-        uses: actions/download-artifact@v4
-        with:
-          name: tchilla-release-aab
-          path: artifacts
+    - name: Download AAB
+      uses: actions/download-artifact@v4
+      with:
+        name: tchilla-release-aab
+        path: artifacts
 
-      # 🚀 Criar release no GitHub
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v1.0.${{ github.run_number }}
-          release_name: "Tchilla Release v1.0.${{ github.run_number }}"
-          draft: false
-          prerelease: false
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+      with:
+        tag_name: v1.0.${{ github.run_number }}
+        release_name: "Tchilla Release v1.0.${{ github.run_number }}"
+        draft: false
+        prerelease: false
 
-      # 📤 Enviar APK
-      - name: Upload APK to Release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: artifacts/app-release.apk
-          asset_name: tchilla-release.apk
-          asset_content_type: application/vnd.android.package-archive
+    - name: Upload APK to Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: artifacts/app-release.apk
+        asset_name: tchilla-release.apk
+        asset_content_type: application/vnd.android.package-archive
 
-      # 📤 Enviar AAB
-      - name: Upload AAB to Release
-        uses: actions/upload-release-asset@v1
-        
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: artifacts/app-release.aab
-          asset_name: tchilla-release.aab
-          asset_content_type: application/octet-stream
-          token: ${{ secrets.TOKEN }}
+    - name: Upload AAB to Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: artifacts/app-release.aab
+        asset_name: tchilla-release.aab
+        asset_content_type: application/octet-stream
