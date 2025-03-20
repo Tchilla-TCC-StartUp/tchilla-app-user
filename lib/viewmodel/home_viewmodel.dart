@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/model/event_type_model.dart';
-import 'package:tchilla/model/home_model.dart';
 import 'package:tchilla/model/service_model.dart';
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
-
+import 'package:tchilla/model/home_model.dart';
 class HomeViewModel extends BaseViewModel {
   RxInt selectedIndex = 0.obs;
   RxDouble adptiveHeight = 510.px.obs;

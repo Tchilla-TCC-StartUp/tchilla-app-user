@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tchilla/model/event_type_model.dart';
 import 'package:tchilla/view/widgets/app_global_data_picker.dart';
-import 'package:tchilla/view/widgets/app_global_dropdown_menu.dart';
+import 'package:tchilla/view/widgets/app_global_searchI_input.dart';
 import 'package:tchilla/view/widgets/app_global_input.dart';
 import 'package:tchilla/view/widgets/app_global_service_tags_manager.dart';
 import 'package:tchilla/view/widgets/app_global_show_and_hide_animation.dart';
@@ -10,6 +11,8 @@ import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_global_time_picker.dart';
 import 'package:tchilla/viewmodel/home_viewmodel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../model/service_model.dart';
 
 class FormService extends StatefulWidget {
   const FormService({
@@ -48,9 +51,9 @@ class _FormServiceState extends State<FormService> {
     TimeOfDay startTimeController;
     TimeOfDay endTimeController;
     DateTime dataEventController;
-    int eventTypeController;
+    EventTypeModel? eventTypeController;
     int guestsNumberController;
-    List<int> serviceList = [];
+    List<ServiceModel> serviceList = [];
     return Form(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,21 +81,18 @@ class _FormServiceState extends State<FormService> {
                       print("Data selecionada: $date");
                     },
                   ),
-                  AppGlobalDropdownMenu(
+                  AppGlobalSearchInput<EventTypeModel>(
+                    displayStringForOption: (EventTypeModel option) =>
+                        option.label ?? '',
                     helpText: AppLocalizations.of(context)!.event_type,
                     hintText: widget.viewmodel.localizations.wedding,
                     width: 37.w,
+                    items: widget.viewmodel.homeData.value?.eventTypes ?? [],
                     onSelected: (value) {
-                      eventTypeController = value ?? '';
+                      eventTypeController = value;
                       widget.viewmodel.loger
-                          .info('Tipo de evento: ${value.toString()}');
+                          .info('Tipo de evento: ${value?.label}');
                     },
-                    dropdownMenuEntries: widget
-                            .viewmodel.homeData.value?.eventTypes
-                            ?.map((e) => DropdownMenuEntry(
-                                value: e.id, label: e.label ?? ''))
-                            .toList() ??
-                        [],
                   ),
                 ],
               ),
@@ -115,42 +115,25 @@ class _FormServiceState extends State<FormService> {
                 ],
               ),
               const AppGlobalVericalSpacing(),
-              AppGlobalDropdownMenu(
+              AppGlobalSearchInput<int>(
                 helpText: AppLocalizations.of(context)!.number_of_guests,
                 hintText: "200 ${widget.viewmodel.localizations.guests}",
                 width: 80.w,
+                items: widget.viewmodel.homeData.value?.guestNumbers ?? [],
+                displayStringForOption: (option) =>
+                    '$option ${widget.viewmodel.localizations.guests}',
                 onSelected: (value) {
-                  guestsNumberController = value;
+                  guestsNumberController = value!;
                   widget.viewmodel.loger
-                      .info('Numero de Convidados: ${value.toString()}');
+                      .info('Número de convidados: ${value.toString()}');
                 },
-                dropdownMenuEntries:
-                    widget.viewmodel.homeData.value?.guestNumbers
-                            ?.map((e) => DropdownMenuEntry(
-                                  value: e,
-                                  label:
-                                      '${e.toString()} ${widget.viewmodel.localizations.guests}',
-                                ))
-                            .toList() ??
-                        [],
               ),
               const AppGlobalVericalSpacing(),
               AppGlobalServiceTagsManager(
                 helpText: AppLocalizations.of(context)!.add_services,
                 hintText: AppLocalizations.of(context)!.select_service,
-                dropdownMenuEntries: widget.viewmodel.homeData.value?.services
-                        ?.where((e) => e.id != null)
-                        .map(
-                          (e) => DropdownMenuEntry<int>(
-                            value: e.id!,
-                            label: e.label ?? '',
-                          ),
-                        )
-                        .toList() ??
-                    [],
-                onChanged: (selectedTags) {
-                  print("Tags Selecionadas: $selectedTags");
-                },
+                services: widget.viewmodel.homeData.value?.services ?? [],
+                onChanged: (selectedTags) {},
               ),
             ],
           ),
