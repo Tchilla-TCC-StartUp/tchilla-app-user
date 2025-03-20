@@ -1,0 +1,48 @@
+name: Flutter CI/CD - Tchilla
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build APK Release
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout o código
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2️⃣ Setup do Flutter
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.0' # ajuste conforme necessário
+
+      # 3️⃣ Cache de dependências
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pub-cache
+            .dart_tool/
+            build/
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+
+      # 4️⃣ Instalar dependências
+      - name: Install dependencies
+        run: flutter pub get
+
+      # 5️⃣ Build APK Release
+      - name: Build APK (Release)
+        run: flutter build apk --release
+
+      # 6️⃣ Upload do APK como artefato
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: tchilla-release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
