@@ -27,7 +27,7 @@ A **Tchilla** propõe uma abordagem digital para otimizar e modernizar o mercado
 
 📄 **MVP:** [Clique aqui para acessar](https://docs.google.com/document/d/19M83rsbTNP2QLDKz9e5bLJpeTGJ04iQeu9vXeAdtJtY/edit?tab=t.0)  
 
-📱 **Baixe o App (APK):** [Clique aqui para baixar](https://drive.google.com/file/d/1Vy0kmgyFXx7Nt0yizHe3L_JjsrAwucdi/view?usp=sharing)  
+📱 **Baixe o App (APK):** [Clique aqui para baixar](https://github.com/Tchilla-TCC-StartUp/tchilla-app-user/releases/tag/v1.0.9)  
 
 ---
 
