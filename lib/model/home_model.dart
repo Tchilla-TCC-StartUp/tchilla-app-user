@@ -34,7 +34,7 @@ class HomeModel {
           : null,
       eventTypes: map['event_types'] != null
           ? List<EventTypeModel>.from(
-              (map['event_types'] as List).map(
+              (map['event_ypes'] as List).map(
                 (x) => EventTypeModel.fromMap(x as Map<String, dynamic>),
               ),
             )
