@@ -20,7 +20,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.0' # Ajuste conforme necessário
+          flutter-version: '3.22.0'
 
       # 3️⃣ Cache de dependências
       - name: Cache Flutter dependencies
@@ -40,16 +40,16 @@ jobs:
       - name: Build APK (Release)
         run: flutter build apk --release
 
-      # 6️⃣ Upload APK como artefato
+      # 6️⃣ Build AAB (Release)
+      - name: Build AAB (Release)
+        run: flutter build appbundle --release
+
+      # 7️⃣ Upload APK como artefato
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: tchilla-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
-
-      # 7️⃣ Build AAB (Release)
-      - name: Build AAB (Release)
-        run: flutter build appbundle --release
 
       # 8️⃣ Upload AAB como artefato
       - name: Upload AAB
@@ -57,3 +57,59 @@ jobs:
         with:
           name: tchilla-release-aab
           path: build/app/outputs/bundle/release/app-release.aab
+
+  release:
+    name: Create GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # ⬇️ Baixar os artefatos do job anterior
+      - name: Download APK
+        uses: actions/download-artifact@v4
+        with:
+          name: tchilla-release-apk
+          path: artifacts
+
+      - name: Download AAB
+        uses: actions/download-artifact@v4
+        with:
+          name: tchilla-release-aab
+          path: artifacts
+
+      # 🚀 Criar release no GitHub
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v1.0.${{ github.run_number }}
+          release_name: "Tchilla Release v1.0.${{ github.run_number }}"
+          draft: false
+          prerelease: false
+
+      # 📤 Enviar APK
+      - name: Upload APK to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: artifacts/app-release.apk
+          asset_name: tchilla-release.apk
+          asset_content_type: application/vnd.android.package-archive
+
+      # 📤 Enviar AAB
+      - name: Upload AAB to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: artifacts/app-release.aab
+          asset_name: tchilla-release.aab
+          asset_content_type: application/octet-stream
