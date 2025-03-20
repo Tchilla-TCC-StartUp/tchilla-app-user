@@ -1,41 +1,20 @@
-# Tchilla App - Documentação do Usuário
+Tchilaaa...
+Resumo da Startup Tchilla
+Missão: Democratizar o planejamento de eventos por meio de uma plataforma centralizada que conecta clientes, fornecedores e agências de forma eficiente.
 
-O **Tchilla App** é uma plataforma onde os clientes podem solicitar serviços automatizados oferecidos pela Tchilla. O aplicativo oferece uma experiência intuitiva e eficiente, permitindo que os usuários acessem e solicitem serviços de maneira prática e rápida.
+Visão: Ser a principal referência no planejamento de eventos, revolucionando o setor com uma experiência digital acessível e inovadora.
 
-## Informações do Projeto
+Valores:
 
-- **Flutter**: 3.22.0
-- **Dart**: 3.4.0
+Transparência e confiabilidade
+Inovação e tecnologia
+Inclusão e acessibilidade
+Compromisso com a excelência na experiência do usuário
+Diferenciais:
 
-## Funcionalidades
-
-- Solicitação de serviços automatizados
-- Interface simples e intuitiva
-- Suporte para múltiplos serviços
-- Notificações para atualizações de status dos pedidos
-- Histórico de solicitações realizadas
-
-## Tecnologias Utilizadas
-
-- **Flutter**: Framework utilizado para o desenvolvimento do aplicativo
-- **Dart**: Linguagem de programação para lógica de negócios
-- **GetX**: Para gerenciamento de estado,dependências e para gerenciamento de rotas
-
-## Como Rodar o Projeto
-
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/Tchilla-TCC-StartUp/tchilla-app-user.git
-   ```
-2. Navegue até a pasta do projeto:
-   ```bash
-   cd tchilla-app
-   ```
-3. Instale as dependências:
-   ```bash
-   flutter pub get
-   ```
-4. Execute o aplicativo:
-   ```bash
-   flutter run
-   ```
+Centraliza o planejamento de eventos em uma única plataforma
+Permite a inclusão de pequenos fornecedores
+Sistema de pagamento unificado
+Tecnologia escalável e ágil
+Digitaliza um mercado tradicionalmente offline
+A Tchilla propõe uma abordagem digital para otimizar e modernizar o mercado de eventos, trazendo praticidade e acessibilidade para organizadores e fornecedores. 🚀
