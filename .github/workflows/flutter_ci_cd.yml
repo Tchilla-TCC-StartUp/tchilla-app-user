@@ -8,11 +8,11 @@ on:
 
 jobs:
   build:
-    name: Build APK Release
+    name: Build APK and AAB Release
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout o código
+      # 1️⃣ Checkout do código-fonte
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -20,7 +20,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.0' # ajuste conforme necessário
+          flutter-version: '3.22.0' # Ajuste conforme necessário
 
       # 3️⃣ Cache de dependências
       - name: Cache Flutter dependencies
@@ -36,13 +36,24 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # 5️⃣ Build APK Release
+      # 5️⃣ Build APK (Release)
       - name: Build APK (Release)
         run: flutter build apk --release
 
-      # 6️⃣ Upload do APK como artefato
+      # 6️⃣ Upload APK como artefato
       - name: Upload APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: tchilla-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
+
+      # 7️⃣ Build AAB (Release)
+      - name: Build AAB (Release)
+        run: flutter build appbundle --release
+
+      # 8️⃣ Upload AAB como artefato
+      - name: Upload AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: tchilla-release-aab
+          path: build/app/outputs/bundle/release/app-release.aab
