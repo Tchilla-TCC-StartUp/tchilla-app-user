@@ -5,10 +5,11 @@ import 'package:tchilla/model/event_type_model.dart';
 import 'package:tchilla/model/service_model.dart';
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
 import 'package:tchilla/model/home_model.dart';
+
 class HomeViewModel extends BaseViewModel {
   RxInt selectedIndex = 0.obs;
-  RxDouble adptiveHeight = 510.px.obs;
-  RxDouble adptiveSilverExpade = 780.px.obs;
+  RxDouble adptiveHeight = 625.px.obs;
+  RxDouble adptiveSilverExpade = 880.px.obs;
   final RxBool isVisible = true.obs;
 
   final RxList<String> tabTitlesForm = <String>[].obs;
@@ -16,6 +17,7 @@ class HomeViewModel extends BaseViewModel {
   Rxn<HomeModel> get homeData => _homeData;
 
   void selectTab(int index, FocusNode focusNode) {
+    desableFocus();
     focusNode.unfocus();
     selectedIndex.value = index;
     updateAdaptiveHeight(focusNode);
@@ -71,9 +73,9 @@ class HomeViewModel extends BaseViewModel {
         ]);
 
     tabTitlesForm.assignAll([
+      localizations.tabVenueAndServices,
       localizations.tabLocal,
       localizations.tabServices,
-      localizations.tabVenueAndServices,
     ]);
   }
 
@@ -93,15 +95,6 @@ class HomeViewModel extends BaseViewModel {
     return this.navigator.navigateToResultSearchPage();
   }
 
-  Future<void> searchLocal(
-    String local,
-    DateTime data,
-    int envitNumber,
-    BuildContext context,
-  ) {
-    return this.navigator.navigateToResultSearchPage();
-  }
-
   void onFocus(FocusNode focusNode) {
     var focus = isVisible.value = focusNode.hasFocus;
     adptiveHeight.value = focus ? 220.px : 520.px;
@@ -110,11 +103,11 @@ class HomeViewModel extends BaseViewModel {
 
   void updateAdaptiveHeight(FocusNode focusNode) {
     switch (selectedIndex.value) {
-      case 0:
+      case 1:
         adptiveHeight.value = 520.px;
         adptiveSilverExpade.value = 780.px;
         break;
-      case 1:
+      case 0:
         adptiveHeight.value = 625.px;
         adptiveSilverExpade.value = 880.px;
         break;
@@ -123,8 +116,8 @@ class HomeViewModel extends BaseViewModel {
         adptiveSilverExpade.value = 880.px;
         break;
       default:
-        adptiveHeight.value = 520.px;
-        adptiveSilverExpade.value = 780.px;
+        adptiveHeight.value = 625.px;
+        adptiveSilverExpade.value = 880.px;
         break;
     }
   }

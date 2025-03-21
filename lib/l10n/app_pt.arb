@@ -137,10 +137,6 @@
   "tabVenueAndServices": "Local+Serviços",
   "visitorAccessDenied": "Você não pode acessar esta página como visitante",
   "guests": "Convidados",
-  "wedding": "Casamento"
-
-
-
-
-
+  "wedding": "Casamento",
+  "form_required_fields_message": "Todos os campos do formulário são obrigatórios para realizar a busca"
 }

@@ -31,7 +31,11 @@ class AppGlobalDatePicker extends StatefulWidget {
     this.decoration,
   })  : initialDate = initialDate,
         firstDate = firstDate ?? DateTime.now(),
-        lastDate = lastDate ?? DateTime.now();
+        lastDate = lastDate ?? DateTime(
+          DateTime.now().year,
+          DateTime.now().month +1,
+          DateTime.now().day,
+        );
 
   @override
   _AppGlobalDatePickerState createState() => _AppGlobalDatePickerState();

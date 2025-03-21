@@ -14,6 +14,9 @@ import 'package:tchilla/services/events/validator.dart';
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
 import 'package:tchilla/viewmodel/detalhesproposedviewmodel.dart';
 import 'package:tchilla/viewmodel/forgont_password_viewmodel.dart';
+import 'package:tchilla/viewmodel/form_local_end_service_viewmodel.dart';
+import 'package:tchilla/viewmodel/form_local_viewmodel.dart';
+import 'package:tchilla/viewmodel/form_service_viewmodel.dart';
 import 'package:tchilla/viewmodel/home_viewmodel.dart';
 import 'package:tchilla/viewmodel/login_viewmodel.dart';
 import 'package:tchilla/viewmodel/onboarding_viewmodel.dart';
@@ -77,7 +80,7 @@ class AppBindings implements Bindings {
 
     Get.put<LoginViewmodel>(LoginViewmodel(repository: Get.find()));
 
-    Get.put<RegisterViewmodel>(RegisterViewmodel( repository: Get.find()));
+    Get.put<RegisterViewmodel>(RegisterViewmodel(repository: Get.find()));
 
     Get.put<ForgontPasswordViewmodel>(ForgontPasswordViewmodel());
 
@@ -94,5 +97,11 @@ class AppBindings implements Bindings {
     Get.put<UserDataViewModel>(UserDataViewModel());
 
     Get.put<SummaryViewmodel>(SummaryViewmodel());
+
+    Get.put<FormLocalViewmodel>(FormLocalViewmodel());
+
+    Get.put<FormServiceViewmodel>(FormServiceViewmodel());
+    
+    Get.put<FormLocalEndServiceViewmodel>(FormLocalEndServiceViewmodel());
   }
 }
