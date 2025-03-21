@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tchilla/resources/app_routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
 class ForgontPasswordViewmodel extends BaseViewModel {
-
-
+  final Rxn<String> email = Rxn<String>();
+  final FocusNode emailFocus = FocusNode();
   void confirmPin(String pin, BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
-
     if (pin.length != 6) {
       showWarning(
         localizations.error_fill_all_fields,
       );
     } else {
-      return navigator.navigateToRefefinePasswordPage(
-        AppRoutes.redefinePasswordPage,
-      );
+      this.navigator.navigateToRefefinePasswordPage(
+            AppRoutes.redefinePasswordPage,
+          );
+      return;
     }
   }
 
@@ -49,23 +49,21 @@ class ForgontPasswordViewmodel extends BaseViewModel {
     await Future.delayed(const Duration(seconds: 3));
 
     if (previousWalk == AppRoutes.userdataPage) {
-      await navigator.navigateToBack();
+      await this.navigator.navigateToBack();
     } else {
-      await navigator.navigateToLoginPage();
+      await this.navigator.navigateToLoginPage();
     }
   }
 
-  Future<void> submitEmail(String email, BuildContext context) async {
-    final localizations = AppLocalizations.of(context)!;
-
-    if (email.isEmpty) {
+  Future<void> submitEmail() async {
+    if (email.value!.isEmpty) {
       showWarning(
         localizations.error_email_required,
       );
       return;
     }
 
-    if (!validator.validatEmail(email)) {
+    if (!validator.validatEmail(email.value!)) {
       showWarning(
         localizations.error_invalid_email,
       );
@@ -73,6 +71,17 @@ class ForgontPasswordViewmodel extends BaseViewModel {
       return;
     }
 
-    await navigator.navigateToConfirmationPage();
+    await this.navigator.navigateToConfirmationPage();
+  }
+
+  void chengeEmail(String? value) {
+    loger.info("Email: $email");
+    return setFieldChange(email, value);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailFocus.dispose();
   }
 }

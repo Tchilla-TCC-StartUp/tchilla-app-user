@@ -22,7 +22,7 @@ class AppGetAppRoutes {
   static final List<GetPage> routes = [
     _buildRoute(AppRoutes.initialRoute, (_) => const SplashPage()),
     _buildRoute(AppRoutes.homePage, (_) => const HomePage()),
-    _buildRoute(AppRoutes.loginPage, (_) => const LoginPage()),
+    _buildRoute(AppRoutes.loginPage, (_) => LoginPage()),
     _buildRoute(AppRoutes.registerPage, (_) => const RegisterPage()),
     _buildRoute(AppRoutes.forgotPasswordEmail, (_) => const ForgotPassswordAuthEmailPage()),
     _buildRoute(AppRoutes.forgotPasswordConfirmationPin, (_) => const ForgotPasswordConfirmationPinPage()),

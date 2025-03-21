@@ -1,26 +1,28 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:tchilla/resources/app_assets_images.dart';
-
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
 class DetalheProposedViewModel extends BaseViewModel {
-  RxInt selectedIndex = 0.obs;
-  RxList<String> tabTitles = [
+  final RxInt selectedIndex = 0.obs;
+  final Rxn<TabController> tabController = Rxn<TabController>();
+
+  final RxList<String> tabTitles = [
     'Sobre',
-    ' Serviços',
+    'Serviços',
     'Galeria',
     'Avaliações',
     'Localização',
-  ].obs;
-  final listImages = [
+  ].obs;  
+
+  final List<String> listImages = [
     AppAssetsImages.defaultProposedImage,
     "https://www.quintoandar.com.br/guias/wp-content/uploads/2024/07/salao-de-festas-condominio.webp",
     "https://espacohipica.com.br/wp-content/uploads/2019/02/festa-de-casamento-em-curitiba_locacao-de-espaco-para-eventos-em-curitiba-52.webp"
   ];
 
-  final galeryImages = [
+  final List<String> galeryImages = [
     AppAssetsImages.defaultProposedImage,
     "https://www.quintoandar.com.br/guias/wp-content/uploads/2024/07/salao-de-festas-condominio.webp",
     "https://espacohipica.com.br/wp-content/uploads/2019/02/festa-de-casamento-em-curitiba_locacao-de-espaco-para-eventos-em-curitiba-52.webp",
@@ -29,7 +31,7 @@ class DetalheProposedViewModel extends BaseViewModel {
     "https://espacohipica.com.br/wp-content/uploads/2019/02/festa-de-casamento-em-curitiba_locacao-de-espaco-para-eventos-em-curitiba-52.webp",
   ];
 
-  final listServices = [
+  final List<Map<String, dynamic>> listServices = [
     {"name": "Bufê", "image": AppAssetsImages.buffetImage, "selected": true},
     {"name": "Garçom", "image": AppAssetsImages.waiterImage, "selected": true},
     {"name": "DJ", "image": AppAssetsImages.djImage, "selected": true},
@@ -49,6 +51,7 @@ class DetalheProposedViewModel extends BaseViewModel {
       "selected": false
     },
   ];
+
   final List<Map<String, dynamic>> listReviews = [
     {
       "name": "Carlos Silva",
@@ -87,27 +90,48 @@ class DetalheProposedViewModel extends BaseViewModel {
     }
   ];
 
-  var currentIndex = 0.obs;
-
+  final currentIndex = 0.obs;
   final pageController = PageController();
+
+  void initTabController(TickerProvider ticker) {
+    final controller = TabController(
+      initialIndex: selectedIndex.value,
+      length: tabTitles.length,
+      vsync: ticker,
+    );
+
+    controller.addListener(() {
+      if (!controller.indexIsChanging) {
+        selectTab(controller.index);
+      }
+    });
+
+    tabController.value = controller;
+  }
 
   void updateCurrentIndex(int index) {
     currentIndex.value = index;
-  }
-
-  goBack() {
-    this.navigator.navigateToBack();
   }
 
   void selectTab(int index) {
     selectedIndex.value = index;
   }
 
-  selectProposed(String id) {
+  void goBack() {
+    this.navigator.navigateToBack();
+  }
+
+  void selectProposed(String id) {
     this.navigator.navigateToDetalhesPage(id);
   }
 
-  scheduleproposal(String id) {
+  void scheduleProposal(String id) {
     this.navigator.navigateToSummaryPage(id);
+  }
+
+  @override
+  void dispose() {
+    tabController.value?.dispose();
+    super.dispose();
   }
 }

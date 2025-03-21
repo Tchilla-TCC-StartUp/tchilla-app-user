@@ -8,10 +8,13 @@ import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/resources/app_dio.dart';
 import 'package:tchilla/resources/app_logs.dart';
 import 'package:tchilla/resources/app_routes.dart';
+import 'package:tchilla/services/events/home_service.dart';
 import 'package:tchilla/services/events/navigation.dart';
 import 'package:tchilla/services/events/notificator.dart';
+import 'package:tchilla/services/events/onboarding_service.dart';
+import 'package:tchilla/services/events/user_service.dart';
 import 'package:tchilla/services/events/validator.dart';
-import 'package:tchilla/viewmodel/base_viewmodel.dart';
+import 'package:tchilla/services/events/welcome_service.dart';
 import 'package:tchilla/viewmodel/detalhesproposedviewmodel.dart';
 import 'package:tchilla/viewmodel/forgont_password_viewmodel.dart';
 import 'package:tchilla/viewmodel/form_local_end_service_viewmodel.dart';
@@ -36,21 +39,25 @@ class AppBindings implements Bindings {
   }
 
   static void init() {
-    registerServices();
-    localData();
-    registerRepositories();
-    registerViewmodels();
-  }
-
-  // ---------- Registro de Eventos ----------
-  static void registerServices() {
     Get.put(AppConstats());
+    localData();
     Get.put<AppRoutes>(AppRoutes());
     Get.put(Navigation());
     Get.put(Notificator());
     Get.put(Validator());
     Get.put(AppLogs());
     Get.put(AppDio().dio);
+    registerRepositories();
+    registerServices();
+    registerViewmodels();
+  }
+
+  // ---------- Registro de Eventos ----------
+  static void registerServices() {
+    Get.lazyPut<HomeService>(() => HomeService());
+    Get.lazyPut<UserService>(() => UserService());
+    Get.lazyPut<OnboardingService>(() => OnboardingService());
+    Get.lazyPut<WelcomeService>(() => WelcomeService());
   }
 
   // ---------- Registro de Dados Locais ----------
@@ -63,28 +70,26 @@ class AppBindings implements Bindings {
   static void registerRepositories() {
     Get.lazyPut<OnboardingRepository>(() => OnboardingRepository());
     Get.lazyPut<WelcomeRepository>(() => WelcomeRepository());
-
     Get.lazyPut<UserRepository>(() => UserRepository());
   }
 
   // ---------- Registro de ViewModels ----------
   static void registerViewmodels() {
-    Get.put<BaseViewModel>(BaseViewModel());
     Get.put<SplashViewmodel>(SplashViewmodel());
 
-    Get.put<OnboardingViewModel>(OnboardingViewModel(repository: Get.find()));
+    Get.put<OnboardingViewModel>(OnboardingViewModel(service: Get.find()));
 
     Get.put<WelcomeViewmodel>(WelcomeViewmodel(
-      repository: Get.find(),
+      service: Get.find(),
     ));
 
-    Get.put<LoginViewmodel>(LoginViewmodel(repository: Get.find()));
+    Get.put<LoginViewmodel>(LoginViewmodel(service: Get.find()));
 
-    Get.put<RegisterViewmodel>(RegisterViewmodel(repository: Get.find()));
+    Get.put<RegisterViewmodel>(RegisterViewmodel(service: Get.find()));
 
     Get.put<ForgontPasswordViewmodel>(ForgontPasswordViewmodel());
 
-    Get.put<HomeViewModel>(HomeViewModel());
+    Get.put<HomeViewModel>(HomeViewModel(service: Get.find()));
 
     Get.put<DetalheProposedViewModel>(DetalheProposedViewModel());
 
@@ -94,14 +99,14 @@ class AppBindings implements Bindings {
 
     Get.put<ResultSearchViewModel>(ResultSearchViewModel());
 
-    Get.put<UserDataViewModel>(UserDataViewModel());
+    Get.put<UserDataViewModel>(UserDataViewModel(service: Get.find()));
 
     Get.put<SummaryViewmodel>(SummaryViewmodel());
 
     Get.put<FormLocalViewmodel>(FormLocalViewmodel());
 
     Get.put<FormServiceViewmodel>(FormServiceViewmodel());
-    
+
     Get.put<FormLocalEndServiceViewmodel>(FormLocalEndServiceViewmodel());
   }
 }

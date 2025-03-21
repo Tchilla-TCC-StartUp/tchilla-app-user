@@ -1,10 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:tchilla/model/auth_model.dart';
+import 'package:tchilla/model/user_model.dart';
 import 'package:tchilla/repository/base_repository.dart';
 import 'package:tchilla/repository/interfaces/iuser_repository.dart';
 
 class UserRepository extends BaseRepository implements IuserRepository {
-
-
   @override
   Future<AuthModel> authUser({
     required String email,
@@ -27,14 +27,24 @@ class UserRepository extends BaseRepository implements IuserRepository {
     required String telefone,
     String? lang,
   }) async {
-   final respose = await post("/Auth/register", data: {
-     "nome": name,
-     "email": email,
-     "telefone": telefone,
-     "senha": password,
-     "tipo": 0
-   });
+    final respose = await post("/Auth/register", data: {
+      "nome": name,
+      "email": email,
+      "telefone": telefone,
+      "senha": password,
+      "tipo": 0
+    });
 
-   return AuthModel.fromMap(respose);
+    return AuthModel.fromMap(respose);
+  }
+
+  @override
+  Future<UserModel> getUserData({required String token, String? lang}) async {
+    final response = await get('/Usuario/getInfoByToken',
+        option: Options(headers: {
+          "Authorization": token,
+        }));
+
+    return UserModel.fromMap(response['data']);
   }
 }

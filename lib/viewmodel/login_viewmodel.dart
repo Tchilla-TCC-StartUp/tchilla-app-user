@@ -1,17 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:tchilla/repository/events/user_repository.dart';
+import 'package:tchilla/services/events/user_service.dart';
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
 class LoginViewmodel extends BaseViewModel {
-  LoginViewmodel({
-    required this.repository,
-  });
-
-  final UserRepository repository;
+  final UserService service;
 
   final Rxn<String?> email = Rxn<String?>();
   final Rxn<String?> password = Rxn<String?>();
+
+  final FocusNode emailFocusNode = FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
+
+  LoginViewmodel({required this.service});
 
   Future<void> navigateToRegisterPage() {
     return this.navigator.navigateToRegisterPage();
@@ -41,7 +43,7 @@ class LoginViewmodel extends BaseViewModel {
 
     await onRequest(
       event:
-          repository.authUser(email: email.value!, password: password.value!),
+          service.authUser(email: email.value!, password: password.value!),
       onSuccess: (value) async {
         await dataToken.saveToken(value.data!);
         this.navigator.navigateToHome();
@@ -64,5 +66,12 @@ class LoginViewmodel extends BaseViewModel {
 
   navigateToForengePasswordPage() {
     this.navigator.navigateToForengePassewordEmailPage();
+  }
+
+  @override
+  void dispose() {
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
+    super.dispose();
   }
 }

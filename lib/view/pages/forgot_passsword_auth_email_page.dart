@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -21,8 +20,6 @@ class ForgotPassswordAuthEmailPage extends StatefulWidget {
 
 class _ForengePassswordAuthEmailPageState
     extends State<ForgotPassswordAuthEmailPage> {
-  final FocusNode emailFocus = FocusNode();
-  final _emailController = TextEditingController();
   final viewmodel = Get.find<ForgontPasswordViewmodel>();
   @override
   Widget build(BuildContext context) {
@@ -42,8 +39,8 @@ class _ForengePassswordAuthEmailPageState
           AppGlobalInput(
             helpText: AppLocalizations.of(context)!.email_address,
             hintText: "celson.paixao@gmail.com",
-            focusNode: emailFocus,
-            controller: _emailController,
+            focusNode: viewmodel.emailFocus,
+           onChanged: viewmodel.chengeEmail,
             keyboardType: TextInputType.emailAddress,
           ),
           AppGlobalVericalSpacing(
@@ -52,8 +49,8 @@ class _ForengePassswordAuthEmailPageState
           AppGlobalTextButton(
             minWidth: 100.w,
             onPressed: () => viewmodel.submitEmail(
-              _emailController.text,
-              context,
+            
+             
             ),
             textButton: AppLocalizations.of(context)!.confirm,
           )

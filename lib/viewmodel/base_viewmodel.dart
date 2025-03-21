@@ -20,6 +20,11 @@ class BaseViewModel extends GetxController {
   final RxBool isError = false.obs;
   final RxString errorMessage = "".obs;
   final lang = Get.deviceLocale?.languageCode ?? "en";
+  final RxString _token = "".obs;
+  RxString get token => _token;
+
+  final RxBool _isAuth = false.obs;
+  RxBool get isAuth => _isAuth;
 
   final Rxn<VoidCallback> lastRequest = Rxn<VoidCallback>();
   BuildContext get context => notificator.snackbarKey.currentContext!;
@@ -30,8 +35,16 @@ class BaseViewModel extends GetxController {
     resetError();
   }
 
+  void setIsAuth() {
+    _isAuth.value = true;
+  }
+
   void stopLoading() {
     isLoading.value = false;
+  }
+
+  void setToken(String value) {
+    _token.value = value;
   }
 
   void resetError() {
@@ -59,6 +72,7 @@ class BaseViewModel extends GetxController {
     ValueChanged<T>? onError,
     VoidCallback? onComplete,
   }) async {
+    // checkinLogin();
     onStart?.call();
     startLoading();
 
@@ -87,21 +101,21 @@ class BaseViewModel extends GetxController {
     });
   }
 
-  Future<bool> checkinLogin() async {
+  void checkinLogin() async {
     try {
-      final token = await dataToken.fetchToken();
+      var value = await dataToken.fetchToken() ?? "";
+      setToken(value);
 
-      if (token?.isNotEmpty ?? false) {
+      if (token.isNotEmpty) {
         loger.info("Usuário já está logado. Token encontrado: $token");
-        return true;
+        setIsAuth();
+        return;
       }
-      loger.printInfo(info: "Usuário não está logado. Token ausente.");
-      return false;
+      loger.info("O User está logado?: $isAuth");
     } catch (e) {
       loger.info(
         "Erro ao verificar login: $e",
       );
-      return false;
     }
   }
 
@@ -142,10 +156,9 @@ class BaseViewModel extends GetxController {
     }
   }
 
-  void desableFocus (){
+  void desableFocus() {
     FocusManager.instance.primaryFocus?.unfocus();
   }
-
 
   void setFieldChange(
     Rxn<dynamic> field,
@@ -153,8 +166,6 @@ class BaseViewModel extends GetxController {
   ) {
     _behaviorSubjectChange(field, newValue);
   }
-
-
 
   bool _behaviorSubjectChange(
     Rxn<dynamic> field,
@@ -169,22 +180,23 @@ class BaseViewModel extends GetxController {
   }
 
   bool setListFieldChange<T>(
-      List<Rxn<T>> field,
-      List<T> newValue, {
-        bool Function(T? a, T b)? compareFn,
-      }) {
+    List<Rxn<T>> field,
+    List<T> newValue, {
+    bool Function(T? a, T b)? compareFn,
+  }) {
     return _behaviorListSubjectChange(field, newValue, compareFn: compareFn);
   }
 
   bool _behaviorListSubjectChange<T>(
-      List<Rxn<T>> field,
-      List<T> newValue, {
-        bool Function(T? a, T b)? compareFn,
-      }) {
+    List<Rxn<T>> field,
+    List<T> newValue, {
+    bool Function(T? a, T b)? compareFn,
+  }) {
     compareFn ??= (a, b) => a == b;
 
     if (field.length != newValue.length ||
-        !_areGenericListsEqual(field.map((e) => e.value).toList(), newValue, compareFn)) {
+        !_areGenericListsEqual(
+            field.map((e) => e.value).toList(), newValue, compareFn)) {
       field
         ..clear()
         ..addAll(newValue.map((e) => Rxn<T>(e)));
@@ -194,17 +206,16 @@ class BaseViewModel extends GetxController {
   }
 
   bool _areGenericListsEqual<T>(
-      List<T?> a,
-      List<T> b,
-      bool Function(T? a, T b) compareFn,
-      ) {
+    List<T?> a,
+    List<T> b,
+    bool Function(T? a, T b) compareFn,
+  ) {
     if (a.length != b.length) return false;
     for (int i = 0; i < a.length; i++) {
       if (!compareFn(a[i], b[i])) return false;
     }
     return true;
   }
-
 
   Future<bool> checkInNetworkConnection() async {
     final connectivityResult = await Connectivity().checkConnectivity();

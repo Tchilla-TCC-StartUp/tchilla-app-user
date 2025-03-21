@@ -1,14 +1,16 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+
 import 'package:tchilla/model/onboarding_model.dart';
 import 'package:tchilla/repository/events/onboarding_repository.dart';
+import 'package:tchilla/services/events/onboarding_service.dart';
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
 class OnboardingViewModel extends BaseViewModel {
-  final OnboardingRepository repository;
-
+  final OnboardingService service;
   OnboardingViewModel({
-    required this.repository,
+    required this.service,
   });
 
   final pageController = PageController();
@@ -19,7 +21,7 @@ class OnboardingViewModel extends BaseViewModel {
 
   void getOnboarding() async {
     await onRequest(
-      event: repository.fetchOnboadData(lang),
+      event: service.fetchOnboadData(lang),
       onSuccess: (value) {
         _onboarding.assignAll(value);
       },

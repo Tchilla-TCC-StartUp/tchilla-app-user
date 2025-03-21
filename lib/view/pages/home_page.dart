@@ -48,6 +48,7 @@ class _HomePageState extends State<HomePage>
     _tabController.addListener(() {
       viewmodel.selectTab(_tabController.index, _locationFocusNode);
     });
+    viewmodel.getUserData();
   }
 
   @override
@@ -71,31 +72,34 @@ class _HomePageState extends State<HomePage>
               FocusManager.instance.primaryFocus?.unfocus();
             },
             behavior: HitTestBehavior.opaque,
-            child: Column(
-              children: [
-                Obx(() {
-                  return viewmodel.isLoading.value
-                      ? const AppGlobalLoading()
-                      : viewmodel.isError.value
-                          ? ErrorTryAgain(
-                              message: viewmodel.errorMessage.value,
-                            )
-                          : AnimatedContainer(
-                              duration: const Duration(milliseconds: 660),
-                              curve: Curves.easeInOut,
-                              height: viewmodel.adptiveSilverExpade.value + 1.h,
-                              child: Stack(
-                                children: [
-                                  _buildBackground(),
-                                  _buildContainerMan(),
-                                ],
+            child: Obx(
+              () {
+                return viewmodel.isLoading.value
+                    ? const AppGlobalLoading()
+                    : viewmodel.isError.value
+                        ? ErrorTryAgain(
+                            message: viewmodel.errorMessage.value,
+                          )
+                        : Column(
+                            children: [
+                              AnimatedContainer(
+                                duration: const Duration(milliseconds: 660),
+                                curve: Curves.easeInOut,
+                                height:
+                                    viewmodel.adptiveSilverExpade.value + 2.h,
+                                child: Stack(
+                                  children: [
+                                    _buildBackground(),
+                                    _buildContainerMan(),
+                                  ],
+                                ),
                               ),
-                            );
-                }),
-                const AppLayoutpage(
-                  body: ViewMorePage(),
-                )
-              ],
+                              const AppLayoutpage(
+                                body: ViewMorePage(),
+                              )
+                            ],
+                          );
+              },
             ),
           ),
         ),
@@ -201,19 +205,19 @@ class _HomePageState extends State<HomePage>
           ),
         ],
       ),
-      child:AppGlobalTabBar(
-          tabController: _tabController,
-          tabs: viewmodel.tabTitlesForm,
-          onTap: (index) => viewmodel.selectTab(index, _locationFocusNode),
-          unselectedLabelColor: primaryBorder,
-          labelColor: primary950,
-          indicatorColor: primary950,
-          tabAlignment: TabAlignment.center,
-          isScrollable: true,
-          labelPadding: EdgeInsets.symmetric(
-            horizontal: getAdaptativeWidth(9.w, 7.w, 5.w),
-          ),
+      child: AppGlobalTabBar(
+        tabController: _tabController,
+        tabs: viewmodel.tabTitlesForm,
+        onTap: (index) => viewmodel.selectTab(index, _locationFocusNode),
+        unselectedLabelColor: primaryBorder,
+        labelColor: primary950,
+        indicatorColor: primary950,
+        tabAlignment: TabAlignment.center,
+        isScrollable: true,
+        labelPadding: EdgeInsets.symmetric(
+          horizontal: getAdaptativeWidth(9.w, 7.w, 5.w),
         ),
+      ),
     );
   }
 
@@ -285,7 +289,9 @@ class _HomePageState extends State<HomePage>
               ),
             ),
             Text(
-              viewmodel.homeData.value!.userName ?? '',
+              viewmodel.userData.value?.nome ??
+                  viewmodel.homeData.value?.userName ??
+                  "",
               style: GoogleFonts.inter(
                 color: primary50,
                 fontSize: 14.spa,
