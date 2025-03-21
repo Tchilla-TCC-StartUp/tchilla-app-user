@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import 'package:tchilla/model/onboarding_model.dart';
-import 'package:tchilla/repository/events/onboarding_repository.dart';
 import 'package:tchilla/services/events/onboarding_service.dart';
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
 

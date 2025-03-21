@@ -100,13 +100,24 @@ class HomeViewModel extends BaseViewModel {
     initLocalData();
   }
 
-  void navigateToProfilePage() async {
+  void navigateToProfilePage() {
     checkinLogin();
     if (isAuth.value) {
       this.navigator.navigateToProfilePage();
       return;
     }
     return showError(localizations.visitorAccessDenied);
+  }
+
+  void navigateToNotificationPage() {
+    // checkinLogin();
+    // if (isAuth.value) {
+    //   this.navigator.navigateToNotificationPage();
+    //   return;
+    // }
+    // return showError(localizations.visitorAccessDenied);
+
+    this.navigator.navigateToNotificationPage();
   }
 
   navigateToResultSearchPage() {

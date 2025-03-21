@@ -19,4 +19,5 @@ abstract class INavigation {
   navigateToTiketPage(String id);
   navigateToChoosePaymentPage();
   navigateToErrorPage(void Function() tryAgainEve);
+  navigateToNotificationPage();
 }

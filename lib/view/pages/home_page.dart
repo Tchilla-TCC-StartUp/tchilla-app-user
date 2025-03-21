@@ -119,16 +119,6 @@ class _HomePageState extends State<HomePage>
               children: [
                 Positioned(
                   top: 5.h,
-                  left: 5.w,
-                  child: _buildHelloUser(),
-                ),
-                Positioned(
-                  top: 6.h,
-                  right: 12.w,
-                  child: _buildNotificationIcon(),
-                ),
-                Positioned(
-                  top: 5.h,
                   right: 5.w,
                   child: Transform.scale(
                     scale: 1.w,
@@ -152,6 +142,16 @@ class _HomePageState extends State<HomePage>
                     color: primary50,
                   ),
                 ),
+                Positioned(
+                  top: 5.h,
+                  left: 5.w,
+                  child: _buildHelloUser(),
+                ),
+                Positioned(
+                  top: 6.h,
+                  right: 12.w,
+                  child: _buildNotificationIcon(),
+                ),
               ],
             ),
           ),
@@ -160,16 +160,19 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Container _buildNotificationIcon() {
-    return Container(
-      padding: const EdgeInsets.all(2),
-      decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(6)),
-          border: Border.all(
-            color: primaryBorder,
-          )),
-      child: SvgPicture.asset(
-        AppAssetsImages.notificationIconSvg,
+  _buildNotificationIcon() {
+    return GestureDetector(
+      onTap: () => viewmodel.navigateToNotificationPage(),
+      child: Container(
+        padding: const EdgeInsets.all(2),
+        decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(6)),
+            border: Border.all(
+              color: primaryBorder,
+            )),
+        child: SvgPicture.asset(
+          AppAssetsImages.notificationIconSvg,
+        ),
       ),
     );
   }

@@ -22,6 +22,7 @@ import 'package:tchilla/viewmodel/form_local_viewmodel.dart';
 import 'package:tchilla/viewmodel/form_service_viewmodel.dart';
 import 'package:tchilla/viewmodel/home_viewmodel.dart';
 import 'package:tchilla/viewmodel/login_viewmodel.dart';
+import 'package:tchilla/viewmodel/notification_viewmodel.dart';
 import 'package:tchilla/viewmodel/onboarding_viewmodel.dart';
 import 'package:tchilla/viewmodel/profile_viewmodel.dart';
 import 'package:tchilla/viewmodel/register_viewmodel.dart';
@@ -108,5 +109,6 @@ class AppBindings implements Bindings {
     Get.put<FormServiceViewmodel>(FormServiceViewmodel());
 
     Get.put<FormLocalEndServiceViewmodel>(FormLocalEndServiceViewmodel());
+    Get.put<NotificationViewmodel>(NotificationViewmodel());
   }
 }

@@ -7,15 +7,12 @@ class RegisterViewmodel extends BaseViewModel {
   final UserService service;
   RegisterViewmodel({required this.service});
 
-
   final RxString countryCode = ''.obs;
 
   final Rxn<String?> email = Rxn<String?>();
   final Rxn<String?> password = Rxn<String?>();
   final Rxn<String?> name = Rxn<String?>();
   final Rxn<String?> telefone = Rxn<String?>();
-
-
 
   register() async {
     final localizations = AppLocalizations.of(context)!;
@@ -49,6 +46,7 @@ class RegisterViewmodel extends BaseViewModel {
       ),
       onSuccess: (value) {
         this.navigator.navigateToLoginPage();
+        showSuccess(value.message!);
       },
       onError: (error) {
         showError(error.errorMessage);
