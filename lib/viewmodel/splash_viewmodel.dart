@@ -11,5 +11,6 @@ class SplashViewmodel extends BaseViewModel {
     }
     await navigator.navigateToOnboarding();
     // await navigator.navigateToHome();
+    // await navigator.navigateToLoginPage();
   }
 }

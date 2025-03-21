@@ -16,10 +16,10 @@ class AppGlobalPhoneNumberInput extends StatefulWidget {
   final void Function(String)? onFieldSubmitted;
   final bool? readOnly;
 
-
   final String initialCountryCode;
 
   final void Function(String)? onCountryCodeChanged;
+  final void Function(String)? onChanged;
 
   const AppGlobalPhoneNumberInput({
     super.key,
@@ -33,10 +33,12 @@ class AppGlobalPhoneNumberInput extends StatefulWidget {
     this.readOnly,
     this.initialCountryCode = 'AO',
     this.onCountryCodeChanged,
+    this.onChanged,
   });
 
   @override
-  State<AppGlobalPhoneNumberInput> createState() => _AppGlobalPhoneNumberInputState();
+  State<AppGlobalPhoneNumberInput> createState() =>
+      _AppGlobalPhoneNumberInputState();
 }
 
 class _AppGlobalPhoneNumberInputState extends State<AppGlobalPhoneNumberInput> {
@@ -70,7 +72,6 @@ class _AppGlobalPhoneNumberInputState extends State<AppGlobalPhoneNumberInput> {
     'NG': 10,
     'ZA': 9,
   };
-
 
   @override
   void initState() {
@@ -106,6 +107,7 @@ class _AppGlobalPhoneNumberInputState extends State<AppGlobalPhoneNumberInput> {
           textInputAction: widget.textInputAction,
           validator: widget.validator,
           onFieldSubmitted: widget.onFieldSubmitted,
+          onChanged: widget.onChanged, // <-- AQUI ESTÁ O PONTO CRUCIAL
           style: GoogleFonts.inter(
             fontWeight: FontWeight.w500,
             fontSize: 15.sp,
@@ -184,6 +186,7 @@ class _AppGlobalPhoneNumberInputState extends State<AppGlobalPhoneNumberInput> {
             ),
           ),
         ),
+
       ],
     );
   }

@@ -23,7 +23,7 @@ class BaseViewModel extends GetxController {
 
   final Rxn<VoidCallback> lastRequest = Rxn<VoidCallback>();
   BuildContext get context => notificator.snackbarKey.currentContext!;
- AppLocalizations get localizations => AppLocalizations.of(context)!;
+  AppLocalizations get localizations => AppLocalizations.of(context)!;
 
   void startLoading() {
     isLoading.value = true;
@@ -141,6 +141,70 @@ class BaseViewModel extends GetxController {
         return "Desconhecido";
     }
   }
+
+  void desableFocus (){
+    FocusManager.instance.primaryFocus?.unfocus();
+  }
+
+
+  void setFieldChange(
+    Rxn<dynamic> field,
+    dynamic newValue,
+  ) {
+    _behaviorSubjectChange(field, newValue);
+  }
+
+
+
+  bool _behaviorSubjectChange(
+    Rxn<dynamic> field,
+    dynamic newValue,
+  ) {
+    if (field.value != newValue) {
+      field.value = newValue;
+      return true;
+    }
+
+    return false;
+  }
+
+  bool setListFieldChange<T>(
+      List<Rxn<T>> field,
+      List<T> newValue, {
+        bool Function(T? a, T b)? compareFn,
+      }) {
+    return _behaviorListSubjectChange(field, newValue, compareFn: compareFn);
+  }
+
+  bool _behaviorListSubjectChange<T>(
+      List<Rxn<T>> field,
+      List<T> newValue, {
+        bool Function(T? a, T b)? compareFn,
+      }) {
+    compareFn ??= (a, b) => a == b;
+
+    if (field.length != newValue.length ||
+        !_areGenericListsEqual(field.map((e) => e.value).toList(), newValue, compareFn)) {
+      field
+        ..clear()
+        ..addAll(newValue.map((e) => Rxn<T>(e)));
+      return true;
+    }
+    return false;
+  }
+
+  bool _areGenericListsEqual<T>(
+      List<T?> a,
+      List<T> b,
+      bool Function(T? a, T b) compareFn,
+      ) {
+    if (a.length != b.length) return false;
+    for (int i = 0; i < a.length; i++) {
+      if (!compareFn(a[i], b[i])) return false;
+    }
+    return true;
+  }
+
 
   Future<bool> checkInNetworkConnection() async {
     final connectivityResult = await Connectivity().checkConnectivity();

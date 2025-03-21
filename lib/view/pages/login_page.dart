@@ -25,21 +25,18 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final FocusNode emailFocusNode = FocusNode();
-  final emailController = TextEditingController();
   final FocusNode passwordFocusNode = FocusNode();
-  final passwordController = TextEditingController();
+
   final viewmodel = Get.find<LoginViewmodel>();
 
   @override
-  void dispose(){
-    emailController.dispose();
-    passwordController.dispose();
+  void dispose() {
     emailFocusNode.dispose();
     passwordFocusNode.dispose();
     super.dispose();
   }
-  @override
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
@@ -69,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                     helpText: AppLocalizations.of(context)!.email_address,
                     hintText: "celson.paixao@gmail.com",
                     keyboardType: TextInputType.emailAddress,
-                    controller: emailController,
+                    onChanged: viewmodel.setEmail,
                     textInputAction: TextInputAction.next,
                   ),
                   const AppGlobalVericalSpacing(),
@@ -87,15 +84,12 @@ class _LoginPageState extends State<LoginPage> {
               AppGlobalInput(
                 focusNode: passwordFocusNode,
                 helpText: AppLocalizations.of(context)!.password,
-                controller: passwordController,
                 hintText: "*******",
                 keyboardType: TextInputType.visiblePassword,
                 textInputAction: TextInputAction.send,
                 obscureText: true,
-                onFieldSubmitted: (value) => viewmodel.login(
-                  emailController.text,
-                  passwordController.text,
-                ),
+                onChanged: viewmodel.setPassword,
+                onFieldSubmitted: (value) => viewmodel.login,
               ),
               AppGlobalVericalSpacing(
                 value: 6.h,
@@ -104,17 +98,15 @@ class _LoginPageState extends State<LoginPage> {
                 () => AppGlobalTextButton(
                   minWidth: 100.w,
                   isLoading: viewmodel.isLoading.value,
-                  onPressed: () => viewmodel.login(
-                    emailController.text,
-                    passwordController.text,
-                  ),
+                  onPressed: viewmodel.login,
                   textButton: AppLocalizations.of(context)!.login,
                 ),
               ),
               AppGlobalVericalSpacing(
                 value: 3.h,
               ),
-              AppAuthDivider(text: AppLocalizations.of(context)!.or_you_can_also),
+              AppAuthDivider(
+                  text: AppLocalizations.of(context)!.or_you_can_also),
               AppGlobalVericalSpacing(
                 value: 3.h,
               ),

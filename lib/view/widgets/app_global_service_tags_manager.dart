@@ -23,10 +23,12 @@ class AppGlobalServiceTagsManager extends StatefulWidget {
   });
 
   @override
-  State<AppGlobalServiceTagsManager> createState() => _AppGlobalServiceTagsManagerState();
+  State<AppGlobalServiceTagsManager> createState() =>
+      _AppGlobalServiceTagsManagerState();
 }
 
-class _AppGlobalServiceTagsManagerState extends State<AppGlobalServiceTagsManager> {
+class _AppGlobalServiceTagsManagerState
+    extends State<AppGlobalServiceTagsManager> {
   final TextEditingController _textController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   late List<ServiceModel> _selectedServices;
@@ -66,8 +68,8 @@ class _AppGlobalServiceTagsManagerState extends State<AppGlobalServiceTagsManage
   List<ServiceModel> _filterServices(String query) {
     return widget.services
         .where((s) =>
-    s.label!.toLowerCase().contains(query.toLowerCase()) &&
-        !_selectedServices.any((selected) => selected.id == s.id))
+            s.label!.toLowerCase().contains(query.toLowerCase()) &&
+            !_selectedServices.any((selected) => selected.id == s.id))
         .toList();
   }
 
@@ -76,51 +78,57 @@ class _AppGlobalServiceTagsManagerState extends State<AppGlobalServiceTagsManage
       spacing: 6,
       runSpacing: 6,
       crossAxisAlignment: WrapCrossAlignment.center,
-      children: _selectedServices.map(
+      children: _selectedServices
+          .map(
             (service) => Container(
-          padding: const EdgeInsets.all(6),
-          margin: const EdgeInsets.only(right: 6,),
-          height: 30.px,
-          decoration: BoxDecoration(
-            color: primary500,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: primary500),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                service.label!,
-                style: GoogleFonts.inter(
-                  fontSize: 12.sp,
-                  color: Colors.white,
-                ),
+              padding: const EdgeInsets.all(6),
+              margin: const EdgeInsets.only(
+                right: 6,
               ),
-              const SizedBox(width: 4),
-              GestureDetector(
-                onTap: () => _removeService(service),
-                child: Icon(
-                  Icons.close,
-                  size: 14.sp,
-                  color: Colors.white,
-                ),
+              height: 30.px,
+              decoration: BoxDecoration(
+                color: primary500,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: primary500),
               ),
-            ],
-          ),
-        ),
-      ).toList(),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    service.label!,
+                    style: GoogleFonts.inter(
+                      fontSize: 12.sp,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  GestureDetector(
+                    onTap: () => _removeService(service),
+                    child: Icon(
+                      Icons.close,
+                      size: 14.sp,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+          .toList(),
     );
   }
 
   Widget _buildAutocompleteField() {
     return ConstrainedBox(
-      constraints: BoxConstraints(minWidth: 80, maxWidth: 30.w),
+      constraints: BoxConstraints(minWidth: 50.w, maxWidth: 50.w),
       child: RawAutocomplete<ServiceModel>(
         textEditingController: _textController,
         focusNode: _focusNode,
         optionsBuilder: (TextEditingValue value) {
           final query = value.text.trim();
-          return query.isEmpty ? const Iterable<ServiceModel>.empty() : _filterServices(query);
+          return query.isEmpty
+              ? const Iterable<ServiceModel>.empty()
+              : _filterServices(query);
         },
         displayStringForOption: (ServiceModel option) => option.label ?? '',
         fieldViewBuilder: (context, controller, focusNode, onSubmitted) {
@@ -187,7 +195,7 @@ class _AppGlobalServiceTagsManagerState extends State<AppGlobalServiceTagsManage
             ),
           ),
         Container(
-          width: 100.w,
+          width: 80.w,
           padding: const EdgeInsets.all(10),
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
@@ -199,8 +207,7 @@ class _AppGlobalServiceTagsManagerState extends State<AppGlobalServiceTagsManage
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                if (_selectedServices.isNotEmpty)
-                  _buildSelectedTags(),
+                if (_selectedServices.isNotEmpty) _buildSelectedTags(),
                 _buildAutocompleteField(),
               ],
             ),
@@ -209,5 +216,4 @@ class _AppGlobalServiceTagsManagerState extends State<AppGlobalServiceTagsManage
       ],
     );
   }
-
 }

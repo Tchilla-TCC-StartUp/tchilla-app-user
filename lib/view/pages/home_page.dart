@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage>
         body: SingleChildScrollView(
           child: GestureDetector(
             onTap: () {
-              FocusScope.of(context).unfocus();
+              FocusManager.instance.primaryFocus?.unfocus();
             },
             behavior: HitTestBehavior.opaque,
             child: Column(
@@ -201,10 +201,9 @@ class _HomePageState extends State<HomePage>
           ),
         ],
       ),
-      child: Obx(
-        () => AppGlobalTabBar(
+      child:AppGlobalTabBar(
           tabController: _tabController,
-          tabs: viewmodel.tabTitlesForm.value,
+          tabs: viewmodel.tabTitlesForm,
           onTap: (index) => viewmodel.selectTab(index, _locationFocusNode),
           unselectedLabelColor: primaryBorder,
           labelColor: primary950,
@@ -215,7 +214,6 @@ class _HomePageState extends State<HomePage>
             horizontal: getAdaptativeWidth(9.w, 7.w, 5.w),
           ),
         ),
-      ),
     );
   }
 
@@ -243,19 +241,16 @@ class _HomePageState extends State<HomePage>
           child: IndexedStack(
             index: _tabController.index,
             children: [
+              FormLocalEndService(
+                homeViewmodel: viewmodel,
+              ),
               // Head
               FormLocal(
-                focusNode: _locationFocusNode,
-                viewmodel: viewmodel,
+                homeViewmodel: viewmodel,
               ),
 
               FormService(
-                focusNode: _locationFocusNode,
-                viewmodel: viewmodel,
-              ),
-              FormLocalEndService(
-                focusNode: _locationFocusNode,
-                viewmodel: viewmodel,
+                homeViewmodel: viewmodel,
               ),
             ],
           ),
