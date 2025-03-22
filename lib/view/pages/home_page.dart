@@ -273,8 +273,11 @@ class _HomePageState extends State<HomePage>
         GestureDetector(
           onTap: () => viewmodel.navigateToProfilePage(),
           child: ClipOval(
+            clipBehavior: Clip.hardEdge,
             child: AppGlobalNetworkImage(
-              image: AppAssetsImages.defaultUserImage,
+              image: viewmodel.userData.value?.foto != null
+                  ? viewmodel.getImageUrl(viewmodel.userData.value!.foto!)
+                  : AppAssetsImages.defaultUserImage,
               width: 40.px,
               height: 40.px,
             ),
@@ -301,9 +304,9 @@ class _HomePageState extends State<HomePage>
                 fontSize: 14.spa,
                 fontWeight: FontWeight.w500,
               ),
-            )
+            ),
           ],
-        )
+        ),
       ],
     );
   }

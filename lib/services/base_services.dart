@@ -7,4 +7,5 @@ class BaseServices {
   final UserRepository userRepository = Get.find();
   final OnboardingRepository onboardingRepository = Get.find();
   final WelcomeRepository welcomeRepository = Get.find();
+
 }

@@ -96,7 +96,7 @@ class AppBindings implements Bindings {
 
     Get.put<ViewMoreViewmodel>(ViewMoreViewmodel());
 
-    Get.put<ProfileViewmodel>(ProfileViewmodel());
+    Get.put<ProfileViewmodel>(ProfileViewmodel(service: Get.find()));
 
     Get.put<ResultSearchViewModel>(ResultSearchViewModel());
 

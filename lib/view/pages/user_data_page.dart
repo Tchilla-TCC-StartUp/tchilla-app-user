@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tchilla/style/colors.dart';
+import 'package:tchilla/view/pages/error_try_again.dart';
 import 'package:tchilla/view/widgets/app_global_input.dart';
 import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
@@ -17,25 +18,19 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/viewmodel/user_data_viewmodel.dart';
 
 class UserDataPage extends StatefulWidget {
-  final String id;
-  const UserDataPage({super.key, required this.id});
+  const UserDataPage({super.key});
 
   @override
   State<UserDataPage> createState() => _UserDataPageState();
 }
 
 class _UserDataPageState extends State<UserDataPage> {
-  final nameController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
   final viewmodel = Get.find<UserDataViewModel>();
 
   @override
   void initState() {
     super.initState();
-    nameController.text = "Celson Paixão";
-    emailController.text = "celson2020paixao@gmail.com";
-    passwordController.text = "1234567890";
+    viewmodel.initEvets();
   }
 
   @override
@@ -54,76 +49,88 @@ class _UserDataPageState extends State<UserDataPage> {
         title: _buildAppbar(),
       ),
       body: AppLayoutpage(
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                width: 150.px,
-                height: 150.px,
-                clipBehavior: Clip.hardEdge,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(100.w)),
-                child: AppGlobalNetworkImage(
-                  image: AppAssetsImages.defaultUserImage,
-                ),
-              ),
-              AppGlobalVericalSpacing(value: 18.px),
-              _buildUserDataCard(
-                controller: nameController,
-                helpText: AppLocalizations.of(context)!.name,
-                isEditable: viewmodel.isNameEditable,
-                onToggleEditable: viewmodel.toggleNameEditable,
-              ),
-              AppGlobalVericalSpacing(value: 18.px),
-              _buildUserDataCard(
-                controller: emailController,
-                helpText: AppLocalizations.of(context)!.email_address,
-                isEditable: viewmodel.isEmailEditable,
-                onToggleEditable: viewmodel.toggleEmailEditable,
-              ),
-              AppGlobalVericalSpacing(value: 18.px),
-              _buildUserDataCard(
-                controller: passwordController,
-                helpText: AppLocalizations.of(context)!.password,
-                isEditable: viewmodel.isPasswordEditable,
-                onToggleEditable: viewmodel.togglePasswordEditable,
-                isPassword: true,
-              ),
-              AppGlobalVericalSpacing(value: 28.px),
-              AppGlobalTextButton(
-                textButton: AppLocalizations.of(context)!.save,
-                minWidth: 100.w,
-                onPressed: () {},
-              )
-            ],
-          ),
+        body: Obx(
+          () {
+            return viewmodel.isLoading.value
+                ? const Center(child: CircularProgressIndicator())
+                : viewmodel.isError.value
+                    ? ErrorTryAgain(message: viewmodel.errorMessage.value)
+                    : SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 150.px,
+                              height: 150.px,
+                              clipBehavior: Clip.hardEdge,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100.w)),
+                              child: AppGlobalNetworkImage(
+                                image: viewmodel
+                                    .getImageUrl(viewmodel.image.value),
+                              ),
+                            ),
+                            AppGlobalVericalSpacing(value: 18.px),
+                            _buildUserDataCard(
+                              initalValue: viewmodel.name.value ?? '',
+                              helpText: viewmodel.localizations.name,
+                              isEditable: viewmodel.isNameEditable,
+                              onToggleEditable: viewmodel.toggleNameEditable,
+                              onChanged: viewmodel.setName,
+                            ),
+                            AppGlobalVericalSpacing(value: 18.px),
+                            _buildUserDataCard(
+                              initalValue: viewmodel.email.value ?? '',
+                              helpText: viewmodel.localizations.email_address,
+                              isEditable: viewmodel.isEmailEditable,
+                              onToggleEditable: viewmodel.toggleEmailEditable,
+                              onChanged: viewmodel.setEmail,
+                            ),
+                            AppGlobalVericalSpacing(value: 18.px),
+                            _buildUserDataCard(
+                              initalValue: viewmodel.password.value ?? '',
+                              helpText: viewmodel.localizations.password,
+                              isEditable: viewmodel.isPasswordEditable,
+                              onToggleEditable:
+                                  viewmodel.togglePasswordEditable,
+                              isPassword: true,
+                            ),
+                            AppGlobalVericalSpacing(value: 28.px),
+                            AppGlobalTextButton(
+                              textButton: viewmodel.localizations.save,
+                              minWidth: 100.w,
+                              onPressed: () {},
+                            )
+                          ],
+                        ),
+                      );
+          },
         ),
       ),
     );
   }
 
   Widget _buildUserDataCard({
-    required TextEditingController controller,
+    required String initalValue,
     required String helpText,
     required RxBool isEditable,
     required VoidCallback onToggleEditable,
+    void Function(String)? onChanged,
     bool? isPassword,
   }) {
-    return Obx(
-      () => AppGlobalInput(
-        helpText: helpText,
-        controller: controller,
-        obscureText: isPassword ?? false,
-        readOnly: !isEditable.value,
-        suffix: GestureDetector(
-          onTap: onToggleEditable,
-          child: Icon(
-            size: 16.px,
-            isEditable.value ? Icons.check : Icons.edit_note_rounded,
-            color: isEditable.value ? Colors.greenAccent.shade700 : primary800,
-          ),
+    return AppGlobalInput(
+      helpText: helpText,
+      initialValue: initalValue,
+      obscureText: isPassword ?? false,
+      readOnly: !isEditable.value,
+      onChanged: onChanged,
+      suffix: GestureDetector(
+        onTap: onToggleEditable,
+        child: Icon(
+          size: 16.px,
+          isEditable.value ? Icons.check : Icons.edit_note_rounded,
+          color: isEditable.value ? Colors.greenAccent.shade700 : primary800,
         ),
       ),
     );
@@ -146,7 +153,7 @@ class _UserDataPageState extends State<UserDataPage> {
           ),
         ),
         AppGlobalText(
-          text: "Celson Paixão",
+          text: viewmodel.name.value ?? '',
           style: TextStyleEnum.h3_bold,
         ),
         Container()

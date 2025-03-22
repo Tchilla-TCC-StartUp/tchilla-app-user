@@ -25,6 +25,7 @@ class AppGlobalInput extends StatefulWidget {
   final FocusNode? focusNode;
   final void Function(String)? onFieldSubmitted;
   final void Function(String)? onChanged;
+  final String? initialValue;
   const AppGlobalInput({
     super.key,
     this.controller,
@@ -46,6 +47,7 @@ class AppGlobalInput extends StatefulWidget {
     this.suffixIconConstraints,
     this.contentPadding,
     this.onChanged,
+    this.initialValue,
   });
 
   @override
@@ -75,6 +77,7 @@ class _AppGlobalInputState extends State<AppGlobalInput> {
             ),
           ),
         TextFormField(
+          initialValue: widget.initialValue,
           readOnly: widget.readOnly ?? false,
           focusNode: widget.focusNode,
           controller: widget.controller,
