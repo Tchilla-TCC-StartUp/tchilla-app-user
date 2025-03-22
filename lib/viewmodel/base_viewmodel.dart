@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tchilla/data/event/local_token_data.dart';
+import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/resources/app_exception.dart';
 import 'package:tchilla/resources/app_logs.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -220,6 +221,13 @@ class BaseViewModel extends GetxController {
       if (!compareFn(a[i], b[i])) return false;
     }
     return true;
+  }
+
+  String getImageUrl(String? image) {
+    final imageUrl = "${AppConstats.baseUrl}$image";
+
+    loger.info("URL da imagem: $imageUrl");
+    return imageUrl;
   }
 
   Future<bool> checkInNetworkConnection() async {

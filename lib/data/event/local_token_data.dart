@@ -23,4 +23,6 @@ class LocalTokenData extends BaseLocalData implements IlocalTokenData {
     deletoken();
     return shared.setString(appconstats.keyToken, token);
   }
+
+
 }

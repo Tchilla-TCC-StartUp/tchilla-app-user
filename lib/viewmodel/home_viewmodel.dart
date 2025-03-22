@@ -36,7 +36,7 @@ class HomeViewModel extends BaseViewModel {
     initLocalData();
   }
 
-    void initEvet() {
+  void initEvet() {
     getUserData();
   }
 
@@ -107,7 +107,11 @@ class HomeViewModel extends BaseViewModel {
   void navigateToProfilePage() async {
     await checkinLogin();
     if (isAuth.value) {
-      this.navigator.navigateToProfilePage();
+      loger.info("O nome o user é ${_userData.value?.nome}");
+      this.navigator.navigateToProfilePage(
+            _userData.value?.nome ?? '',
+            _userData.value?.foto ?? '',
+          );
       return;
     }
     return showError(localizations.visitorAccessDenied);

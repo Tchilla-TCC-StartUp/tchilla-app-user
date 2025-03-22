@@ -35,8 +35,11 @@ class AppGetAppRoutes {
     _buildRoute(AppRoutes.resultSearchPage, (_) => const ResultSearchPage()),
     _buildRoute(AppRoutes.welcomePage, (_) => const WelcomePage()),
     _buildRoute(AppRoutes.detailsPage, (args) => DetalheProposedPage(id: args)),
-    _buildRoute(AppRoutes.profilePage, (_) => const ProfilePage()),
-    _buildRoute(AppRoutes.userdataPage, (args) => UserDataPage(id: args)),
+    _buildRoute(
+        AppRoutes.profilePage,
+        (args) =>
+            ProfilePage(userNamer: args['userNamer'], image: args['image'])),
+    _buildRoute(AppRoutes.userdataPage, (args) => const UserDataPage()),
     _buildRoute(AppRoutes.summaryPage, (args) => SummaryPage(id: args)),
     _buildRoute(AppRoutes.tiketPage, (args) => TiketPage(id: args)),
     _buildRoute(

@@ -13,8 +13,8 @@ abstract class INavigation {
   navigateToWelcomePage();
 
   navigateToDetalhesPage(String id);
-  navigateToProfilePage();
-  navigateToUserDataPage(String id);
+  navigateToProfilePage(String userNamer, String image);
+  navigateToUserDataPage();
   navigateToSummaryPage(String id);
   navigateToTiketPage(String id);
   navigateToChoosePaymentPage();

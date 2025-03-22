@@ -3,4 +3,5 @@ abstract class IlocalTokenData {
   Future<void> saveToken(String token);
   Future<void> updateToken(String token);
   Future<void> deletoken();
+
 }

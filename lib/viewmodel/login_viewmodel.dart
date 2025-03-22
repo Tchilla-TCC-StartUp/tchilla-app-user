@@ -6,7 +6,6 @@ import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
 class LoginViewmodel extends BaseViewModel {
   final UserService service;
-
   final Rxn<String?> email = Rxn<String?>();
   final Rxn<String?> password = Rxn<String?>();
 

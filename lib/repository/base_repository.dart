@@ -17,7 +17,7 @@ class BaseRepository {
   Future<T> get<T>(String endpoint,
       {Map<String, dynamic>? queryParameters, Options? option}) async {
     try {
-      final response = await dio.get(endpoint,
+      final response = await dio.get("/api$endpoint",
           queryParameters: queryParameters, options: option);
       return _handleResponse<T>(
           notificator.snackbarKey.currentContext!, response);
@@ -29,7 +29,7 @@ class BaseRepository {
   /// Método genérico para requisições POST
   Future<T> post<T>(String endpoint, {dynamic data, Options? option}) async {
     try {
-      final response = await dio.post(endpoint, data: data, options: option);
+      final response = await dio.post("/api$endpoint", data: data, options: option);
       return _handleResponse<T>(context, response);
     } catch (e) {
       throw _handleError(context, e);
@@ -39,7 +39,7 @@ class BaseRepository {
   /// Método genérico para requisições PUT
   Future<T> put<T>(String endpoint, {dynamic data, Options? option}) async {
     try {
-      final response = await dio.put(endpoint, data: data, options: option);
+      final response = await dio.put("/api$endpoint", data: data, options: option);
       return _handleResponse<T>(context, response);
     } catch (e) {
       throw _handleError(context, e);
@@ -49,7 +49,7 @@ class BaseRepository {
   /// Método genérico para requisições DELETE
   Future<T> delete<T>(String endpoint, Options? option) async {
     try {
-      final response = await dio.delete(endpoint, options: option);
+      final response = await dio.delete("/api$endpoint", options: option);
       return _handleResponse<T>(context, response);
     } catch (e) {
       throw _handleError(context, e);

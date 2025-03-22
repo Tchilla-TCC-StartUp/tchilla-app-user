@@ -13,8 +13,13 @@ class UserDataViewModel extends BaseViewModel {
   final Rxn<String?> password = Rxn<String?>();
   final Rxn<String?> name = Rxn<String?>();
   final Rxn<String?> telefone = Rxn<String?>();
+  final Rxn<String?> image = Rxn<String?>();
 
   UserDataViewModel({required this.service});
+
+  void initEvets() {
+    getUserData();
+  }
 
   void toggleNameEditable() {
     isNameEditable.value = !isNameEditable.value;
@@ -29,8 +34,18 @@ class UserDataViewModel extends BaseViewModel {
     this.navigator.navigateToRefefinePasswordPage(AppRoutes.userdataPage);
   }
 
-  void getUserData() {
-    checkinLogin();
+  void getUserData() async {
+    await checkinLogin();
+    await onRequest(
+      event: service.getUserData(token: token.value),
+      onSuccess: (value) {
+        email.value = value.email;
+        password.value = '*********';
+        name.value = value.nome;
+        telefone.value = value.telefone;
+        image.value = value.foto;
+      },
+    );
   }
 
   void setEmail(String? value) {
