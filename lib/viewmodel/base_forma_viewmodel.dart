@@ -12,7 +12,9 @@ class BaseFormaViewmodel extends BaseViewModel {
   final Rxn<TimeOfDay?> endTimeEvent = Rxn<TimeOfDay?>();
   final Rxn<int?> numberGuestsEvent = Rxn<int?>();
   final List<Rxn<ServiceModel>> serviceEvent = <Rxn<ServiceModel>>[];
+ 
 
+ 
 
 
   void setLocalEvent(String? value) {

@@ -134,4 +134,9 @@ class DetalheProposedViewModel extends BaseViewModel {
     tabController.value?.dispose();
     super.dispose();
   }
+  
+  @override
+  void initEvet() {
+    // TODO: implement initEvet
+  }
 }

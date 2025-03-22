@@ -84,4 +84,9 @@ class ForgontPasswordViewmodel extends BaseViewModel {
     super.dispose();
     emailFocus.dispose();
   }
+  
+  @override
+  void initEvet() {
+    // TODO: implement initEvet
+  }
 }

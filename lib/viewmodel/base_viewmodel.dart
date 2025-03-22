@@ -70,6 +70,7 @@ class BaseViewModel extends GetxController {
     VoidCallback? onStart,
     ValueChanged<T>? onSuccess,
     ValueChanged<T>? onError,
+    ValueChanged<T>? onErrorAuth,
     VoidCallback? onComplete,
   }) async {
     // checkinLogin();
@@ -89,6 +90,10 @@ class BaseViewModel extends GetxController {
           error is ServerException) {
         emitError(error.message);
         showError(error);
+      } else if (error is UnauthorizedException) {
+        showError(error);
+        cleanToken();
+        navigator.navigateToWelcomePage();
       } else {
         showError(error);
       }
@@ -101,7 +106,7 @@ class BaseViewModel extends GetxController {
     });
   }
 
-  void checkinLogin() async {
+  Future<void> checkinLogin() async {
     try {
       var value = await dataToken.fetchToken() ?? "";
       setToken(value);

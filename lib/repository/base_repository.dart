@@ -66,12 +66,15 @@ class BaseRepository {
       throw ValidationException(
         response.statusMessage ?? l10n.invalidRequest,
       );
-    } else if (response.statusCode == 401 || response.statusCode == 403) {
+    } else if (response.statusCode == 403) {
       throw AuthException(response.statusMessage ?? l10n.unauthorizedAccess);
     } else if (response.statusCode == 404) {
       throw NetworkException(response.statusMessage ?? l10n.resourceNotFound);
     } else if (response.statusCode == 500) {
       throw ServerException(response.statusMessage ?? l10n.internalServerError);
+    } else if (response.statusCode == 401) {
+      throw UnauthorizedException(
+          response.statusMessage ?? l10n.unauthorizedAccess);
     } else {
       throw UnknownException("${l10n.unknownError} ${response.statusCode}");
     }
@@ -87,6 +90,9 @@ class BaseRepository {
           error.type == DioExceptionType.receiveTimeout) {
         return NetworkException(errorMessage);
       } else if (error.type == DioExceptionType.badResponse) {
+        if (error.response?.statusCode == 401) {
+          return UnauthorizedException(errorMessage);
+        }
         return ServerException(errorMessage);
       } else if (error.type == DioExceptionType.cancel) {
         return UnknownException(errorMessage);
@@ -96,6 +102,7 @@ class BaseRepository {
         return UnknownException(errorMessage);
       }
     }
+
     return UnknownException(error.toString());
   }
 

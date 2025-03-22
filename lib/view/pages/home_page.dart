@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage>
     _tabController.addListener(() {
       viewmodel.selectTab(_tabController.index, _locationFocusNode);
     });
-    viewmodel.getUserData();
+    viewmodel.initEvet();
   }
 
   @override
@@ -66,21 +66,22 @@ class _HomePageState extends State<HomePage>
         statusBarIconBrightness: Brightness.light,
       ),
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: GestureDetector(
-            onTap: () {
-              FocusManager.instance.primaryFocus?.unfocus();
-            },
-            behavior: HitTestBehavior.opaque,
-            child: Obx(
-              () {
-                return viewmodel.isLoading.value
-                    ? const AppGlobalLoading()
-                    : viewmodel.isError.value
-                        ? ErrorTryAgain(
-                            message: viewmodel.errorMessage.value,
-                          )
-                        : Column(
+        body: Obx(
+          () {
+            return viewmodel.isLoading.value
+                ? const AppGlobalLoading()
+                : viewmodel.isError.value
+                    ? ErrorTryAgain(
+                        message: viewmodel.errorMessage.value,
+                        event: viewmodel.initEvet,
+                      )
+                    : SingleChildScrollView(
+                        child: GestureDetector(
+                          onTap: () {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                          },
+                          behavior: HitTestBehavior.opaque,
+                          child: Column(
                             children: [
                               AnimatedContainer(
                                 duration: const Duration(milliseconds: 660),
@@ -98,10 +99,10 @@ class _HomePageState extends State<HomePage>
                                 body: ViewMorePage(),
                               )
                             ],
-                          );
-              },
-            ),
-          ),
+                          ),
+                        ),
+                      );
+          },
         ),
       ),
     );

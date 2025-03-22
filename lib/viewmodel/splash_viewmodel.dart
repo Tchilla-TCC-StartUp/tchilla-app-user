@@ -1,8 +1,8 @@
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
 class SplashViewmodel extends BaseViewModel {
-  void fristNavigation() {
-    checkinLogin();
+  void fristNavigation() async {
+    await checkinLogin();
     Future.delayed(const Duration(seconds: 2), () {
       navigateToHomePage();
     });
@@ -17,8 +17,8 @@ class SplashViewmodel extends BaseViewModel {
       await navigator.navigateToHome();
       return;
     }
-    // await navigator.navigateToOnboarding();
-    await navigator.navigateToHome();
+    await navigator.navigateToOnboarding();
+    // await navigator.navigateToHome();
     // await navigator.navigateToLoginPage();
   }
 }

@@ -28,6 +28,11 @@ class UnknownException extends AppException {
   UnknownException(String message, {int? code}) : super(message, code: code);
 }
 
+class UnauthorizedException extends AppException {
+  UnauthorizedException(String message, {int? code})
+      : super(message, code: code);
+}
+
 class SocketException extends AppException {
   SocketException(String message, {int? code}) : super(message, code: code);
 }

@@ -36,6 +36,10 @@ class HomeViewModel extends BaseViewModel {
     initLocalData();
   }
 
+    void initEvet() {
+    getUserData();
+  }
+
   void initLocalData() {
     homeData.value = HomeModel(
         userName: localizations.visitor,
@@ -87,7 +91,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   void getUserData() async {
-    checkinLogin();
+    await checkinLogin();
     if (isAuth.value) {
       await onRequest(
         event: service.getUserData(token: token.value),
@@ -100,8 +104,8 @@ class HomeViewModel extends BaseViewModel {
     initLocalData();
   }
 
-  void navigateToProfilePage() {
-    checkinLogin();
+  void navigateToProfilePage() async {
+    await checkinLogin();
     if (isAuth.value) {
       this.navigator.navigateToProfilePage();
       return;
