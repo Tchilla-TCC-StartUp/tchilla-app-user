@@ -31,7 +31,6 @@ class _ChoosePaymentMethodPageState extends State<ChoosePaymentMethodPage> {
         title: AppGlobalText(
           text: AppLocalizations.of(context)!.deposit,
           style: TextStyleEnum.h3_bold,
-          color: gray600,
         ),
       ),
       body: AppLayoutpage(
@@ -61,7 +60,9 @@ class _ChoosePaymentMethodPageState extends State<ChoosePaymentMethodPage> {
               image: AppAssetsImages.mcxNetworkImage,
               onTap: _builMCXMethod,
             ),
-            AppGlobalVericalSpacing(value: 1.h,),
+            AppGlobalVericalSpacing(
+              value: 1.h,
+            ),
             _buildCardPaymentMethod(
               image: AppAssetsImages.mcxNetworkImage,
               onTap: () {},
@@ -72,7 +73,7 @@ class _ChoosePaymentMethodPageState extends State<ChoosePaymentMethodPage> {
     );
   }
 
-  _builMCXMethod(){
+  _builMCXMethod() {
     return showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -85,9 +86,7 @@ class _ChoosePaymentMethodPageState extends State<ChoosePaymentMethodPage> {
         return McxMethodView();
       },
     );
-
   }
-
 
   _buildCardPaymentMethod(
       {required String image, required void Function()? onTap}) {

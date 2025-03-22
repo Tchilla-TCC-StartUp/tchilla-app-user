@@ -93,4 +93,9 @@ class Navigation extends INavigation {
   navigateToChoosePaymentPage() {
     Get.toNamed(AppRoutes.chosePaymentPage);
   }
+
+  @override
+  navigateToNotificationPage() {
+    Get.toNamed(AppRoutes.notificationPage);
+  }
 }

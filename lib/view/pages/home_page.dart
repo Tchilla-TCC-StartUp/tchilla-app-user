@@ -48,6 +48,7 @@ class _HomePageState extends State<HomePage>
     _tabController.addListener(() {
       viewmodel.selectTab(_tabController.index, _locationFocusNode);
     });
+    viewmodel.initEvet();
   }
 
   @override
@@ -65,39 +66,43 @@ class _HomePageState extends State<HomePage>
         statusBarIconBrightness: Brightness.light,
       ),
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: GestureDetector(
-            onTap: () {
-              FocusManager.instance.primaryFocus?.unfocus();
-            },
-            behavior: HitTestBehavior.opaque,
-            child: Column(
-              children: [
-                Obx(() {
-                  return viewmodel.isLoading.value
-                      ? const AppGlobalLoading()
-                      : viewmodel.isError.value
-                          ? ErrorTryAgain(
-                              message: viewmodel.errorMessage.value,
-                            )
-                          : AnimatedContainer(
-                              duration: const Duration(milliseconds: 660),
-                              curve: Curves.easeInOut,
-                              height: viewmodel.adptiveSilverExpade.value + 1.h,
-                              child: Stack(
-                                children: [
-                                  _buildBackground(),
-                                  _buildContainerMan(),
-                                ],
+        body: Obx(
+          () {
+            return viewmodel.isLoading.value
+                ? const AppGlobalLoading()
+                : viewmodel.isError.value
+                    ? ErrorTryAgain(
+                        message: viewmodel.errorMessage.value,
+                        event: viewmodel.initEvet,
+                      )
+                    : SingleChildScrollView(
+                        child: GestureDetector(
+                          onTap: () {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                          },
+                          behavior: HitTestBehavior.opaque,
+                          child: Column(
+                            children: [
+                              AnimatedContainer(
+                                duration: const Duration(milliseconds: 660),
+                                curve: Curves.easeInOut,
+                                height:
+                                    viewmodel.adptiveSilverExpade.value + 2.h,
+                                child: Stack(
+                                  children: [
+                                    _buildBackground(),
+                                    _buildContainerMan(),
+                                  ],
+                                ),
                               ),
-                            );
-                }),
-                const AppLayoutpage(
-                  body: ViewMorePage(),
-                )
-              ],
-            ),
-          ),
+                              const AppLayoutpage(
+                                body: ViewMorePage(),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+          },
         ),
       ),
     );
@@ -113,16 +118,6 @@ class _HomePageState extends State<HomePage>
             color: primary950,
             child: Stack(
               children: [
-                Positioned(
-                  top: 5.h,
-                  left: 5.w,
-                  child: _buildHelloUser(),
-                ),
-                Positioned(
-                  top: 6.h,
-                  right: 12.w,
-                  child: _buildNotificationIcon(),
-                ),
                 Positioned(
                   top: 5.h,
                   right: 5.w,
@@ -148,6 +143,16 @@ class _HomePageState extends State<HomePage>
                     color: primary50,
                   ),
                 ),
+                Positioned(
+                  top: 5.h,
+                  left: 5.w,
+                  child: _buildHelloUser(),
+                ),
+                Positioned(
+                  top: 6.h,
+                  right: 12.w,
+                  child: _buildNotificationIcon(),
+                ),
               ],
             ),
           ),
@@ -156,16 +161,19 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Container _buildNotificationIcon() {
-    return Container(
-      padding: const EdgeInsets.all(2),
-      decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(6)),
-          border: Border.all(
-            color: primaryBorder,
-          )),
-      child: SvgPicture.asset(
-        AppAssetsImages.notificationIconSvg,
+  _buildNotificationIcon() {
+    return GestureDetector(
+      onTap: () => viewmodel.navigateToNotificationPage(),
+      child: Container(
+        padding: const EdgeInsets.all(2),
+        decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(6)),
+            border: Border.all(
+              color: primaryBorder,
+            )),
+        child: SvgPicture.asset(
+          AppAssetsImages.notificationIconSvg,
+        ),
       ),
     );
   }
@@ -201,19 +209,19 @@ class _HomePageState extends State<HomePage>
           ),
         ],
       ),
-      child:AppGlobalTabBar(
-          tabController: _tabController,
-          tabs: viewmodel.tabTitlesForm,
-          onTap: (index) => viewmodel.selectTab(index, _locationFocusNode),
-          unselectedLabelColor: primaryBorder,
-          labelColor: primary950,
-          indicatorColor: primary950,
-          tabAlignment: TabAlignment.center,
-          isScrollable: true,
-          labelPadding: EdgeInsets.symmetric(
-            horizontal: getAdaptativeWidth(9.w, 7.w, 5.w),
-          ),
+      child: AppGlobalTabBar(
+        tabController: _tabController,
+        tabs: viewmodel.tabTitlesForm,
+        onTap: (index) => viewmodel.selectTab(index, _locationFocusNode),
+        unselectedLabelColor: primaryBorder,
+        labelColor: primary950,
+        indicatorColor: primary950,
+        tabAlignment: TabAlignment.center,
+        isScrollable: true,
+        labelPadding: EdgeInsets.symmetric(
+          horizontal: getAdaptativeWidth(9.w, 7.w, 5.w),
         ),
+      ),
     );
   }
 
@@ -285,7 +293,9 @@ class _HomePageState extends State<HomePage>
               ),
             ),
             Text(
-              viewmodel.homeData.value!.userName ?? '',
+              viewmodel.userData.value?.nome ??
+                  viewmodel.homeData.value?.userName ??
+                  "",
               style: GoogleFonts.inter(
                 color: primary50,
                 fontSize: 14.spa,

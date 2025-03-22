@@ -7,6 +7,7 @@ import 'package:tchilla/view/pages/forgot_passsword_auth_email_page.dart';
 import 'package:tchilla/view/pages/forgot_password_confitmation_pin_page.dart';
 import 'package:tchilla/view/pages/home_page.dart';
 import 'package:tchilla/view/pages/login_page.dart';
+import 'package:tchilla/view/pages/notifications_page.dart';
 import 'package:tchilla/view/pages/onboarding_page.dart';
 import 'package:tchilla/view/pages/profile_page.dart';
 import 'package:tchilla/view/pages/redefine_password_page.dart';
@@ -24,9 +25,12 @@ class AppGetAppRoutes {
     _buildRoute(AppRoutes.homePage, (_) => const HomePage()),
     _buildRoute(AppRoutes.loginPage, (_) => const LoginPage()),
     _buildRoute(AppRoutes.registerPage, (_) => const RegisterPage()),
-    _buildRoute(AppRoutes.forgotPasswordEmail, (_) => const ForgotPassswordAuthEmailPage()),
-    _buildRoute(AppRoutes.forgotPasswordConfirmationPin, (_) => const ForgotPasswordConfirmationPinPage()),
-    _buildRoute(AppRoutes.redefinePasswordPage, (args) => RedefinePasswordPage(previousWalk: args)),
+    _buildRoute(AppRoutes.forgotPasswordEmail,
+        (_) => const ForgotPassswordAuthEmailPage()),
+    _buildRoute(AppRoutes.forgotPasswordConfirmationPin,
+        (_) => const ForgotPasswordConfirmationPinPage()),
+    _buildRoute(AppRoutes.redefinePasswordPage,
+        (args) => RedefinePasswordPage(previousWalk: args)),
     _buildRoute(AppRoutes.onboardingPage, (_) => const OnboardingPage()),
     _buildRoute(AppRoutes.resultSearchPage, (_) => const ResultSearchPage()),
     _buildRoute(AppRoutes.welcomePage, (_) => const WelcomePage()),
@@ -35,13 +39,16 @@ class AppGetAppRoutes {
     _buildRoute(AppRoutes.userdataPage, (args) => UserDataPage(id: args)),
     _buildRoute(AppRoutes.summaryPage, (args) => SummaryPage(id: args)),
     _buildRoute(AppRoutes.tiketPage, (args) => TiketPage(id: args)),
-    _buildRoute(AppRoutes.chosePaymentPage, (args) => const ChoosePaymentMethodPage()),
+    _buildRoute(
+        AppRoutes.chosePaymentPage, (args) => const ChoosePaymentMethodPage()),
+    _buildRoute(
+        AppRoutes.notificationPage, (args) => const NotificationsPage()),
   ];
 
   static GetPage _buildRoute(
-      String path,
-      Widget Function(dynamic args) pageBuilder,
-      ) {
+    String path,
+    Widget Function(dynamic args) pageBuilder,
+  ) {
     return GetPage(
       name: path,
       page: () => pageBuilder(Get.arguments),
@@ -50,5 +57,3 @@ class AppGetAppRoutes {
     );
   }
 }
-
-

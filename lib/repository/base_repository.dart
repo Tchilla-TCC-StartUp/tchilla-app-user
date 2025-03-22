@@ -15,10 +15,10 @@ class BaseRepository {
 
   /// Método genérico para requisições GET
   Future<T> get<T>(String endpoint,
-      {Map<String, dynamic>? queryParameters}) async {
+      {Map<String, dynamic>? queryParameters, Options? option}) async {
     try {
-      final response =
-          await dio.get(endpoint, queryParameters: queryParameters);
+      final response = await dio.get(endpoint,
+          queryParameters: queryParameters, options: option);
       return _handleResponse<T>(
           notificator.snackbarKey.currentContext!, response);
     } catch (e) {
@@ -27,9 +27,9 @@ class BaseRepository {
   }
 
   /// Método genérico para requisições POST
-  Future<T> post<T>(String endpoint, {dynamic data}) async {
+  Future<T> post<T>(String endpoint, {dynamic data, Options? option}) async {
     try {
-      final response = await dio.post(endpoint, data: data);
+      final response = await dio.post(endpoint, data: data, options: option);
       return _handleResponse<T>(context, response);
     } catch (e) {
       throw _handleError(context, e);
@@ -37,9 +37,9 @@ class BaseRepository {
   }
 
   /// Método genérico para requisições PUT
-  Future<T> put<T>(String endpoint, {dynamic data}) async {
+  Future<T> put<T>(String endpoint, {dynamic data, Options? option}) async {
     try {
-      final response = await dio.put(endpoint, data: data);
+      final response = await dio.put(endpoint, data: data, options: option);
       return _handleResponse<T>(context, response);
     } catch (e) {
       throw _handleError(context, e);
@@ -47,9 +47,9 @@ class BaseRepository {
   }
 
   /// Método genérico para requisições DELETE
-  Future<T> delete<T>(String endpoint) async {
+  Future<T> delete<T>(String endpoint, Options? option) async {
     try {
-      final response = await dio.delete(endpoint);
+      final response = await dio.delete(endpoint, options: option);
       return _handleResponse<T>(context, response);
     } catch (e) {
       throw _handleError(context, e);
@@ -66,12 +66,15 @@ class BaseRepository {
       throw ValidationException(
         response.statusMessage ?? l10n.invalidRequest,
       );
-    } else if (response.statusCode == 401 || response.statusCode == 403) {
+    } else if (response.statusCode == 403) {
       throw AuthException(response.statusMessage ?? l10n.unauthorizedAccess);
     } else if (response.statusCode == 404) {
       throw NetworkException(response.statusMessage ?? l10n.resourceNotFound);
     } else if (response.statusCode == 500) {
-      throw ServerException(response.statusMessage  ?? l10n.internalServerError);
+      throw ServerException(response.statusMessage ?? l10n.internalServerError);
+    } else if (response.statusCode == 401) {
+      throw UnauthorizedException(
+          response.statusMessage ?? l10n.unauthorizedAccess);
     } else {
       throw UnknownException("${l10n.unknownError} ${response.statusCode}");
     }
@@ -87,6 +90,9 @@ class BaseRepository {
           error.type == DioExceptionType.receiveTimeout) {
         return NetworkException(errorMessage);
       } else if (error.type == DioExceptionType.badResponse) {
+        if (error.response?.statusCode == 401) {
+          return UnauthorizedException(errorMessage);
+        }
         return ServerException(errorMessage);
       } else if (error.type == DioExceptionType.cancel) {
         return UnknownException(errorMessage);
@@ -96,6 +102,7 @@ class BaseRepository {
         return UnknownException(errorMessage);
       }
     }
+
     return UnknownException(error.toString());
   }
 
@@ -121,5 +128,4 @@ class BaseRepository {
         return l10n.unexpectedConnectionError;
     }
   }
-
 }

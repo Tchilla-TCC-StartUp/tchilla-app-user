@@ -1,7 +1,9 @@
 import 'package:tchilla/model/auth_model.dart';
 import 'package:tchilla/model/user_model.dart';
 
-abstract class IuserRepository {
+abstract class IUserService {
+  Future<UserModel> getUserData({required String token});
+
   Future<AuthModel> authUser({
     required String email,
     required String password,
@@ -13,11 +15,6 @@ abstract class IuserRepository {
     required String name,
     required String password,
     required String telefone,
-    String? lang,
-  });
-
-  Future<UserModel> getUserData({
-    required String token,
     String? lang,
   });
 }

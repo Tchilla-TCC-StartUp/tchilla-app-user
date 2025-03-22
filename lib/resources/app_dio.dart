@@ -2,8 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:tchilla/resources/%20app_interceptor.dart';
 import 'package:tchilla/resources/app_constats.dart';
+import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
-class AppDio {
+class AppDio extends BaseViewModel {
   final _dio = Dio(
     BaseOptions(
       baseUrl: AppConstats.baseUrl,

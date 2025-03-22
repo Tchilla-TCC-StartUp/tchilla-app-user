@@ -1,12 +1,13 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:tchilla/repository/events/user_repository.dart';
+import 'package:tchilla/services/events/user_service.dart';
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
 class RegisterViewmodel extends BaseViewModel {
-  final UserRepository repository;
+  final UserService service;
+  RegisterViewmodel({required this.service});
+
   final RxString countryCode = ''.obs;
-  RegisterViewmodel({required this.repository});
 
   final Rxn<String?> email = Rxn<String?>();
   final Rxn<String?> password = Rxn<String?>();
@@ -37,14 +38,15 @@ class RegisterViewmodel extends BaseViewModel {
     }
 
     await onRequest(
-      event: repository.registerUser(
+      event: service.registerUser(
         email: email.value!.trim(),
         name: name.value!.trim(),
         password: password.value!,
         telefone: "$countryCode${telefone.value ?? ''}",
       ),
       onSuccess: (value) {
-      this.navigator.navigateToLoginPage();
+        this.navigator.navigateToLoginPage();
+        showSuccess(value.message!);
       },
       onError: (error) {
         showError(error.errorMessage);
@@ -57,6 +59,7 @@ class RegisterViewmodel extends BaseViewModel {
   navigateToLoginPage() {
     this.navigator.navigateToLoginPage();
   }
+
   void setEmail(String? value) {
     setFieldChange(email, value);
     loger.info('Email é $email');
@@ -76,6 +79,4 @@ class RegisterViewmodel extends BaseViewModel {
     setFieldChange(telefone, value);
     loger.info('Telefone é $telefone');
   }
-
-
 }

@@ -63,6 +63,7 @@ class AppGlobalSearchInput<T extends Object> extends StatelessWidget {
                   fontSize: 15.sp,
                   color: primary950,
                 ),
+                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   hintText: hintText,
                   hintStyle: TextStyle(color: Colors.grey.shade500),

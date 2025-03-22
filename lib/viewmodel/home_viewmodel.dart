@@ -3,10 +3,14 @@ import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/model/event_type_model.dart';
 import 'package:tchilla/model/service_model.dart';
+import 'package:tchilla/model/user_model.dart';
+import 'package:tchilla/services/events/home_service.dart';
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
 import 'package:tchilla/model/home_model.dart';
 
 class HomeViewModel extends BaseViewModel {
+  final HomeService service;
+  HomeViewModel({required this.service});
   RxInt selectedIndex = 0.obs;
   RxDouble adptiveHeight = 625.px.obs;
   RxDouble adptiveSilverExpade = 880.px.obs;
@@ -14,7 +18,10 @@ class HomeViewModel extends BaseViewModel {
 
   final RxList<String> tabTitlesForm = <String>[].obs;
   final Rxn<HomeModel> _homeData = Rxn<HomeModel>();
+  final Rxn<UserModel> _userData = Rxn<UserModel>();
+
   Rxn<HomeModel> get homeData => _homeData;
+  Rxn<UserModel> get userData => _userData;
 
   void selectTab(int index, FocusNode focusNode) {
     desableFocus();
@@ -27,6 +34,10 @@ class HomeViewModel extends BaseViewModel {
   void onReady() {
     super.onReady();
     initLocalData();
+  }
+
+    void initEvet() {
+    getUserData();
   }
 
   void initLocalData() {
@@ -79,16 +90,38 @@ class HomeViewModel extends BaseViewModel {
     ]);
   }
 
-  void navigateToProfilePage() async {
-    final bool isAuth = await checkinLogin();
+  void getUserData() async {
+    await checkinLogin();
+    if (isAuth.value) {
+      await onRequest(
+        event: service.getUserData(token: token.value),
+        onSuccess: (data) {
+          _userData.value = data;
+        },
+      );
+      return;
+    }
+    initLocalData();
+  }
 
-    if (isAuth) {
+  void navigateToProfilePage() async {
+    await checkinLogin();
+    if (isAuth.value) {
       this.navigator.navigateToProfilePage();
       return;
     }
     return showError(localizations.visitorAccessDenied);
+  }
 
-    // return this.navigator.navigateToProfilePage();
+  void navigateToNotificationPage() {
+    // checkinLogin();
+    // if (isAuth.value) {
+    //   this.navigator.navigateToNotificationPage();
+    //   return;
+    // }
+    // return showError(localizations.visitorAccessDenied);
+
+    this.navigator.navigateToNotificationPage();
   }
 
   navigateToResultSearchPage() {
