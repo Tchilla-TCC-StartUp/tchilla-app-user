@@ -97,20 +97,24 @@ class AppGlobalSearchInput<T extends Object> extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 child: Material(
                   borderRadius: BorderRadius.circular(6),
+
                   elevation: 4,
-                  child: ListView.builder(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    itemCount: options.length,
-                    itemBuilder: (context, index) {
-                      final option = options.elementAt(index);
-                      return ListTile(
-                        title: optionBuilder != null
-                            ? optionBuilder!(context, option)
-                            : Text(displayStringForOption(option)),
-                        onTap: () => onSelectedFn(option),
-                      );
-                    },
+                  child: SizedBox(
+                    width: width,
+                    child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      itemCount: options.length,
+                      itemBuilder: (context, index) {
+                        final option = options.elementAt(index);
+                        return ListTile(
+                          title: optionBuilder != null
+                              ? optionBuilder!(context, option)
+                              : Text(displayStringForOption(option), style:GoogleFonts.inter( fontSize: 15.sp),),
+                          onTap: () => onSelectedFn(option),
+                        );
+                      },
+                    ),
                   ),
                 ),
               );

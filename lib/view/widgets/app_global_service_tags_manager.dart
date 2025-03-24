@@ -158,9 +158,11 @@ class _AppGlobalServiceTagsManagerState
             alignment: Alignment.topLeft,
             child: Material(
               elevation: 4,
-              child: Container(
-                width: 80.w,
-                constraints: const BoxConstraints(maxHeight: 200),
+              child:  ConstrainedBox(
+                constraints: const BoxConstraints(
+                  maxWidth: 250,
+                  maxHeight: 200,
+                ),
                 child: ListView.builder(
                   itemCount: options.length,
                   itemBuilder: (context, index) {
