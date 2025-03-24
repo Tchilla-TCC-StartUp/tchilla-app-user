@@ -87,6 +87,7 @@ class _FormServiceState extends State<FormService> {
             displayStringForOption: (option) =>
                 '$option ${widget.homeViewmodel.localizations.guests}',
             onSelected: viewmodel.setNumberGuestsEvent,
+            keyboardType: TextInputType.number,
           ),
           const AppGlobalVericalSpacing(),
           AppGlobalServiceTagsManager(

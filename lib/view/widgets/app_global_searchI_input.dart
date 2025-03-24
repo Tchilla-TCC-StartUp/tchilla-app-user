@@ -14,7 +14,7 @@ class AppGlobalSearchInput<T extends Object> extends StatelessWidget {
     this.helpText,
     required this.displayStringForOption,
     required this.onSelected,
-    this.optionBuilder,
+    this.optionBuilder, this.keyboardType,
   });
 
   final List<T> items;
@@ -24,8 +24,9 @@ class AppGlobalSearchInput<T extends Object> extends StatelessWidget {
   final void Function(T?) onSelected;
   final String Function(T) displayStringForOption;
   final Widget Function(BuildContext, T)? optionBuilder;
+  final TextInputType? keyboardType;
 
-  @override
+@override
   Widget build(BuildContext context) {
     return SizedBox(
       width: width,
@@ -63,7 +64,7 @@ class AppGlobalSearchInput<T extends Object> extends StatelessWidget {
                   fontSize: 15.sp,
                   color: primary950,
                 ),
-                keyboardType: TextInputType.number,
+                keyboardType: keyboardType,
                 decoration: InputDecoration(
                   hintText: hintText,
                   hintStyle: TextStyle(color: Colors.grey.shade500),

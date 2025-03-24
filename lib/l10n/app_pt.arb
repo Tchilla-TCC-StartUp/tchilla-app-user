@@ -138,5 +138,6 @@
   "visitorAccessDenied": "Você não pode acessar esta página como visitante",
   "guests": "Convidados",
   "wedding": "Casamento",
-  "form_required_fields_message": "Todos os campos do formulário são obrigatórios para realizar a busca"
+  "form_required_fields_message": "Todos os campos do formulário são obrigatórios para realizar a busca",
+  "help_text_mcx": "Informe seu número de telefone associado ao Multicaixa Express"
 }

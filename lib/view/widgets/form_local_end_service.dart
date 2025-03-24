@@ -93,6 +93,7 @@ class _FormLocalEndServiceState extends State<FormLocalEndService> {
             displayStringForOption: (option) =>
                 '$option ${widget.homeViewmodel.localizations.guests}',
             onSelected: viewmodel.numberGuestsEvent,
+            keyboardType: TextInputType.number,
           ),
           const AppGlobalVericalSpacing(),
           AppGlobalServiceTagsManager(
