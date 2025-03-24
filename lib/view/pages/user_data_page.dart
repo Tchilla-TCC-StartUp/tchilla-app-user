@@ -14,7 +14,6 @@ import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/services/events/navigation.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/viewmodel/user_data_viewmodel.dart';
 
 class UserDataPage extends StatefulWidget {

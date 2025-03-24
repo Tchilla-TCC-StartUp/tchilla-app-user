@@ -7,6 +7,7 @@ import 'package:tchilla/view/pages/forgot_passsword_auth_email_page.dart';
 import 'package:tchilla/view/pages/forgot_password_confitmation_pin_page.dart';
 import 'package:tchilla/view/pages/home_page.dart';
 import 'package:tchilla/view/pages/login_page.dart';
+import 'package:tchilla/view/pages/mcx_method_view.dart';
 import 'package:tchilla/view/pages/notifications_page.dart';
 import 'package:tchilla/view/pages/onboarding_page.dart';
 import 'package:tchilla/view/pages/profile_page.dart';

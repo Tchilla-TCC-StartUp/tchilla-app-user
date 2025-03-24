@@ -136,7 +136,8 @@
   "visitorAccessDenied": "You cannot access this page as a guest",
   "guests": "Guests",
   "wedding": "Wedding",
-  "form_required_fields_message": "All fields in the form are required to perform the search"
+  "form_required_fields_message": "All fields in the form are required to perform the search",
+  "help_text_mcx": "Enter your Multicaixa Express phone number"
  
 
 

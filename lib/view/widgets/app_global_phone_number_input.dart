@@ -46,31 +46,31 @@ class _AppGlobalPhoneNumberInputState extends State<AppGlobalPhoneNumberInput> {
 
   final Map<String, String> countryCodes = {
     'AO': '+244',
-    'BR': '+55',
-    'US': '+1',
-    'PT': '+351',
-    'FR': '+33',
-    'NG': '+234',
-    'ZA': '+27',
+    // 'BR': '+55',
+    // 'US': '+1',
+    // 'PT': '+351',
+    // 'FR': '+33',
+    // 'NG': '+234',
+    // 'ZA': '+27',
   };
 
   final Map<String, String> countryFlags = {
     'AO': '🇦🇴',
-    'BR': '🇧🇷',
-    'US': '🇺🇸',
-    'PT': '🇵🇹',
-    'FR': '🇫🇷',
-    'NG': '🇳🇬',
-    'ZA': '🇿🇦',
+    // 'BR': '🇧🇷',
+    // 'US': '🇺🇸',
+    // 'PT': '🇵🇹',
+    // 'FR': '🇫🇷',
+    // 'NG': '🇳🇬',
+    // 'ZA': '🇿🇦',
   };
   final Map<String, int> maxLengths = {
     'AO': 9,
-    'BR': 11,
-    'US': 10,
-    'PT': 9,
-    'FR': 9,
-    'NG': 10,
-    'ZA': 9,
+    // 'BR': 11,
+    // 'US': 10,
+    // 'PT': 9,
+    // 'FR': 9,
+    // 'NG': 10,
+    // 'ZA': 9,
   };
 
   @override

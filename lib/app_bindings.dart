@@ -15,6 +15,7 @@ import 'package:tchilla/services/events/onboarding_service.dart';
 import 'package:tchilla/services/events/user_service.dart';
 import 'package:tchilla/services/events/validator.dart';
 import 'package:tchilla/services/events/welcome_service.dart';
+import 'package:tchilla/viewmodel/choose_payment_method_viewmodel.dart';
 import 'package:tchilla/viewmodel/detalhesproposedviewmodel.dart';
 import 'package:tchilla/viewmodel/forgont_password_viewmodel.dart';
 import 'package:tchilla/viewmodel/form_local_end_service_viewmodel.dart';
@@ -110,5 +111,6 @@ class AppBindings implements Bindings {
 
     Get.put<FormLocalEndServiceViewmodel>(FormLocalEndServiceViewmodel());
     Get.put<NotificationViewmodel>(NotificationViewmodel());
+    Get.put<ChoosePaymentMethodViewmodel>(ChoosePaymentMethodViewmodel());
   }
 }

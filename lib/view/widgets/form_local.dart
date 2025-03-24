@@ -91,6 +91,7 @@ class _FormLocalState extends State<FormLocal> {
             width: 80.w,
             items: widget.homeViewmodel.homeData.value?.guestNumbers ?? [],
             onSelected: viewmodel.setNumberGuestsEvent,
+            keyboardType: TextInputType.number,
           ),
           const AppGlobalVericalSpacing(),
           AppGlobalTextButton(
