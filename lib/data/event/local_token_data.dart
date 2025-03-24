@@ -14,7 +14,8 @@ class LocalTokenData extends BaseLocalData implements IlocalTokenData {
 
   @override
   Future<void> saveToken(String token) {
-    return shared.setString(appconstats.keyToken, token);
+    return shared.setString(
+        appconstats.keyToken, "${appconstats.typeToken} $token");
   }
 
   @override
@@ -22,4 +23,6 @@ class LocalTokenData extends BaseLocalData implements IlocalTokenData {
     deletoken();
     return shared.setString(appconstats.keyToken, token);
   }
+
+
 }

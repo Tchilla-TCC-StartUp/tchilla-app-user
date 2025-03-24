@@ -35,19 +35,10 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
     with SingleTickerProviderStateMixin {
   final viewmodel = Get.find<DetalheProposedViewModel>();
 
-  late TabController _tabController;
-
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(
-      initialIndex: viewmodel.selectedIndex.value,
-      length: viewmodel.tabTitles.length,
-      vsync: this,
-    );
-    _tabController.addListener(() {
-      viewmodel.selectTab(_tabController.index);
-    });
+    viewmodel.initTabController(this);
   }
 
   @override
@@ -127,7 +118,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
             _buildTabs(),
             _buildTabViews(),
             AppGlobalTextButton(
-              onPressed: () => viewmodel.scheduleproposal("11"),
+              onPressed: () => viewmodel.scheduleProposal("11"),
               textButton: AppLocalizations.of(context)!.schedule,
               minWidth: 100.w,
             ),
@@ -142,8 +133,8 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
 
   Widget _buildTabs() {
     return AppGlobalTabBar(
-      tabController: _tabController,
-      tabs: viewmodel.tabTitles.value,
+      tabController: viewmodel.tabController.value!,
+      tabs: viewmodel.tabTitles,
       onTap: viewmodel.selectTab,
       unselectedLabelColor: primaryBorder,
       labelColor: primary950,
@@ -157,7 +148,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
       // color: primary400,
       height: 44.h,
       child: TabBarView(
-        controller: _tabController,
+        controller: viewmodel.tabController.value,
         physics: const NeverScrollableScrollPhysics(),
         children: [
           _buildAboutView(),

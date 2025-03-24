@@ -10,7 +10,8 @@ import 'package:tchilla/services/events/navigation.dart';
 
 class AppGlobalBackButton extends StatelessWidget {
   final double? minWidth;
-  const AppGlobalBackButton({super.key, this.minWidth});
+  final void Function()? onTap;
+  const AppGlobalBackButton({super.key, this.minWidth, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class AppGlobalBackButton extends StatelessWidget {
       child: MaterialButton(
         minWidth: minWidth ?? 2.w,
         padding: const EdgeInsets.all(0),
-        onPressed: Get.find<Navigation>().navigateToBack,
+        onPressed: onTap ?? Get.find<Navigation>().navigateToBack,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.px),
           side: const BorderSide(color: primaryBorder),

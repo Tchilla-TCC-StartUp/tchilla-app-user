@@ -65,13 +65,14 @@ class Navigation extends INavigation {
   }
 
   @override
-  navigateToProfilePage() {
-    Get.toNamed(AppRoutes.profilePage);
+  navigateToProfilePage(String userNamer, String image) {
+    Get.toNamed(AppRoutes.profilePage,
+        arguments: {"userNamer": userNamer, "image": image});
   }
 
   @override
-  navigateToUserDataPage(String id) {
-    Get.toNamed(AppRoutes.userdataPage, arguments: id);
+  navigateToUserDataPage() {
+    Get.toNamed(AppRoutes.userdataPage);
   }
 
   @override
@@ -92,5 +93,10 @@ class Navigation extends INavigation {
   @override
   navigateToChoosePaymentPage() {
     Get.toNamed(AppRoutes.chosePaymentPage);
+  }
+
+  @override
+  navigateToNotificationPage() {
+    Get.toNamed(AppRoutes.notificationPage);
   }
 }

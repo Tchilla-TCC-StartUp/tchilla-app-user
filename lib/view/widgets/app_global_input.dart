@@ -5,7 +5,7 @@ import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 
-class AppGlobalInput extends StatelessWidget {
+class AppGlobalInput extends StatefulWidget {
   final TextEditingController? controller;
   final String? label;
   final String? hintText;
@@ -24,7 +24,8 @@ class AppGlobalInput extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
   final FocusNode? focusNode;
   final void Function(String)? onFieldSubmitted;
-
+  final void Function(String)? onChanged;
+  final String? initialValue;
   const AppGlobalInput({
     super.key,
     this.controller,
@@ -45,50 +46,67 @@ class AppGlobalInput extends StatelessWidget {
     this.textAlign,
     this.suffixIconConstraints,
     this.contentPadding,
+    this.onChanged,
+    this.initialValue,
   });
+
+  @override
+  State<AppGlobalInput> createState() => _AppGlobalInputState();
+}
+
+class _AppGlobalInputState extends State<AppGlobalInput> {
+  @override
+  void dispose() {
+    widget.controller?.dispose();
+    widget.focusNode?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (helpText != null)
+        if (widget.helpText != null)
           Padding(
             padding: EdgeInsets.symmetric(vertical: 4.spa),
             child: AppGlobalText(
-              text: helpText!,
+              text: widget.helpText!,
               style: TextStyleEnum.h3_bold,
               color: primary950,
             ),
           ),
         TextFormField(
-          readOnly: readOnly ?? false,
-          focusNode: focusNode,
-          controller: controller,
-          keyboardType: keyboardType,
-          textAlign: textAlign ?? TextAlign.start,
-          obscureText: obscureText,
-          textInputAction: textInputAction,
-          validator: validator,
-          onFieldSubmitted: onFieldSubmitted,
+          initialValue: widget.initialValue,
+          readOnly: widget.readOnly ?? false,
+          focusNode: widget.focusNode,
+          controller: widget.controller,
+          keyboardType: widget.keyboardType,
+          textAlign: widget.textAlign ?? TextAlign.start,
+          obscureText: widget.obscureText,
+          textInputAction: widget.textInputAction,
+          validator: widget.validator,
+          onChanged: widget.onChanged,
+          onFieldSubmitted: widget.onFieldSubmitted,
           style: GoogleFonts.inter(
             fontWeight: FontWeight.w500,
             fontSize: 15.sp,
             color: primary950,
           ),
           decoration: InputDecoration(
-            labelText: label,
-            hintText: hintText,
+            labelText: widget.label,
+            hintText: widget.hintText,
             alignLabelWithHint: true,
             hintStyle: GoogleFonts.inter(
               fontWeight: FontWeight.w600,
               fontSize: 15.sp,
               color: const Color(0xffAFBACA),
             ),
-            contentPadding: contentPadding,
-            prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
-            suffix: suffix,
-            suffixIconConstraints: suffixIconConstraints ??
+            contentPadding: widget.contentPadding,
+            prefixIcon:
+                widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
+            suffix: widget.suffix,
+            suffixIconConstraints: widget.suffixIconConstraints ??
                 BoxConstraints(
                   maxHeight: 5.px,
                   maxWidth: 5.px,

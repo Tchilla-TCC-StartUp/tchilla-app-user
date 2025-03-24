@@ -42,12 +42,11 @@ class _ViewMorePageState extends State<ViewMorePage>
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      return  viewmodel.isLoading.value
-                  ? const AppGlobalLoading()
-                  : viewmodel.isError.value
-                      ? ErrorTryAgain(message: viewmodel.errorMessage.value)
-                      : _buildBody(context)
-            ;
+      return viewmodel.isLoading.value
+          ? const AppGlobalLoading()
+          : viewmodel.isError.value
+              ? ErrorTryAgain(message: viewmodel.errorMessage.value)
+              : _buildBody(context);
     });
   }
 
@@ -90,20 +89,18 @@ class _ViewMorePageState extends State<ViewMorePage>
           style: TextStyleEnum.h3_bold,
         ),
         AppGlobalVericalSpacing(value: 1.h),
-        Obx(
-          () => AppGlobalTabBar(
-            tabController: _tabController,
-            tabs: viewmodel.tabTitlesSegestions.value,
-            onTap: viewmodel.selectTab,
-            unselectedLabelColor: primaryBorder,
-            labelColor: primary950,
-            indicatorColor: primary950,
-            tabAlignment: TabAlignment.start,
-            isScrollable: true,
-          ),
+        AppGlobalTabBar(
+          tabController: _tabController,
+          tabs: viewmodel.tabTitlesSegestions,
+          onTap: viewmodel.selectTab,
+          unselectedLabelColor: primaryBorder,
+          labelColor: primary950,
+          indicatorColor: primary950,
+          tabAlignment: TabAlignment.start,
+          isScrollable: true,
         ),
         SizedBox(
-          height: 90.h,
+          height: 75.h,
           child: _buildTabViews(),
         )
       ],

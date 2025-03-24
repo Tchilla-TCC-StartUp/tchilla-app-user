@@ -3,19 +3,28 @@ import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/model/event_type_model.dart';
 import 'package:tchilla/model/service_model.dart';
+import 'package:tchilla/model/user_model.dart';
+import 'package:tchilla/services/events/home_service.dart';
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
 import 'package:tchilla/model/home_model.dart';
+
 class HomeViewModel extends BaseViewModel {
+  final HomeService service;
+  HomeViewModel({required this.service});
   RxInt selectedIndex = 0.obs;
-  RxDouble adptiveHeight = 510.px.obs;
-  RxDouble adptiveSilverExpade = 780.px.obs;
+  RxDouble adptiveHeight = 625.px.obs;
+  RxDouble adptiveSilverExpade = 880.px.obs;
   final RxBool isVisible = true.obs;
 
   final RxList<String> tabTitlesForm = <String>[].obs;
   final Rxn<HomeModel> _homeData = Rxn<HomeModel>();
+  final Rxn<UserModel> _userData = Rxn<UserModel>();
+
   Rxn<HomeModel> get homeData => _homeData;
+  Rxn<UserModel> get userData => _userData;
 
   void selectTab(int index, FocusNode focusNode) {
+    desableFocus();
     focusNode.unfocus();
     selectedIndex.value = index;
     updateAdaptiveHeight(focusNode);
@@ -25,6 +34,10 @@ class HomeViewModel extends BaseViewModel {
   void onReady() {
     super.onReady();
     initLocalData();
+  }
+
+  void initEvet() {
+    getUserData();
   }
 
   void initLocalData() {
@@ -71,34 +84,51 @@ class HomeViewModel extends BaseViewModel {
         ]);
 
     tabTitlesForm.assignAll([
+      localizations.tabVenueAndServices,
       localizations.tabLocal,
       localizations.tabServices,
-      localizations.tabVenueAndServices,
     ]);
   }
 
-  void navigateToProfilePage() async {
-    final bool isAuth = await checkinLogin();
+  void getUserData() async {
+    await checkinLogin();
+    if (isAuth.value) {
+      await onRequest(
+        event: service.getUserData(token: token.value),
+        onSuccess: (data) {
+          _userData.value = data;
+        },
+      );
+      return;
+    }
+    initLocalData();
+  }
 
-    if (isAuth) {
-      this.navigator.navigateToProfilePage();
+  void navigateToProfilePage() async {
+    await checkinLogin();
+    if (isAuth.value) {
+      loger.info("O nome o user é ${_userData.value?.nome}");
+      this.navigator.navigateToProfilePage(
+            _userData.value?.nome ?? '',
+            _userData.value?.foto ?? '',
+          );
+      return;
+    }
+    return showError(localizations.visitorAccessDenied);
+  }
+
+  void navigateToNotificationPage() {
+    checkinLogin();
+    if (isAuth.value) {
+      this.navigator.navigateToNotificationPage();
       return;
     }
     return showError(localizations.visitorAccessDenied);
 
-    // return this.navigator.navigateToProfilePage();
+    this.navigator.navigateToNotificationPage();
   }
 
   navigateToResultSearchPage() {
-    return this.navigator.navigateToResultSearchPage();
-  }
-
-  Future<void> searchLocal(
-    String local,
-    DateTime data,
-    int envitNumber,
-    BuildContext context,
-  ) {
     return this.navigator.navigateToResultSearchPage();
   }
 
@@ -110,11 +140,11 @@ class HomeViewModel extends BaseViewModel {
 
   void updateAdaptiveHeight(FocusNode focusNode) {
     switch (selectedIndex.value) {
-      case 0:
+      case 1:
         adptiveHeight.value = 520.px;
         adptiveSilverExpade.value = 780.px;
         break;
-      case 1:
+      case 0:
         adptiveHeight.value = 625.px;
         adptiveSilverExpade.value = 880.px;
         break;
@@ -123,8 +153,8 @@ class HomeViewModel extends BaseViewModel {
         adptiveSilverExpade.value = 880.px;
         break;
       default:
-        adptiveHeight.value = 520.px;
-        adptiveSilverExpade.value = 780.px;
+        adptiveHeight.value = 625.px;
+        adptiveSilverExpade.value = 880.px;
         break;
     }
   }

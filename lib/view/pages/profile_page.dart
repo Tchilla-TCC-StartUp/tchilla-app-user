@@ -16,7 +16,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/viewmodel/profile_viewmodel.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  final String userNamer;
+  final String image;
+  const ProfilePage({super.key, required this.userNamer, required this.image});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -43,15 +45,15 @@ class _ProfilePageState extends State<ProfilePage> {
           body: Column(
         children: [
           ProfileSectionCard(
-            onTap: () => viewmodel.goToUserDataPage("1kwd"),
+            onTap: () => viewmodel.goToUserDataPage(),
+            title: widget.userNamer,
             leading: ClipOval(
               child: AppGlobalNetworkImage(
-                image: AppAssetsImages.defaultUserImage,
+                image: viewmodel.getImageUrl(widget.image),
                 width: 40.px,
                 height: 40.px,
               ),
             ),
-            title: "Celson Paixão",
           ),
           ProfileSectionCard(
             leading: SvgPicture.asset(

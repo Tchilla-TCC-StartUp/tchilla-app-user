@@ -29,10 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final FocusNode emailFocusNode = FocusNode();
   final FocusNode passwordFocusNode = FocusNode();
   final FocusNode phoneNumberFocusNode = FocusNode();
-  final nameController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final phoneNumberController = TextEditingController();
+
   final viewmodel = Get.find<RegisterViewmodel>();
 
   @override
@@ -41,17 +38,10 @@ class _RegisterPageState extends State<RegisterPage> {
     nameFocusNode.dispose();
     passwordFocusNode.dispose();
     phoneNumberFocusNode.dispose();
-    emailController.dispose();
-    nameController.dispose();
-    passwordController.dispose();
-    phoneNumberController.dispose();
     super.dispose();
   }
 
-  void onRegisterUser() {
-    viewmodel.register(nameController.text, emailController.text,
-        passwordController.text, phoneNumberController.text);
-  }
+
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +67,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 value: 2.h,
               ),
               AppGlobalInput(
-                controller: nameController,
+                onChanged: viewmodel.setName,
                 focusNode: nameFocusNode,
                 helpText: AppLocalizations.of(context)!.name,
                 hintText: "Celson Paixão",
@@ -88,7 +78,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 value: 2.h,
               ),
               AppGlobalInput(
-                controller: emailController,
+                onChanged: viewmodel.setEmail,
                 focusNode: emailFocusNode,
                 helpText: AppLocalizations.of(context)!.email_address,
                 hintText: "celson.paixao@gmail.com",
@@ -107,20 +97,20 @@ class _RegisterPageState extends State<RegisterPage> {
                   viewmodel.countryCode.value = code;
                   print(code);
                 },
-                controller: phoneNumberController,
+                onChanged: viewmodel.setPhoneNumer,
                 focusNode: phoneNumberFocusNode,
               ),
               AppGlobalVericalSpacing(
                 value: 2.h,
               ),
               AppGlobalInput(
-                controller: passwordController,
+                onChanged: viewmodel.setPassword,
                 focusNode: passwordFocusNode,
                 helpText: AppLocalizations.of(context)!.password,
                 hintText: "*******",
                 keyboardType: TextInputType.visiblePassword,
                 textInputAction: TextInputAction.send,
-                onFieldSubmitted: (p0) => onRegisterUser(),
+                onFieldSubmitted: (v)=> viewmodel.register,
                 obscureText: true,
               ),
               AppGlobalVericalSpacing(
@@ -130,7 +120,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 () => AppGlobalTextButton(
                   minWidth: 100.w,
                   isLoading: viewmodel.isLoading.value,
-                  onPressed: () => onRegisterUser(),
+                  onPressed : viewmodel.register,
                   textButton:
                       AppLocalizations.of(context)!.create_account_button,
                 ),

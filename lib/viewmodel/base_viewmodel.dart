@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tchilla/data/event/local_token_data.dart';
+import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/resources/app_exception.dart';
 import 'package:tchilla/resources/app_logs.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -20,18 +21,31 @@ class BaseViewModel extends GetxController {
   final RxBool isError = false.obs;
   final RxString errorMessage = "".obs;
   final lang = Get.deviceLocale?.languageCode ?? "en";
+  final RxString _token = "".obs;
+  RxString get token => _token;
+
+  final RxBool _isAuth = false.obs;
+  RxBool get isAuth => _isAuth;
 
   final Rxn<VoidCallback> lastRequest = Rxn<VoidCallback>();
   BuildContext get context => notificator.snackbarKey.currentContext!;
- AppLocalizations get localizations => AppLocalizations.of(context)!;
+  AppLocalizations get localizations => AppLocalizations.of(context)!;
 
   void startLoading() {
     isLoading.value = true;
     resetError();
   }
 
+  void setIsAuth() {
+    _isAuth.value = true;
+  }
+
   void stopLoading() {
     isLoading.value = false;
+  }
+
+  void setToken(String value) {
+    _token.value = value;
   }
 
   void resetError() {
@@ -57,8 +71,10 @@ class BaseViewModel extends GetxController {
     VoidCallback? onStart,
     ValueChanged<T>? onSuccess,
     ValueChanged<T>? onError,
+    ValueChanged<T>? onErrorAuth,
     VoidCallback? onComplete,
   }) async {
+    // checkinLogin();
     onStart?.call();
     startLoading();
 
@@ -75,6 +91,10 @@ class BaseViewModel extends GetxController {
           error is ServerException) {
         emitError(error.message);
         showError(error);
+      } else if (error is UnauthorizedException) {
+        showError(error);
+        cleanToken();
+        navigator.navigateToWelcomePage();
       } else {
         showError(error);
       }
@@ -87,21 +107,21 @@ class BaseViewModel extends GetxController {
     });
   }
 
-  Future<bool> checkinLogin() async {
+  Future<void> checkinLogin() async {
     try {
-      final token = await dataToken.fetchToken();
+      var value = await dataToken.fetchToken() ?? "";
+      setToken(value);
 
-      if (token?.isNotEmpty ?? false) {
+      if (token.isNotEmpty) {
         loger.info("Usuário já está logado. Token encontrado: $token");
-        return true;
+        setIsAuth();
+        return;
       }
-      loger.printInfo(info: "Usuário não está logado. Token ausente.");
-      return false;
+      loger.info("O User está logado?: $isAuth");
     } catch (e) {
       loger.info(
         "Erro ao verificar login: $e",
       );
-      return false;
     }
   }
 
@@ -140,6 +160,74 @@ class BaseViewModel extends GetxController {
       default:
         return "Desconhecido";
     }
+  }
+
+  void desableFocus() {
+    FocusManager.instance.primaryFocus?.unfocus();
+  }
+
+  void setFieldChange(
+    Rxn<dynamic> field,
+    dynamic newValue,
+  ) {
+    _behaviorSubjectChange(field, newValue);
+  }
+
+  bool _behaviorSubjectChange(
+    Rxn<dynamic> field,
+    dynamic newValue,
+  ) {
+    if (field.value != newValue) {
+      field.value = newValue;
+      return true;
+    }
+
+    return false;
+  }
+
+  bool setListFieldChange<T>(
+    List<Rxn<T>> field,
+    List<T> newValue, {
+    bool Function(T? a, T b)? compareFn,
+  }) {
+    return _behaviorListSubjectChange(field, newValue, compareFn: compareFn);
+  }
+
+  bool _behaviorListSubjectChange<T>(
+    List<Rxn<T>> field,
+    List<T> newValue, {
+    bool Function(T? a, T b)? compareFn,
+  }) {
+    compareFn ??= (a, b) => a == b;
+
+    if (field.length != newValue.length ||
+        !_areGenericListsEqual(
+            field.map((e) => e.value).toList(), newValue, compareFn)) {
+      field
+        ..clear()
+        ..addAll(newValue.map((e) => Rxn<T>(e)));
+      return true;
+    }
+    return false;
+  }
+
+  bool _areGenericListsEqual<T>(
+    List<T?> a,
+    List<T> b,
+    bool Function(T? a, T b) compareFn,
+  ) {
+    if (a.length != b.length) return false;
+    for (int i = 0; i < a.length; i++) {
+      if (!compareFn(a[i], b[i])) return false;
+    }
+    return true;
+  }
+
+  String getImageUrl(String? image) {
+    final imageUrl = "${AppConstats.baseUrl}$image";
+
+    loger.info("URL da imagem: $imageUrl");
+    return imageUrl;
   }
 
   Future<bool> checkInNetworkConnection() async {
