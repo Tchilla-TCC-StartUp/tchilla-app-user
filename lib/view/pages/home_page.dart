@@ -275,9 +275,10 @@ class _HomePageState extends State<HomePage>
           child: ClipOval(
             clipBehavior: Clip.hardEdge,
             child: AppGlobalNetworkImage(
-              image: viewmodel.userData.value?.foto != null
-                  ? viewmodel.getImageUrl(viewmodel.userData.value!.foto!)
-                  : AppAssetsImages.defaultUserImage,
+              image: viewmodel.isVisitor.value
+                  ? AppAssetsImages.defaultUserImage
+                  : viewmodel.userData.value?.foto ??
+                      AppAssetsImages.defaultUserImage,
               width: 40.px,
               height: 40.px,
             ),
@@ -296,9 +297,10 @@ class _HomePageState extends State<HomePage>
               ),
             ),
             Text(
-              viewmodel.userData.value?.nome ??
-                  viewmodel.homeData.value?.userName ??
-                  "",
+              viewmodel.isVisitor.value
+                  ? viewmodel.localizations.visitor
+                  : viewmodel.userData.value?.nome ??
+                      viewmodel.localizations.visitor,
               style: GoogleFonts.inter(
                 color: primary50,
                 fontSize: 14.spa,

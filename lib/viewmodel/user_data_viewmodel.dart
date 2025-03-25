@@ -35,7 +35,6 @@ class UserDataViewModel extends BaseViewModel {
   }
 
   void getUserData() async {
-    await checkinLogin();
     await onRequest(
       event: service.getUserData(token: token.value),
       onSuccess: (value) {

@@ -2,23 +2,16 @@ import 'package:tchilla/viewmodel/base_viewmodel.dart';
 
 class SplashViewmodel extends BaseViewModel {
   void fristNavigation() async {
-    await checkinLogin();
-    Future.delayed(const Duration(seconds: 2), () {
-      navigateToHomePage();
-    });
-  }
+    await Future.delayed(const Duration(seconds: 2));
 
-  void navigateToHomePage() async {
-    // final isNetworkConnect = await checkInNetworkConnection();
-    // if (isNetworkConnect) {
-    // }
-
-    if (isAuth.value) {
+    await onEvent(
+      checkLogin: true,
+      event: (_) async {
       await navigator.navigateToHome();
-      return;
-    }
-    await navigator.navigateToOnboarding();
-    // await navigator.navigateToHome();
-    // await navigator.navigateToLoginPage();
+      },
+      onErrorAuth: () async {
+      await navigator.navigateToOnboarding();
+      },
+    );
   }
 }

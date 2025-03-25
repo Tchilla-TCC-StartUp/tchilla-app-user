@@ -24,8 +24,7 @@ class BaseViewModel extends GetxController {
   final RxString _token = "".obs;
   RxString get token => _token;
 
-  final RxBool _isAuth = false.obs;
-  RxBool get isAuth => _isAuth;
+
 
   final Rxn<VoidCallback> lastRequest = Rxn<VoidCallback>();
   BuildContext get context => notificator.snackbarKey.currentContext!;
@@ -36,9 +35,6 @@ class BaseViewModel extends GetxController {
     resetError();
   }
 
-  void setIsAuth() {
-    _isAuth.value = true;
-  }
 
   void stopLoading() {
     isLoading.value = false;
@@ -66,6 +62,33 @@ class BaseViewModel extends GetxController {
     );
   }
 
+  Future<void> onEvent({
+    required Future<void> Function(String token)? event,
+    bool checkLogin = false,
+    VoidCallback? onErrorAuth,
+  }) async {
+    try {
+      String token = '';
+      if (checkLogin) {
+        token = await dataToken.fetchToken() ?? '';
+        loger.info("Resultado da busca pelo token: $token");
+
+        if (token.isEmpty) {
+          onErrorAuth?.call();
+          return;
+        }
+      }
+
+      if (event != null) {
+        await event(token);
+      }
+    } catch (e) {
+      loger.info('Erro no onEvent: $e');
+    }
+  }
+
+
+
   Future<T> onRequest<T>({
     required Future<T> event,
     VoidCallback? onStart,
@@ -74,7 +97,6 @@ class BaseViewModel extends GetxController {
     ValueChanged<T>? onErrorAuth,
     VoidCallback? onComplete,
   }) async {
-    // checkinLogin();
     onStart?.call();
     startLoading();
 
@@ -107,26 +129,16 @@ class BaseViewModel extends GetxController {
     });
   }
 
-  Future<void> checkinLogin() async {
+
+
+  Future<void> cleanToken() async {
     try {
-      var value = await dataToken.fetchToken() ?? "";
-      setToken(value);
-
-      if (token.isNotEmpty) {
-        loger.info("Usuário já está logado. Token encontrado: $token");
-        setIsAuth();
-        return;
-      }
-      loger.info("O User está logado?: $isAuth");
+      await dataToken.deletoken();
+      _token.value = "";
+      loger.info("Token limpo com sucesso. Usuário desautenticado.");
     } catch (e) {
-      loger.info(
-        "Erro ao verificar login: $e",
-      );
+      loger.printError(info: "Erro ao limpar token: $e");
     }
-  }
-
-  Future<void> cleanToken() {
-    return dataToken.deletoken();
   }
 
   void showWarning(String message) {

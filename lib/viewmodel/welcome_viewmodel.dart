@@ -18,19 +18,25 @@ class WelcomeViewmodel extends BaseViewModel {
         _welcomeData.value = value;
       },
     );
-
-    lastRequest.value = getWelcomeData;
   }
 
   void navigateToLogin() {
-    this.navigator.navigateToLoginPage();
+    onEvent(event: (_) async {
+      await this.navigator.navigateToLoginPage();
+    });
   }
 
   void navigateToRegister() {
-    this.navigator.navigateToRegisterPage();
+    onEvent(event: (_) async {
+      await this.navigator.navigateToRegisterPage();
+    });
   }
 
-  void enterAsVisitor() {
-    this.navigator.navigateToHome();
+  void enterAsVisitor() async {
+    await onEvent(
+      event: (_) async {
+        await this.navigator.navigateToHome();
+      },
+    );
   }
 }
