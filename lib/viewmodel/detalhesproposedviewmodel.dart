@@ -14,7 +14,7 @@ class DetalheProposedViewModel extends BaseViewModel {
     'Galeria',
     'Avaliações',
     'Localização',
-  ].obs;  
+  ].obs;
 
   final List<String> listImages = [
     AppAssetsImages.defaultProposedImage,
@@ -58,7 +58,7 @@ class DetalheProposedViewModel extends BaseViewModel {
       "image": AppAssetsImages.defaultUserImage,
       "rating": 4.5,
       "comment":
-          "Ótimo serviço, os garçons foram muito atenciosos e a comida estava incrível!"
+          "Ótimo serviço, os garçons foram muito atenciosos e a comida estava incrível!,"
     },
     {
       "name": "Mariana Oliveira",
@@ -134,7 +134,7 @@ class DetalheProposedViewModel extends BaseViewModel {
     tabController.value?.dispose();
     super.dispose();
   }
-  
+
   @override
   void initEvet() {
     // TODO: implement initEvet

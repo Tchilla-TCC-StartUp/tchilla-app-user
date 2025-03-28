@@ -3,27 +3,27 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
-import 'package:tchilla/view/widgets/app_global_input.dart';
 import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_phone_number_input.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
-import 'package:tchilla/view/widgets/app_layoutpage.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/viewmodel/choose_payment_method_viewmodel.dart';
 
 class McxMethodView extends StatefulWidget {
   final ChoosePaymentMethodViewmodel choosePaymentMethodViewmodel;
-  const McxMethodView({super.key, required this.choosePaymentMethodViewmodel,});
+  const McxMethodView({
+    super.key,
+    required this.choosePaymentMethodViewmodel,
+  });
 
   @override
   State<McxMethodView> createState() => _McxMethodViewState();
 }
 
 class _McxMethodViewState extends State<McxMethodView> {
-
-  ChoosePaymentMethodViewmodel get viewmodel => widget.choosePaymentMethodViewmodel;
+  ChoosePaymentMethodViewmodel get viewmodel =>
+      widget.choosePaymentMethodViewmodel;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -59,8 +59,10 @@ class _McxMethodViewState extends State<McxMethodView> {
             value: 3.h,
           ),
           AppGlobalTextButton(
-              onPressed: () {},
-              textButton: viewmodel.localizations.lb_continue)
+            minWidth: 100.w,
+            onPressed: viewmodel.paymentMCX,
+            textButton: viewmodel.localizations.lb_continue,
+          )
         ],
       ),
     );

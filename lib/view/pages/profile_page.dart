@@ -49,7 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
             title: widget.userNamer,
             leading: ClipOval(
               child: AppGlobalNetworkImage(
-                image: viewmodel.getImageUrl(widget.image),
+                image: widget.image,
                 width: 40.px,
                 height: 40.px,
               ),

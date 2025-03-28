@@ -17,4 +17,8 @@ class ChoosePaymentMethodViewmodel extends BaseViewModel {
 
     this.navigator.navigateToBack();
   }
+
+  void paymentMCX() {
+    this.navigator.navigateToTiketPage("11");
+  }
 }

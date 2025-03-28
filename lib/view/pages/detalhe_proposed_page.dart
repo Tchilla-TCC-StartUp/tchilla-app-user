@@ -326,20 +326,20 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
           crossAxisCount: 2,
           crossAxisSpacing: 1.w,
           mainAxisSpacing: 1.h,
-          childAspectRatio: 1.4,
+          childAspectRatio: 1.5,
         ),
         itemCount: viewmodel.galeryImages.length,
         itemBuilder: (context, index) {
           var item = viewmodel.galeryImages[index];
 
           return Card(
-            elevation: 4,
+            elevation: 2,
             clipBehavior: Clip.hardEdge,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12.sp),
             ),
-            color: primary50,
-            shadowColor: primary500,
+            color: primary600,
+            shadowColor: primary600,
             child: AppGlobalNetworkImage(
               image: item,
               width: 60.w,
@@ -358,16 +358,17 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
           padding: const EdgeInsets.all(5.0),
           child: Container(
             width: 275.px,
-            height: 150.px,
+            height: 110.px,
+            clipBehavior: Clip.hardEdge,
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: primary50,
               borderRadius: BorderRadius.circular(8.px),
               boxShadow: const [
                 BoxShadow(
-                  color: primary300,
-                  blurRadius: 5,
-                  offset: Offset(0, 5),
+                  color: primary400,
+                  blurRadius: 2,
+                  offset: Offset(0, 1),
                 )
               ],
             ),
@@ -378,8 +379,8 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
                     ClipOval(
                       child: AppGlobalNetworkImage(
                         image: item["image"],
-                        width: 45.px,
-                        height: 45.px,
+                        width: 35.px,
+                        height: 35.px,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -389,17 +390,18 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
                       children: [
                         AppGlobalText(
                           text: item["name"],
-                          style: TextStyleEnum.p_bold,
+                          style: TextStyleEnum.review_bold,
                         ),
                         Row(
                           children: [
                             const Icon(
                               Icons.star_rounded,
                               color: Colors.amber,
+                              size: 16,
                             ),
                             AppGlobalText(
                               text: item["rating"].toString(),
-                              style: TextStyleEnum.p_bold,
+                              style: TextStyleEnum.review_bold,
                             ),
                           ],
                         ),
@@ -407,10 +409,12 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
                     ),
                   ],
                 ),
-                const AppGlobalVericalSpacing(),
+                AppGlobalVericalSpacing(
+                  value: 1.h,
+                ),
                 AppGlobalText(
                   text: item["comment"].toString(),
-                  style: TextStyleEnum.p_normal,
+                  style: TextStyleEnum.review_normal,
                   maxLines: 10,
                   align: TextAlign.start,
                   color: gray700,

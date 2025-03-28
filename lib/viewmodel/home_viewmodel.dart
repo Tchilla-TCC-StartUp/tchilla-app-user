@@ -4,6 +4,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/model/event_type_model.dart';
 import 'package:tchilla/model/service_model.dart';
 import 'package:tchilla/model/user_model.dart';
+import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/services/events/home_service.dart';
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
 import 'package:tchilla/model/home_model.dart';
@@ -23,6 +24,16 @@ class HomeViewModel extends BaseViewModel {
   Rxn<HomeModel> get homeData => _homeData;
   Rxn<UserModel> get userData => _userData;
 
+
+  final RxBool _isVisitor = false.obs;
+  RxBool get isVisitor => _isVisitor;
+
+
+  void setIsVisitor() async {
+    _isVisitor.value = true ;
+    loger.info("Entrou como Visitante!");
+  }
+
   void selectTab(int index, FocusNode focusNode) {
     desableFocus();
     focusNode.unfocus();
@@ -40,8 +51,13 @@ class HomeViewModel extends BaseViewModel {
     getUserData();
   }
 
-  void initLocalData() {
-    homeData.value = HomeModel(
+  void initLocalData()async {
+    tabTitlesForm.assignAll([
+      localizations.tabVenueAndServices,
+      localizations.tabLocal,
+      localizations.tabServices,
+    ]);
+    _homeData.value = HomeModel(
         userName: localizations.visitor,
         guestNumbers: [
           50,
@@ -50,22 +66,13 @@ class HomeViewModel extends BaseViewModel {
           300,
           400,
           500,
-        ], // exemplo
+        ],
         eventTypes: [
           EventTypeModel(1, 'Casamento'),
           EventTypeModel(2, 'Aniversário'),
           EventTypeModel(3, 'Formatura'),
           EventTypeModel(4, 'Festa de 15 anos'),
           EventTypeModel(5, 'Festa de Réveillon'),
-          EventTypeModel(6, 'Festa de Natal'),
-          EventTypeModel(7, 'Festa de Ano Novo'),
-          EventTypeModel(8, 'Festa de Carnaval'),
-          EventTypeModel(9, 'Festa de São João'),
-          EventTypeModel(10, 'Festa de São Pedro'),
-          EventTypeModel(11, 'Festa de São Paulo'),
-          EventTypeModel(12, 'Festa de São Jorge'),
-          EventTypeModel(13, 'Festa de São Miguel'),
-          EventTypeModel(14, 'Festa de São Sebastião'),
         ],
         services: [
           ServiceModel(1, 'Buffet'),
@@ -77,55 +84,52 @@ class HomeViewModel extends BaseViewModel {
           ServiceModel(7, 'Transporte'),
           ServiceModel(8, 'Segurança'),
           ServiceModel(9, 'Limpeza'),
-          ServiceModel(10, 'Serviço de Bar'),
-          ServiceModel(11, 'Serviço de Garçom'),
-          ServiceModel(12, 'Serviço de Cozinha'),
-          ServiceModel(13, 'Serviço de Buffet'),
         ]);
-
-    tabTitlesForm.assignAll([
-      localizations.tabVenueAndServices,
-      localizations.tabLocal,
-      localizations.tabServices,
-    ]);
   }
 
   void getUserData() async {
-    await checkinLogin();
-    if (isAuth.value) {
-      await onRequest(
-        event: service.getUserData(token: token.value),
-        onSuccess: (data) {
-          _userData.value = data;
-        },
-      );
-      return;
-    }
-    initLocalData();
+    await onEvent(
+      checkLogin: true,
+      event: (token) async {
+        await onRequest(
+          event: service.getUserData(token: token),
+          onSuccess: (data) {
+            _userData.value = UserModel(data.id , data.nome, data.telefone, data.email, "${AppConstats.baseUrl}${data.foto}");
+          },
+        );
+      },
+      onErrorAuth: () async{
+       initLocalData();
+       setIsVisitor();
+      }
+    );
   }
 
   void navigateToProfilePage() async {
-    await checkinLogin();
-    if (isAuth.value) {
-      loger.info("O nome o user é ${_userData.value?.nome}");
-      this.navigator.navigateToProfilePage(
-            _userData.value?.nome ?? '',
-            _userData.value?.foto ?? '',
-          );
-      return;
-    }
-    return showError(localizations.visitorAccessDenied);
+    onEvent(
+      checkLogin: true,
+      event: (token) async {
+        this.navigator.navigateToProfilePage(
+          _userData.value?.nome ?? '',
+          _userData.value?.foto ?? '',
+        );
+      },
+      onErrorAuth: (){
+        showError(localizations.visitorAccessDenied);
+      }
+    );
   }
 
-  void navigateToNotificationPage() {
-    checkinLogin();
-    if (isAuth.value) {
-      this.navigator.navigateToNotificationPage();
-      return;
-    }
-    return showError(localizations.visitorAccessDenied);
-
-    this.navigator.navigateToNotificationPage();
+  void navigateToNotificationPage() async {
+    await onEvent(
+      checkLogin: true,
+      event: (token) async {
+        this.navigator.navigateToNotificationPage();
+      },
+      onErrorAuth: () {
+        showError(localizations.visitorAccessDenied);
+      },
+    );
   }
 
   navigateToResultSearchPage() {
