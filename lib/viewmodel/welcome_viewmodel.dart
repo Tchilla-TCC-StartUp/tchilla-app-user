@@ -8,7 +8,6 @@ class WelcomeViewmodel extends BaseViewModel {
   final Rxn<WelcomeModel> _welcomeData = Rxn<WelcomeModel>();
 
   WelcomeViewmodel({required this.service});
-
   WelcomeModel? get welcomeData => _welcomeData.value;
 
   void getWelcomeData() async {

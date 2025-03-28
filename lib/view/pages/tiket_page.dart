@@ -10,8 +10,8 @@ import 'package:tchilla/view/widgets/app_global_image_button.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
-import 'package:tchilla/view/widgets/tiket_layout.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tchilla/view/widgets/zig_zag_divider.dart';
 
 class TiketPage extends StatefulWidget {
   final String id;
@@ -24,6 +24,18 @@ class TiketPage extends StatefulWidget {
 class _TiketPageState extends State<TiketPage> {
   @override
   Widget build(BuildContext context) {
+    final services = [
+      "Dj",
+      'Buffet',
+      'Decoração',
+      'Música',
+      'Fotografia',
+      'Filmagem',
+      'Iluminação',
+      'Transporte',
+      'Segurança',
+      'Limpeza',
+    ];
     return Scaffold(
       appBar: AppBar(
         leading: const AppGlobalBackButton(),
@@ -36,94 +48,56 @@ class _TiketPageState extends State<TiketPage> {
       body: AppLayoutpage(
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            AppGlobalVericalSpacing(
-              value: 5.h,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  AppGlobalVericalSpacing(value: 2.h),
+                  _buildTiketTitle(),
+                  const AppGlobalVericalSpacing(),
+                  _builLocation(),
+                  AppGlobalVericalSpacing(value: 2.h),
+                  _buildTiketInfo(),
+                  const ZigZagDivider(),
+                  _buildServices(services),
+                  const ZigZagDivider(),
+                  _buildPrice(),
+                ],
+              ),
             ),
-            TicketLayout(
-              top: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                child: _buildTiketTopInfo(),
+            Padding(
+              padding: EdgeInsets.only(
+                bottom: 2.h,
               ),
-              bottom: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
+              child: AppGlobalImageButton(
+                color: primary950,
+                onPressed: () {},
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AppGlobalText(
+                      text: AppLocalizations.of(context)!.downloadReceipt,
+                      style: TextStyleEnum.p_medium,
+                      color: primary50,
+                    ),
+                    AppGlobalHorizontalSpacing(
+                      value: 10.px,
+                    ),
+                    const Icon(
+                      Icons.file_download_outlined,
+                      color: primary50,
+                    )
+                  ],
                 ),
-                child: _buildTiketBottomInfo(),
               ),
-            )
+            ),
           ],
         ),
       ),
-    );
-  }
-
-  _buildTiketBottomInfo() {
-    final services = [
-      "Dj",
-      "Dj",
-      "Dj",
-      "Dj",
-      "Dj",
-      "Dj",
-      "Dj",
-      "Dj",
-      "Dj",
-      "Dj",
-      "Dj",
-      "Dj",
-      "Dj",
-      "Dj",
-      "Dj",
-      "Dj",
-    ];
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildServices(services),
-        const AppGlobalVericalSpacing(),
-        _buildPrice(),
-        const AppGlobalVericalSpacing(),
-        AppGlobalImageButton(
-            onPressed: () {},
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AppGlobalText(
-                  text: AppLocalizations.of(context)!.downloadReceipt,
-                  style: TextStyleEnum.p_medium,
-                  color: primary500,
-                ),
-                AppGlobalHorizontalSpacing(
-                  value: 10.px,
-                ),
-                const Icon(
-                  Icons.file_download_outlined,
-                  color: primary500,
-                )
-              ],
-            ))
-      ],
-    );
-  }
-
-  _buildTiketTopInfo() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        _buildTiketTitle(),
-        const AppGlobalVericalSpacing(),
-        _builLocation(),
-        const AppGlobalVericalSpacing(),
-        _buildTiketInfo(),
-        const AppGlobalVericalSpacing(),
-      ],
     );
   }
 
@@ -135,24 +109,34 @@ class _TiketPageState extends State<TiketPage> {
         children: [
           AppGlobalText(
             text: AppLocalizations.of(context)!.service,
-            style: TextStyleEnum.p_normal,
-            color: gray600,
+            style: TextStyleEnum.h3_medium,
+            color: gray800,
             align: TextAlign.justify,
           ),
+          AppGlobalVericalSpacing(value: 1.h),
           Wrap(
             direction: Axis.horizontal,
-            crossAxisAlignment: WrapCrossAlignment.start,
-            spacing: 8,
-            runSpacing: 4,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            alignment: WrapAlignment.spaceBetween,
+            runAlignment: WrapAlignment.spaceBetween,
+            spacing: 3.w,
+            runSpacing: 1.h,
             children: List.generate(
-              services.length,
-              (index) => AppGlobalText(
-                text: services[index],
-                style: TextStyleEnum.p_medium,
-                color: primary950,
-                align: TextAlign.justify,
-              ),
-            ),
+                services.length,
+                (index) => Container(
+                      width: 120,
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          color: gray900.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(6)),
+                      child: AppGlobalText(
+                        text: services[index],
+                        style: TextStyleEnum.p_medium,
+                        color: gray900,
+                        align: TextAlign.justify,
+                      ),
+                    )),
           )
         ],
       ),
@@ -167,14 +151,14 @@ class _TiketPageState extends State<TiketPage> {
         children: [
           AppGlobalText(
             text: AppLocalizations.of(context)!.paid_amount,
-            style: TextStyleEnum.p_normal,
-            color: gray600,
+            style: TextStyleEnum.h3_medium,
+            color: gray800,
             align: TextAlign.justify,
           ),
           const AngolaPrice(
             price: 250000,
-            style: TextStyleEnum.h3_medium,
-            color: primary950,
+            style: TextStyleEnum.h3_bold,
+            color: primary900,
           )
         ],
       ),
@@ -190,7 +174,7 @@ class _TiketPageState extends State<TiketPage> {
           AppGlobalText(
             text: "${AppLocalizations.of(context)!.reservation}:",
             style: TextStyleEnum.h3_bold,
-            color: primaryBorder,
+            color: gray700,
           ),
           const AppGlobalHorizontalSpacing(),
           AppGlobalText(
@@ -204,13 +188,9 @@ class _TiketPageState extends State<TiketPage> {
   }
 
   _buildTiketInfo() {
-    return GridView.count(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      crossAxisCount: 2,
-      crossAxisSpacing: 20,
-      mainAxisSpacing: 8,
-      childAspectRatio: 3,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         _buildLabelInfoEvent(
           title: AppLocalizations.of(context)!.event_date,
@@ -234,7 +214,7 @@ class _TiketPageState extends State<TiketPage> {
       children: [
         AppGlobalText(
           text: title,
-          style: TextStyleEnum.p_normal,
+          style: TextStyleEnum.p_medium,
           color: gray600,
           align: TextAlign.justify,
         ),
@@ -270,7 +250,7 @@ class _TiketPageState extends State<TiketPage> {
             AppGlobalText(
               text: "Benfica, Zona Verde II",
               style: TextStyleEnum.p_medium,
-              color: primaryBorder,
+              color: gray600,
               align: TextAlign.justify,
             ),
           ],

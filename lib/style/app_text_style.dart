@@ -24,6 +24,8 @@ enum TextStyleEnum {
   subtitle,
   overline,
   onboarding_title,
+  review_normal,
+  review_bold,
 }
 
 TextStyle getTextStyle(
@@ -145,6 +147,18 @@ TextStyle getTextStyle(
       return GoogleFonts.inter(
         fontSize: 21.sp,
         fontWeight: FontWeight.w900,
+        color: color,
+      );
+    case TextStyleEnum.review_normal:
+      return GoogleFonts.inter(
+        fontSize: 13.px,
+        fontWeight: FontWeight.normal,
+        color: color,
+      );
+    case TextStyleEnum.review_bold:
+      return GoogleFonts.inter(
+        fontSize: 14.px,
+        fontWeight: FontWeight.bold,
         color: color,
       );
     default:
