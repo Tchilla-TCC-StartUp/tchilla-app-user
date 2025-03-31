@@ -102,44 +102,42 @@ class _TiketPageState extends State<TiketPage> {
   }
 
   _buildServices(List<String> services) {
-    return Align(
-      alignment: Alignment.topLeft,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AppGlobalText(
-            text: AppLocalizations.of(context)!.service,
-            style: TextStyleEnum.h3_medium,
-            color: gray800,
-            align: TextAlign.justify,
-          ),
-          AppGlobalVericalSpacing(value: 1.h),
-          Wrap(
-            direction: Axis.horizontal,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            alignment: WrapAlignment.spaceBetween,
-            runAlignment: WrapAlignment.spaceBetween,
-            spacing: 3.w,
-            runSpacing: 1.h,
-            children: List.generate(
-                services.length,
-                (index) => Container(
-                      width: 120,
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                          color: gray900.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(6)),
-                      child: AppGlobalText(
-                        text: services[index],
-                        style: TextStyleEnum.p_medium,
-                        color: gray900,
-                        align: TextAlign.justify,
-                      ),
-                    )),
-          )
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AppGlobalText(
+          text: AppLocalizations.of(context)!.service,
+          style: TextStyleEnum.h3_medium,
+          color: gray800,
+          align: TextAlign.justify,
+        ),
+        AppGlobalVericalSpacing(value: 1.h),
+        Wrap(
+          direction: Axis.horizontal,
+          crossAxisAlignment: WrapCrossAlignment.start,
+          alignment: WrapAlignment.spaceBetween,
+          runAlignment: WrapAlignment.spaceBetween,
+          spacing: 10.px,
+          runSpacing: 10.px,
+          children: List.generate(
+              services.length,
+              (index) => Container(
+                    width: 28.w,
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: gray900.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: AppGlobalText(
+                      text: services[index],
+                      style: TextStyleEnum.p_medium,
+                      color: gray500,
+                      align: TextAlign.justify,
+                    ),
+                  )),
+        )
+      ],
     );
   }
 

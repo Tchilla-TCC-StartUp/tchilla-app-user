@@ -17,7 +17,7 @@ import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/app_responsible_card.dart';
-import 'package:tchilla/viewmodel/detalhesproposedviewmodel.dart';
+import 'package:tchilla/viewmodel/detalhes_proposed_viewmodel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetalheProposedPage extends StatefulWidget {
@@ -338,7 +338,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12.sp),
             ),
-            color: primary600,
+            color: primary50,
             shadowColor: primary600,
             child: AppGlobalNetworkImage(
               image: item,

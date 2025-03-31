@@ -12,7 +12,6 @@ import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/profile_section_card.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/viewmodel/profile_viewmodel.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -42,49 +41,51 @@ class _ProfilePageState extends State<ProfilePage> {
         title: _buildAppbar(),
       ),
       body: AppLayoutpage(
-          body: Column(
-        children: [
-          ProfileSectionCard(
-            onTap: () => viewmodel.goToUserDataPage(),
-            title: widget.userNamer,
-            leading: ClipOval(
-              child: AppGlobalNetworkImage(
-                image: widget.image,
-                width: 40.px,
-                height: 40.px,
+          body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ProfileSectionCard(
+              onTap: viewmodel.goToUserDataPage,
+              title: widget.userNamer,
+              leading: ClipOval(
+                child: AppGlobalNetworkImage(
+                  image: widget.image,
+                  width: 40.px,
+                  height: 40.px,
+                ),
               ),
             ),
-          ),
-          ProfileSectionCard(
-            leading: SvgPicture.asset(
-              AppAssetsImages.listIconSvg,
-              colorFilter: const ColorFilter.mode(
-                primary900,
-                BlendMode.srcIn,
+            ProfileSectionCard(
+              onTap: viewmodel.goToSchedulesPage,
+              leading: SvgPicture.asset(
+                AppAssetsImages.listIconSvg,
+                colorFilter: const ColorFilter.mode(
+                  primary900,
+                  BlendMode.srcIn,
+                ),
               ),
+              title: viewmodel.localizations.my_schedules,
             ),
-            title: AppLocalizations.of(context)!.my_schedules,
-          ),
-          ProfileSectionCard(
-            leading: SvgPicture.asset(
-              AppAssetsImages.notificationIconSvg,
-              colorFilter: const ColorFilter.mode(
-                primary900,
-                BlendMode.srcIn,
+            ProfileSectionCard(
+              onTap: viewmodel.goToNotificatiosPage,
+              leading: SvgPicture.asset(
+                AppAssetsImages.notificationIconSvg,
+                colorFilter: const ColorFilter.mode(
+                  primary900,
+                  BlendMode.srcIn,
+                ),
               ),
+              title: viewmodel.localizations.notifications,
             ),
-            title: AppLocalizations.of(context)!.notifications,
-          ),
-          const Divider(
-            color: primary200,
-          ),
-          _builPreferences(),
-          const Divider(
-            color: primary200,
-          ),
-          _buildSuporte(),
-          _buidLogoutButton()
-        ],
+            // const Divider(color: primary200),
+            // _builPreferences(),
+            const Divider(
+              color: primary200,
+            ),
+            _buildSuporte(),
+            _buidLogoutButton()
+          ],
+        ),
       )),
     );
   }
@@ -94,7 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AppGlobalText(
-          text: AppLocalizations.of(context)!.support,
+          text: viewmodel.localizations.support,
           style: TextStyleEnum.h3_bold,
         ),
         const AppGlobalVericalSpacing(),
@@ -106,7 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
               BlendMode.srcIn,
             ),
           ),
-          title: AppLocalizations.of(context)!.help_center,
+          title: viewmodel.localizations.help_center,
         ),
         ProfileSectionCard(
           leading: SvgPicture.asset(
@@ -116,7 +117,7 @@ class _ProfilePageState extends State<ProfilePage> {
               BlendMode.srcIn,
             ),
           ),
-          title: AppLocalizations.of(context)!.faqs,
+          title: viewmodel.localizations.faqs,
         ),
       ],
     );
@@ -127,7 +128,7 @@ class _ProfilePageState extends State<ProfilePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AppGlobalText(
-          text: AppLocalizations.of(context)!.settings_preferences,
+          text: viewmodel.localizations.settings_preferences,
           style: TextStyleEnum.h3_bold,
         ),
         const AppGlobalVericalSpacing(),
@@ -139,7 +140,7 @@ class _ProfilePageState extends State<ProfilePage> {
               BlendMode.srcIn,
             ),
           ),
-          title: AppLocalizations.of(context)!.security,
+          title: viewmodel.localizations.security,
         ),
         ProfileSectionCard(
           leading: SvgPicture.asset(
@@ -149,7 +150,7 @@ class _ProfilePageState extends State<ProfilePage> {
               BlendMode.srcIn,
             ),
           ),
-          title: AppLocalizations.of(context)!.dark_mode,
+          title: viewmodel.localizations.dark_mode,
         ),
       ],
     );
@@ -158,7 +159,7 @@ class _ProfilePageState extends State<ProfilePage> {
   _buidLogoutButton() {
     return ListTile(
       title: AppGlobalText(
-        text: AppLocalizations.of(context)!.logout,
+        text: viewmodel.localizations.logout,
         style: TextStyleEnum.h3_bold,
         color: Colors.red.shade700,
         // color: primary400,
@@ -193,7 +194,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
         AppGlobalText(
-          text: AppLocalizations.of(context)!.my_profile,
+          text: viewmodel.localizations.my_profile,
           style: TextStyleEnum.h3_bold,
         ),
         Container()

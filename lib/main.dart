@@ -16,14 +16,14 @@ void main() async {
   runApp(
     ResponsiveSizer(
       builder: (context, orientation, screenType) {
-        return MyApp();
+        return const MyApp();
       },
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {

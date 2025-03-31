@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "image": "",
+    "name": "",
+    "location": "",
+    "suportpersonNumer": 300,
+    "status": null,
+    "type": "local",
+    "typeEvent": "Casamento",
+    "price": 400000,
+    "services": [
+      {
+        "id": 1,
+        "label": "Dj"
+      },
+      {
+        "id": 1,
+        "label": "Limperza"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "image": "",
+    "name": "",
+    "location": "",
+    "suportpersonNumer": 300,
+    "status": null,
+    "type": "local",
+    "typeEvent": "Casamento",
+    "price": 400000,
+    "services": [
+      {
+        "id": 1,
+        "label": "Dj"
+      },
+      {
+        "id": 1,
+        "label": "Limperza"
+      }
+    ]
+  }
+]

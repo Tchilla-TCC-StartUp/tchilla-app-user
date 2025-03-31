@@ -1,7 +1,7 @@
 import 'package:tchilla/model/auth_model.dart';
 import 'package:tchilla/model/user_model.dart';
 import 'package:tchilla/services/base_services.dart';
-import 'package:tchilla/services/interface/iuser_data_service.dart';
+import 'package:tchilla/services/interface/iuser_service.dart';
 
 class UserService extends BaseServices implements IUserService {
   @override

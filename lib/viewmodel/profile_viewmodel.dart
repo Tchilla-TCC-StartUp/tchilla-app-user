@@ -9,6 +9,14 @@ class ProfileViewmodel extends BaseViewModel {
     return navigator.navigateToUserDataPage();
   }
 
+  goToNotificatiosPage() {
+    return navigator.navigateToNotificationPage();
+  }
+
+  goToSchedulesPage() {
+    return navigator.navigateToSchedulesPage();
+  }
+
   logout() async {
     await cleanToken();
     return navigator.navigateToWelcomePage();

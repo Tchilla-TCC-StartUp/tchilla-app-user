@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tchilla/model/proposed_model.dart';
+import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/pages/error_try_again.dart';
@@ -12,6 +14,8 @@ import 'package:tchilla/view/widgets/card_more_requested.dart';
 import 'package:tchilla/view/widgets/proposed_card.dart';
 import 'package:tchilla/viewmodel/view_more_viewmodel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../resources/app_enums.dart';
 
 class ViewMorePage extends StatefulWidget {
   const ViewMorePage({super.key});
@@ -113,8 +117,15 @@ class _ViewMorePageState extends State<ViewMorePage>
       itemBuilder: (context, itemIndex) => Padding(
         padding: EdgeInsets.symmetric(vertical: 1.h),
         child: ProposedCard(
+          proposed: ProposedModel(
+            image: AppAssetsImages.defaultProposedImage,
+            name: "Salão de Festa Mela",
+            location: "Patriota",
+            suportpersonNumer: 300,
+            price: 400000,
+            type: ProposedType.combo,
+          ),
           onClick: () => viewmodel.selectProposed("id"),
-          services: ["Dj", "Decoração"],
         ),
       ),
     );

@@ -24,13 +24,11 @@ class HomeViewModel extends BaseViewModel {
   Rxn<HomeModel> get homeData => _homeData;
   Rxn<UserModel> get userData => _userData;
 
-
   final RxBool _isVisitor = false.obs;
   RxBool get isVisitor => _isVisitor;
 
-
   void setIsVisitor() async {
-    _isVisitor.value = true ;
+    _isVisitor.value = true;
     loger.info("Entrou como Visitante!");
   }
 
@@ -51,73 +49,67 @@ class HomeViewModel extends BaseViewModel {
     getUserData();
   }
 
-  void initLocalData()async {
+  void initLocalData() async {
     tabTitlesForm.assignAll([
       localizations.tabVenueAndServices,
       localizations.tabLocal,
       localizations.tabServices,
     ]);
-    _homeData.value = HomeModel(
-        userName: localizations.visitor,
-        guestNumbers: [
-          50,
-          100,
-          200,
-          300,
-          400,
-          500,
-        ],
-        eventTypes: [
-          EventTypeModel(1, 'Casamento'),
-          EventTypeModel(2, 'Aniversário'),
-          EventTypeModel(3, 'Formatura'),
-          EventTypeModel(4, 'Festa de 15 anos'),
-          EventTypeModel(5, 'Festa de Réveillon'),
-        ],
-        services: [
-          ServiceModel(1, 'Buffet'),
-          ServiceModel(2, 'Decoração'),
-          ServiceModel(3, 'Música'),
-          ServiceModel(4, 'Fotografia'),
-          ServiceModel(5, 'Filmagem'),
-          ServiceModel(6, 'Iluminação'),
-          ServiceModel(7, 'Transporte'),
-          ServiceModel(8, 'Segurança'),
-          ServiceModel(9, 'Limpeza'),
-        ]);
+    _homeData.value = HomeModel(userName: localizations.visitor, guestNumbers: [
+      50,
+      100,
+      200,
+      300,
+      400,
+      500,
+    ], eventTypes: [
+      EventTypeModel(1, 'Casamento'),
+      EventTypeModel(2, 'Aniversário'),
+      EventTypeModel(3, 'Formatura'),
+      EventTypeModel(4, 'Festa de 15 anos'),
+      EventTypeModel(5, 'Festa de Réveillon'),
+    ], services: [
+      ServiceModel(1, 'Buffet'),
+      ServiceModel(2, 'Decoração'),
+      ServiceModel(3, 'Música'),
+      ServiceModel(4, 'Fotografia'),
+      ServiceModel(5, 'Filmagem'),
+      ServiceModel(6, 'Iluminação'),
+      ServiceModel(7, 'Transporte'),
+      ServiceModel(8, 'Segurança'),
+      ServiceModel(9, 'Limpeza'),
+    ]);
   }
 
   void getUserData() async {
     await onEvent(
-      checkLogin: true,
-      event: (token) async {
-        await onRequest(
-          event: service.getUserData(token: token),
-          onSuccess: (data) {
-            _userData.value = UserModel(data.id , data.nome, data.telefone, data.email, "${AppConstats.baseUrl}${data.foto}");
-          },
-        );
-      },
-      onErrorAuth: () async{
-       initLocalData();
-       setIsVisitor();
-      }
-    );
+        checkLogin: true,
+        event: (token) async {
+          await onRequest(
+            event: service.getUserData(token: token),
+            onSuccess: (data) {
+              _userData.value = UserModel(data.id, data.nome, data.telefone,
+                  data.email, "${AppConstats.baseUrl}${data.foto}");
+            },
+          );
+        },
+        onErrorAuth: () async {
+          initLocalData();
+          setIsVisitor();
+        });
   }
 
   void navigateToProfilePage() async {
     onEvent(
-      checkLogin: true,
-      event: (token) async {
-        this.navigator.navigateToProfilePage(
-          _userData.value?.nome ?? '',
-          _userData.value?.foto ?? '',
-        );
-      },
-      onErrorAuth: (){
-        showError(localizations.visitorAccessDenied);
-      }
-    );
+        // checkLogin: true,
+        event: (token) async {
+      this.navigator.navigateToProfilePage(
+            _userData.value?.nome ?? '',
+            _userData.value?.foto ?? '',
+          );
+    }, onErrorAuth: () {
+      showError(localizations.visitorAccessDenied);
+    });
   }
 
   void navigateToNotificationPage() async {

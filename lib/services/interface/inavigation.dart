@@ -20,4 +20,5 @@ abstract class INavigation {
   navigateToChoosePaymentPage();
   navigateToErrorPage(void Function() tryAgainEve);
   navigateToNotificationPage();
+  navigateToSchedulesPage();
 }
