@@ -5,7 +5,7 @@ class SplashViewmodel extends BaseViewModel {
     await Future.delayed(const Duration(seconds: 2));
 
     await onEvent(
-      // checkLogin: true,
+      checkLogin: true,
       event: (_) async {
       await navigator.navigateToHome();
       },

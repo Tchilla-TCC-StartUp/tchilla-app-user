@@ -107,14 +107,10 @@ class _HomePageState extends State<HomePage>
           floatingActionButton: Obx(
             () => viewmodel.isVisitor.value
                 ? FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: viewmodel.logoutVisitorMode,
                     tooltip: viewmodel.localizations.logout,
                     backgroundColor: primary50,
-                    child: Icon(
-                      Icons.logout_rounded,
-                      color: Colors.red[700],
-                    ),
-                  )
+                    child: SvgPicture.asset(AppAssetsImages.logoutIconSvg))
                 : const SizedBox.shrink(),
           )),
     );

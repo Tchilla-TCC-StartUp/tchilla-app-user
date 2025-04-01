@@ -73,6 +73,7 @@ flutter:
   assets:
     - assets/vectores/
     - assets/images/
+    - lib/jsons/
 flutter_launcher_icons:
   ios: true
   android: true

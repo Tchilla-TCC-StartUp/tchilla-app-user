@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/model/proposed_model.dart';
-import 'package:tchilla/resources/app_assets_images.dart';
-import 'package:tchilla/resources/app_enums.dart';
+import 'package:tchilla/resources/app_formaters.dart';
 import 'package:tchilla/style/app_text_style.dart';
+import 'package:tchilla/view/pages/error_try_again.dart';
 import 'package:tchilla/view/widgets/app_global_back_button.dart';
+import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
@@ -20,6 +22,13 @@ class SchedulesPage extends StatefulWidget {
 
 class _SchedulesPageState extends State<SchedulesPage> {
   final viewmodel = Get.find<SchedulesViewmodel>();
+
+  @override
+  void initState() {
+    super.initState();
+    viewmodel.initEvent();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,31 +40,40 @@ class _SchedulesPageState extends State<SchedulesPage> {
         ),
         centerTitle: true,
       ),
-      body: AppLayoutpage(
-          body: Column(
-        children: [
-          _buildSchedulesCard(
-            date: "25 MAR 2025",
-            proposed: ProposedModel(
-              image: AppAssetsImages.defaultProposedImage,
-              name: "Salão de Festa Mela",
-              location: "Patriota",
-              suportpersonNumer: 300,
-              price: 400000,
-              status: ProposedStatus.pending,
-              type: ProposedType.combo,
-            ),
-          ),
-        ],
-      )),
+      body: Obx(() {
+        return viewmodel.isLoading.value
+            ? const AppGlobalLoading()
+            : viewmodel.isError.value
+                ? ErrorTryAgain(message: viewmodel.errorMessage.value)
+                : viewmodel.proposeds.isNotEmpty
+                    ? AppLayoutpage(
+                        body: ListView.builder(
+                        itemCount: viewmodel.proposeds.length,
+                        itemBuilder: (context, intex) {
+                          var item = viewmodel.proposeds[intex];
+                          return Padding(
+                            padding: EdgeInsets.only(bottom: 2.h),
+                            child: _buildSchedulesCard(proposed: item),
+                          );
+                        },
+                      ))
+                    : Center(
+                        child: AppGlobalText(
+                          text: "Sem nehum agendamneto ",
+                          style: TextStyleEnum.p_medium,
+                        ),
+                      );
+      }),
     );
   }
 
-  _buildSchedulesCard({required String date, required ProposedModel proposed}) {
+  _buildSchedulesCard({required ProposedModel proposed}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppGlobalText(text: date, style: TextStyleEnum.h3_bold),
+        AppGlobalText(
+            text: formatDateToReadableString(proposed.date!),
+            style: TextStyleEnum.h3_bold),
         const AppGlobalVericalSpacing(),
         ProposedCard(
           onClick: () {},

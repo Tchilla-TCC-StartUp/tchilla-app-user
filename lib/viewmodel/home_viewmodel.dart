@@ -29,7 +29,13 @@ class HomeViewModel extends BaseViewModel {
 
   void setIsVisitor() async {
     _isVisitor.value = true;
-    loger.info("Entrou como Visitante!");
+    loger.info("Entrou no modo Visitante!");
+  }
+
+  void logoutVisitorMode() {
+    _isVisitor.value = false;
+    loger.info("Saiu do modo Visitante!");
+    this.navigator.navigateToWelcomePage();
   }
 
   void selectTab(int index, FocusNode focusNode) {
@@ -101,15 +107,17 @@ class HomeViewModel extends BaseViewModel {
 
   void navigateToProfilePage() async {
     onEvent(
-        // checkLogin: true,
-        event: (token) async {
-      this.navigator.navigateToProfilePage(
-            _userData.value?.nome ?? '',
-            _userData.value?.foto ?? '',
-          );
-    }, onErrorAuth: () {
-      showError(localizations.visitorAccessDenied);
-    });
+      checkLogin: true,
+      event: (token) async {
+        this.navigator.navigateToProfilePage(
+              _userData.value?.nome ?? '',
+              _userData.value?.foto ?? '',
+            );
+      },
+      onErrorAuth: () {
+        showError(localizations.visitorAccessDenied);
+      },
+    );
   }
 
   void navigateToNotificationPage() async {

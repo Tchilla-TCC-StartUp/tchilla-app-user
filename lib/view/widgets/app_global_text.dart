@@ -9,6 +9,8 @@ class AppGlobalText extends StatelessWidget {
   final TextStyleEnum style;
   Color? color;
   final TextAlign? align;
+ final TextOverflow? overflow;
+ final double? width;
 
   AppGlobalText({
     super.key,
@@ -17,17 +19,22 @@ class AppGlobalText extends StatelessWidget {
     this.color,
     this.minFontSize,
     this.maxLines,
-    this.align,
+    this.align, this.overflow, this.width,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      textAlign: align,
-      style: getTextStyle(style, color: color ?? primary950),
-      maxLines: maxLines ?? 2,
-      overflow: TextOverflow.ellipsis,
+    return SizedBox(
+      width: width,
+      child: Text(
+        text,
+        textAlign: align,
+        overflow: overflow,
+        softWrap: true,
+        style: getTextStyle(style, color: color ?? primary950),
+        maxLines: maxLines ?? 2,
+
+      ),
     );
   }
 }
