@@ -119,7 +119,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
             _buildTabViews(),
             AppGlobalTextButton(
               onPressed: () => viewmodel.scheduleProposal("11"),
-              textButton: AppLocalizations.of(context)!.schedule,
+              textButton: viewmodel.localizations.schedule,
               minWidth: 100.w,
             ),
             AppGlobalVericalSpacing(
@@ -234,7 +234,7 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
           value: 2.h,
         ),
         AppGlobalText(
-          text: AppLocalizations.of(context)!.description,
+          text: viewmodel.localizations.description,
           style: TextStyleEnum.h3_bold,
         ),
         const AppGlobalVericalSpacing(),

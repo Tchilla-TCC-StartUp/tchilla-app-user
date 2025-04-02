@@ -68,7 +68,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             child: GestureDetector(
               onTap: viewmodel.clickSkip,
               child: AppGlobalText(
-                text: AppLocalizations.of(context)!.skip,
+                text: viewmodel.localizations.skip,
                 style: TextStyleEnum.h3_medium,
               ),
             ),
@@ -111,7 +111,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 AppGlobalText(
-                  text: AppLocalizations.of(context)!.proceed,
+                  text: viewmodel.localizations.proceed,
                   color: primary50,
                   style: TextStyleEnum.h3_bold,
                 ),

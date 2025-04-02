@@ -70,14 +70,14 @@ class _WelcomePageState extends State<WelcomePage> {
         AppGlobalTextButton(
           minWidth: 100.w,
           onPressed: viewmodel.navigateToRegister,
-          textButton: AppLocalizations.of(context)!.create_account_button,
+          textButton: viewmodel.localizations.create_account_button,
         ),
         AppGlobalVericalSpacing(
           value: 3.h,
         ),
         AppGlobalBorderButton(
           minWidth: 100.w,
-          textButton: AppLocalizations.of(context)!.login,
+          textButton: viewmodel.localizations.login,
           onPressed: viewmodel.navigateToLogin,
         ),
         AppGlobalVericalSpacing(
@@ -86,7 +86,7 @@ class _WelcomePageState extends State<WelcomePage> {
         GestureDetector(
           onTap: viewmodel.enterAsVisitor,
           child: AppGlobalText(
-            text: AppLocalizations.of(context)!.guest_login,
+            text: viewmodel.localizations.guest_login,
             style: TextStyleEnum.h3_bold,
           ),
         )

@@ -58,7 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ],
               ),
               AppGlobalText(
-                text: AppLocalizations.of(context)!.sign_up,
+                text: viewmodel.localizations.sign_up,
                 style: TextStyleEnum.h2_bold,
               ),
               AppGlobalVericalSpacing(
@@ -67,7 +67,7 @@ class _RegisterPageState extends State<RegisterPage> {
               AppGlobalInput(
                 onChanged: viewmodel.setName,
                 focusNode: nameFocusNode,
-                helpText: AppLocalizations.of(context)!.name,
+                helpText: viewmodel.localizations.name,
                 hintText: "Celson Paixão",
                 keyboardType: TextInputType.name,
                 textInputAction: TextInputAction.next,
@@ -78,7 +78,7 @@ class _RegisterPageState extends State<RegisterPage> {
               AppGlobalInput(
                 onChanged: viewmodel.setEmail,
                 focusNode: emailFocusNode,
-                helpText: AppLocalizations.of(context)!.email_address,
+                helpText: viewmodel.localizations.email_address,
                 hintText: "celson.paixao@gmail.com",
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
@@ -87,7 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 value: 2.h,
               ),
               AppGlobalPhoneNumberInput(
-                label: AppLocalizations.of(context)!.telephone_number,
+                label: viewmodel.localizations.telephone_number,
                 hintText: '923 445 566',
                 initialCountryCode: '+244',
                 textInputAction: TextInputAction.next,
@@ -104,7 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
               AppGlobalInput(
                 onChanged: viewmodel.setPassword,
                 focusNode: passwordFocusNode,
-                helpText: AppLocalizations.of(context)!.password,
+                helpText: viewmodel.localizations.password,
                 hintText: "*******",
                 keyboardType: TextInputType.visiblePassword,
                 textInputAction: TextInputAction.send,
@@ -120,14 +120,14 @@ class _RegisterPageState extends State<RegisterPage> {
                   isLoading: viewmodel.isLoading.value,
                   onPressed: viewmodel.register,
                   textButton:
-                      AppLocalizations.of(context)!.create_account_button,
+                      viewmodel.localizations.create_account_button,
                 ),
               ),
               AppGlobalVericalSpacing(
                 value: 3.h,
               ),
               AppAuthDivider(
-                  text: AppLocalizations.of(context)!.or_you_can_also),
+                  text: viewmodel.localizations.or_you_can_also),
               AppGlobalVericalSpacing(
                 value: 3.h,
               ),
@@ -145,7 +145,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     const AppGlobalHorizontalSpacing(),
                     AppGlobalText(
-                      text: AppLocalizations.of(context)!.sign_up_with_google,
+                      text: viewmodel.localizations.sign_up_with_google,
                       style: TextStyleEnum.p_normal,
                       color: gray600,
                     ),
@@ -160,7 +160,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   AppGlobalText(
-                    text: AppLocalizations.of(context)!.already_have_account,
+                    text: viewmodel.localizations.already_have_account,
                     style: TextStyleEnum.p_medium,
                     color: gray600,
                   ),
@@ -168,7 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   GestureDetector(
                     onTap: viewmodel.navigateToLoginPage,
                     child: AppGlobalText(
-                      text: AppLocalizations.of(context)!.login_here,
+                      text: viewmodel.localizations.login_here,
                       style: TextStyleEnum.p_medium,
                       color: primary500,
                     ),

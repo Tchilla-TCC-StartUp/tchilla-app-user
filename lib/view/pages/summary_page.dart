@@ -36,7 +36,7 @@ class _SummaryPageState extends State<SummaryPage> {
         leading: const AppGlobalBackButton(),
         centerTitle: true,
         title: AppGlobalText(
-          text: AppLocalizations.of(context)!.appointment_summary,
+          text: viewmodel.localizations.appointment_summary,
           style: TextStyleEnum.h3_bold,
         ),
       ),
@@ -118,7 +118,7 @@ class _SummaryPageState extends State<SummaryPage> {
           Row(
             children: [
               AppGlobalText(
-                text: "${AppLocalizations.of(context)!.total}:",
+                text: "${viewmodel.localizations.total}:",
                 style: TextStyleEnum.h3_medium,
               ),
               const AppGlobalHorizontalSpacing(),
@@ -136,13 +136,13 @@ class _SummaryPageState extends State<SummaryPage> {
             children: [
               AppGlobalBorderButton(
                 onPressed: viewmodel.navigator.navigateToBack,
-                textButton: AppLocalizations.of(context)!.cancel,
+                textButton: viewmodel.localizations.cancel,
                 minWidth: 40.w,
               ),
               AppGlobalTextButton(
                 minWidth: 40.w,
                 onPressed: () => viewmodel.clickContinue("pjk,d"),
-                textButton: AppLocalizations.of(context)!.lb_continue,
+                textButton: viewmodel.localizations.lb_continue,
               )
             ],
           ),
@@ -187,13 +187,13 @@ class _SummaryPageState extends State<SummaryPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AppGlobalText(
-          text: AppLocalizations.of(context)!.appointment_summary,
+          text: viewmodel.localizations.appointment_summary,
           style: TextStyleEnum.h3_bold,
         ),
         AppGlobalVericalSpacing(value: 2.h),
-        _buildInfoRow(AppLocalizations.of(context)!.event_date, eventData),
-        _buildInfoRow(AppLocalizations.of(context)!.event_type, eventType),
-        _buildInfoRow(AppLocalizations.of(context)!.number_of_guests,
+        _buildInfoRow(viewmodel.localizations.event_date, eventData),
+        _buildInfoRow(viewmodel.localizations.event_type, eventType),
+        _buildInfoRow(viewmodel.localizations.number_of_guests,
             numberOfGuests.toString()),
         AppGlobalVericalSpacing(value: 1.h),
         Row(
@@ -201,7 +201,7 @@ class _SummaryPageState extends State<SummaryPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppGlobalText(
-              text: AppLocalizations.of(context)!.service,
+              text: viewmodel.localizations.service,
               style: TextStyleEnum.p_normal,
               color: gray500,
             ),

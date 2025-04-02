@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               AppGlobalText(
-                text: AppLocalizations.of(context)!.sign_in,
+                text: viewmodel.localizations.sign_in,
                 style: TextStyleEnum.h2_bold,
               ),
               AppGlobalVericalSpacing(
@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   AppGlobalInput(
                     focusNode: emailFocusNode,
-                    helpText: AppLocalizations.of(context)!.email_address,
+                    helpText: viewmodel.localizations.email_address,
                     hintText: "celson.paixao@gmail.com",
                     keyboardType: TextInputType.emailAddress,
                     onChanged: viewmodel.setEmail,
@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                   GestureDetector(
                     onTap: viewmodel.navigateToForengePasswordPage,
                     child: AppGlobalText(
-                      text: AppLocalizations.of(context)!.forgot_password,
+                      text: viewmodel.localizations.forgot_password,
                       style: TextStyleEnum.p_normal,
                       color: primary500,
                     ),
@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
               const AppGlobalVericalSpacing(),
               AppGlobalInput(
                 focusNode: passwordFocusNode,
-                helpText: AppLocalizations.of(context)!.password,
+                helpText: viewmodel.localizations.password,
                 hintText: "*******",
                 keyboardType: TextInputType.visiblePassword,
                 textInputAction: TextInputAction.send,
@@ -99,14 +99,14 @@ class _LoginPageState extends State<LoginPage> {
                   minWidth: 100.w,
                   isLoading: viewmodel.isLoading.value,
                   onPressed: viewmodel.login,
-                  textButton: AppLocalizations.of(context)!.login,
+                  textButton: viewmodel.localizations.login,
                 ),
               ),
               AppGlobalVericalSpacing(
                 value: 3.h,
               ),
               AppAuthDivider(
-                  text: AppLocalizations.of(context)!.or_you_can_also),
+                  text: viewmodel.localizations.or_you_can_also),
               AppGlobalVericalSpacing(
                 value: 3.h,
               ),
@@ -124,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const AppGlobalHorizontalSpacing(),
                     AppGlobalText(
-                      text: AppLocalizations.of(context)!.sign_up_with_google,
+                      text: viewmodel.localizations.sign_up_with_google,
                       style: TextStyleEnum.p_normal,
                       color: gray600,
                     )
@@ -139,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: GestureDetector(
                   onTap: viewmodel.navigateToRegisterPage,
                   child: AppGlobalText(
-                    text: AppLocalizations.of(context)!.create_account_button,
+                    text: viewmodel.localizations.create_account_button,
                     style: TextStyleEnum.h3_bold,
                     color: primary500,
                     align: TextAlign.center,

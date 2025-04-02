@@ -40,12 +40,12 @@ class _ForgotPasswordConfirmationPinPageState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Headerpage(
-                title: AppLocalizations.of(context)!.confirmation_pin,
+                title: viewmodel.localizations.confirmation_pin,
                 description:
-                    AppLocalizations.of(context)!.confirmation_pin_description,
+                    viewmodel.localizations.confirmation_pin_description,
               ),
               AppGlobalText(
-                text: AppLocalizations.of(context)!.pin,
+                text: viewmodel.localizations.pin,
                 style: TextStyleEnum.h3_bold,
               ),
               const AppGlobalVericalSpacing(),
@@ -58,7 +58,7 @@ class _ForgotPasswordConfirmationPinPageState
                   final pin = _controllers.map((c) => c.text).join();
                   viewmodel.confirmPin(pin, context);
                 },
-                textButton: AppLocalizations.of(context)!.confirm,
+                textButton: viewmodel.localizations.confirm,
                 minWidth: 100.w,
               ),
             ],
