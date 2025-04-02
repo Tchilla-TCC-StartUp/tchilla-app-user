@@ -26,19 +26,24 @@ class AppGlobalImageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      color: color,
-      splashColor: color,
-      elevation: 0,
-      hoverColor: Colors.transparent,
-      minWidth: minWidth,
-      hoverElevation: 0,
-      height: 55.px,
-      onPressed: _handlePress,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.px),
-      ),
-      child: child,
-    );
+    return Obx(() {
+      return Opacity(
+        opacity: _debouncer.isReady.value ? 1 : 0.5,
+        child: MaterialButton(
+          color: color,
+          splashColor: color,
+          elevation: 0,
+          hoverColor: Colors.transparent,
+          minWidth: minWidth,
+          hoverElevation: 0,
+          height: 55.px,
+          onPressed: _handlePress,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.px),
+          ),
+          child: child,
+        ),
+      );
+    });
   }
 }

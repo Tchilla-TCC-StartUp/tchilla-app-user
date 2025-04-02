@@ -41,8 +41,6 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
-
-
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -110,7 +108,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 hintText: "*******",
                 keyboardType: TextInputType.visiblePassword,
                 textInputAction: TextInputAction.send,
-                onFieldSubmitted: (v)=> viewmodel.register,
+                onFieldSubmitted: (v) => viewmodel.register,
                 obscureText: true,
               ),
               AppGlobalVericalSpacing(
@@ -120,7 +118,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 () => AppGlobalTextButton(
                   minWidth: 100.w,
                   isLoading: viewmodel.isLoading.value,
-                  onPressed : viewmodel.register,
+                  onPressed: viewmodel.register,
                   textButton:
                       AppLocalizations.of(context)!.create_account_button,
                 ),

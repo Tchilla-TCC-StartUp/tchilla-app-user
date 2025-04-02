@@ -30,24 +30,29 @@ class AppGlobalTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      color: primary950,
-      // color: _debouncer.isReady.value ? primary950 : gray400,
-      elevation: 0,
-      minWidth: minWidth,
-      height: 55.px,
-      onPressed: _handlePress,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.px),
-      ),
-      child: isLoading
-          ? const AppGlobalLoading(color: primary50)
-          : AppGlobalText(
-              text: textButton,
-              style: TextStyleEnum.h3_medium,
-              color: primary50,
-              // color: _debouncer.isReady.value ? primary50 : gray900,
-            ),
-    );
+    return Obx(() {
+      return Opacity(
+        opacity: _debouncer.isReady.value ? 1 : 0.5,
+        child: MaterialButton(
+          color: primary950,
+          // color: _debouncer.isReady.value ? primary950 : gray400,
+          elevation: 0,
+          minWidth: minWidth,
+          height: 55.px,
+          onPressed: _handlePress,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.px),
+          ),
+          child: isLoading
+              ? const AppGlobalLoading(color: primary50)
+              : AppGlobalText(
+                  text: textButton,
+                  style: TextStyleEnum.h3_medium,
+                  color: primary50,
+                  // color: _debouncer.isReady.value ? primary50 : gray900,
+                ),
+        ),
+      );
+    });
   }
 }

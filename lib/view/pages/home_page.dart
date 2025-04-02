@@ -20,6 +20,7 @@ import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/form_local.dart';
 import 'package:tchilla/view/widgets/form_local_end_service.dart';
 import 'package:tchilla/view/widgets/form_service.dart';
+import 'package:tchilla/view/widgets/tchilla_animation_loading.dart';
 import 'package:tchilla/viewmodel/home_viewmodel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -69,7 +70,7 @@ class _HomePageState extends State<HomePage>
           body: Obx(
             () {
               return viewmodel.isLoading.value
-                  ? const AppGlobalLoading()
+                  ? const TchillaAnimationLoading()
                   : viewmodel.isError.value
                       ? ErrorTryAgain(
                           message: viewmodel.errorMessage.value,

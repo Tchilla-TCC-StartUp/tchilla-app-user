@@ -13,6 +13,7 @@ import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/onboarding_body.dart';
+import 'package:tchilla/view/widgets/tchilla_animation_loading.dart';
 import 'package:tchilla/viewmodel/onboarding_viewmodel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -40,7 +41,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           body: Obx(
             () {
               return viewmodel.isLoading.value
-                  ? const AppGlobalLoading()
+                  ? const TchillaAnimationLoading()
                   : viewmodel.isError.value
                       ? ErrorTryAgain(
                           message: viewmodel.errorMessage.value,

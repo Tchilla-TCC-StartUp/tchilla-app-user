@@ -1,4 +1,3 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:tchilla/services/events/user_service.dart';
 import 'package:tchilla/viewmodel/base_viewmodel.dart';

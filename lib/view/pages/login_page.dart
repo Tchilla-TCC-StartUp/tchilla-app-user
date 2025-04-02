@@ -89,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                 textInputAction: TextInputAction.send,
                 obscureText: true,
                 onChanged: viewmodel.setPassword,
-                onFieldSubmitted: (value) => viewmodel.login,
+                onFieldSubmitted: (value) => viewmodel.login(),
               ),
               AppGlobalVericalSpacing(
                 value: 6.h,
