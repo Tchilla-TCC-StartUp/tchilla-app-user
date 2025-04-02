@@ -196,6 +196,11 @@ class BaseViewModel extends GetxController {
 
     return false;
   }
+void cleanFields<T>(List<Rxn<T>> fields) {
+    for (var field in fields) {
+      field.value = null;
+    }
+  }
 
   bool setListFieldChange<T>(
     List<Rxn<T>> field,

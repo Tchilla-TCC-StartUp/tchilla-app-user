@@ -15,8 +15,6 @@ class RegisterViewmodel extends BaseViewModel {
   final Rxn<String?> telefone = Rxn<String?>();
 
   register() async {
-    final localizations = AppLocalizations.of(context)!;
-
     if (name.value == null || name.value!.trim().isEmpty) {
       return showWarning(localizations.error_full_name_required);
     }
@@ -46,6 +44,7 @@ class RegisterViewmodel extends BaseViewModel {
       ),
       onSuccess: (value) {
         this.navigator.navigateToLoginPage();
+        cleanFields([email, name, telefone, password]);
         showSuccess(value.message!);
       },
       onError: (error) {
