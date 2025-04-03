@@ -15,6 +15,7 @@ import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
+import 'package:tchilla/view/widgets/app_global_user_avatar_name.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/app_responsible_card.dart';
 import 'package:tchilla/viewmodel/detalhes_proposed_viewmodel.dart';
@@ -376,13 +377,9 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
               children: [
                 Row(
                   children: [
-                    ClipOval(
-                      child: AppGlobalNetworkImage(
-                        image: item["image"],
-                        width: 35.px,
-                        height: 35.px,
-                        fit: BoxFit.cover,
-                      ),
+                    AppGlobalUserAvatarName(
+                      name: item["name"],
+                      size: 35.px,
                     ),
                     const AppGlobalHorizontalSpacing(),
                     Column(

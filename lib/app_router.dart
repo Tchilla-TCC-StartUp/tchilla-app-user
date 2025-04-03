@@ -40,7 +40,7 @@ class AppGetAppRoutes {
     _buildRoute(
         AppRoutes.profilePage,
         (args) =>
-            ProfilePage(userNamer: args['userNamer'], image: args['image'])),
+            ProfilePage(userNamer: args['userNamer'])),
     _buildRoute(AppRoutes.userdataPage, (args) => const UserDataPage()),
     _buildRoute(AppRoutes.summaryPage, (args) => SummaryPage(id: args)),
     _buildRoute(AppRoutes.tiketPage, (args) => TiketPage(id: args)),
