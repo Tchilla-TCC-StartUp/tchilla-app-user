@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
-import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tchilla/view/widgets/app_global_user_avatar_name.dart';
 
 class AppResponsibleCard extends StatelessWidget {
   final String name;
@@ -14,7 +13,6 @@ class AppResponsibleCard extends StatelessWidget {
   final String imageUrl;
   final double rating;
   final int reviews;
-
   const AppResponsibleCard({
     super.key,
     required this.name,
@@ -41,14 +39,7 @@ class AppResponsibleCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                ClipOval(
-                  child: AppGlobalNetworkImage(
-                    image: imageUrl,
-                    width: 45.px,
-                    height: 45.px,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                AppGlobalUserAvatarName(name: name),
                 const AppGlobalHorizontalSpacing(),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
