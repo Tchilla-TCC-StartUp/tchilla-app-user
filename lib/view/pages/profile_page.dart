@@ -10,14 +10,18 @@ import 'package:tchilla/services/events/navigation.dart';
 import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
+import 'package:tchilla/view/widgets/app_global_user_avatar_name.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/profile_section_card.dart';
 import 'package:tchilla/viewmodel/profile_viewmodel.dart';
 
 class ProfilePage extends StatefulWidget {
   final String userNamer;
-  final String image;
-  const ProfilePage({super.key, required this.userNamer, required this.image});
+
+  const ProfilePage({
+    super.key,
+    required this.userNamer,
+  });
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -48,11 +52,7 @@ class _ProfilePageState extends State<ProfilePage> {
               onTap: viewmodel.goToUserDataPage,
               title: widget.userNamer,
               leading: ClipOval(
-                child: AppGlobalNetworkImage(
-                  image: widget.image,
-                  width: 40.px,
-                  height: 40.px,
-                ),
+                child: AppGlobalUserAvatarName(name: widget.userNamer),
               ),
             ),
             ProfileSectionCard(

@@ -6,6 +6,7 @@ import 'package:tchilla/view/widgets/app_global_input.dart';
 import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
+import 'package:tchilla/view/widgets/app_global_user_avatar_name.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -60,16 +61,9 @@ class _UserDataPageState extends State<UserDataPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Container(
-                              width: 150.px,
-                              height: 150.px,
-                              clipBehavior: Clip.hardEdge,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100.w)),
-                              child: AppGlobalNetworkImage(
-                                image: viewmodel
-                                    .getImageUrl(viewmodel.image.value),
-                              ),
+                            AppGlobalUserAvatarName(
+                              name: viewmodel.name.value ?? "",
+                              size: 150.px,
                             ),
                             AppGlobalVericalSpacing(value: 18.px),
                             _buildUserDataCard(

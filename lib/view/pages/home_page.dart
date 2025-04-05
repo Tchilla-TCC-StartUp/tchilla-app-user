@@ -16,6 +16,7 @@ import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_circular_liner.dart';
+import 'package:tchilla/view/widgets/app_global_user_avatar_name.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/form_local.dart';
 import 'package:tchilla/view/widgets/form_local_end_service.dart';
@@ -283,13 +284,12 @@ class _HomePageState extends State<HomePage>
           onTap: () => viewmodel.navigateToProfilePage(),
           child: ClipOval(
             clipBehavior: Clip.hardEdge,
-            child: AppGlobalNetworkImage(
-              image: viewmodel.isVisitor.value
-                  ? AppAssetsImages.defaultUserImage
-                  : viewmodel.userData.value?.foto ??
-                      AppAssetsImages.defaultUserImage,
-              width: 40.px,
-              height: 40.px,
+            child: AppGlobalUserAvatarName(
+              name: viewmodel.isVisitor.value
+                  ? viewmodel.localizations.visitor
+                  : viewmodel.userData.value?.nome ??
+                      viewmodel.localizations.visitor,
+              size: 40.px,
             ),
           ),
         ),
