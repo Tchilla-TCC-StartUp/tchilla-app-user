@@ -19,7 +19,7 @@ class LoginViewmodel extends BaseViewModel {
   }
 
   login() async {
-    if (email.value!.isEmpty || password.value!.isEmpty) {
+    if (email.value == null || password.value == null) {
       loger.info("Campos vazios detectados");
       return showWarning(
         AppLocalizations.of(context)!.login_required_fields,
@@ -35,16 +35,18 @@ class LoginViewmodel extends BaseViewModel {
 
     if (password.value!.length < 6) {
       loger.info("Senha curta");
-      return showWarning(
+      showWarning(
         AppLocalizations.of(context)!.login_password_length,
       );
+
+      return;
     }
 
     await onRequest(
-      event:
-          service.authUser(email: email.value!, password: password.value!),
+      event: service.authUser(email: email.value!, password: password.value!),
       onSuccess: (value) async {
         await dataToken.saveToken(value.data!);
+        cleanFields([email, password]);
         this.navigator.navigateToHome();
       },
       onError: (value) {
@@ -73,6 +75,4 @@ class LoginViewmodel extends BaseViewModel {
     passwordFocusNode.dispose();
     super.dispose();
   }
-  
-
 }

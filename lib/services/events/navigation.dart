@@ -99,4 +99,9 @@ class Navigation extends INavigation {
   navigateToNotificationPage() {
     Get.toNamed(AppRoutes.notificationPage);
   }
+
+  @override
+  navigateToSchedulesPage() {
+    Get.toNamed(AppRoutes.schedulesPage);
+  }
 }

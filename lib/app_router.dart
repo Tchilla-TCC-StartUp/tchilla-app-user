@@ -13,6 +13,7 @@ import 'package:tchilla/view/pages/profile_page.dart';
 import 'package:tchilla/view/pages/redefine_password_page.dart';
 import 'package:tchilla/view/pages/register_page.dart';
 import 'package:tchilla/view/pages/result_search_page.dart';
+import 'package:tchilla/view/pages/schedules_page.dart';
 import 'package:tchilla/view/pages/splash_page.dart';
 import 'package:tchilla/view/pages/summary_page.dart';
 import 'package:tchilla/view/pages/tiket_page.dart';
@@ -25,6 +26,7 @@ class AppGetAppRoutes {
     _buildRoute(AppRoutes.homePage, (_) => const HomePage()),
     _buildRoute(AppRoutes.loginPage, (_) => const LoginPage()),
     _buildRoute(AppRoutes.registerPage, (_) => const RegisterPage()),
+    _buildRoute(AppRoutes.schedulesPage, (_) => const SchedulesPage()),
     _buildRoute(AppRoutes.forgotPasswordEmail,
         (_) => const ForgotPassswordAuthEmailPage()),
     _buildRoute(AppRoutes.forgotPasswordConfirmationPin,

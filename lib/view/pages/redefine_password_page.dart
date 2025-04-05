@@ -35,12 +35,12 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Headerpage(
-              title: AppLocalizations.of(context)!.reset_password,
+              title: viewmodel.localizations.reset_password,
               description:
-                  AppLocalizations.of(context)!.reset_password_description,
+                  viewmodel.localizations.reset_password_description,
             ),
             AppGlobalInput(
-              helpText: AppLocalizations.of(context)!.password,
+              helpText: viewmodel.localizations.password,
               hintText: "***********",
               keyboardType: TextInputType.visiblePassword,
               controller: passordController,
@@ -51,7 +51,7 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
               value: 2.h,
             ),
             AppGlobalInput(
-              helpText: AppLocalizations.of(context)!.confirm_password,
+              helpText: viewmodel.localizations.confirm_password,
               hintText: "***********",
               keyboardType: TextInputType.visiblePassword,
               controller: confirmPassordController,
@@ -79,7 +79,7 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
                   widget.previousWalk,
                 );
               },
-              textButton: AppLocalizations.of(context)!.redefine,
+              textButton: viewmodel.localizations.redefine,
             )
           ],
         )),

@@ -24,8 +24,6 @@ class BaseViewModel extends GetxController {
   final RxString _token = "".obs;
   RxString get token => _token;
 
-
-
   final Rxn<VoidCallback> lastRequest = Rxn<VoidCallback>();
   BuildContext get context => notificator.snackbarKey.currentContext!;
   AppLocalizations get localizations => AppLocalizations.of(context)!;
@@ -34,7 +32,6 @@ class BaseViewModel extends GetxController {
     isLoading.value = true;
     resetError();
   }
-
 
   void stopLoading() {
     isLoading.value = false;
@@ -87,8 +84,6 @@ class BaseViewModel extends GetxController {
     }
   }
 
-
-
   Future<T> onRequest<T>({
     required Future<T> event,
     VoidCallback? onStart,
@@ -112,7 +107,7 @@ class BaseViewModel extends GetxController {
           error is UnknownException ||
           error is ServerException) {
         emitError(error.message);
-        showError(error);
+        // showError(error);
       } else if (error is UnauthorizedException) {
         showError(error);
         cleanToken();
@@ -128,8 +123,6 @@ class BaseViewModel extends GetxController {
       onComplete?.call();
     });
   }
-
-
 
   Future<void> cleanToken() async {
     try {
@@ -195,6 +188,12 @@ class BaseViewModel extends GetxController {
     }
 
     return false;
+  }
+
+  void cleanFields<T>(List<Rxn<T>> fields) {
+    for (var field in fields) {
+      field.value = null;
+    }
   }
 
   bool setListFieldChange<T>(

@@ -128,7 +128,7 @@ TextStyle getTextStyle(
       );
     case TextStyleEnum.button_text:
       return GoogleFonts.inter(
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.normal,
         fontSize: 14.sp,
         color: color,
       );

@@ -106,7 +106,6 @@ class BaseRepository {
     return UnknownException(error.toString());
   }
 
-  /// Método que extrai a mensagem de erro do response ou usa o l10n como fallback
   String _getErrorMessage(DioException error, AppLocalizations l10n) {
     if (error.response?.data is Map<String, dynamic>) {
       final data = error.response!.data as Map<String, dynamic>;

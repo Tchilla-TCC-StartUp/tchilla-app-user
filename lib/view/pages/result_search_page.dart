@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tchilla/model/proposed_model.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
+import 'package:tchilla/resources/app_enums.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/pages/error_try_again.dart';
 import 'package:tchilla/view/widgets/app_custom_list_card.dart';
@@ -63,7 +65,7 @@ class _ResultSearchPageState extends State<ResultSearchPage>
   _buildTabs() {
     return AppGlobalTabBar(
       tabController: _tabController,
-      tabs: viewmodel.tabTitles.value,
+      tabs: viewmodel.tabTitles,
       onTap: viewmodel.selectTab,
       unselectedLabelColor: primaryBorder,
       labelColor: primary950,
@@ -112,8 +114,15 @@ class _ResultSearchPageState extends State<ResultSearchPage>
       itemBuilder: (context, itemIndex) => Padding(
         padding: EdgeInsets.symmetric(vertical: 1.h),
         child: ProposedCard(
+          proposed: ProposedModel(
+            image: AppAssetsImages.defaultProposedImage,
+            name: "Salão de Festa Mela",
+            location: "Patriota",
+            suportpersonNumer: 300,
+            price: 350000,
+            type: ProposedType.combo,
+          ),
           onClick: () => viewmodel.selectProposed("id"),
-          services: const ["Dj", "Decoração"],
         ),
       ),
     );
@@ -125,8 +134,15 @@ class _ResultSearchPageState extends State<ResultSearchPage>
       itemBuilder: (context, itemIndex) => Padding(
         padding: EdgeInsets.symmetric(vertical: 1.h),
         child: ProposedCard(
+          proposed: ProposedModel(
+            image: AppAssetsImages.defaultProposedImage,
+            name: "Salão de Festa Mela",
+            location: "Patriota",
+            suportpersonNumer: 300,
+            price: 400000,
+            type: ProposedType.combo,
+          ),
           onClick: () => viewmodel.selectProposed("id"),
-          services: const ["Dj", "Decoração"],
         ),
       ),
     );

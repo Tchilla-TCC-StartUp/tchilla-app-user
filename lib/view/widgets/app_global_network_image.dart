@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tchilla/resources/app_assets_images.dart';
+import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_global_shimmer.dart';
-
 
 class AppGlobalNetworkImage extends StatelessWidget {
   const AppGlobalNetworkImage({
@@ -24,9 +25,13 @@ class AppGlobalNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: width,
       height: height,
+      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(border ?? 8),
+      ),
       child: isSvg
           ? SvgPicture.network(
               image,
@@ -41,8 +46,17 @@ class AppGlobalNetworkImage extends StatelessWidget {
               imageUrl: image,
               fit: fit ?? BoxFit.cover,
               placeholder: (context, url) => _buildShimmer(border),
-              errorWidget: (context, url, error) =>
-                  const Icon(Icons.error, color: Colors.red),
+              errorWidget: (context, url, error) {
+                // return const Icon(Icons.error, color: Colors.red);
+                return Center(
+                  child: SvgPicture.asset(
+                    AppAssetsImages.logoSvg,
+                    width: width,
+                    height: height,
+                    // fit: BoxFit.fitHeight,
+                  ),
+                );
+              },
             ),
     );
   }

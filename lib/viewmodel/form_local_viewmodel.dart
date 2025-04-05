@@ -1,7 +1,6 @@
 import 'package:tchilla/viewmodel/base_forma_viewmodel.dart';
 
 class FormLocalViewmodel extends BaseFormaViewmodel {
-
   void searchLocal() async {
     if (localEvent.value == null ||
         dateEvent.value == null ||
@@ -10,9 +9,11 @@ class FormLocalViewmodel extends BaseFormaViewmodel {
         endTimeEvent.value == null ||
         numberGuestsEvent.value == null) {
       return notificator.showLocalAlert(
-          localizations.alert_attention, localizations.login_required_fields);
+        localizations.alert_attention,
+        localizations.form_required_fields_message,
+      );
     }
 
-  navigator.navigateToResultSearchPage();
+    navigator.navigateToResultSearchPage();
   }
 }
