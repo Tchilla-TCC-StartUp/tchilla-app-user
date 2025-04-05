@@ -107,7 +107,7 @@ class BaseViewModel extends GetxController {
           error is UnknownException ||
           error is ServerException) {
         emitError(error.message);
-        // showError(error);
+        showError(error);
       } else if (error is UnauthorizedException) {
         showError(error);
         cleanToken();

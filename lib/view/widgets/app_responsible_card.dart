@@ -13,7 +13,6 @@ class AppResponsibleCard extends StatelessWidget {
   final String imageUrl;
   final double rating;
   final int reviews;
-
   const AppResponsibleCard({
     super.key,
     required this.name,
