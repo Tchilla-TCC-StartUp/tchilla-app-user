@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
-import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
