@@ -2,6 +2,7 @@ class AppAssetsImages {
   static const String _imagesPath = 'assets/images/';
   static const String _vectorsPath = 'assets/vectores/';
   static const String _iconsPath = 'assets/icons/';
+  static const String _animationsPath = 'assets/animations/';
 
   // Ícones SVG
   static const String _logoSvg = '${_vectorsPath}logo.svg';
@@ -58,6 +59,9 @@ class AppAssetsImages {
 
   static const String _mcxNetworkIMage =
       'https://emis.ao/media/wz3fuo21/express_logo.jpg?anchor=center&rnd=133184617376030000&preset=mediatextslidermin320';
+
+  static const String _tchillaLoadingAnimation =
+      '${_animationsPath}tchilla_loading_animation.json';
   // Métodos GET
   static String get logoSvg => _logoSvg;
   static String get logotipoSvg => _logotipoSvg;
@@ -92,4 +96,5 @@ class AppAssetsImages {
   static String get defaultUserImage => _defaultUserImage;
   static String get defaultProposedImage => _defaultProposedImage;
   static String get mcxNetworkImage => _mcxNetworkIMage;
+  static String get tchillaLoadingAnimation => _tchillaLoadingAnimation;
 }

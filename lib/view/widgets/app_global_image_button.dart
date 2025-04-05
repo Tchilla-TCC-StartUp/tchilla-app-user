@@ -1,12 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:tchilla/style/app_text_style.dart';
-import 'package:tchilla/style/colors.dart';
-import 'package:tchilla/view/widgets/app_global_text.dart';
+import 'package:tchilla/resources/app_debouncer.dart';
 
 class AppGlobalImageButton extends StatelessWidget {
-  const AppGlobalImageButton({
+  AppGlobalImageButton({
     super.key,
     required this.onPressed,
     this.minWidth,
@@ -18,22 +16,34 @@ class AppGlobalImageButton extends StatelessWidget {
   final double? minWidth;
   final Widget child;
   final Color? color;
+  final AppDebouncer _debouncer = AppDebouncer(milliseconds: 3000);
+
+  void _handlePress() {
+    if (!_debouncer.isReady.value) return;
+    onPressed();
+    _debouncer.run(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      color: color,
-      splashColor: color,
-      elevation: 0,
-      hoverColor: Colors.transparent,
-      minWidth: minWidth,
-      hoverElevation: 0,
-      height: 55.px,
-      onPressed: onPressed,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.px),
-      ),
-      child: child,
-    );
+    return Obx(() {
+      return Opacity(
+        opacity: _debouncer.isReady.value ? 1 : 0.5,
+        child: MaterialButton(
+          color: color,
+          splashColor: color,
+          elevation: 0,
+          hoverColor: Colors.transparent,
+          minWidth: minWidth,
+          hoverElevation: 0,
+          height: 55.px,
+          onPressed: _handlePress,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.px),
+          ),
+          child: child,
+        ),
+      );
+    });
   }
 }

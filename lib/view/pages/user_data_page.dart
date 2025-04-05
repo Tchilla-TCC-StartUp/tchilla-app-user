@@ -14,6 +14,7 @@ import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/services/events/navigation.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
+import 'package:tchilla/view/widgets/tchilla_animation_loading.dart';
 import 'package:tchilla/viewmodel/user_data_viewmodel.dart';
 
 class UserDataPage extends StatefulWidget {
@@ -51,7 +52,7 @@ class _UserDataPageState extends State<UserDataPage> {
         body: Obx(
           () {
             return viewmodel.isLoading.value
-                ? const Center(child: CircularProgressIndicator())
+                ? const Center(child: TchillaAnimationLoading())
                 : viewmodel.isError.value
                     ? ErrorTryAgain(message: viewmodel.errorMessage.value)
                     : SingleChildScrollView(

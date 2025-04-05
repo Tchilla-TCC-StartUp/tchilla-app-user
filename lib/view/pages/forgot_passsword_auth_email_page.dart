@@ -32,12 +32,12 @@ class _ForengePassswordAuthEmailPageState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Headerpage(
-            title: AppLocalizations.of(context)!.forgot_password,
+            title: viewmodel.localizations.forgot_password,
             description:
-                AppLocalizations.of(context)!.forgot_password_description,
+                viewmodel.localizations.forgot_password_description,
           ),
           AppGlobalInput(
-            helpText: AppLocalizations.of(context)!.email_address,
+            helpText: viewmodel.localizations.email_address,
             hintText: "celson.paixao@gmail.com",
             focusNode: viewmodel.emailFocus,
            onChanged: viewmodel.chengeEmail,
@@ -52,7 +52,7 @@ class _ForengePassswordAuthEmailPageState
             
              
             ),
-            textButton: AppLocalizations.of(context)!.confirm,
+            textButton: viewmodel.localizations.confirm,
           )
         ],
       )),

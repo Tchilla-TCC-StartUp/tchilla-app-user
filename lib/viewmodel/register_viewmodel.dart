@@ -1,4 +1,3 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:tchilla/services/events/user_service.dart';
 import 'package:tchilla/viewmodel/base_viewmodel.dart';
@@ -15,8 +14,6 @@ class RegisterViewmodel extends BaseViewModel {
   final Rxn<String?> telefone = Rxn<String?>();
 
   register() async {
-    final localizations = AppLocalizations.of(context)!;
-
     if (name.value == null || name.value!.trim().isEmpty) {
       return showWarning(localizations.error_full_name_required);
     }
@@ -46,6 +43,7 @@ class RegisterViewmodel extends BaseViewModel {
       ),
       onSuccess: (value) {
         this.navigator.navigateToLoginPage();
+        cleanFields([email, name, telefone, password]);
         showSuccess(value.message!);
       },
       onError: (error) {

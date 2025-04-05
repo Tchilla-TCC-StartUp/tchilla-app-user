@@ -27,13 +27,16 @@ class UserRepository extends BaseRepository implements IuserRepository {
     required String telefone,
     String? lang,
   }) async {
-    final respose = await post("/Auth/register", data: {
-      "nome": name,
-      "email": email,
-      "telefone": telefone,
-      "senha": password,
-      "tipo": 0
-    });
+    final respose = await post(
+      "/Auth/register",
+      data: {
+        "nome": name,
+        "email": email,
+        "telefone": telefone,
+        "senha": password,
+        "tipo": 0
+      },
+    );
 
     return AuthModel.fromMap(respose);
   }

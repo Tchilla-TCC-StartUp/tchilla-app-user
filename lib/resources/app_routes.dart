@@ -1,5 +1,4 @@
 class AppRoutes {
-
   static const String _initialRoute = "/";
   static const String _mainRouter = "${_initialRoute}main";
 
@@ -8,6 +7,7 @@ class AppRoutes {
 
   static const String _homePage = "$_mainRouter/home";
   static const String _profilePage = "$_mainRouter/profile";
+  static const String _schedulesPage = "$_profilePage/schedules";
   static const String _resultSearchPage = "$_homePage/result_search";
   static const String _detailsPage = "$_resultSearchPage/detalhes";
   static const String _userdataPage = "$_profilePage/user_data";
@@ -52,5 +52,5 @@ class AppRoutes {
   static String get errorPage => _errorPage;
   static String get tiketPage => _tiketPage;
   static String get chosePaymentPage => _chosePaymentPage;
-
+  static String get schedulesPage => _schedulesPage;
 }

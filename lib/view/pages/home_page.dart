@@ -20,6 +20,7 @@ import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/form_local.dart';
 import 'package:tchilla/view/widgets/form_local_end_service.dart';
 import 'package:tchilla/view/widgets/form_service.dart';
+import 'package:tchilla/view/widgets/tchilla_animation_loading.dart';
 import 'package:tchilla/viewmodel/home_viewmodel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -66,45 +67,53 @@ class _HomePageState extends State<HomePage>
         statusBarIconBrightness: Brightness.light,
       ),
       child: Scaffold(
-        body: Obx(
-          () {
-            return viewmodel.isLoading.value
-                ? const AppGlobalLoading()
-                : viewmodel.isError.value
-                    ? ErrorTryAgain(
-                        message: viewmodel.errorMessage.value,
-                        event: viewmodel.initEvet,
-                      )
-                    : SingleChildScrollView(
-                        child: GestureDetector(
-                          onTap: () {
-                            FocusManager.instance.primaryFocus?.unfocus();
-                          },
-                          behavior: HitTestBehavior.opaque,
-                          child: Column(
-                            children: [
-                              AnimatedContainer(
-                                duration: const Duration(milliseconds: 660),
-                                curve: Curves.easeInOut,
-                                height:
-                                    viewmodel.adptiveSilverExpade.value + 2.h,
-                                child: Stack(
-                                  children: [
-                                    _buildBackground(),
-                                    _buildContainerMan(),
-                                  ],
+          body: Obx(
+            () {
+              return viewmodel.isLoading.value
+                  ? const TchillaAnimationLoading()
+                  : viewmodel.isError.value
+                      ? ErrorTryAgain(
+                          message: viewmodel.errorMessage.value,
+                          event: viewmodel.initEvet,
+                        )
+                      : SingleChildScrollView(
+                          child: GestureDetector(
+                            onTap: () {
+                              FocusManager.instance.primaryFocus?.unfocus();
+                            },
+                            behavior: HitTestBehavior.opaque,
+                            child: Column(
+                              children: [
+                                AnimatedContainer(
+                                  duration: const Duration(milliseconds: 660),
+                                  curve: Curves.easeInOut,
+                                  height:
+                                      viewmodel.adptiveSilverExpade.value + 2.h,
+                                  child: Stack(
+                                    children: [
+                                      _buildBackground(),
+                                      _buildContainerMan(),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              const AppLayoutpage(
-                                body: ViewMorePage(),
-                              )
-                            ],
+                                const AppLayoutpage(
+                                  body: ViewMorePage(),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-          },
-        ),
-      ),
+                        );
+            },
+          ),
+          floatingActionButton: Obx(
+            () => viewmodel.isVisitor.value
+                ? FloatingActionButton(
+                    onPressed: viewmodel.logoutVisitorMode,
+                    tooltip: viewmodel.localizations.logout,
+                    backgroundColor: primary50,
+                    child: SvgPicture.asset(AppAssetsImages.logoutIconSvg))
+                : const SizedBox.shrink(),
+          )),
     );
   }
 

@@ -33,7 +33,7 @@ class _ChoosePaymentMethodPageState extends State<ChoosePaymentMethodPage> {
           centerTitle: true,
           backgroundColor: Colors.transparent,
           title: AppGlobalText(
-            text: AppLocalizations.of(context)!.deposit,
+            text: viewmodel.localizations.deposit,
             style: TextStyleEnum.h3_bold,
           ),
         ),
@@ -65,7 +65,7 @@ class _ChoosePaymentMethodPageState extends State<ChoosePaymentMethodPage> {
           value: 1.h,
         ),
         AppGlobalText(
-          text: AppLocalizations.of(context)!.add_or_search_deposit_methods,
+          text: viewmodel.localizations.add_or_search_deposit_methods,
           style: TextStyleEnum.h3_bold,
           color: primary950,
         ),
@@ -73,7 +73,7 @@ class _ChoosePaymentMethodPageState extends State<ChoosePaymentMethodPage> {
           value: 1.h,
         ),
         AppGlobalText(
-          text: AppLocalizations.of(context)!.choose_payment_method,
+          text: viewmodel.localizations.choose_payment_method,
           style: TextStyleEnum.p_light,
           color: gray500,
         ),

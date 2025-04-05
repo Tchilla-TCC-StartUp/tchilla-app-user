@@ -35,16 +35,20 @@ class UserDataViewModel extends BaseViewModel {
   }
 
   void getUserData() async {
-    await onRequest(
-      event: service.getUserData(token: token.value),
-      onSuccess: (value) {
-        email.value = value.email;
-        password.value = '*********';
-        name.value = value.nome;
-        telefone.value = value.telefone;
-        image.value = value.foto;
-      },
-    );
+    await onEvent(
+        checkLogin: true,
+        event: (token) async {
+      onRequest(
+        event: service.getUserData(token: token),
+        onSuccess: (value) {
+          email.value = value.email;
+          password.value = '*********';
+          name.value = value.nome;
+          telefone.value = value.telefone;
+          image.value = value.foto;
+        },
+      );
+    });
   }
 
   void setEmail(String? value) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tchilla/resources/app_formaters.dart';
 
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
@@ -31,11 +32,12 @@ class AppGlobalDatePicker extends StatefulWidget {
     this.decoration,
   })  : initialDate = initialDate,
         firstDate = firstDate ?? DateTime.now(),
-        lastDate = lastDate ?? DateTime(
-          DateTime.now().year,
-          DateTime.now().month +1,
-          DateTime.now().day,
-        );
+        lastDate = lastDate ??
+            DateTime(
+              DateTime.now().year,
+              DateTime.now().month + 1,
+              DateTime.now().day,
+            );
 
   @override
   _AppGlobalDatePickerState createState() => _AppGlobalDatePickerState();
@@ -93,26 +95,5 @@ class _AppGlobalDatePickerState extends State<AppGlobalDatePicker> {
         ),
       ],
     );
-  }
-
-  String formatDateToReadableString(DateTime date) {
-    const months = [
-      "JAN",
-      "FEV",
-      "MAR",
-      "ABR",
-      "MAI",
-      "JUN",
-      "JUL",
-      "AGO",
-      "SET",
-      "OUT",
-      "NOV",
-      "DEZ"
-    ];
-    String day = date.day.toString().padLeft(2, '0');
-    String month = months[date.month - 1];
-    String year = date.year.toString();
-    return "$day $month $year";
   }
 }
