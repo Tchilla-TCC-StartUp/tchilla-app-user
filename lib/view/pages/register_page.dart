@@ -13,7 +13,7 @@ import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
-import 'package:tchilla/viewmodel/register_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/register_viewmodel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../widgets/app_global_image_button.dart';
 

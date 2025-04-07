@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:tchilla/resources/app_routes.dart';
 import 'package:tchilla/services/events/user_service.dart';
-import 'package:tchilla/viewmodel/base_viewmodel.dart';
+import 'package:tchilla/viewmodel/interface/iuser_data_viewmodel.dart';
 
-class UserDataViewModel extends BaseViewModel {
+class UserDataViewModel extends IUserDataViewmodel {
   final UserService service;
   final RxBool isNameEditable = false.obs;
   final RxBool isEmailEditable = false.obs;
@@ -17,6 +17,7 @@ class UserDataViewModel extends BaseViewModel {
 
   UserDataViewModel({required this.service});
 
+  @override
   void initEvets() {
     getUserData();
   }
@@ -25,15 +26,18 @@ class UserDataViewModel extends BaseViewModel {
     isNameEditable.value = !isNameEditable.value;
   }
 
+  @override
   void toggleEmailEditable() {
     isEmailEditable.value = !isEmailEditable.value;
   }
 
+  @override
   void togglePasswordEditable() {
     // isPasswordEditable.value = !isPasswordEditable.value;
     this.navigator.navigateToRefefinePasswordPage(AppRoutes.userdataPage);
   }
 
+  @override
   void getUserData() async {
     await onEvent(
         checkLogin: true,
@@ -51,21 +55,25 @@ class UserDataViewModel extends BaseViewModel {
     });
   }
 
+  @override
   void setEmail(String? value) {
     setFieldChange(email, value);
     loger.info('Email é $email');
   }
 
+  @override
   void setPassword(String? value) {
     setFieldChange(password, value);
     loger.info('Password é $password');
   }
 
+  @override
   void setName(String? value) {
     setFieldChange(name, value);
     loger.info('Nome é $name');
   }
 
+  @override
   void setPhoneNumer(String? value) {
     setFieldChange(telefone, value);
     loger.info('Telefone é $telefone');

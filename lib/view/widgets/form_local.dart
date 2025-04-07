@@ -11,8 +11,8 @@ import 'package:tchilla/view/widgets/app_global_searchI_input.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_global_time_picker.dart';
-import 'package:tchilla/viewmodel/form_local_viewmodel.dart';
-import 'package:tchilla/viewmodel/home_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/form_local_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/home_viewmodel.dart';
 
 class FormLocal extends StatefulWidget {
   const FormLocal({

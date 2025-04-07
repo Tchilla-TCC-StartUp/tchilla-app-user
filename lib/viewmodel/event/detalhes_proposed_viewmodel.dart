@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:tchilla/resources/app_assets_images.dart';
-import 'package:tchilla/viewmodel/base_viewmodel.dart';
+import 'package:tchilla/viewmodel/interface/idetalhes_proposed_viewmodel.dart';
 
-class DetalheProposedViewModel extends BaseViewModel {
+class DetalheProposedViewModel extends IDetalhesProposedViewmodel {
   final RxInt selectedIndex = 0.obs;
   final Rxn<TabController> tabController = Rxn<TabController>();
 
@@ -93,6 +92,7 @@ class DetalheProposedViewModel extends BaseViewModel {
   final currentIndex = 0.obs;
   final pageController = PageController();
 
+  @override
   void initTabController(TickerProvider ticker) {
     final controller = TabController(
       initialIndex: selectedIndex.value,
@@ -109,10 +109,12 @@ class DetalheProposedViewModel extends BaseViewModel {
     tabController.value = controller;
   }
 
+  @override
   void updateCurrentIndex(int index) {
     currentIndex.value = index;
   }
 
+  @override
   void selectTab(int index) {
     selectedIndex.value = index;
   }
@@ -121,10 +123,12 @@ class DetalheProposedViewModel extends BaseViewModel {
     this.navigator.navigateToBack();
   }
 
+  @override
   void selectProposed(String id) {
     this.navigator.navigateToDetalhesPage(id);
   }
 
+  @override
   void scheduleProposal(String id) {
     this.navigator.navigateToSummaryPage(id);
   }
@@ -135,8 +139,5 @@ class DetalheProposedViewModel extends BaseViewModel {
     super.dispose();
   }
 
-  @override
-  void initEvet() {
-    // TODO: implement initEvet
-  }
+
 }

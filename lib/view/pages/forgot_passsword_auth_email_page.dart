@@ -8,7 +8,7 @@ import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/headerpage.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:tchilla/viewmodel/forgont_password_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/forgont_password_viewmodel.dart';
 
 class ForgotPassswordAuthEmailPage extends StatefulWidget {
   const ForgotPassswordAuthEmailPage({super.key});

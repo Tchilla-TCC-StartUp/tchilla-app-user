@@ -11,7 +11,7 @@ import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/proposed_card.dart';
-import 'package:tchilla/viewmodel/schedules_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/schedules_viewmodel.dart';
 
 class SchedulesPage extends StatefulWidget {
   const SchedulesPage({super.key});

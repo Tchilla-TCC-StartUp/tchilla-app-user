@@ -6,10 +6,10 @@ import 'package:tchilla/model/service_model.dart';
 import 'package:tchilla/model/user_model.dart';
 import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/services/events/home_service.dart';
-import 'package:tchilla/viewmodel/base_viewmodel.dart';
 import 'package:tchilla/model/home_model.dart';
+import 'package:tchilla/viewmodel/interface/Ihome_viewmodel.dart';
 
-class HomeViewModel extends BaseViewModel {
+class HomeViewModel extends  IHomeViewmodel{
   final HomeService service;
   HomeViewModel({required this.service});
   RxInt selectedIndex = 0.obs;
@@ -27,17 +27,20 @@ class HomeViewModel extends BaseViewModel {
   final RxBool _isVisitor = false.obs;
   RxBool get isVisitor => _isVisitor;
 
+  @override
   void setIsVisitor() async {
     _isVisitor.value = true;
     loger.info("Entrou no modo Visitante!");
   }
 
+  @override
   void logoutVisitorMode() {
     _isVisitor.value = false;
     loger.info("Saiu do modo Visitante!");
     this.navigator.navigateToWelcomePage();
   }
 
+  @override
   void selectTab(int index, FocusNode focusNode) {
     desableFocus();
     focusNode.unfocus();
@@ -55,6 +58,7 @@ class HomeViewModel extends BaseViewModel {
     getUserData();
   }
 
+  @override
   void initLocalData() async {
     tabTitlesForm.assignAll([
       localizations.tabVenueAndServices,
@@ -87,6 +91,7 @@ class HomeViewModel extends BaseViewModel {
     ]);
   }
 
+  @override
   void getUserData() async {
     await onEvent(
         checkLogin: true,
@@ -105,6 +110,7 @@ class HomeViewModel extends BaseViewModel {
         });
   }
 
+  @override
   void navigateToProfilePage() async {
     onEvent(
       checkLogin: true,
@@ -120,6 +126,7 @@ class HomeViewModel extends BaseViewModel {
     );
   }
 
+  @override
   void navigateToNotificationPage() async {
     await onEvent(
       checkLogin: true,
@@ -136,12 +143,14 @@ class HomeViewModel extends BaseViewModel {
     return this.navigator.navigateToResultSearchPage();
   }
 
+  @override
   void onFocus(FocusNode focusNode) {
     var focus = isVisible.value = focusNode.hasFocus;
     adptiveHeight.value = focus ? 220.px : 520.px;
     adptiveSilverExpade.value = focus ? 480.px : 780.px;
   }
 
+  @override
   void updateAdaptiveHeight(FocusNode focusNode) {
     switch (selectedIndex.value) {
       case 1:

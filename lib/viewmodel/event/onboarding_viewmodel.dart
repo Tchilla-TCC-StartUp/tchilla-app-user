@@ -1,12 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-
 import 'package:tchilla/model/onboarding_model.dart';
 import 'package:tchilla/services/events/onboarding_service.dart';
-import 'package:tchilla/viewmodel/base_viewmodel.dart';
+import 'package:tchilla/viewmodel/interface/ionboarding_viewmodel.dart';
 
-class OnboardingViewModel extends BaseViewModel {
+class OnboardingViewModel extends IOnboardingViewmodel {
   final OnboardingService service;
   OnboardingViewModel({
     required this.service,
@@ -18,6 +16,7 @@ class OnboardingViewModel extends BaseViewModel {
 
   RxList<OnboardingModel> get onboarding => _onboarding;
 
+  @override
   void getOnboarding() async {
     await onRequest(
       event: service.fetchOnboadData(lang),
@@ -27,6 +26,7 @@ class OnboardingViewModel extends BaseViewModel {
     );
   }
 
+  @override
   void nextPage() {
     if (currentPage.value < 2) {
       pageController.nextPage(
@@ -38,6 +38,7 @@ class OnboardingViewModel extends BaseViewModel {
     }
   }
 
+  @override
   void clickSkip() {
     this.navigator.navigateToWelcomePage();
   }

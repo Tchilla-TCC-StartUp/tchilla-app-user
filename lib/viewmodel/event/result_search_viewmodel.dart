@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:tchilla/viewmodel/base_viewmodel.dart';
+import 'package:tchilla/viewmodel/interface/iresult_search_viewmodel.dart';
 
-class ResultSearchViewModel extends BaseViewModel {
+class ResultSearchViewModel extends IResultSearchViewmodel {
   RxInt selectedIndex = 0.obs;
   RxList<String> tabTitles = [
     'Todas Ofertas',
@@ -11,11 +11,12 @@ class ResultSearchViewModel extends BaseViewModel {
     'Melhores custos e benefício',
   ].obs;
 
-
+  @override
   void selectTab(int index) {
     selectedIndex.value = index;
   }
 
+  @override
   selectProposed(String id) {
     this.navigator.navigateToDetalhesPage(id);
   }

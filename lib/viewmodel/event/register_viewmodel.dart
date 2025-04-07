@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:tchilla/services/events/user_service.dart';
-import 'package:tchilla/viewmodel/base_viewmodel.dart';
+import 'package:tchilla/viewmodel/interface/iregister_viewmodel.dart';
 
-class RegisterViewmodel extends BaseViewModel {
+class RegisterViewmodel extends IRegisterViewmodel {
   final UserService service;
   RegisterViewmodel({required this.service});
 
@@ -13,6 +13,7 @@ class RegisterViewmodel extends BaseViewModel {
   final Rxn<String?> name = Rxn<String?>();
   final Rxn<String?> telefone = Rxn<String?>();
 
+  @override
   register() async {
     if (name.value == null || name.value!.trim().isEmpty) {
       return showWarning(localizations.error_full_name_required);
@@ -45,34 +46,39 @@ class RegisterViewmodel extends BaseViewModel {
         this.navigator.navigateToLoginPage();
         cleanFields([email, name, telefone, password]);
         showSuccess(value.message!);
+
+        navigateToLoginPage();
       },
       onError: (error) {
         showError(error.errorMessage);
       },
     );
-
-    await navigateToLoginPage();
   }
 
+  @override
   navigateToLoginPage() {
     this.navigator.navigateToLoginPage();
   }
 
+  @override
   void setEmail(String? value) {
     setFieldChange(email, value);
     loger.info('Email é $email');
   }
 
+  @override
   void setPassword(String? value) {
     setFieldChange(password, value);
     loger.info('Password é $password');
   }
 
+  @override
   void setName(String? value) {
     setFieldChange(name, value);
     loger.info('Nome é $name');
   }
 
+  @override
   void setPhoneNumer(String? value) {
     setFieldChange(telefone, value);
     loger.info('Telefone é $telefone');
