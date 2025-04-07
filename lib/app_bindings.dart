@@ -8,6 +8,7 @@ import 'package:tchilla/resources/app_constats.dart';
 import 'package:tchilla/resources/app_dio.dart';
 import 'package:tchilla/resources/app_logs.dart';
 import 'package:tchilla/resources/app_routes.dart';
+import 'package:tchilla/services/events/conectivity_service.dart';
 import 'package:tchilla/services/events/home_service.dart';
 import 'package:tchilla/services/events/navigation.dart';
 import 'package:tchilla/services/events/notificator.dart';
@@ -57,6 +58,7 @@ class AppBindings implements Bindings {
 
   // ---------- Registro de Eventos ----------
   static void registerServices() {
+    Get.lazyPut<ConectivityService>(() => ConectivityService());
     Get.lazyPut<HomeService>(() => HomeService());
     Get.lazyPut<UserService>(() => UserService());
     Get.lazyPut<OnboardingService>(() => OnboardingService());
@@ -78,7 +80,7 @@ class AppBindings implements Bindings {
 
   // ---------- Registro de ViewModels ----------
   static void registerViewmodels() {
-    Get.put<SplashViewmodel>(SplashViewmodel());
+    Get.put<SplashViewmodel>(SplashViewmodel(conectivityService: Get.find()));
 
     Get.put<OnboardingViewModel>(OnboardingViewModel(service: Get.find()));
 
@@ -90,7 +92,8 @@ class AppBindings implements Bindings {
 
     Get.put<RegisterViewmodel>(RegisterViewmodel(service: Get.find()));
 
-    Get.put<ForgontPasswordViewmodel>(ForgontPasswordViewmodel(service: Get.find()));
+    Get.put<ForgontPasswordViewmodel>(
+        ForgontPasswordViewmodel(service: Get.find()));
 
     Get.put<HomeViewModel>(HomeViewModel(service: Get.find()));
 
