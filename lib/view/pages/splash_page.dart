@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/resources/app_size.dart';
-import 'package:tchilla/viewmodel/splash_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/splash_viewmodel.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

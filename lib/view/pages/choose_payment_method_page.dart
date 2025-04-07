@@ -12,7 +12,7 @@ import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:tchilla/viewmodel/choose_payment_method_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/choose_payment_method_viewmodel.dart';
 
 class ChoosePaymentMethodPage extends StatefulWidget {
   const ChoosePaymentMethodPage({super.key});

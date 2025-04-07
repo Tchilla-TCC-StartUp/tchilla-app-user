@@ -13,7 +13,7 @@ import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_user_avatar_name.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/profile_section_card.dart';
-import 'package:tchilla/viewmodel/profile_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/profile_viewmodel.dart';
 
 class ProfilePage extends StatefulWidget {
   final String userNamer;

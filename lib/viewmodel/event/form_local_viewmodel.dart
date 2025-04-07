@@ -1,14 +1,14 @@
-import 'package:tchilla/viewmodel/base_forma_viewmodel.dart';
+import 'package:tchilla/viewmodel/interface/iform_local_viewmodel.dart';
 
-class FormLocalEndServiceViewmodel extends BaseFormaViewmodel {
-  void searchLocalAndService() async {
+class FormLocalViewmodel extends IFormLocalViewmodel {
+  @override
+  void searchLocal() async {
     if (localEvent.value == null ||
         dateEvent.value == null ||
         typeEvent.value == null ||
         starTimeEvent.value == null ||
         endTimeEvent.value == null ||
-        numberGuestsEvent.value == null ||
-        serviceEvent.isEmpty) {
+        numberGuestsEvent.value == null) {
       return notificator.showLocalAlert(
         localizations.alert_attention,
         localizations.form_required_fields_message,

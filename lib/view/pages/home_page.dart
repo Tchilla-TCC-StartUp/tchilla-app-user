@@ -22,7 +22,7 @@ import 'package:tchilla/view/widgets/form_local.dart';
 import 'package:tchilla/view/widgets/form_local_end_service.dart';
 import 'package:tchilla/view/widgets/form_service.dart';
 import 'package:tchilla/view/widgets/tchilla_animation_loading.dart';
-import 'package:tchilla/viewmodel/home_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/home_viewmodel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {

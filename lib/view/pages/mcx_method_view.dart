@@ -8,7 +8,7 @@ import 'package:tchilla/view/widgets/app_global_phone_number_input.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
-import 'package:tchilla/viewmodel/choose_payment_method_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/choose_payment_method_viewmodel.dart';
 
 class McxMethodView extends StatefulWidget {
   final ChoosePaymentMethodViewmodel choosePaymentMethodViewmodel;

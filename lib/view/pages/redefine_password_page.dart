@@ -9,7 +9,7 @@ import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/headerpage.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../viewmodel/forgont_password_viewmodel.dart';
+import '../../viewmodel/event/forgont_password_viewmodel.dart';
 
 class RedefinePasswordPage extends StatefulWidget {
   final String previousWalk;
@@ -36,8 +36,7 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
           children: [
             Headerpage(
               title: viewmodel.localizations.reset_password,
-              description:
-                  viewmodel.localizations.reset_password_description,
+              description: viewmodel.localizations.reset_password_description,
             ),
             AppGlobalInput(
               helpText: viewmodel.localizations.password,
@@ -61,7 +60,6 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
                 viewmodel.resetPassword(
                   passordController.text,
                   confirmPassordController.text,
-                  context,
                   widget.previousWalk,
                 );
               },
@@ -75,7 +73,6 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
                 viewmodel.resetPassword(
                   passordController.text,
                   confirmPassordController.text,
-                  context,
                   widget.previousWalk,
                 );
               },

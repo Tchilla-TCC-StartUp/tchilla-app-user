@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tchilla/resources/app_routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:tchilla/viewmodel/base_viewmodel.dart';
+import 'package:tchilla/viewmodel/interface/iforgont_password_viewmodel.dart';
 
-class ForgontPasswordViewmodel extends BaseViewModel {
+class ForgontPasswordViewmodel extends IForgontPasswordViewmodel {
   final Rxn<String> email = Rxn<String>();
   final FocusNode emailFocus = FocusNode();
-  void confirmPin(String pin, BuildContext context) {
+
+  @override
+  void confirmPin(String pin) {
     if (pin.length != 6) {
       showWarning(
         localizations.error_fill_all_fields,
@@ -20,10 +22,10 @@ class ForgontPasswordViewmodel extends BaseViewModel {
     }
   }
 
+  @override
   Future<void> resetPassword(
     String password,
     String confirmPassword,
-    BuildContext context,
     final String previousWalk,
   ) async {
     final localizations = AppLocalizations.of(context)!;
@@ -55,6 +57,7 @@ class ForgontPasswordViewmodel extends BaseViewModel {
     }
   }
 
+  @override
   Future<void> submitEmail() async {
     if (email.value!.isEmpty) {
       showWarning(
@@ -74,6 +77,7 @@ class ForgontPasswordViewmodel extends BaseViewModel {
     await this.navigator.navigateToConfirmationPage();
   }
 
+  @override
   void chengeEmail(String? value) {
     loger.info("Email: $email");
     return setFieldChange(email, value);
@@ -83,10 +87,5 @@ class ForgontPasswordViewmodel extends BaseViewModel {
   void dispose() {
     super.dispose();
     emailFocus.dispose();
-  }
-  
-  @override
-  void initEvet() {
-    // TODO: implement initEvet
   }
 }

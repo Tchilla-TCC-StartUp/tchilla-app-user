@@ -1,15 +1,16 @@
 import 'package:get/get.dart';
 import 'package:tchilla/model/welcome_model.dart';
 import 'package:tchilla/services/events/welcome_service.dart';
-import 'package:tchilla/viewmodel/base_viewmodel.dart';
+import 'package:tchilla/viewmodel/interface/iwelcome_viewmodel.dart';
 
-class WelcomeViewmodel extends BaseViewModel {
+class WelcomeViewmodel extends IWelcomeViewmodel {
   final WelcomeService service;
   final Rxn<WelcomeModel> _welcomeData = Rxn<WelcomeModel>();
 
   WelcomeViewmodel({required this.service});
   WelcomeModel? get welcomeData => _welcomeData.value;
 
+  @override
   void getWelcomeData() async {
     await onRequest(
       event: service.fetchWelcomeData(lang),
@@ -19,18 +20,21 @@ class WelcomeViewmodel extends BaseViewModel {
     );
   }
 
+  @override
   void navigateToLogin() {
     onEvent(event: (_) async {
       await this.navigator.navigateToLoginPage();
     });
   }
 
+  @override
   void navigateToRegister() {
     onEvent(event: (_) async {
       await this.navigator.navigateToRegisterPage();
     });
   }
 
+  @override
   void enterAsVisitor() async {
     await onEvent(
       event: (_) async {

@@ -11,7 +11,7 @@ import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/onboarding_body.dart';
 import 'package:tchilla/view/widgets/tchilla_animation_loading.dart';
-import 'package:tchilla/viewmodel/welcome_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/welcome_viewmodel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WelcomePage extends StatefulWidget {

@@ -18,7 +18,7 @@ import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_global_user_avatar_name.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/app_responsible_card.dart';
-import 'package:tchilla/viewmodel/detalhes_proposed_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/detalhes_proposed_viewmodel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetalheProposedPage extends StatefulWidget {

@@ -13,7 +13,7 @@ import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/proposed_card.dart';
-import 'package:tchilla/viewmodel/result_search_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/result_search_viewmodel.dart';
 
 class ResultSearchPage extends StatefulWidget {
   const ResultSearchPage({super.key});

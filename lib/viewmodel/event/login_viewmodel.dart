@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:tchilla/services/events/user_service.dart';
-import 'package:tchilla/viewmodel/base_viewmodel.dart';
+import 'package:tchilla/viewmodel/interface/ilogin_viewmodel.dart';
 
-class LoginViewmodel extends BaseViewModel {
+class LoginViewmodel extends ILoginViewmodel {
   final UserService service;
   final Rxn<String?> email = Rxn<String?>();
   final Rxn<String?> password = Rxn<String?>();
@@ -14,10 +14,12 @@ class LoginViewmodel extends BaseViewModel {
 
   LoginViewmodel({required this.service});
 
+  @override
   Future<void> navigateToRegisterPage() {
     return this.navigator.navigateToRegisterPage();
   }
 
+  @override
   login() async {
     if (email.value == null || password.value == null) {
       loger.info("Campos vazios detectados");
@@ -55,16 +57,19 @@ class LoginViewmodel extends BaseViewModel {
     );
   }
 
+  @override
   void setEmail(String? value) {
     setFieldChange(email, value);
     loger.info('Email é $email');
   }
 
+  @override
   void setPassword(String? value) {
     setFieldChange(password, value);
     loger.info('Password é $password');
   }
 
+  @override
   navigateToForengePasswordPage() {
     this.navigator.navigateToForengePassewordEmailPage();
   }
