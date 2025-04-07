@@ -90,7 +90,7 @@ class AppBindings implements Bindings {
 
     Get.put<RegisterViewmodel>(RegisterViewmodel(service: Get.find()));
 
-    Get.put<ForgontPasswordViewmodel>(ForgontPasswordViewmodel());
+    Get.put<ForgontPasswordViewmodel>(ForgontPasswordViewmodel(service: Get.find()));
 
     Get.put<HomeViewModel>(HomeViewModel(service: Get.find()));
 

@@ -3,8 +3,7 @@ import 'package:tchilla/repository/base_repository.dart';
 import 'package:tchilla/repository/interfaces/ionboarding_repository.dart';
 
 
-class OnboardingRepository extends BaseRepository
-    implements IonboardingRepository {
+class OnboardingRepository extends  IonboardingRepository {
 
 
   @override

@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
+import 'package:tchilla/resources/app_enums.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_animation_logo.dart';
@@ -85,6 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                 focusNode: passwordFocusNode,
                 helpText: viewmodel.localizations.password,
                 hintText: "*******",
+                inputType: AppInputType.password,
                 keyboardType: TextInputType.visiblePassword,
                 textInputAction: TextInputAction.send,
                 obscureText: true,
@@ -110,30 +112,30 @@ class _LoginPageState extends State<LoginPage> {
               AppGlobalVericalSpacing(
                 value: 3.h,
               ),
-              AppGlobalImageButton(
-                minWidth: 100.w,
-                color: primary300.withOpacity(.5),
-                onPressed: () {},
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                      AppAssetsImages.googleLogoSvg,
-                      width: 30.px,
-                      height: 30.px,
-                    ),
-                    const AppGlobalHorizontalSpacing(),
-                    AppGlobalText(
-                      text: viewmodel.localizations.sign_up_with_google,
-                      style: TextStyleEnum.p_normal,
-                      color: gray600,
-                    )
-                  ],
-                ),
-              ),
-              AppGlobalVericalSpacing(
-                value: 3.h,
-              ),
+              // AppGlobalImageButton(
+              //   minWidth: 100.w,
+              //   color: primary300.withOpacity(.5),
+              //   onPressed: () {},
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+              //       SvgPicture.asset(
+              //         AppAssetsImages.googleLogoSvg,
+              //         width: 30.px,
+              //         height: 30.px,
+              //       ),
+              //       const AppGlobalHorizontalSpacing(),
+              //       AppGlobalText(
+              //         text: viewmodel.localizations.sign_up_with_google,
+              //         style: TextStyleEnum.p_normal,
+              //         color: gray600,
+              //       )
+              //     ],
+              //   ),
+              // ),
+              // AppGlobalVericalSpacing(
+              //   value: 3.h,
+              // ),
               Align(
                 alignment: Alignment.center,
                 child: GestureDetector(

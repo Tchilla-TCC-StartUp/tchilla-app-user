@@ -4,6 +4,7 @@ import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/pages/error_try_again.dart';
 import 'package:tchilla/view/widgets/app_global_input.dart';
 import 'package:tchilla/view/widgets/app_global_network_image.dart';
+import 'package:tchilla/view/widgets/app_global_phone_number_input.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_global_user_avatar_name.dart';
@@ -52,7 +53,7 @@ class _UserDataPageState extends State<UserDataPage> {
       body: AppLayoutpage(
         body: Obx(
           () {
-            return viewmodel.isLoading.value
+            return viewmodel.localLoading.value
                 ? const Center(child: TchillaAnimationLoading())
                 : viewmodel.isError.value
                     ? ErrorTryAgain(message: viewmodel.errorMessage.value)
@@ -66,65 +67,62 @@ class _UserDataPageState extends State<UserDataPage> {
                               size: 150.px,
                             ),
                             AppGlobalVericalSpacing(value: 18.px),
-                            _buildUserDataCard(
-                              initalValue: viewmodel.name.value ?? '',
+
+                            // Name
+                            AppGlobalInput(
                               helpText: viewmodel.localizations.name,
-                              isEditable: viewmodel.isNameEditable,
-                              onToggleEditable: viewmodel.toggleNameEditable,
+                              initialValue: viewmodel.name.value ?? '',
                               onChanged: viewmodel.setName,
                             ),
                             AppGlobalVericalSpacing(value: 18.px),
-                            _buildUserDataCard(
-                              initalValue: viewmodel.email.value ?? '',
+
+                            // Email
+                            AppGlobalInput(
                               helpText: viewmodel.localizations.email_address,
-                              isEditable: viewmodel.isEmailEditable,
-                              onToggleEditable: viewmodel.toggleEmailEditable,
+                              initialValue: viewmodel.email.value ?? '',
                               onChanged: viewmodel.setEmail,
                             ),
                             AppGlobalVericalSpacing(value: 18.px),
-                            _buildUserDataCard(
-                              initalValue: viewmodel.password.value ?? '',
+
+                            // Phone
+                            AppGlobalPhoneNumberInput(
+                              label: viewmodel.localizations.telephone_number,
+                              initialValue: viewmodel.telefone.value ?? '',
+                              initialCountryCode: '+244',
+                              onCountryCodeChanged: (code) {
+                                viewmodel.countryCode.value = code;
+                                print(code);
+                              },
+                              onChanged: viewmodel.setPhoneNumer,
+                            ),
+                            AppGlobalVericalSpacing(value: 18.px),
+
+                            // Password
+                            AppGlobalInput(
+                              readOnly: true,
+                              suffix: GestureDetector(
+                                onTap: viewmodel.togglePasswordEditable,
+                                child: Icon(
+                                  Icons.edit_note_rounded,
+                                  size: 16.px,
+                                ),
+                              ),
                               helpText: viewmodel.localizations.password,
-                              isEditable: viewmodel.isPasswordEditable,
-                              onToggleEditable:
-                                  viewmodel.togglePasswordEditable,
-                              isPassword: true,
+                              initialValue: viewmodel.password.value ?? '',
+                              obscureText: true,
+
                             ),
                             AppGlobalVericalSpacing(value: 28.px),
                             AppGlobalTextButton(
                               textButton: viewmodel.localizations.save,
                               minWidth: 100.w,
-                              onPressed: () {},
+                              isLoading: viewmodel.isLoading.value,
+                              onPressed: viewmodel.updateUser,
                             )
                           ],
                         ),
                       );
           },
-        ),
-      ),
-    );
-  }
-
-  Widget _buildUserDataCard({
-    required String initalValue,
-    required String helpText,
-    required RxBool isEditable,
-    required VoidCallback onToggleEditable,
-    void Function(String)? onChanged,
-    bool? isPassword,
-  }) {
-    return AppGlobalInput(
-      helpText: helpText,
-      initialValue: initalValue,
-      obscureText: isPassword ?? false,
-      readOnly: !isEditable.value,
-      onChanged: onChanged,
-      suffix: GestureDetector(
-        onTap: onToggleEditable,
-        child: Icon(
-          size: 16.px,
-          isEditable.value ? Icons.check : Icons.edit_note_rounded,
-          color: isEditable.value ? Colors.greenAccent.shade700 : primary800,
         ),
       ),
     );

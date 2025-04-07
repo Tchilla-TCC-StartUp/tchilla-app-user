@@ -22,7 +22,20 @@ class ProfileViewmodel extends IProfileViewmodel {
 
   @override
   logout() async {
-    await cleanToken();
-    return navigator.navigateToWelcomePage();
+    onEvent(
+      checkLogin: true,
+      event: (token) async {
+        await onRequest(
+            event: service.logoutUser(token: token),
+            onSuccess: (data) async {
+              await cleanToken();
+              loger.info(data.message!);
+              return navigator.navigateToWelcomePage();
+            },
+            onError: (error) {
+              showError(error);
+            });
+      },
+    );
   }
 }

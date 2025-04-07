@@ -9,4 +9,5 @@ abstract class IUserDataViewmodel extends BaseViewModel {
   void setPassword(String? value);
   void setName(String? value);
   void setPhoneNumer(String? value);
+  void updateUser();
 }

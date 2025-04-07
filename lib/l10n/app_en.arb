@@ -137,13 +137,8 @@
   "guests": "Guests",
   "wedding": "Wedding",
   "form_required_fields_message": "All fields in the form are required to perform the search",
-  "help_text_mcx": "Enter your Multicaixa Express phone number"
- 
-
-
-
-
-
-
-
+  "help_text_mcx": "Enter your Multicaixa Express phone number",
+  "new_password": "New password",
+  "old_password": "Old password",
+  "confirm_new_password": "Confirm new password"
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tchilla/resources/phone_constants.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
@@ -15,12 +16,20 @@ class AppGlobalPhoneNumberInput extends StatefulWidget {
   final FocusNode? focusNode;
   final void Function(String)? onFieldSubmitted;
   final bool? readOnly;
-
   final String initialCountryCode;
-
   final void Function(String)? onCountryCodeChanged;
   final void Function(String)? onChanged;
-
+  final TextInputType? keyboardType;
+  final bool? obscureText;
+  final IconData? prefixIcon;
+  final IconData? suffixIcon;
+  final VoidCallback? onSuffixIconPressed;
+  final String? helpText;
+  final Widget? suffix;
+  final TextAlign? textAlign;
+  final BoxConstraints? suffixIconConstraints;
+  final EdgeInsetsGeometry? contentPadding;
+  final String? initialValue;
   const AppGlobalPhoneNumberInput({
     super.key,
     this.controller,
@@ -33,7 +42,7 @@ class AppGlobalPhoneNumberInput extends StatefulWidget {
     this.readOnly,
     this.initialCountryCode = 'AO',
     this.onCountryCodeChanged,
-    this.onChanged,
+    this.onChanged, this.keyboardType, this.obscureText, this.prefixIcon, this.suffixIcon, this.onSuffixIconPressed, this.helpText, this.suffix, this.textAlign, this.suffixIconConstraints, this.contentPadding, this.initialValue,
   });
 
   @override
@@ -44,34 +53,6 @@ class AppGlobalPhoneNumberInput extends StatefulWidget {
 class _AppGlobalPhoneNumberInputState extends State<AppGlobalPhoneNumberInput> {
   late String selectedCountry;
 
-  final Map<String, String> countryCodes = {
-    'AO': '+244',
-    // 'BR': '+55',
-    // 'US': '+1',
-    // 'PT': '+351',
-    // 'FR': '+33',
-    // 'NG': '+234',
-    // 'ZA': '+27',
-  };
-
-  final Map<String, String> countryFlags = {
-    'AO': '🇦🇴',
-    // 'BR': '🇧🇷',
-    // 'US': '🇺🇸',
-    // 'PT': '🇵🇹',
-    // 'FR': '🇫🇷',
-    // 'NG': '🇳🇬',
-    // 'ZA': '🇿🇦',
-  };
-  final Map<String, int> maxLengths = {
-    'AO': 9,
-    // 'BR': 11,
-    // 'US': 10,
-    // 'PT': 9,
-    // 'FR': 9,
-    // 'NG': 10,
-    // 'ZA': 9,
-  };
 
   @override
   void initState() {
@@ -99,27 +80,29 @@ class _AppGlobalPhoneNumberInputState extends State<AppGlobalPhoneNumberInput> {
             ),
           ),
         TextFormField(
+          initialValue: widget.initialValue,
           readOnly: widget.readOnly ?? false,
           focusNode: widget.focusNode,
           controller: widget.controller,
-          maxLength: maxLengths[selectedCountry] ?? 9,
+          maxLength: maxPhoneLengths[selectedCountry] ?? 9,
           keyboardType: TextInputType.phone,
           textInputAction: widget.textInputAction,
           validator: widget.validator,
           onFieldSubmitted: widget.onFieldSubmitted,
-          onChanged: widget.onChanged, // <-- AQUI ESTÁ O PONTO CRUCIAL
+          onChanged: widget.onChanged,
           style: GoogleFonts.inter(
             fontWeight: FontWeight.w500,
             fontSize: 15.sp,
             color: primary950,
           ),
           decoration: InputDecoration(
-            hintText: widget.hintText,
+            hintText: widget.hintText ?? phoneHints[selectedCountry],
             hintStyle: GoogleFonts.inter(
               fontWeight: FontWeight.w600,
               fontSize: 15.sp,
               color: const Color(0xffAFBACA),
             ),
+            suffix: widget.suffix,
             counterText: '',
             prefixIcon: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.px),
