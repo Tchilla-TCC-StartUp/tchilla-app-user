@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 import 'package:tchilla/resources/app_logs.dart';
@@ -11,14 +10,14 @@ class ConectivityService extends IConectivityService {
   Future<bool> isConnectedToInternet() async {
     final List<ConnectivityResult> connectivityResult =
         await (Connectivity().checkConnectivity());
-      _loger.info("Conexão usada: $connectivityResult");
+    _loger.info("Conexão usada: $connectivityResult");
     if (connectivityResult.contains(ConnectivityResult.mobile) ||
         connectivityResult.contains(ConnectivityResult.wifi) ||
-        connectivityResult.contains(ConnectivityResult.ethernet) ||
-        connectivityResult.contains(ConnectivityResult.vpn)) {
+        connectivityResult.contains(ConnectivityResult.ethernet)) {
       return true;
     } else if (connectivityResult.contains(ConnectivityResult.other) ||
-        connectivityResult.contains(ConnectivityResult.none)) {
+        connectivityResult.contains(ConnectivityResult.none) ||
+        connectivityResult.contains(ConnectivityResult.vpn)) {
       return false;
     } else {
       return false;
