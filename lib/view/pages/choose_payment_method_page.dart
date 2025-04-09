@@ -81,11 +81,11 @@ class _ChoosePaymentMethodPageState extends State<ChoosePaymentMethodPage> {
         AppGlobalVericalSpacing(
           value: 3.h,
         ),
-        _buildCardPaymentMethod(
-          title: 'Multicaixa Express',
-          image: AppAssetsImages.mcxNetworkImage,
-          onTap: () => viewmodel.switchMethod(1),
-        ),
+        // _buildCardPaymentMethod(
+        //   title: 'Multicaixa Express',
+        //   image: AppAssetsImages.mcxNetworkImage,
+        //   onTap: () => viewmodel.switchMethod(1),
+        // ),
         _buildCardPaymentMethod(
           title: viewmodel.localizations.payment_receipt,
           image: AppAssetsImages.trnasfericon,
