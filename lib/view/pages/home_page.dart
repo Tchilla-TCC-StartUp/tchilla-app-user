@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage>
           body: Obx(
             () {
               return viewmodel.isLoading.value
-                  ? const TchillaAnimationLoading()
+                  ? const AppGlobalLoading()
                   : viewmodel.isError.value
                       ? ErrorTryAgain(
                           message: viewmodel.errorMessage.value,

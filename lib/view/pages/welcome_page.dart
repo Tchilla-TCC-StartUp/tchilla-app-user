@@ -39,7 +39,7 @@ class _WelcomePageState extends State<WelcomePage> {
           body: Obx(
             () {
               return viewmodel.isLoading.value
-                  ? const TchillaAnimationLoading()
+                  ? const AppGlobalLoading()
                   : viewmodel.isError.value
                       ? ErrorTryAgain(
                           message: viewmodel.errorMessage.value,

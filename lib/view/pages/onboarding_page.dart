@@ -41,7 +41,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           body: Obx(
             () {
               return viewmodel.isLoading.value
-                  ? const TchillaAnimationLoading()
+                  ? const AppGlobalLoading()
                   : viewmodel.isError.value
                       ? ErrorTryAgain(
                           message: viewmodel.errorMessage.value,

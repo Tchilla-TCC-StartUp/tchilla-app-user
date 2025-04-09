@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
+import 'package:tchilla/services/events/navigation.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/angola_price.dart';
@@ -38,12 +40,8 @@ class _TiketPageState extends State<TiketPage> {
     ];
     return Scaffold(
       appBar: AppBar(
-        leading: const AppGlobalBackButton(),
+        leading: AppGlobalBackButton(onTap: Get.find<Navigation>().navigateToHome,),
         centerTitle: true,
-        title: AppGlobalText(
-          text: AppLocalizations.of(context)!.reservationTicket,
-          style: TextStyleEnum.h3_bold,
-        ),
       ),
       body: AppLayoutpage(
         body: Column(
@@ -52,10 +50,19 @@ class _TiketPageState extends State<TiketPage> {
           children: [
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   AppGlobalVericalSpacing(value: 2.h),
+                  Align(
+                    alignment: AlignmentDirectional.topStart,
+                    child: Image.asset(
+                      AppAssetsImages.logotipoPng,
+                      height: 50.px,
+                      width: 150.px,
+                    ),
+                  ),
+                  AppGlobalVericalSpacing(value: 3.h),
                   _buildTiketTitle(),
                   const AppGlobalVericalSpacing(),
                   _builLocation(),
@@ -186,8 +193,8 @@ class _TiketPageState extends State<TiketPage> {
   }
 
   _buildTiketInfo() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         _buildLabelInfoEvent(
@@ -207,11 +214,12 @@ class _TiketPageState extends State<TiketPage> {
   }
 
   _buildLabelInfoEvent({required String title, required String info}) {
-    return Column(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         AppGlobalText(
-          text: title,
+          text: "$title :",
           style: TextStyleEnum.p_medium,
           color: gray600,
           align: TextAlign.justify,
@@ -219,7 +227,7 @@ class _TiketPageState extends State<TiketPage> {
         AppGlobalText(
           text: info,
           style: TextStyleEnum.p_medium,
-          color: primary950,
+          color: gray800,
           align: TextAlign.justify,
         ),
       ],

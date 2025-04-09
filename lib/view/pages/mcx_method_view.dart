@@ -31,14 +31,11 @@ class _McxMethodViewState extends State<McxMethodView> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Card(
-            clipBehavior: Clip.hardEdge,
-            child: ClipRRect(
-              child: AppGlobalNetworkImage(
-                width: 100.px,
-                height: 100.px,
-                image: AppAssetsImages.mcxNetworkImage,
-              ),
+          ClipRRect(
+            child: AppGlobalNetworkImage(
+              width: 100.px,
+              height: 100.px,
+              image: AppAssetsImages.mcxNetworkImage,
             ),
           ),
           AppGlobalVericalSpacing(

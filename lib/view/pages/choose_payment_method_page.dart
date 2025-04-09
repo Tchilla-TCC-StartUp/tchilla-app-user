@@ -6,12 +6,12 @@ import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/pages/mcx_method_view.dart';
+import 'package:tchilla/view/pages/receipt_method_view.dart';
 import 'package:tchilla/view/widgets/app_global_back_button.dart';
 import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/viewmodel/event/choose_payment_method_viewmodel.dart';
 
 class ChoosePaymentMethodPage extends StatefulWidget {
@@ -48,9 +48,10 @@ class _ChoosePaymentMethodPageState extends State<ChoosePaymentMethodPage> {
     switch (viewmodel.bodyViewIndex.value) {
       case 0:
         return _buildSwichMethod();
-
       case 1:
         return McxMethodView( choosePaymentMethodViewmodel: viewmodel,);
+      case 2:
+        return ReceiptMethodView( choosePaymentMethodViewmodel: viewmodel,);
         default:
           return _buildSwichMethod();
 
@@ -81,8 +82,14 @@ class _ChoosePaymentMethodPageState extends State<ChoosePaymentMethodPage> {
           value: 3.h,
         ),
         _buildCardPaymentMethod(
+          title: 'Multicaixa Express',
           image: AppAssetsImages.mcxNetworkImage,
           onTap: () => viewmodel.switchMethod(1),
+        ),
+        _buildCardPaymentMethod(
+          title: viewmodel.localizations.payment_receipt,
+          image: AppAssetsImages.trnasfericon,
+          onTap: () => viewmodel.switchMethod(2),
         ),
         AppGlobalVericalSpacing(
           value: 1.h,
@@ -95,7 +102,7 @@ class _ChoosePaymentMethodPageState extends State<ChoosePaymentMethodPage> {
 
 
   _buildCardPaymentMethod(
-      {required String image, required void Function()? onTap}) {
+      {required String image, required void Function()? onTap, required String title}) {
     return InkWell(
       onTap: onTap,
       child: Card(
@@ -107,20 +114,18 @@ class _ChoosePaymentMethodPageState extends State<ChoosePaymentMethodPage> {
             children: [
               Row(
                 children: [
-                  Card(
-                    clipBehavior: Clip.hardEdge,
-                    child: AppGlobalNetworkImage(
-                      image: image,
-                      width: 50.px,
-                      height: 50.px,
-                      border: 10.px,
-                    ),
+                  AppGlobalNetworkImage(
+                    image: image,
+                    width: 50.px,
+                    height: 50.px,
+                    border: 10.px,
+
                   ),
                   AppGlobalHorizontalSpacing(
                     value: 10.px,
                   ),
                   AppGlobalText(
-                    text: 'Multicaixa Express',
+                    text:  title,
                     style: TextStyleEnum.p_bold,
                     color: gray900,
                   ),

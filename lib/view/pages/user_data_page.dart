@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/pages/error_try_again.dart';
 import 'package:tchilla/view/widgets/app_global_input.dart';
-import 'package:tchilla/view/widgets/app_global_network_image.dart';
+import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_phone_number_input.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
@@ -16,7 +16,6 @@ import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/services/events/navigation.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
-import 'package:tchilla/view/widgets/tchilla_animation_loading.dart';
 import 'package:tchilla/viewmodel/event/user_data_viewmodel.dart';
 
 class UserDataPage extends StatefulWidget {
@@ -54,7 +53,7 @@ class _UserDataPageState extends State<UserDataPage> {
         body: Obx(
           () {
             return viewmodel.localLoading.value
-                ? const Center(child: TchillaAnimationLoading())
+                ? const Center(child: AppGlobalLoading())
                 : viewmodel.isError.value
                     ? ErrorTryAgain(message: viewmodel.errorMessage.value)
                     : SingleChildScrollView(

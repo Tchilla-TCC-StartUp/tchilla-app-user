@@ -58,10 +58,13 @@ class AppAssetsImages {
       'https://upload.wikimedia.org/wikipedia/commons/3/3b/Copacabana_Palace_-_Sal%C3%A3o_de_festas_%281%29.jpg';
 
   static const String _mcxNetworkIMage =
-      'https://emis.ao/media/wz3fuo21/express_logo.jpg?anchor=center&rnd=133184617376030000&preset=mediatextslidermin320';
+      'https://play-lh.googleusercontent.com/qU0CpVCHvC01MJIxtvfv3kB3iYxsUrYCmnzoz62bD5p55uc8sOnfsOy_iDKqJ2Ybow';
 
   static const String _tchillaLoadingAnimation =
       '${_animationsPath}tchilla_loading_animation.json';
+
+  static const String _pdgSvg = 'https://www.svgrepo.com/show/452084/pdf.svg';
+  static const String _trnasfericon = 'https://www.svgrepo.com/show/3048/transfer.svg';
   // Métodos GET
   static String get logoSvg => _logoSvg;
   static String get logotipoSvg => _logotipoSvg;
@@ -97,4 +100,6 @@ class AppAssetsImages {
   static String get defaultProposedImage => _defaultProposedImage;
   static String get mcxNetworkImage => _mcxNetworkIMage;
   static String get tchillaLoadingAnimation => _tchillaLoadingAnimation;
+  static String get pdfSvg => _pdgSvg;
+  static String get trnasfericon  => _trnasfericon ;
 }

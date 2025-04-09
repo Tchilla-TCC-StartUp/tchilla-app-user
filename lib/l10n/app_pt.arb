@@ -142,5 +142,8 @@
   "help_text_mcx": "Informe seu número de telefone associado ao Multicaixa Express",
   "new_password": "Nova senha",
   "old_password": "Senha antiga",
-  "confirm_new_password": "Confirmar nova senha"
+  "confirm_new_password": "Confirmar nova senha",
+  "payment_receipt" : "Transferência Bancária",
+  "payment_receipt_description": "Faça o pagamento para este Iban, via Bai Direto, Multicaixa Express ou outro Aplicativo de Internet Banking e faça o carregamento do comprovante de pagamento.",
+  "send": "Enviar"
 }

@@ -140,5 +140,8 @@
   "help_text_mcx": "Enter your Multicaixa Express phone number",
   "new_password": "New password",
   "old_password": "Old password",
-  "confirm_new_password": "Confirm new password"
+  "confirm_new_password": "Confirm new password",
+  "payment_receipt" : "Transfer Bank",
+  "payment_receipt_description" : "Make the payment to this Iban via Bai Direto, Multicaixa Express or another Internet Banking Application and upload the proof of payment.",
+  "send" : "Send"
 }
