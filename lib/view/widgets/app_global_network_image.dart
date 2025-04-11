@@ -65,7 +65,7 @@ class AppGlobalNetworkImage extends StatelessWidget {
     return AppGlobalShimmer(
       width: width ?? 50,
       height: height ?? 50,
-      borderRadius: BorderRadius.circular(border ?? 8),
+      borderRadius: border ?? 8,
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/pages/error_try_again.dart';
+import 'package:tchilla/view/shimmers/welcome_shimmer.dart';
 import 'package:tchilla/view/widgets/app_global_image_button.dart';
 import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_page_indicator.dart';
@@ -41,7 +42,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           body: Obx(
             () {
               return viewmodel.isLoading.value
-                  ? const AppGlobalLoading()
+                  ? const WelcomeShimmer()
                   : viewmodel.isError.value
                       ? ErrorTryAgain(
                           message: viewmodel.errorMessage.value,

@@ -10,6 +10,7 @@ import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/pages/error_try_again.dart';
 import 'package:tchilla/view/pages/view_more_page.dart';
+import 'package:tchilla/view/shimmers/home_shimmer.dart';
 import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
@@ -71,7 +72,7 @@ class _HomePageState extends State<HomePage>
           body: Obx(
             () {
               return viewmodel.isLoading.value
-                  ? const AppGlobalLoading()
+                  ? const HomeShimmer()
                   : viewmodel.isError.value
                       ? ErrorTryAgain(
                           message: viewmodel.errorMessage.value,

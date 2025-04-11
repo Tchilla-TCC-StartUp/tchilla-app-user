@@ -8,6 +8,7 @@ import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/widgets/app_animation_logo.dart';
 import 'package:tchilla/view/widgets/app_auth_divider.dart';
+import 'package:tchilla/view/widgets/app_global_back_button.dart';
 import 'package:tchilla/view/widgets/app_global_input.dart';
 import 'package:tchilla/view/widgets/app_global_phone_number_input.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';

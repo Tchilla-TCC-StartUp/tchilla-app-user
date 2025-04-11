@@ -34,7 +34,6 @@ class UserRepository extends IuserRepository {
         "email": email,
         "telefone": telefone,
         "senha": password,
-        "tipo": 0
       },
     );
 
