@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tchilla/services/events/user_service.dart';
 import 'package:tchilla/viewmodel/interface/iregister_viewmodel.dart';
@@ -5,7 +6,10 @@ import 'package:tchilla/viewmodel/interface/iregister_viewmodel.dart';
 class RegisterViewmodel extends IRegisterViewmodel {
   final UserService service;
   RegisterViewmodel({required this.service});
-
+  final FocusNode nameFocusNode = FocusNode();
+  final FocusNode emailFocusNode = FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
+  final FocusNode phoneNumberFocusNode = FocusNode();
   final RxString countryCode = ''.obs;
 
   final Rxn<String?> email = Rxn<String?>();
@@ -82,5 +86,14 @@ class RegisterViewmodel extends IRegisterViewmodel {
   void setPhoneNumer(String? value) {
     setFieldChange(telefone, value);
     loger.info('Telefone é $telefone');
+  }
+
+  @override
+  void dispose() {
+   emailFocusNode.dispose();
+    nameFocusNode.dispose();
+    passwordFocusNode.dispose();
+    phoneNumberFocusNode.dispose();
+    super.dispose();
   }
 }

@@ -13,49 +13,34 @@ class LabelStatusProposed extends StatelessWidget {
   }
 
   _buildState({required ProposedStatus status}) {
+    Color color;
+    String message;
     switch (status) {
       case ProposedStatus.cancelad:
-        return Container(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.all(6),
-          decoration: BoxDecoration(
-            color: Colors.red.withOpacity(0.3),
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: AppGlobalText(
-            text: "Cancelado",
-            style: TextStyleEnum.button_text,
-            color: Colors.red.shade900,
-          ),
-        );
+        message = "Cancelado";
+        color = Colors.redAccent.shade700;
       case ProposedStatus.sucess:
-        return Container(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.all(6),
-          decoration: BoxDecoration(
-            color: Colors.green.withOpacity(0.3),
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: AppGlobalText(
-            text: "Realizado",
-            style: TextStyleEnum.button_text,
-            color: Colors.green.shade900,
-          ),
-        );
+        message = "Realizado";
+        color = Colors.greenAccent.shade700;
       case ProposedStatus.pending:
-        return Container(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.all(6),
-          decoration: BoxDecoration(
-            color: Colors.amber.withOpacity(0.3),
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: AppGlobalText(
-            text: "Pendente",
-            style: TextStyleEnum.button_text,
-            color: Colors.amber.shade900,
-          ),
-        );
+        message = "Pendente";
+        color = Colors.amberAccent.shade700;
+      case ProposedStatus.schedule:
+        message = "Agendado";
+        color = Colors.blueAccent.shade700;
     }
+    return Container(
+      alignment: Alignment.center,
+      padding: const EdgeInsets.all(6),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: AppGlobalText(
+        text: message,
+        style: TextStyleEnum.button_text,
+        color: color,
+      ),
+    );
   }
 }

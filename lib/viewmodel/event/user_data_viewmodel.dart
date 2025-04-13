@@ -25,9 +25,11 @@ class UserDataViewModel extends IUserDataViewmodel {
   UserDataViewModel({required this.service});
 
   @override
-  void initEvets() {
+  void onInit() {
+    super.onInit();
     getUserData();
   }
+
 
   void toggleNameEditable() {
     isNameEditable.value = !isNameEditable.value;
@@ -87,7 +89,6 @@ class UserDataViewModel extends IUserDataViewmodel {
     );
   }
 
-
   @override
   void setEmail(String? value) {
     setFieldChange(email, value);
@@ -114,10 +115,9 @@ class UserDataViewModel extends IUserDataViewmodel {
 
   @override
   void updateUser() async {
-    final bool hasChanges =
-        email.value?.trim() != _initialEmail.trim() ||
-            name.value?.trim() != _initialName.trim() ||
-            telefone.value?.trim() != _initialTelefone.trim();
+    final bool hasChanges = email.value?.trim() != _initialEmail.trim() ||
+        name.value?.trim() != _initialName.trim() ||
+        telefone.value?.trim() != _initialTelefone.trim();
 
     if (!hasChanges) {
       this.navigator.navigateToBack();

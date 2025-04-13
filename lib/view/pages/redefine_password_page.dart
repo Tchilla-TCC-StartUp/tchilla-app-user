@@ -11,16 +11,9 @@ import 'package:tchilla/view/widgets/headerpage.dart';
 
 import '../../viewmodel/event/forgont_password_viewmodel.dart';
 
-class RedefinePasswordPage extends StatefulWidget {
+class RedefinePasswordPage extends GetView<ForgontPasswordViewmodel> {
   final String previousWalk;
   const RedefinePasswordPage({super.key, required this.previousWalk});
-
-  @override
-  State<RedefinePasswordPage> createState() => _RedefinePasswordPageState();
-}
-
-class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
-  final viewmodel = Get.find<ForgontPasswordViewmodel>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +28,14 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Headerpage(
-                title: viewmodel.localizations.reset_password,
-                description: viewmodel.localizations.reset_password_description,
+                title: controller.localizations.reset_password,
+                description: controller.localizations.reset_password_description,
               ),
               AppGlobalInput(
-                helpText: viewmodel.localizations.old_password,
+                helpText: controller.localizations.old_password,
                 hintText: "***********",
                 keyboardType: TextInputType.visiblePassword,
-                onChanged: viewmodel.setOldPassword,
+                onChanged: controller.setOldPassword,
                 inputType: AppInputType.password,
                 obscureText: true,
                 textInputAction: TextInputAction.next,
@@ -51,11 +44,11 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
                 value: 2.h,
               ),
               AppGlobalInput(
-                helpText: viewmodel.localizations.new_password,
+                helpText: controller.localizations.new_password,
                 hintText: "***********",
                 inputType: AppInputType.password,
                 keyboardType: TextInputType.visiblePassword,
-                onChanged: viewmodel.setNewPassword,
+                onChanged: controller.setNewPassword,
                 obscureText: true,
                 textInputAction: TextInputAction.next,
               ),
@@ -63,16 +56,16 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
                 value: 2.h,
               ),
               AppGlobalInput(
-                helpText: viewmodel.localizations.confirm_new_password,
+                helpText: controller.localizations.confirm_new_password,
                 hintText: "***********",
                 inputType: AppInputType.password,
                 keyboardType: TextInputType.visiblePassword,
-                onChanged: viewmodel.setConfirmNewPassword,
+                onChanged: controller.setConfirmNewPassword,
                 obscureText: true,
                 textInputAction: TextInputAction.send,
                 onFieldSubmitted: (p0) {
-                  viewmodel.resetPassword(
-                    widget.previousWalk,
+                  controller.resetPassword(
+                    previousWalk,
                   );
                 },
               ),
@@ -82,13 +75,13 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
               Obx(
                 () => AppGlobalTextButton(
                   minWidth: 100.w,
-                  isLoading: viewmodel.isLoading.value,
+                  isLoading: controller.isLoading.value,
                   onPressed: () {
-                    viewmodel.resetPassword(
-                      widget.previousWalk,
+                    controller.resetPassword(
+                      previousWalk,
                     );
                   },
-                  textButton: viewmodel.localizations.redefine,
+                  textButton: controller.localizations.redefine,
                 ),
               )
             ],
@@ -97,4 +90,6 @@ class _RedefinePasswordPageState extends State<RedefinePasswordPage> {
       ),
     );
   }
+
 }
+

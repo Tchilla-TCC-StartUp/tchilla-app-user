@@ -2,16 +2,12 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:tchilla/model/proposed_model.dart';
+import 'package:tchilla/resources/app_routes.dart';
 import 'package:tchilla/viewmodel/interface/ischedules_viewmodel.dart';
 
 class SchedulesViewmodel extends ISchedulesViewmodel {
   final RxList<ProposedModel> _proposeds = <ProposedModel>[].obs;
   RxList<ProposedModel> get proposeds => _proposeds;
-
-  @override
-  void initEvent() async {
-    await chengeLocalData();
-  }
 
   @override
   Future<void> chengeLocalData() async {
@@ -24,4 +20,15 @@ class SchedulesViewmodel extends ISchedulesViewmodel {
 
   @override
   void getSchedules() async {}
+
+  @override
+  void goToDetalhes(id) {
+    this.navigator.navigateToScheduleDetalhes(AppRoutes.schedulesPage);
+  }
+
+  @override
+  void onInit() async {
+    super.onInit();
+    await chengeLocalData();
+  }
 }

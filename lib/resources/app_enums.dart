@@ -1,4 +1,4 @@
-enum ProposedStatus { cancelad, sucess, pending }
+enum ProposedStatus { cancelad, sucess, pending, schedule }
 
 enum ProposedType { local, service, combo, product }
 

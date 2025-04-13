@@ -10,6 +10,7 @@ import 'package:tchilla/view/pages/login_page.dart';
 import 'package:tchilla/view/pages/notifications_page.dart';
 import 'package:tchilla/view/pages/onboarding_page.dart';
 import 'package:tchilla/view/pages/profile_page.dart';
+import 'package:tchilla/view/pages/receipt_method_page.dart';
 import 'package:tchilla/view/pages/redefine_password_page.dart';
 import 'package:tchilla/view/pages/register_page.dart';
 import 'package:tchilla/view/pages/result_search_page.dart';
@@ -20,6 +21,7 @@ import 'package:tchilla/view/pages/summary_page.dart';
 import 'package:tchilla/view/pages/tiket_page.dart';
 import 'package:tchilla/view/pages/user_data_page.dart';
 import 'package:tchilla/view/pages/welcome_page.dart';
+import 'package:tchilla/view/widgets/schedules_detalhe.dart';
 
 class AppGetAppRoutes {
   static final List<GetPage> routes = [
@@ -98,6 +100,16 @@ class AppGetAppRoutes {
     _buildRoute(
       path: AppRoutes.sucessSchedulesPage,
       pageBuilder: (args) => const SucessSchedulePage(),
+    ),
+    _buildRoute(
+      path: AppRoutes.receiptPaymentPage,
+      pageBuilder: (args) => const ReceiptMethodPage(),
+    ),
+    _buildRoute(
+      path: AppRoutes.schedulesDetalhes,
+      pageBuilder: (args) => SchedulesDetalhe(
+        previousWalk: args,
+      ),
     ),
   ];
 

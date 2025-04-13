@@ -8,6 +8,7 @@ class AppRoutes {
   static const String _homePage = "$_mainRouter/home";
   static const String _profilePage = "$_mainRouter/profile";
   static const String _schedulesPage = "$_profilePage/schedules";
+  static const String _schedulesDetalhes = "$_schedulesPage/detalhes";
   static const String _resultSearchPage = "$_homePage/result_search";
   static const String _detailsPage = "$_resultSearchPage/detalhes";
   static const String _userdataPage = "$_profilePage/user_data";
@@ -15,8 +16,9 @@ class AppRoutes {
   static const String _summaryPage = "$_detailsPage/summary";
   static const String _tiketPage = "$_summaryPage/tiket";
   static const String _chosePaymentPage = "$_summaryPage/chosePayment";
-  static const String _sucessSchedulesPage = "/sucess";
+  static const String _sucessSchedulesPage = "$_mainRouter/sucess";
   static const String _mcxPaymentPage = "$_chosePaymentPage/mcx";
+  static const String _receiptPaymentPage = "$_chosePaymentPage/receipt";
 
   static const String _loginPage = "$_mainRouter/login";
   static const String _registerPage = "$_mainRouter/register";
@@ -55,4 +57,8 @@ class AppRoutes {
   static String get chosePaymentPage => _chosePaymentPage;
   static String get schedulesPage => _schedulesPage;
   static String get sucessSchedulesPage => _sucessSchedulesPage;
+
+  static String get mcxPaymentPage => _mcxPaymentPage;
+  static String get receiptPaymentPage => _receiptPaymentPage;
+  static String get schedulesDetalhes => _schedulesDetalhes;
 }

@@ -15,8 +15,8 @@ class LoginViewmodel extends ILoginViewmodel {
   LoginViewmodel({required this.service});
 
   @override
-  Future<void> navigateToRegisterPage() {
-    return this.navigator.navigateToRegisterPage();
+  void navigateToRegisterPage() {
+    this.navigator.navigateToRegisterPage();
   }
 
   @override

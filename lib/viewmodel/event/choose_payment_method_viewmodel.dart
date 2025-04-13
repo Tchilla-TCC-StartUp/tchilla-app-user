@@ -37,6 +37,15 @@ class ChoosePaymentMethodViewmodel extends IchoosePaymentMethodViewmodel {
     showSuccess("IBAN copiado com sucesso");
   }
 
+  void submitReceiptevice() async {
+    if (_selectedPdfFile.value == null) {
+      showWarning("Infome o Comprovativo de pagamneto");
+
+      return;
+    }
+    return this.navigator.navigateToSucessPage();
+  }
+
   void setReceiptevice() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -55,7 +64,6 @@ class ChoosePaymentMethodViewmodel extends IchoosePaymentMethodViewmodel {
   void clearReceiptFile() {
     _selectedPdfFile.value = null;
   }
-
 
   @override
   void dispose() {

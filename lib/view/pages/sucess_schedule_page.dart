@@ -9,16 +9,11 @@ import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/animation_icon.dart';
+import 'package:tchilla/viewmodel/event/sucess_schedule_viewmodel.dart';
 
-class SucessSchedulePage extends StatefulWidget {
+class SucessSchedulePage extends GetView<SucessScheduleViewmodel> {
   const SucessSchedulePage({super.key});
 
-  @override
-  State<SucessSchedulePage> createState() => _SucessSchedulePageState();
-}
-
-class _SucessSchedulePageState extends State<SucessSchedulePage> {
-  final navigator = Get.find<Navigation>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +34,7 @@ class _SucessSchedulePageState extends State<SucessSchedulePage> {
             value: 2.h,
           ),
           AppGlobalTextButton(
-            onPressed: () {},
+            onPressed: controller.goToDetalhes,
             textButton: "Ver datalhes",
             minWidth: 100.w,
             color: Colors.greenAccent.shade700,
@@ -48,7 +43,7 @@ class _SucessSchedulePageState extends State<SucessSchedulePage> {
             value: 2.h,
           ),
           AppGlobalTextButton(
-            onPressed: navigator.navigateToHome,
+            onPressed: controller.navigator.navigateToBack,
             textButton: "Voltar",
             minWidth: 100.w,
             color: Colors.transparent,

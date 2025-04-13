@@ -18,21 +18,8 @@ import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/viewmodel/event/user_data_viewmodel.dart';
 
-class UserDataPage extends StatefulWidget {
+class UserDataPage extends GetView<UserDataViewModel> {
   const UserDataPage({super.key});
-
-  @override
-  State<UserDataPage> createState() => _UserDataPageState();
-}
-
-class _UserDataPageState extends State<UserDataPage> {
-  final viewmodel = Get.find<UserDataViewModel>();
-
-  @override
-  void initState() {
-    super.initState();
-    viewmodel.initEvets();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,47 +39,47 @@ class _UserDataPageState extends State<UserDataPage> {
       body: AppLayoutpage(
         body: Obx(
           () {
-            return viewmodel.localLoading.value
+            return controller.localLoading.value
                 ? const Center(child: AppGlobalLoading())
-                : viewmodel.isError.value
-                    ? ErrorTryAgain(message: viewmodel.errorMessage.value)
+                : controller.isError.value
+                    ? ErrorTryAgain(message: controller.errorMessage.value)
                     : SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             AppGlobalUserAvatarName(
-                              name: viewmodel.name.value ?? "",
+                              name: controller.name.value ?? "",
                               size: 150.px,
                             ),
                             AppGlobalVericalSpacing(value: 18.px),
 
                             // Name
                             AppGlobalInput(
-                              helpText: viewmodel.localizations.name,
-                              initialValue: viewmodel.name.value ?? '',
-                              onChanged: viewmodel.setName,
+                              helpText: controller.localizations.name,
+                              initialValue: controller.name.value ?? '',
+                              onChanged: controller.setName,
                             ),
                             AppGlobalVericalSpacing(value: 18.px),
 
                             // Email
                             AppGlobalInput(
-                              helpText: viewmodel.localizations.email_address,
-                              initialValue: viewmodel.email.value ?? '',
-                              onChanged: viewmodel.setEmail,
+                              helpText: controller.localizations.email_address,
+                              initialValue: controller.email.value ?? '',
+                              onChanged: controller.setEmail,
                             ),
                             AppGlobalVericalSpacing(value: 18.px),
 
                             // Phone
                             AppGlobalPhoneNumberInput(
-                              label: viewmodel.localizations.telephone_number,
-                              initialValue: viewmodel.telefone.value ?? '',
+                              label: controller.localizations.telephone_number,
+                              initialValue: controller.telefone.value ?? '',
                               initialCountryCode: '+244',
                               onCountryCodeChanged: (code) {
-                                viewmodel.countryCode.value = code;
+                                controller.countryCode.value = code;
                                 print(code);
                               },
-                              onChanged: viewmodel.setPhoneNumer,
+                              onChanged: controller.setPhoneNumer,
                             ),
                             AppGlobalVericalSpacing(value: 18.px),
 
@@ -100,22 +87,22 @@ class _UserDataPageState extends State<UserDataPage> {
                             AppGlobalInput(
                               readOnly: true,
                               suffix: GestureDetector(
-                                onTap: viewmodel.togglePasswordEditable,
+                                onTap: controller.togglePasswordEditable,
                                 child: Icon(
                                   Icons.edit_note_rounded,
                                   size: 16.px,
                                 ),
                               ),
-                              helpText: viewmodel.localizations.password,
-                              initialValue: viewmodel.password.value ?? '',
+                              helpText: controller.localizations.password,
+                              initialValue: controller.password.value ?? '',
                               obscureText: true,
                             ),
                             AppGlobalVericalSpacing(value: 28.px),
                             AppGlobalTextButton(
-                              textButton: viewmodel.localizations.save,
+                              textButton: controller.localizations.save,
                               minWidth: 100.w,
-                              isLoading: viewmodel.isLoading.value,
-                              onPressed: viewmodel.updateUser,
+                              isLoading: controller.isLoading.value,
+                              onPressed: controller.updateUser,
                             )
                           ],
                         ),
@@ -143,7 +130,7 @@ class _UserDataPageState extends State<UserDataPage> {
           ),
         ),
         AppGlobalText(
-          text: viewmodel.name.value ?? '',
+          text: controller.name.value ?? '',
           style: TextStyleEnum.h3_bold,
         ),
         Container()

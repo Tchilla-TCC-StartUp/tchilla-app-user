@@ -32,6 +32,7 @@ import 'package:tchilla/viewmodel/event/result_search_viewmodel.dart';
 import 'package:tchilla/viewmodel/event/schedule_detalhe_viewmodel.dart';
 import 'package:tchilla/viewmodel/event/schedules_viewmodel.dart';
 import 'package:tchilla/viewmodel/event/splash_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/sucess_schedule_viewmodel.dart';
 import 'package:tchilla/viewmodel/event/summary_viewmodel.dart';
 import 'package:tchilla/viewmodel/event/user_data_viewmodel.dart';
 import 'package:tchilla/viewmodel/event/view_more_viewmodel.dart';
@@ -160,6 +161,10 @@ class AppBindings implements Bindings {
     );
     Get.lazyPut<ScheduleDetalheViewmodel>(
       () => ScheduleDetalheViewmodel(),
+      fenix: true,
+    );
+    Get.lazyPut<SucessScheduleViewmodel>(
+      () => SucessScheduleViewmodel(),
       fenix: true,
     );
   }

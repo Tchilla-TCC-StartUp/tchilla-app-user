@@ -109,4 +109,20 @@ class Navigation extends INavigation {
   navigateToSucessPage() {
     Get.offAllNamed(AppRoutes.sucessSchedulesPage);
   }
+
+  @override
+  navigateToPaymentMCX() {
+    // TODO: implement navigateToPaymentMCX
+    throw UnimplementedError();
+  }
+
+  @override
+  navigateToPaymentReceipt() {
+    Get.toNamed(AppRoutes.receiptPaymentPage);
+  }
+
+  @override
+  navigateToScheduleDetalhes(String previousWalk) {
+    Get.toNamed(AppRoutes.schedulesDetalhes, arguments: previousWalk);
+  }
 }
