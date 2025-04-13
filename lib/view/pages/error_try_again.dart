@@ -42,6 +42,7 @@ class ErrorTryAgain extends StatelessWidget {
             onPressed: event ?? () {},
             textButton: AppLocalizations.of(context)!.try_again,
             minWidth: 90.w,
+            color: Colors.redAccent.shade700,
           ),
         ],
       ),

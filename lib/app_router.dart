@@ -107,7 +107,7 @@ class AppGetAppRoutes {
     ),
     _buildRoute(
       path: AppRoutes.schedulesDetalhes,
-      pageBuilder: (args) => SchedulesDetalhe(
+      pageBuilder: (args) => SchedulesDetalhePage(
         previousWalk: args,
       ),
     ),

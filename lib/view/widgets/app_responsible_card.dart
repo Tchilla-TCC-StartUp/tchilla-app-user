@@ -11,6 +11,7 @@ class AppResponsibleCard extends StatelessWidget {
   final String name;
   final String role;
   final String imageUrl;
+  final Widget? sufixWidget;
   final double rating;
   final int reviews;
   const AppResponsibleCard({
@@ -19,7 +20,7 @@ class AppResponsibleCard extends StatelessWidget {
     required this.role,
     required this.imageUrl,
     this.rating = 0.0,
-    this.reviews = 0,
+    this.reviews = 0, this.sufixWidget,
   });
 
   @override
@@ -56,28 +57,28 @@ class AppResponsibleCard extends StatelessWidget {
                 ),
               ],
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.star_rounded,
-                      color: Colors.amber,
-                    ),
-                    AppGlobalText(
-                      text: rating.toStringAsFixed(1),
-                      style: TextStyleEnum.p_bold,
-                    ),
-                  ],
-                ),
-                AppGlobalText(
-                  text: "($reviews ${AppLocalizations.of(context)!.reviews})",
-                  style: TextStyleEnum.p_normal,
-                  color: gray700,
-                )
-              ],
-            ),
+           sufixWidget ??  Column(
+             crossAxisAlignment: CrossAxisAlignment.end,
+             children: [
+               Row(
+                 children: [
+                   const Icon(
+                     Icons.star_rounded,
+                     color: Colors.amber,
+                   ),
+                   AppGlobalText(
+                     text: rating.toStringAsFixed(1),
+                     style: TextStyleEnum.p_bold,
+                   ),
+                 ],
+               ),
+               AppGlobalText(
+                 text: "($reviews ${AppLocalizations.of(context)!.reviews})",
+                 style: TextStyleEnum.p_normal,
+                 color: gray700,
+               )
+             ],
+           ),
           ],
         ),
       ],

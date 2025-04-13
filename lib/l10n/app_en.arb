@@ -143,5 +143,9 @@
   "confirm_new_password": "Confirm new password",
   "payment_receipt" : "Transfer Bank",
   "payment_receipt_description" : "Make the payment to this Iban via Bai Direto, Multicaixa Express or another Internet Banking Application and upload the proof of payment.",
-  "send" : "Send"
+  "send" : "Send",
+  "schedule_detalhe": "Scheduling details",
+  "payment_method": "Payment method",
+  "message": "Message",
+  "give_an_assessment": "Give an assessment"
 }

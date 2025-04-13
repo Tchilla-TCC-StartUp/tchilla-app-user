@@ -51,9 +51,7 @@ class LoginViewmodel extends ILoginViewmodel {
         cleanFields([email, password]);
         this.navigator.navigateToHome();
       },
-      onError: (value) {
-        showError(value.errorMessage);
-      },
+
     );
   }
 

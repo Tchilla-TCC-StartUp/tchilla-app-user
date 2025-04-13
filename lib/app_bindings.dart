@@ -160,7 +160,7 @@ class AppBindings implements Bindings {
       fenix: true,
     );
     Get.lazyPut<ScheduleDetalheViewmodel>(
-      () => ScheduleDetalheViewmodel(),
+      () => ScheduleDetalheViewmodel( userService: Get.find()),
       fenix: true,
     );
     Get.lazyPut<SucessScheduleViewmodel>(

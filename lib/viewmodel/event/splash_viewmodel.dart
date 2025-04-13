@@ -15,12 +15,11 @@ class SplashViewmodel extends ISplashViewmodel {
       _isConnected.value = await conectivityService.isConnectedToInternet();
       loger.info("User está conectado: ${_isConnected.value}");
 
-      if (!_isConnected.value) {
+      if (_isConnected.value) {
         await onEvent(
           checkLogin: true,
           event: (_) async => await this.navigator.navigateToHome(),
-          onErrorAuth: () async =>
-              await this.navigator.navigateToSchedulesPage(),
+          onErrorAuth: () async => await this.navigator.navigateToOnboarding(),
         );
       }
     } catch (e) {

@@ -145,5 +145,9 @@
   "confirm_new_password": "Confirmar nova senha",
   "payment_receipt" : "Transferência Bancária",
   "payment_receipt_description": "Faça o pagamento para este Iban, via Bai Direto, Multicaixa Express ou outro Aplicativo de Internet Banking e faça o carregamento do comprovante de pagamento.",
-  "send": "Enviar"
+  "send": "Enviar",
+  "schedule_detalhe": "Detalhes de Agendamento",
+  "payment_method": "Método de pagamento",
+  "message": "Mensagem",
+  "give_an_assessment": "Dar uma avaliação"
 }
