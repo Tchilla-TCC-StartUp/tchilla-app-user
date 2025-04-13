@@ -11,6 +11,12 @@ class WelcomeViewmodel extends IWelcomeViewmodel {
   WelcomeModel? get welcomeData => _welcomeData.value;
 
   @override
+  void onInit() {
+    super.onInit();
+    getWelcomeData();
+  }
+
+  @override
   void getWelcomeData() async {
     await onRequest(
       event: service.fetchWelcomeData(lang),

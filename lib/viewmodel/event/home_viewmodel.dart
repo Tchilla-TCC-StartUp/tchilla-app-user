@@ -9,7 +9,7 @@ import 'package:tchilla/services/events/home_service.dart';
 import 'package:tchilla/model/home_model.dart';
 import 'package:tchilla/viewmodel/interface/Ihome_viewmodel.dart';
 
-class HomeViewModel extends  IHomeViewmodel{
+class HomeViewModel extends IHomeViewmodel {
   final HomeService service;
   HomeViewModel({required this.service});
   RxInt selectedIndex = 0.obs;
@@ -49,18 +49,15 @@ class HomeViewModel extends  IHomeViewmodel{
   }
 
   @override
-  void onReady() {
-    super.onReady();
+  void onInit() {
+    super.onInit();
     initLocalData();
-  }
-
-  void initEvet() {
     getUserData();
   }
 
   @override
   void initLocalData() async {
-    tabTitlesForm.assignAll([
+    tabTitlesForm.addAll([
       localizations.tabVenueAndServices,
       localizations.tabLocal,
       localizations.tabServices,

@@ -21,4 +21,7 @@ class SchedulesViewmodel extends ISchedulesViewmodel {
     _proposeds.value =
         jsonList.map((item) => ProposedModel.fromMap(item)).toList();
   }
+
+  @override
+  void getSchedules() async {}
 }

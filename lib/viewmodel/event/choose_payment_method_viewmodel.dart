@@ -12,8 +12,6 @@ class ChoosePaymentMethodViewmodel extends IchoosePaymentMethodViewmodel {
   final Rx<File?> _selectedPdfFile = Rx<File?>(null);
   Rx<File?> get selectedPdfFile => _selectedPdfFile;
 
-
-
   @override
   void switchMethod(int index) {
     _bodyViewIndex.value = index;

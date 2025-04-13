@@ -17,6 +17,12 @@ class OnboardingViewModel extends IOnboardingViewmodel {
   RxList<OnboardingModel> get onboarding => _onboarding;
 
   @override
+  void onInit() {
+    super.onInit();
+    getOnboarding();
+  }
+
+  @override
   void getOnboarding() async {
     await onRequest(
       event: service.fetchOnboadData(lang),

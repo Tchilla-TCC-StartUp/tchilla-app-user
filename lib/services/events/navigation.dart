@@ -104,4 +104,9 @@ class Navigation extends INavigation {
   navigateToSchedulesPage() {
     Get.toNamed(AppRoutes.schedulesPage);
   }
+
+  @override
+  navigateToSucessPage() {
+    Get.offAllNamed(AppRoutes.sucessSchedulesPage);
+  }
 }

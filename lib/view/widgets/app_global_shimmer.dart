@@ -27,7 +27,7 @@ class _AppGlobalShimmerState extends State<AppGlobalShimmer>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 3),
     )..repeat();
 
     _animation = Tween<double>(begin: -2, end: 2).animate(

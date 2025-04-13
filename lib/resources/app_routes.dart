@@ -15,6 +15,7 @@ class AppRoutes {
   static const String _summaryPage = "$_detailsPage/summary";
   static const String _tiketPage = "$_summaryPage/tiket";
   static const String _chosePaymentPage = "$_summaryPage/chosePayment";
+  static const String _sucessSchedulesPage = "/sucess";
   static const String _mcxPaymentPage = "$_chosePaymentPage/mcx";
 
   static const String _loginPage = "$_mainRouter/login";
@@ -53,4 +54,5 @@ class AppRoutes {
   static String get tiketPage => _tiketPage;
   static String get chosePaymentPage => _chosePaymentPage;
   static String get schedulesPage => _schedulesPage;
+  static String get sucessSchedulesPage => _sucessSchedulesPage;
 }

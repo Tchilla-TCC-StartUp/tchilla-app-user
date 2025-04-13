@@ -29,6 +29,7 @@ import 'package:tchilla/viewmodel/event/onboarding_viewmodel.dart';
 import 'package:tchilla/viewmodel/event/profile_viewmodel.dart';
 import 'package:tchilla/viewmodel/event/register_viewmodel.dart';
 import 'package:tchilla/viewmodel/event/result_search_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/schedule_detalhe_viewmodel.dart';
 import 'package:tchilla/viewmodel/event/schedules_viewmodel.dart';
 import 'package:tchilla/viewmodel/event/splash_viewmodel.dart';
 import 'package:tchilla/viewmodel/event/summary_viewmodel.dart';
@@ -56,66 +57,110 @@ class AppBindings implements Bindings {
     registerViewmodels();
   }
 
-  // ---------- Registro de Eventos ----------
-  static void registerServices() {
-    Get.lazyPut<ConectivityService>(() => ConectivityService());
-    Get.lazyPut<HomeService>(() => HomeService());
-    Get.lazyPut<UserService>(() => UserService());
-    Get.lazyPut<OnboardingService>(() => OnboardingService());
-    Get.lazyPut<WelcomeService>(() => WelcomeService());
-  }
-
-  // ---------- Registro de Dados Locais ----------
+// ---------- Registro de Dados Locais ----------
   static void localData() {
     Get.put(BaseLocalData());
     Get.put(LocalTokenData());
   }
 
-  // ---------- Registro de Repositórios ----------
-  static void registerRepositories() {
-    Get.lazyPut<OnboardingRepository>(() => OnboardingRepository());
-    Get.lazyPut<WelcomeRepository>(() => WelcomeRepository());
-    Get.lazyPut<UserRepository>(() => UserRepository());
+  // ---------- Registro de Eventos ----------
+  static void registerServices() {
+    Get.lazyPut<ConectivityService>(() => ConectivityService(), fenix: true);
+    Get.lazyPut<HomeService>(() => HomeService(), fenix: true);
+    Get.lazyPut<UserService>(() => UserService(), fenix: true);
+    Get.lazyPut<OnboardingService>(() => OnboardingService(), fenix: true);
+    Get.lazyPut<WelcomeService>(() => WelcomeService(), fenix: true);
   }
 
-  // ---------- Registro de ViewModels ----------
+// ---------- Registro de Repositórios ----------
+  static void registerRepositories() {
+    Get.lazyPut<OnboardingRepository>(() => OnboardingRepository(),
+        fenix: true);
+    Get.lazyPut<WelcomeRepository>(() => WelcomeRepository(), fenix: true);
+    Get.lazyPut<UserRepository>(() => UserRepository(), fenix: true);
+  }
+
+// ---------- Registro de ViewModels ----------
   static void registerViewmodels() {
-    Get.put<SplashViewmodel>(SplashViewmodel(conectivityService: Get.find()));
-
-    Get.put<OnboardingViewModel>(OnboardingViewModel(service: Get.find()));
-
-    Get.put<WelcomeViewmodel>(WelcomeViewmodel(
-      service: Get.find(),
-    ));
-
-    Get.put<LoginViewmodel>(LoginViewmodel(service: Get.find()));
-
-    Get.put<RegisterViewmodel>(RegisterViewmodel(service: Get.find()));
-
-    Get.put<ForgontPasswordViewmodel>(
-        ForgontPasswordViewmodel(service: Get.find()));
-
-    Get.put<HomeViewModel>(HomeViewModel(service: Get.find()));
-
-    Get.put<DetalheProposedViewModel>(DetalheProposedViewModel());
-
-    Get.put<ViewMoreViewmodel>(ViewMoreViewmodel());
-
-    Get.put<ProfileViewmodel>(ProfileViewmodel(service: Get.find()));
-
-    Get.put<ResultSearchViewModel>(ResultSearchViewModel());
-
-    Get.put<UserDataViewModel>(UserDataViewModel(service: Get.find()));
-
-    Get.put<SummaryViewmodel>(SummaryViewmodel());
-
-    Get.put<FormLocalViewmodel>(FormLocalViewmodel());
-
-    Get.put<FormServiceViewmodel>(FormServiceViewmodel());
-
-    Get.put<FormLocalEndServiceViewmodel>(FormLocalEndServiceViewmodel());
-    Get.put<NotificationViewmodel>(NotificationViewmodel());
-    Get.put<ChoosePaymentMethodViewmodel>(ChoosePaymentMethodViewmodel());
-    Get.put<SchedulesViewmodel>(SchedulesViewmodel());
+    Get.lazyPut<SplashViewmodel>(
+      () => SplashViewmodel(conectivityService: Get.find()),
+      fenix: true,
+    );
+    Get.lazyPut<OnboardingViewModel>(
+      () => OnboardingViewModel(service: Get.find()),
+      fenix: true,
+    );
+    Get.lazyPut<WelcomeViewmodel>(
+      () => WelcomeViewmodel(service: Get.find()),
+      fenix: true,
+    );
+    Get.lazyPut<LoginViewmodel>(
+      () => LoginViewmodel(service: Get.find()),
+      fenix: true,
+    );
+    Get.lazyPut<RegisterViewmodel>(
+      () => RegisterViewmodel(service: Get.find()),
+      fenix: true,
+    );
+    Get.lazyPut<ForgontPasswordViewmodel>(
+      () => ForgontPasswordViewmodel(service: Get.find()),
+      fenix: true,
+    );
+    Get.lazyPut<HomeViewModel>(
+      () => HomeViewModel(service: Get.find()),
+      fenix: true,
+    );
+    Get.lazyPut<DetalheProposedViewModel>(
+      () => DetalheProposedViewModel(),
+      fenix: true,
+    );
+    Get.lazyPut<ViewMoreViewmodel>(
+      () => ViewMoreViewmodel(),
+      fenix: true,
+    );
+    Get.lazyPut<ProfileViewmodel>(
+      () => ProfileViewmodel(service: Get.find()),
+      fenix: true,
+    );
+    Get.lazyPut<ResultSearchViewModel>(
+      () => ResultSearchViewModel(),
+      fenix: true,
+    );
+    Get.lazyPut<UserDataViewModel>(
+      () => UserDataViewModel(service: Get.find()),
+      fenix: true,
+    );
+    Get.lazyPut<SummaryViewmodel>(
+      () => SummaryViewmodel(),
+      fenix: true,
+    );
+    Get.lazyPut<FormLocalViewmodel>(
+      () => FormLocalViewmodel(),
+      fenix: true,
+    );
+    Get.lazyPut<FormServiceViewmodel>(
+      () => FormServiceViewmodel(),
+      fenix: true,
+    );
+    Get.lazyPut<FormLocalEndServiceViewmodel>(
+      () => FormLocalEndServiceViewmodel(),
+      fenix: true,
+    );
+    Get.lazyPut<NotificationViewmodel>(
+      () => NotificationViewmodel(),
+      fenix: true,
+    );
+    Get.lazyPut<ChoosePaymentMethodViewmodel>(
+      () => ChoosePaymentMethodViewmodel(),
+      fenix: true,
+    );
+    Get.lazyPut<SchedulesViewmodel>(
+      () => SchedulesViewmodel(),
+      fenix: true,
+    );
+    Get.lazyPut<ScheduleDetalheViewmodel>(
+      () => ScheduleDetalheViewmodel(),
+      fenix: true,
+    );
   }
 }

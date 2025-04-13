@@ -51,7 +51,6 @@ class _HomePageState extends State<HomePage>
     _tabController.addListener(() {
       viewmodel.selectTab(_tabController.index, _locationFocusNode);
     });
-    viewmodel.initEvet();
   }
 
   @override
@@ -76,7 +75,7 @@ class _HomePageState extends State<HomePage>
                   : viewmodel.isError.value
                       ? ErrorTryAgain(
                           message: viewmodel.errorMessage.value,
-                          event: viewmodel.initEvet,
+                          event: viewmodel.onInit,
                         )
                       : SingleChildScrollView(
                           child: GestureDetector(

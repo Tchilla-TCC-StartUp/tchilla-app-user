@@ -109,7 +109,6 @@ class _UserDataPageState extends State<UserDataPage> {
                               helpText: viewmodel.localizations.password,
                               initialValue: viewmodel.password.value ?? '',
                               obscureText: true,
-
                             ),
                             AppGlobalVericalSpacing(value: 28.px),
                             AppGlobalTextButton(

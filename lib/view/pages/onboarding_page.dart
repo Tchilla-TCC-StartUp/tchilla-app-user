@@ -8,31 +8,15 @@ import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/pages/error_try_again.dart';
 import 'package:tchilla/view/shimmers/welcome_shimmer.dart';
 import 'package:tchilla/view/widgets/app_global_image_button.dart';
-import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_page_indicator.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/onboarding_body.dart';
-import 'package:tchilla/view/widgets/tchilla_animation_loading.dart';
 import 'package:tchilla/viewmodel/event/onboarding_viewmodel.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class OnboardingPage extends StatefulWidget {
+class OnboardingPage extends GetView<OnboardingViewModel> {
   const OnboardingPage({super.key});
-
-  @override
-  State<OnboardingPage> createState() => _OnboardingPageState();
-}
-
-class _OnboardingPageState extends State<OnboardingPage> {
-  final viewmodel = Get.find<OnboardingViewModel>();
-
-  @override
-  void initState() {
-    super.initState();
-    viewmodel.getOnboarding();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +25,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
         child: AppLayoutpage(
           body: Obx(
             () {
-              return viewmodel.isLoading.value
+              return controller.isLoading.value
                   ? const WelcomeShimmer()
-                  : viewmodel.isError.value
+                  : controller.isError.value
                       ? ErrorTryAgain(
-                          message: viewmodel.errorMessage.value,
-                          event: viewmodel.getOnboarding,
+                          message: controller.errorMessage.value,
+                          event: controller.onInit,
                         )
                       : _buildBody(context);
             },
@@ -63,13 +47,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
           value: 2.h,
         ),
         Visibility(
-          visible: viewmodel.currentPage.value < 2,
+          visible: controller.currentPage.value < 2,
           child: Align(
             alignment: Alignment.centerRight,
             child: GestureDetector(
-              onTap: viewmodel.clickSkip,
+              onTap: controller.clickSkip,
               child: AppGlobalText(
-                text: viewmodel.localizations.skip,
+                text: controller.localizations.skip,
                 style: TextStyleEnum.h3_medium,
               ),
             ),
@@ -81,14 +65,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
         Expanded(
           child: Obx(() {
             return PageView.builder(
-              controller: viewmodel.pageController,
+              controller: controller.pageController,
               physics: const NeverScrollableScrollPhysics(),
               onPageChanged: (index) {
-                viewmodel.currentPage.value = index;
+                controller.currentPage.value = index;
               },
-              itemCount: viewmodel.onboarding.length,
+              itemCount: controller.onboarding.length,
               itemBuilder: (context, index) {
-                var item = viewmodel.onboarding[index];
+                var item = controller.onboarding[index];
                 return OnboardingBody(
                   image: item.url!,
                   title: item.title!,
@@ -99,20 +83,20 @@ class _OnboardingPageState extends State<OnboardingPage> {
           }),
         ),
         AppGlobalPageIndicator(
-          controller: viewmodel.pageController,
-          count: viewmodel.onboarding.length,
+          controller: controller.pageController,
+          count: controller.onboarding.length,
         ),
         AppGlobalVericalSpacing(
           value: 5.h,
         ),
         AppGlobalImageButton(
-            onPressed: viewmodel.nextPage,
+            onPressed: controller.nextPage,
             color: primary950,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 AppGlobalText(
-                  text: viewmodel.localizations.proceed,
+                  text: controller.localizations.proceed,
                   color: primary50,
                   style: TextStyleEnum.h3_bold,
                 ),

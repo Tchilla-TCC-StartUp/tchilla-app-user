@@ -5,6 +5,7 @@ import 'package:tchilla/model/proposed_model.dart';
 import 'package:tchilla/resources/app_formaters.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/view/pages/error_try_again.dart';
+import 'package:tchilla/view/shimmers/propose_list_shimmer.dart';
 import 'package:tchilla/view/widgets/app_global_back_button.dart';
 import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
@@ -42,7 +43,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
       ),
       body: Obx(() {
         return viewmodel.isLoading.value
-            ? const AppGlobalLoading()
+            ? const ProposedListShimmer()
             : viewmodel.isError.value
                 ? ErrorTryAgain(message: viewmodel.errorMessage.value)
                 : viewmodel.proposeds.isNotEmpty

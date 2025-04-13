@@ -21,4 +21,5 @@ abstract class INavigation {
   navigateToErrorPage(void Function() tryAgainEve);
   navigateToNotificationPage();
   navigateToSchedulesPage();
+  navigateToSucessPage();
 }

@@ -32,7 +32,6 @@ class _ReceiptMethodViewState extends State<ReceiptMethodView> {
               height: 100.px,
               width: 100.px,
               image: AppAssetsImages.trnasfericon,
-
             ),
           ),
           AppGlobalVericalSpacing(
@@ -155,7 +154,8 @@ class _ReceiptMethodViewState extends State<ReceiptMethodView> {
           }),
           AppGlobalVericalSpacing(value: 2.h),
           AppGlobalTextButton(
-            onPressed: () {},
+            onPressed: widget
+                .choosePaymentMethodViewmodel.navigator.navigateToSucessPage,
             textButton: widget.choosePaymentMethodViewmodel.localizations.send,
             minWidth: 100.w,
           )

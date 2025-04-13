@@ -15,6 +15,7 @@ import 'package:tchilla/view/pages/register_page.dart';
 import 'package:tchilla/view/pages/result_search_page.dart';
 import 'package:tchilla/view/pages/schedules_page.dart';
 import 'package:tchilla/view/pages/splash_page.dart';
+import 'package:tchilla/view/pages/sucess_schedule_page.dart';
 import 'package:tchilla/view/pages/summary_page.dart';
 import 'package:tchilla/view/pages/tiket_page.dart';
 import 'package:tchilla/view/pages/user_data_page.dart';
@@ -22,42 +23,93 @@ import 'package:tchilla/view/pages/welcome_page.dart';
 
 class AppGetAppRoutes {
   static final List<GetPage> routes = [
-    _buildRoute(AppRoutes.initialRoute, (_) => const SplashPage()),
-    _buildRoute(AppRoutes.homePage, (_) => const HomePage()),
-    _buildRoute(AppRoutes.loginPage, (_) => const LoginPage()),
-    _buildRoute(AppRoutes.registerPage, (_) => const RegisterPage()),
-    _buildRoute(AppRoutes.schedulesPage, (_) => const SchedulesPage()),
-    _buildRoute(AppRoutes.forgotPasswordEmail,
-        (_) => const ForgotPassswordAuthEmailPage()),
-    _buildRoute(AppRoutes.forgotPasswordConfirmationPin,
-        (_) => const ForgotPasswordConfirmationPinPage()),
-    _buildRoute(AppRoutes.redefinePasswordPage,
-        (args) => RedefinePasswordPage(previousWalk: args)),
-    _buildRoute(AppRoutes.onboardingPage, (_) => const OnboardingPage()),
-    _buildRoute(AppRoutes.resultSearchPage, (_) => const ResultSearchPage()),
-    _buildRoute(AppRoutes.welcomePage, (_) => const WelcomePage()),
-    _buildRoute(AppRoutes.detailsPage, (args) => DetalheProposedPage(id: args)),
     _buildRoute(
-        AppRoutes.profilePage,
-        (args) =>
-            ProfilePage(userNamer: args['userNamer'])),
-    _buildRoute(AppRoutes.userdataPage, (args) => const UserDataPage()),
-    _buildRoute(AppRoutes.summaryPage, (args) => SummaryPage(id: args)),
-    _buildRoute(AppRoutes.tiketPage, (args) => TiketPage(id: args)),
+      path: AppRoutes.initialRoute,
+      pageBuilder: (_) => const SplashPage(),
+    ),
     _buildRoute(
-        AppRoutes.chosePaymentPage, (args) => const ChoosePaymentMethodPage()),
+      path: AppRoutes.homePage,
+      pageBuilder: (_) => const HomePage(),
+    ),
     _buildRoute(
-        AppRoutes.notificationPage, (args) => const NotificationsPage()),
+      path: AppRoutes.loginPage,
+      pageBuilder: (_) => const LoginPage(),
+    ),
+    _buildRoute(
+      path: AppRoutes.registerPage,
+      pageBuilder: (_) => const RegisterPage(),
+    ),
+    _buildRoute(
+      path: AppRoutes.schedulesPage,
+      pageBuilder: (_) => const SchedulesPage(),
+    ),
+    _buildRoute(
+      path: AppRoutes.forgotPasswordEmail,
+      pageBuilder: (_) => const ForgotPassswordAuthEmailPage(),
+    ),
+    _buildRoute(
+      path: AppRoutes.forgotPasswordConfirmationPin,
+      pageBuilder: (_) => const ForgotPasswordConfirmationPinPage(),
+    ),
+    _buildRoute(
+      path: AppRoutes.redefinePasswordPage,
+      pageBuilder: (args) => RedefinePasswordPage(previousWalk: args),
+    ),
+    _buildRoute(
+      path: AppRoutes.onboardingPage,
+      pageBuilder: (_) => const OnboardingPage(),
+    ),
+    _buildRoute(
+      path: AppRoutes.resultSearchPage,
+      pageBuilder: (_) => const ResultSearchPage(),
+    ),
+    _buildRoute(
+      path: AppRoutes.welcomePage,
+      pageBuilder: (_) => const WelcomePage(),
+    ),
+    _buildRoute(
+      path: AppRoutes.detailsPage,
+      pageBuilder: (args) => DetalheProposedPage(id: args),
+    ),
+    _buildRoute(
+      path: AppRoutes.profilePage,
+      pageBuilder: (args) => ProfilePage(userNamer: args['userNamer']),
+    ),
+    _buildRoute(
+      path: AppRoutes.userdataPage,
+      pageBuilder: (args) => const UserDataPage(),
+    ),
+    _buildRoute(
+      path: AppRoutes.summaryPage,
+      pageBuilder: (args) => SummaryPage(id: args),
+    ),
+    _buildRoute(
+      path: AppRoutes.tiketPage,
+      pageBuilder: (args) => TiketPage(id: args),
+    ),
+    _buildRoute(
+      path: AppRoutes.chosePaymentPage,
+      pageBuilder: (args) => const ChoosePaymentMethodPage(),
+    ),
+    _buildRoute(
+      path: AppRoutes.notificationPage,
+      pageBuilder: (args) => const NotificationsPage(),
+    ),
+    _buildRoute(
+      path: AppRoutes.sucessSchedulesPage,
+      pageBuilder: (args) => const SucessSchedulePage(),
+    ),
   ];
 
-  static GetPage _buildRoute(
-    String path,
-    Widget Function(dynamic args) pageBuilder,
-  ) {
+  static GetPage _buildRoute({
+    required String path,
+    Transition? transition,
+    required Widget Function(dynamic args) pageBuilder,
+  }) {
     return GetPage(
       name: path,
       page: () => pageBuilder(Get.arguments),
-      transition: Transition.rightToLeft,
+      transition: transition ?? Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 500),
     );
   }
