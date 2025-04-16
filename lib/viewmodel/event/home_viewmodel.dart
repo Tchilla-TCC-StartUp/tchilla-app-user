@@ -52,8 +52,8 @@ class HomeViewModel extends IHomeViewmodel {
   void onInit() {
     super.onInit();
     initLocalData();
-    getUserData();
   }
+
 
   @override
   void initLocalData() async {
@@ -167,5 +167,10 @@ class HomeViewModel extends IHomeViewmodel {
         adptiveSilverExpade.value = 880.px;
         break;
     }
+  }
+
+  @override
+  void initEvent() {
+    getUserData();
   }
 }

@@ -51,6 +51,8 @@ class _HomePageState extends State<HomePage>
     _tabController.addListener(() {
       viewmodel.selectTab(_tabController.index, _locationFocusNode);
     });
+
+    viewmodel.initEvent();
   }
 
   @override

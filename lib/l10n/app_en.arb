@@ -70,8 +70,6 @@
   "security": "Security",
   "dark_mode": "Dark Mode",
   "logout": "Logout",
-
-  "schedule": "Schedule",
   "description": "Description",
   "responsible": "Responsible",
   
@@ -101,7 +99,7 @@
   "error_password_length": "Password must be at least 6 characters long.",
 
    "save": "Save",
-   "schedule":"Schedule",
+   "schedule":"Request an Appointment",
    "reviews":"Reviews",
    "appointment_summary": "Appointment summary",
    "responsible":"Responsible",

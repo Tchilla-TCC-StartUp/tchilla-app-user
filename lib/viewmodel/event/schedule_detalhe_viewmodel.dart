@@ -1,5 +1,4 @@
 import 'dart:ffi';
-
 import 'package:get/get.dart';
 import 'package:tchilla/model/review_model.dart';
 import 'package:tchilla/model/user_model.dart';

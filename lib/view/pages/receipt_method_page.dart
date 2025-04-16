@@ -48,40 +48,7 @@ class ReceiptMethodPage extends GetView<ChoosePaymentMethodViewmodel> {
               AppGlobalVericalSpacing(
                 value: 2.h,
               ),
-              Container(
-                width: 100.w,
-                alignment: Alignment.center,
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: gray300,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        AppGlobalText(
-                          text: "AO06",
-                          style: TextStyleEnum.h3_bold,
-                        ),
-                        AppGlobalText(
-                          text: controller.iban,
-                          style: TextStyleEnum.h3_medium,
-                        ),
-                      ],
-                    ),
-                    GestureDetector(
-                      onTap: controller.copyIban,
-                      child: const Icon(
-                        Icons.copy_outlined,
-                        size: 20,
-                      ),
-                    )
-                  ],
-                ),
-              ),
+
               Obx(() {
                 final selectedFile = controller.selectedPdfFile.value;
                 return Column(

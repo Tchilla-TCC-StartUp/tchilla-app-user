@@ -11,4 +11,5 @@ abstract class IHomeViewmodel extends BaseViewModel {
   void navigateToNotificationPage();
   void onFocus(FocusNode focusNode);
   void updateAdaptiveHeight(FocusNode focusNode);
+  void initEvent();
 }

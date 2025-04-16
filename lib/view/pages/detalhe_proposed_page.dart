@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:free_map/free_map.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
@@ -37,10 +38,21 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
     with SingleTickerProviderStateMixin {
   final viewmodel = Get.find<DetalheProposedViewModel>();
 
+  FmData? _address;
+  late final MapController _mapController;
+  final _src = const LatLng(-8.9703729, 13.1984824);
+
   @override
   void initState() {
     super.initState();
     viewmodel.initTabController(this);
+    _mapController = MapController();
+  }
+
+  @override
+  void dispose() {
+    _mapController.dispose();
+    super.dispose();
   }
 
   @override
@@ -368,15 +380,32 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
     );
   }
 
-  _buildLocationView() {
-    return Column(
-      children: [
-        Center(
-            child: Text(
-          "Localização",
-        )),
-        // Adicione mais conteúdo ou widgets conforme necessário
+  Widget get _buildMap {
+    return FmMap(
+      mapController: _mapController,
+      mapOptions: MapOptions(
+        minZoom: 15,
+        maxZoom: 18,
+        initialZoom: 15,
+        initialCenter: _src,
+      ),
+      markers: [
+        Marker(
+          point: _src,
+          child: const Icon(
+            size: 40.0,
+            color: Colors.red,
+            Icons.location_on_rounded,
+          ),
+        ),
       ],
+      polylineOptions: const FmPolylineOptions(
+        strokeWidth: 3,
+        color: Colors.blue,
+      ),
     );
+  }
+  _buildLocationView() {
+    return _buildMap;
   }
 }

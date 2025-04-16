@@ -10,7 +10,6 @@ class AppGlobalInput extends StatefulWidget {
   final TextEditingController? controller;
   final String? label;
   final AppInputType inputType;
-
   final String? hintText;
   final TextInputType? keyboardType;
   final bool obscureText;

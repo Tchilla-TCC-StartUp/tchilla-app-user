@@ -70,7 +70,7 @@
   "dark_mode": "Modo Escuro",
   "logout": "Sair",
 
-  "schedule": "Agendar",
+  "schedule": "Solicitar Agendamento",
   "description": "Descrição",
   "responsible": "Responsável",
 
@@ -100,7 +100,6 @@
   "error_password_length": "A senha deve ter pelo menos 6 caracteres.",
 
   "save": "Salvar",
-  "schedule": "Agendar",
    "reviews":"Avaliações",
   "appointment_summary": "Resumo do agendamento",
   "responsible":"Responsavel",

@@ -50,13 +50,50 @@ class ChoosePaymentMethodPage extends GetView<ChoosePaymentMethodViewmodel> {
             color: gray500,
           ),
           AppGlobalVericalSpacing(
-            value: 3.h,
+            value: 1.h,
           ),
           // _buildCardPaymentMethod(
           //   title: 'Multicaixa Express',
           //   image: AppAssetsImages.mcxNetworkImage,
           //   onTap: () => controller.switchMethod(1),
           // ),
+          Container(
+            width: 100.w,
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: gray300,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    AppGlobalText(
+                      text: "AO06",
+                      style: TextStyleEnum.h3_bold,
+                    ),
+                    AppGlobalText(
+                      text: controller.iban,
+                      style: TextStyleEnum.h3_medium,
+                    ),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: controller.copyIban,
+                  child: const Icon(
+                    Icons.copy_outlined,
+                    size: 20,
+                  ),
+                )
+              ],
+            ),
+          ),
+          AppGlobalVericalSpacing(
+            value: 3.h,
+          ),
           _buildCardPaymentMethod(
             title: controller.localizations.payment_receipt,
             image: AppAssetsImages.trnasfericon,
