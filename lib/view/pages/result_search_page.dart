@@ -6,6 +6,7 @@ import 'package:tchilla/resources/app_assets_images.dart';
 import 'package:tchilla/resources/app_enums.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/pages/error_try_again.dart';
+import 'package:tchilla/view/shimmers/propose_list_shimmer.dart';
 import 'package:tchilla/view/widgets/app_custom_list_card.dart';
 import 'package:tchilla/view/widgets/app_global_back_button.dart';
 import 'package:tchilla/view/widgets/app_global_loading.dart';
@@ -13,7 +14,7 @@ import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/proposed_card.dart';
-import 'package:tchilla/viewmodel/result_search_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/result_search_viewmodel.dart';
 
 class ResultSearchPage extends StatefulWidget {
   const ResultSearchPage({super.key});
@@ -86,7 +87,7 @@ class _ResultSearchPageState extends State<ResultSearchPage>
               return Obx(
                 () {
                   return viewmodel.isLoading.value
-                      ? const AppGlobalLoading()
+                      ? const ProposedListShimmer()
                       : viewmodel.isError.value
                           ? ErrorTryAgain(message: viewmodel.errorMessage.value)
                           : _builAllProposedSection();

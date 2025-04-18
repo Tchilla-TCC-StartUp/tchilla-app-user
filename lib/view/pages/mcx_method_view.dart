@@ -8,7 +8,7 @@ import 'package:tchilla/view/widgets/app_global_phone_number_input.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
-import 'package:tchilla/viewmodel/choose_payment_method_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/choose_payment_method_viewmodel.dart';
 
 class McxMethodView extends StatefulWidget {
   final ChoosePaymentMethodViewmodel choosePaymentMethodViewmodel;
@@ -31,14 +31,11 @@ class _McxMethodViewState extends State<McxMethodView> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Card(
-            clipBehavior: Clip.hardEdge,
-            child: ClipRRect(
-              child: AppGlobalNetworkImage(
-                width: 100.px,
-                height: 100.px,
-                image: AppAssetsImages.mcxNetworkImage,
-              ),
+          ClipRRect(
+            child: AppGlobalNetworkImage(
+              width: 100.px,
+              height: 100.px,
+              image: AppAssetsImages.mcxNetworkImage,
             ),
           ),
           AppGlobalVericalSpacing(

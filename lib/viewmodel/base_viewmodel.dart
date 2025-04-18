@@ -104,16 +104,15 @@ class BaseViewModel extends GetxController {
 
       if (error is SocketException ||
           error is NetworkException ||
-          error is UnknownException ||
-          error is ServerException) {
+          error is UnknownException) {
         emitError(error.message);
-        showError(error);
       } else if (error is UnauthorizedException) {
         showError(error);
         cleanToken();
         navigator.navigateToWelcomePage();
       } else {
-        showError(error);
+        loger.printError(info: "=========>Erro diferente : $error");
+        showError(error.toString());
       }
 
       onError?.call(error);

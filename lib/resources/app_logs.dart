@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:developer' as dev;
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 
 class AppLogs {
   static const String _divider =
@@ -8,11 +8,11 @@ class AppLogs {
 
   /// Método para imprimir divisores no log
   void _printDividerStart() {
-    dev.log("╔$_divider");
+    Get.log("╔$_divider");
   }
 
   void _printDividerEnd() {
-    dev.log("╚$_divider");
+    Get.log("╚$_divider");
   }
 
   /// Adiciona timestamp ao log
@@ -23,7 +23,7 @@ class AppLogs {
   /// Log de mensagens informativas
   void info(String message) {
     _printDividerStart();
-    dev.log("${_timestamp()} 🟢 [INFO]: $message");
+    Get.log("${_timestamp()} 🟢 [INFO]: $message");
     _printDividerEnd();
   }
 
@@ -36,10 +36,10 @@ class AppLogs {
     Map<String, dynamic>? queryParameters,
   }) {
     _printDividerStart();
-    dev.log("${_timestamp()} 🌍 [HTTP REQUEST] ➡️ $method $url");
-    dev.log("🔹 Query Params: ${jsonEncode(queryParameters)}");
-    dev.log("📩 Headers: ${jsonEncode(headers)}");
-    dev.log("📝 Body:\n${const JsonEncoder.withIndent('  ').convert(body)}");
+    Get.log("${_timestamp()} 🌍 [HTTP REQUEST] ➡️ $method $url");
+    Get.log("🔹 Query Params: ${jsonEncode(queryParameters)}");
+    Get.log("📩 Headers: ${jsonEncode(headers)}");
+    Get.log("📝 Body:\n${const JsonEncoder.withIndent('  ').convert(body)}");
     _printDividerEnd();
   }
 
@@ -49,8 +49,8 @@ class AppLogs {
     required dynamic body,
   }) {
     _printDividerStart();
-    dev.log("${_timestamp()} 📩 [HTTP RESPONSE] ⬅️ Status: $statusCode");
-    dev.log(
+    Get.log("${_timestamp()} 📩 [HTTP RESPONSE] ⬅️ Status: $statusCode");
+    Get.log(
         "📜 Response Body:\n${const JsonEncoder.withIndent('  ').convert(body)}");
     _printDividerEnd();
   }
@@ -58,21 +58,21 @@ class AppLogs {
   /// Log de erro HTTP do Dio Interceptor
   void printError({String? info}) {
     _printDividerStart();
-    dev.log("${_timestamp()} ❌ [ERROR] $info");
+    Get.log("${_timestamp()} ❌ [ERROR] $info");
     _printDividerEnd();
   }
 
   /// Log detalhado de erro de requisição Dio
   void logDioError(DioException err) {
     _printDividerStart();
-    dev.log(
+    Get.log(
         "${_timestamp()} ❌ [DIO ERROR] ${err.response?.statusCode} ${err.requestOptions.uri}");
-    dev.log("🔴 Error Message: ${err.message}");
+    Get.log("🔴 Error Message: ${err.message}");
     try {
-      dev.log(
+      Get.log(
           "📝 Response Data:\n${const JsonEncoder.withIndent('  ').convert(err.response?.data)}");
     } catch (e) {
-      dev.log("⚠️ Erro ao formatar resposta: ${e.toString()}");
+      Get.log("⚠️ Erro ao formatar resposta: ${e.toString()}");
     }
     _printDividerEnd();
   }

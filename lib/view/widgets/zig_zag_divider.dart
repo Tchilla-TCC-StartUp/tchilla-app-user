@@ -6,7 +6,7 @@ class ZigZagLinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
-      ..color = gray400
+      ..color = gray300
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
@@ -38,7 +38,7 @@ class ZigZagDivider extends StatelessWidget {
       child: CustomPaint(
         size: Size(
           100.w,
-          5,
+          4,
         ),
         painter: ZigZagLinePainter(),
       ),

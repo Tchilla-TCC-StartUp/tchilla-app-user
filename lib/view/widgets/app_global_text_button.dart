@@ -14,11 +14,13 @@ class AppGlobalTextButton extends StatelessWidget {
     this.minWidth,
     this.isLoading = false,
     required this.textButton,
+    this.color,
   });
 
   final void Function() onPressed;
   final double? minWidth;
   final String textButton;
+  final Color? color;
   final bool isLoading;
   final AppDebouncer _debouncer = AppDebouncer(milliseconds: 3000);
 
@@ -34,7 +36,7 @@ class AppGlobalTextButton extends StatelessWidget {
       return Opacity(
         opacity: _debouncer.isReady.value ? 1 : 0.5,
         child: MaterialButton(
-          color: primary950,
+          color: color ?? primary950,
           // color: _debouncer.isReady.value ? primary950 : gray400,
           elevation: 0,
           minWidth: minWidth,
@@ -48,7 +50,7 @@ class AppGlobalTextButton extends StatelessWidget {
               : AppGlobalText(
                   text: textButton,
                   style: TextStyleEnum.h3_medium,
-                  color: primary50,
+                  color: color == Colors.transparent ? primary950 : primary50,
                   // color: _debouncer.isReady.value ? primary50 : gray900,
                 ),
         ),

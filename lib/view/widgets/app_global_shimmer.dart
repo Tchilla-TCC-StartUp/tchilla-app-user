@@ -4,7 +4,7 @@ import 'dart:ui' as ui;
 class AppGlobalShimmer extends StatefulWidget {
   final double width;
   final double height;
-  final BorderRadius? borderRadius;
+  final double? borderRadius;
 
   const AppGlobalShimmer({
     super.key,
@@ -27,7 +27,7 @@ class _AppGlobalShimmerState extends State<AppGlobalShimmer>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 3),
     )..repeat();
 
     _animation = Tween<double>(begin: -2, end: 2).animate(
@@ -46,9 +46,9 @@ class _AppGlobalShimmerState extends State<AppGlobalShimmer>
               Offset(bounds.width * _animation.value, 0),
               Offset(bounds.width * (_animation.value + 1), 0),
               [
+                Colors.grey[300]!,
                 Colors.grey[200]!,
-                Colors.grey[100]!,
-                Colors.grey[200]!,
+                Colors.grey[300]!,
               ],
               [0.2, 0.5, 0.8],
               TileMode.mirror,
@@ -60,7 +60,7 @@ class _AppGlobalShimmerState extends State<AppGlobalShimmer>
             height: widget.height,
             decoration: BoxDecoration(
               color: Colors.grey[300],
-              borderRadius: widget.borderRadius ?? BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? 8),
             ),
           ),
         );

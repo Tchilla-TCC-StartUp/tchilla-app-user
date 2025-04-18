@@ -8,7 +8,7 @@ abstract class INavigation {
   navigateToForengePassewordEmailPage();
   navigateToConfirmationPage();
   navigateToRefefinePasswordPage(String previousWalk);
-
+  navigateToScheduleDetalhes(String previousWalk);
   navigateToResultSearchPage();
   navigateToWelcomePage();
 
@@ -21,4 +21,7 @@ abstract class INavigation {
   navigateToErrorPage(void Function() tryAgainEve);
   navigateToNotificationPage();
   navigateToSchedulesPage();
+  navigateToSucessPage();
+  navigateToPaymentReceipt();
+  navigateToPaymentMCX();
 }

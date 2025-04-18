@@ -56,27 +56,35 @@ class BaseRepository {
     }
   }
 
-  /// Manipulação genérica de resposta HTTP
   T _handleResponse<T>(BuildContext context, Response response) {
     final l10n = AppLocalizations.of(context)!;
 
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      return response.data;
-    } else if (response.statusCode == 400) {
-      throw ValidationException(
-        response.statusMessage ?? l10n.invalidRequest,
-      );
-    } else if (response.statusCode == 403) {
-      throw AuthException(response.statusMessage ?? l10n.unauthorizedAccess);
-    } else if (response.statusCode == 404) {
-      throw NetworkException(response.statusMessage ?? l10n.resourceNotFound);
-    } else if (response.statusCode == 500) {
-      throw ServerException(response.statusMessage ?? l10n.internalServerError);
-    } else if (response.statusCode == 401) {
-      throw UnauthorizedException(
-          response.statusMessage ?? l10n.unauthorizedAccess);
-    } else {
-      throw UnknownException("${l10n.unknownError} ${response.statusCode}");
+    switch (response.statusCode) {
+      case 200:
+      case 201:
+        return response.data;
+      case 400:
+        throw ValidationException(
+          response.data['error'] ?? response.statusMessage ?? l10n.invalidRequest,
+        );
+      case 401:
+        throw UnauthorizedException(
+          response.data['error'] ?? response.statusMessage ?? l10n.unauthorizedAccess,
+        );
+      case 403:
+        throw AuthException(
+          response.data['error'] ?? response.statusMessage ?? l10n.unauthorizedAccess,
+        );
+      case 404:
+        throw NetworkException(
+          response.data['error'] ?? response.statusMessage ?? l10n.resourceNotFound,
+        );
+      case 500:
+        throw ServerException(
+          response.data['error'] ?? response.statusMessage ?? l10n.internalServerError,
+        );
+      default:
+        throw UnknownException("${l10n.unknownError} ${response.statusCode}");
     }
   }
 
@@ -84,27 +92,46 @@ class BaseRepository {
     final l10n = AppLocalizations.of(context)!;
 
     if (error is DioException) {
-      String errorMessage = _getErrorMessage(error, l10n);
+      final statusCode = error.response?.statusCode;
+      final errorMessage = error.response?.data['error'] ??
+          error.response?.statusMessage ??
+          _getErrorMessage(error, l10n);
 
-      if (error.type == DioExceptionType.connectionTimeout ||
-          error.type == DioExceptionType.receiveTimeout) {
-        return NetworkException(errorMessage);
-      } else if (error.type == DioExceptionType.badResponse) {
-        if (error.response?.statusCode == 401) {
-          return UnauthorizedException(errorMessage);
-        }
-        return ServerException(errorMessage);
-      } else if (error.type == DioExceptionType.cancel) {
-        return UnknownException(errorMessage);
-      } else if (error.type == DioExceptionType.connectionError) {
-        return SocketException(errorMessage);
-      } else {
-        return UnknownException(errorMessage);
+      switch (error.type) {
+        case DioExceptionType.connectionTimeout:
+        case DioExceptionType.receiveTimeout:
+          return NetworkException(errorMessage);
+
+        case DioExceptionType.badResponse:
+          switch (statusCode) {
+            case 400:
+              return ValidationException(errorMessage);
+            case 401:
+              return UnauthorizedException(errorMessage);
+            case 403:
+              return AuthException(errorMessage);
+            case 404:
+              return NetworkException(errorMessage);
+            case 500:
+              return ServerException(errorMessage);
+            default:
+              return UnknownException("${l10n.unknownError} $statusCode");
+          }
+
+        case DioExceptionType.connectionError:
+          return SocketException(errorMessage);
+
+        case DioExceptionType.cancel:
+        case DioExceptionType.sendTimeout:
+        case DioExceptionType.unknown:
+        default:
+          return UnknownException(errorMessage);
       }
     }
 
     return UnknownException(error.toString());
   }
+
 
   String _getErrorMessage(DioException error, AppLocalizations l10n) {
     if (error.response?.data is Map<String, dynamic>) {

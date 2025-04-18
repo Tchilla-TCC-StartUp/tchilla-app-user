@@ -3,33 +3,17 @@ import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/view/pages/error_try_again.dart';
+import 'package:tchilla/view/shimmers/welcome_shimmer.dart';
 import 'package:tchilla/view/widgets/app_global_border_button.dart';
-import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/onboarding_body.dart';
-import 'package:tchilla/view/widgets/tchilla_animation_loading.dart';
-import 'package:tchilla/viewmodel/welcome_viewmodel.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tchilla/viewmodel/event/welcome_viewmodel.dart';
 
-class WelcomePage extends StatefulWidget {
+class WelcomePage extends GetView<WelcomeViewmodel> {
   const WelcomePage({super.key});
-
-  @override
-  State<WelcomePage> createState() => _WelcomePageState();
-}
-
-class _WelcomePageState extends State<WelcomePage> {
-  final viewmodel = Get.find<WelcomeViewmodel>();
-
-  @override
-  void initState() {
-    super.initState();
-
-    viewmodel.getWelcomeData();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +22,12 @@ class _WelcomePageState extends State<WelcomePage> {
         child: AppLayoutpage(
           body: Obx(
             () {
-              return viewmodel.isLoading.value
-                  ? const TchillaAnimationLoading()
-                  : viewmodel.isError.value
+              return controller.isLoading.value
+                  ? const WelcomeShimmer()
+                  : controller.isError.value
                       ? ErrorTryAgain(
-                          message: viewmodel.errorMessage.value,
-                          event: viewmodel.getWelcomeData,
+                          message: controller.errorMessage.value,
+                          event: controller.getWelcomeData,
                         )
                       : _buildBody(context);
             },
@@ -60,33 +44,33 @@ class _WelcomePageState extends State<WelcomePage> {
           value: 3.h,
         ),
         OnboardingBody(
-          image: viewmodel.welcomeData?.url ?? "",
-          title: viewmodel.welcomeData?.title ?? '',
-          description: viewmodel.welcomeData?.description ?? '',
+          image: controller.welcomeData?.url ?? "",
+          title: controller.welcomeData?.title ?? '',
+          description: controller.welcomeData?.description ?? '',
         ),
         AppGlobalVericalSpacing(
           value: 4.h,
         ),
         AppGlobalTextButton(
           minWidth: 100.w,
-          onPressed: viewmodel.navigateToRegister,
-          textButton: viewmodel.localizations.create_account_button,
+          onPressed: controller.navigateToRegister,
+          textButton: controller.localizations.create_account_button,
         ),
         AppGlobalVericalSpacing(
           value: 3.h,
         ),
         AppGlobalBorderButton(
           minWidth: 100.w,
-          textButton: viewmodel.localizations.login,
-          onPressed: viewmodel.navigateToLogin,
+          textButton: controller.localizations.login,
+          onPressed: controller.navigateToLogin,
         ),
         AppGlobalVericalSpacing(
           value: 3.h,
         ),
         GestureDetector(
-          onTap: viewmodel.enterAsVisitor,
+          onTap: controller.enterAsVisitor,
           child: AppGlobalText(
-            text: viewmodel.localizations.guest_login,
+            text: controller.localizations.guest_login,
             style: TextStyleEnum.h3_bold,
           ),
         )

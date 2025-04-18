@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
+import 'package:tchilla/resources/app_formaters.dart';
 import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/pages/error_try_again.dart';
@@ -15,20 +16,13 @@ import 'package:tchilla/view/widgets/app_global_spacing.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tchilla/view/widgets/app_responsible_card.dart';
-import 'package:tchilla/viewmodel/summary_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/summary_viewmodel.dart';
 
-class SummaryPage extends StatefulWidget {
+class SummaryPage extends GetView<SummaryViewmodel> {
   final String id;
   const SummaryPage({super.key, required this.id});
 
-  @override
-  State<SummaryPage> createState() => _SummaryPageState();
-}
-
-class _SummaryPageState extends State<SummaryPage> {
-  final viewmodel = Get.find<SummaryViewmodel>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,25 +30,25 @@ class _SummaryPageState extends State<SummaryPage> {
         leading: const AppGlobalBackButton(),
         centerTitle: true,
         title: AppGlobalText(
-          text: viewmodel.localizations.appointment_summary,
+          text: controller.localizations.appointment_summary,
           style: TextStyleEnum.h3_bold,
         ),
       ),
       body: AppLayoutpage(
         body: Obx(
           () {
-            return viewmodel.isLoading.value
+            return controller.isLoading.value
                 ? const AppGlobalLoading()
-                : viewmodel.isError.value
-                    ? ErrorTryAgain(message: viewmodel.errorMessage.value)
-                    : _buildBody(context);
+                : controller.isError.value
+                    ? ErrorTryAgain(message: controller.errorMessage.value)
+                    : _buildBody();
           },
         ),
       ),
     );
   }
 
-  Column _buildBody(BuildContext context) {
+  Column _buildBody() {
     return Column(
       children: [
         Expanded(
@@ -86,7 +80,6 @@ class _SummaryPageState extends State<SummaryPage> {
                   value: 3.h,
                 ),
                 _buildEventSummaryData(
-                  context: context,
                   eventData: "25/Novembro/2035 - 18h",
                   eventType: "Casamento",
                   numberOfGuests: 200,
@@ -118,11 +111,11 @@ class _SummaryPageState extends State<SummaryPage> {
           Row(
             children: [
               AppGlobalText(
-                text: "${viewmodel.localizations.total}:",
+                text: "${controller.localizations.total}:",
                 style: TextStyleEnum.h3_medium,
               ),
               const AppGlobalHorizontalSpacing(),
-              AngolaPrice(
+              const AngolaPrice(
                 price: 308000,
                 style: TextStyleEnum.h3_bold,
                 color: primary950,
@@ -135,14 +128,14 @@ class _SummaryPageState extends State<SummaryPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AppGlobalBorderButton(
-                onPressed: viewmodel.navigator.navigateToBack,
-                textButton: viewmodel.localizations.cancel,
+                onPressed: controller.navigator.navigateToBack,
+                textButton: controller.localizations.cancel,
                 minWidth: 40.w,
               ),
               AppGlobalTextButton(
                 minWidth: 40.w,
-                onPressed: () => viewmodel.clickContinue("pjk,d"),
-                textButton: viewmodel.localizations.lb_continue,
+                onPressed: () => controller.clickContinue("pjk,d"),
+                textButton: controller.localizations.lb_continue,
               )
             ],
           ),
@@ -177,7 +170,6 @@ class _SummaryPageState extends State<SummaryPage> {
   }
 
   _buildEventSummaryData({
-    required BuildContext context,
     required String eventData,
     required String eventType,
     required int numberOfGuests,
@@ -187,13 +179,13 @@ class _SummaryPageState extends State<SummaryPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AppGlobalText(
-          text: viewmodel.localizations.appointment_summary,
+          text: controller.localizations.appointment_summary,
           style: TextStyleEnum.h3_bold,
         ),
         AppGlobalVericalSpacing(value: 2.h),
-        _buildInfoRow(viewmodel.localizations.event_date, eventData),
-        _buildInfoRow(viewmodel.localizations.event_type, eventType),
-        _buildInfoRow(viewmodel.localizations.number_of_guests,
+        _buildInfoRow(controller.localizations.event_date, eventData),
+        _buildInfoRow(controller.localizations.event_type, eventType),
+        _buildInfoRow(controller.localizations.number_of_guests,
             numberOfGuests.toString()),
         AppGlobalVericalSpacing(value: 1.h),
         Row(
@@ -201,7 +193,7 @@ class _SummaryPageState extends State<SummaryPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppGlobalText(
-              text: viewmodel.localizations.service,
+              text: controller.localizations.service,
               style: TextStyleEnum.p_normal,
               color: gray500,
             ),
@@ -236,10 +228,5 @@ class _SummaryPageState extends State<SummaryPage> {
         ),
       ],
     );
-  }
-
-  String formatAngolaPrice(int price) {
-    final formatter = NumberFormat.currency(locale: 'pt_AO', symbol: 'Kz');
-    return formatter.format(price);
   }
 }

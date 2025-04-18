@@ -12,7 +12,7 @@ import 'package:tchilla/view/widgets/app_global_tab_bar.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/card_more_requested.dart';
 import 'package:tchilla/view/widgets/proposed_card.dart';
-import 'package:tchilla/viewmodel/view_more_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/view_more_viewmodel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../resources/app_enums.dart';

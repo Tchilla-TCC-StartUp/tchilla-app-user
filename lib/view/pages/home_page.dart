@@ -10,6 +10,7 @@ import 'package:tchilla/style/app_text_style.dart';
 import 'package:tchilla/style/colors.dart';
 import 'package:tchilla/view/pages/error_try_again.dart';
 import 'package:tchilla/view/pages/view_more_page.dart';
+import 'package:tchilla/view/shimmers/home_shimmer.dart';
 import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_network_image.dart';
 import 'package:tchilla/view/widgets/app_global_spacing.dart';
@@ -22,7 +23,7 @@ import 'package:tchilla/view/widgets/form_local.dart';
 import 'package:tchilla/view/widgets/form_local_end_service.dart';
 import 'package:tchilla/view/widgets/form_service.dart';
 import 'package:tchilla/view/widgets/tchilla_animation_loading.dart';
-import 'package:tchilla/viewmodel/home_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/home_viewmodel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
@@ -50,7 +51,8 @@ class _HomePageState extends State<HomePage>
     _tabController.addListener(() {
       viewmodel.selectTab(_tabController.index, _locationFocusNode);
     });
-    viewmodel.initEvet();
+
+    viewmodel.initEvent();
   }
 
   @override
@@ -71,11 +73,11 @@ class _HomePageState extends State<HomePage>
           body: Obx(
             () {
               return viewmodel.isLoading.value
-                  ? const TchillaAnimationLoading()
+                  ? const HomeShimmer()
                   : viewmodel.isError.value
                       ? ErrorTryAgain(
                           message: viewmodel.errorMessage.value,
-                          event: viewmodel.initEvet,
+                          event: viewmodel.onInit,
                         )
                       : SingleChildScrollView(
                           child: GestureDetector(

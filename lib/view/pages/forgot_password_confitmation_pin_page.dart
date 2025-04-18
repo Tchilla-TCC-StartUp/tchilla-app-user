@@ -8,7 +8,7 @@ import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/headerpage.dart';
-import 'package:tchilla/viewmodel/forgont_password_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/forgont_password_viewmodel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ForgotPasswordConfirmationPinPage extends StatefulWidget {
@@ -56,7 +56,7 @@ class _ForgotPasswordConfirmationPinPageState
               AppGlobalTextButton(
                 onPressed: () {
                   final pin = _controllers.map((c) => c.text).join();
-                  viewmodel.confirmPin(pin, context);
+                  viewmodel.confirmPin(pin);
                 },
                 textButton: viewmodel.localizations.confirm,
                 minWidth: 100.w,

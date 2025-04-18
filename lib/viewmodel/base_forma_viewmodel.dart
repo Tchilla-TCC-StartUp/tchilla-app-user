@@ -14,9 +14,6 @@ class BaseFormaViewmodel extends BaseViewModel {
   final List<Rxn<ServiceModel>> serviceEvent = <Rxn<ServiceModel>>[];
  
 
- 
-
-
   void setLocalEvent(String? value) {
     setFieldChange(localEvent, value);
     loger.info('Local do evento é ${localEvent.value}');

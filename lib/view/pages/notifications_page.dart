@@ -9,7 +9,7 @@ import 'package:tchilla/view/widgets/app_global_back_button.dart';
 import 'package:tchilla/view/widgets/app_global_loading.dart';
 import 'package:tchilla/view/widgets/app_global_text.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
-import 'package:tchilla/viewmodel/notification_viewmodel.dart';
+import 'package:tchilla/viewmodel/event/notification_viewmodel.dart';
 
 class NotificationsPage extends StatefulWidget {
   const NotificationsPage({super.key});

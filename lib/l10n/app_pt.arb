@@ -70,7 +70,7 @@
   "dark_mode": "Modo Escuro",
   "logout": "Sair",
 
-  "schedule": "Agendar",
+  "schedule": "Solicitar Agendamento",
   "description": "Descrição",
   "responsible": "Responsável",
 
@@ -100,7 +100,6 @@
   "error_password_length": "A senha deve ter pelo menos 6 caracteres.",
 
   "save": "Salvar",
-  "schedule": "Agendar",
    "reviews":"Avaliações",
   "appointment_summary": "Resumo do agendamento",
   "responsible":"Responsavel",
@@ -139,5 +138,16 @@
   "guests": "Convidados",
   "wedding": "Casamento",
   "form_required_fields_message": "Todos os campos do formulário são obrigatórios para realizar a busca",
-  "help_text_mcx": "Informe seu número de telefone associado ao Multicaixa Express"
+  "help_text_mcx": "Informe seu número de telefone associado ao Multicaixa Express",
+  "new_password": "Nova senha",
+  "old_password": "Senha antiga",
+  "confirm_new_password": "Confirmar nova senha",
+  "payment_receipt" : "Transferência Bancária",
+  "payment_receipt_description": "Faça o pagamento para este Iban, via Bai Direto, Multicaixa Express ou outro Aplicativo de Internet Banking e faça o carregamento do comprovante de pagamento.",
+  "send": "Enviar",
+  "schedule_detalhe": "Detalhes de Agendamento",
+  "payment_method": "Método de pagamento",
+  "message": "Mensagem",
+  "give_an_assessment": "Dar uma avaliação",
+  "version": "Versão"
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:free_map/free_map.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tchilla/resources/app_assets_images.dart';
@@ -18,7 +19,8 @@ import 'package:tchilla/view/widgets/app_global_text_button.dart';
 import 'package:tchilla/view/widgets/app_global_user_avatar_name.dart';
 import 'package:tchilla/view/widgets/app_layoutpage.dart';
 import 'package:tchilla/view/widgets/app_responsible_card.dart';
-import 'package:tchilla/viewmodel/detalhes_proposed_viewmodel.dart';
+import 'package:tchilla/view/widgets/review_card.dart';
+import 'package:tchilla/viewmodel/event/detalhes_proposed_viewmodel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetalheProposedPage extends StatefulWidget {
@@ -36,10 +38,21 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
     with SingleTickerProviderStateMixin {
   final viewmodel = Get.find<DetalheProposedViewModel>();
 
+  FmData? _address;
+  late final MapController _mapController;
+  final _src = const LatLng(-8.9703729, 13.1984824);
+
   @override
   void initState() {
     super.initState();
     viewmodel.initTabController(this);
+    _mapController = MapController();
+  }
+
+  @override
+  void dispose() {
+    _mapController.dispose();
+    super.dispose();
   }
 
   @override
@@ -357,82 +370,42 @@ class _DetalheProposedPageState extends State<DetalheProposedPage>
         var item = viewmodel.listReviews[index];
         return Padding(
           padding: const EdgeInsets.all(5.0),
-          child: Container(
-            width: 275.px,
-            height: 110.px,
-            clipBehavior: Clip.hardEdge,
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: primary50,
-              borderRadius: BorderRadius.circular(8.px),
-              boxShadow: const [
-                BoxShadow(
-                  color: primary400,
-                  blurRadius: 2,
-                  offset: Offset(0, 1),
-                )
-              ],
-            ),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    AppGlobalUserAvatarName(
-                      name: item["name"],
-                      size: 35.px,
-                    ),
-                    const AppGlobalHorizontalSpacing(),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AppGlobalText(
-                          text: item["name"],
-                          style: TextStyleEnum.review_bold,
-                        ),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.star_rounded,
-                              color: Colors.amber,
-                              size: 16,
-                            ),
-                            AppGlobalText(
-                              text: item["rating"].toString(),
-                              style: TextStyleEnum.review_bold,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                AppGlobalVericalSpacing(
-                  value: 1.h,
-                ),
-                AppGlobalText(
-                  text: item["comment"].toString(),
-                  style: TextStyleEnum.review_normal,
-                  maxLines: 10,
-                  align: TextAlign.start,
-                  color: gray700,
-                ),
-              ],
-            ),
+          child: ReviewCard(
+            name: item["name"],
+            comment: item["comment"],
+            rating: item["rating"],
           ),
         );
       },
     );
   }
 
-  _buildLocationView() {
-    return Column(
-      children: [
-        Center(
-            child: Text(
-          "Localização",
-        )),
-        // Adicione mais conteúdo ou widgets conforme necessário
+  Widget get _buildMap {
+    return FmMap(
+      mapController: _mapController,
+      mapOptions: MapOptions(
+        minZoom: 15,
+        maxZoom: 18,
+        initialZoom: 15,
+        initialCenter: _src,
+      ),
+      markers: [
+        Marker(
+          point: _src,
+          child: const Icon(
+            size: 40.0,
+            color: Colors.red,
+            Icons.location_on_rounded,
+          ),
+        ),
       ],
+      polylineOptions: const FmPolylineOptions(
+        strokeWidth: 3,
+        color: Colors.blue,
+      ),
     );
+  }
+  _buildLocationView() {
+    return _buildMap;
   }
 }
