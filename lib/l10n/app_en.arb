@@ -145,5 +145,6 @@
   "schedule_detalhe": "Scheduling details",
   "payment_method": "Payment method",
   "message": "Message",
-  "give_an_assessment": "Give an assessment"
+  "give_an_assessment": "Give an assessment",
+  "version": "Version"
 }

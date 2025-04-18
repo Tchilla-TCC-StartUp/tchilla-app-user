@@ -148,5 +148,6 @@
   "schedule_detalhe": "Detalhes de Agendamento",
   "payment_method": "Método de pagamento",
   "message": "Mensagem",
-  "give_an_assessment": "Dar uma avaliação"
+  "give_an_assessment": "Dar uma avaliação",
+  "version": "Versão"
 }
